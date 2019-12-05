@@ -98,7 +98,7 @@
 </ul>
 </li>
 <li>Arbitrary topologies(star,tree,line)realizable by a coupling module</li>
-</ul>
+
 
 <h3 id="ASI-slave-的结构"><a href="#ASI-slave-的结构" class="headerlink" title="ASI-slave-的结构"></a>ASI-slave-的结构</h3><p><img src="https://i.loli.net/2019/07/12/5d286de1f2dc395126.png" alt="20190712132415.png"></p>
 
@@ -122,7 +122,7 @@
 <li>even parity</li>
 </ul>
 </li>
-</ul>
+
 <p><strong>附：</strong><br><img src="https://i.loli.net/2019/07/12/5d28770dd74ce84681.png" alt="20190712140322.png"><br><img src="https://i.loli.net/2019/07/12/5d2877a3b75d847277.png" alt="20190712140550.png"></p>
 ]]></content>
       <tags>
@@ -520,12 +520,12 @@
     <url>/2019/05/04/DDS-%E5%A4%8D%E4%B9%A01/</url>
     <content><![CDATA[<h3 id="Fully-Customised-Design-und-Semi-Customised-Design"><a href="#Fully-Customised-Design-und-Semi-Customised-Design" class="headerlink" title="Fully Customised Design und Semi Customised Design"></a>Fully Customised Design und Semi Customised Design</h3><li>Fully Customised Design:<br>jede Schaltung wird für gegebene Anwendung entworfen, um die Performanz zu optimieren. Schaltungen werden als Schaltplan beschrieben.<a id="more"></a></li>
 <li><strong>Semi Customised Design</strong>:<br>Logische Schaltung ist in einer Computer-Sprache definiert, Schaltplan wird dann automatisch generiert. Der Schaltplan verwendet fertige Bauteile, logische Gatter.</li>
-</ul>
+
 <a id="more"></a>
 
 <h3 id="FPGA-und-ASIC"><a href="#FPGA-und-ASIC" class="headerlink" title="FPGA-und-ASIC"></a>FPGA-und-ASIC</h3><li>FPGAs sind konfigurierbare ASICs, welche viele fertige Hardware-ressourcen haben(z.b. Mikroprocessor)</li>
 <li>ASIC is wie ein leeres Zeichnungsblatt, der Designer muss alle Komponenten entwerfen.</li>
-</ul>
+
 <img src="https://i.loli.net/2019/07/17/5d2f3b32d9d0c85496.png" alt="20190717171349.png">
 ]]></content>
       <tags>
@@ -547,7 +547,7 @@
 <h4 id="NMOS"><a href="#NMOS" class="headerlink" title="NMOS"></a>NMOS</h4><ul>
 <li>leitet bei einer positiven Gate-Source Spannung.</li>
 <li><strong>Wichtig</strong>: <code>NMOS leitet auch wenn der Drain ein höheres Potential als das Gate hat. Wichtig ist nur</code>$V_{gs}&gt;V_{th}$</li>
-<li><strong><em>Transistorschwelle</em></strong> $V_{th}$: <code>die minimale Gate-Source Spannung, die den Transistor einschaltet.(0.3-0.5V)</code><br><img src="https://i.loli.net/2019/07/19/5d30d71f8e12376363.png" alt="20190718223124.png"></p></li>
+<li><strong><em>Transistorschwelle</em></strong> $V_{th}$: <code>die minimale Gate-Source Spannung, die den Transistor einschaltet.(0.3-0.5V)</code><br><img src="https://i.loli.net/2019/07/19/5d30d71f8e12376363.png" alt="20190718223124.png"><p></p></li>
 </ul>
 <p>Wie wissen wir dann, welcher Kontakt Drain und welcher Source ist?</p>
 <blockquote>
@@ -709,7 +709,7 @@
 <td>The bill, please!</td>
 </tr>
 </tbody></table>
-<p><a href="http://germanwithjenny.com/2018/01/23/podcast-4-im-restaurant-a1/" target="_blank" rel="noopener">website</a><br><audio style="width:100%;" controls="controls"><br>    <source src="http://germanwithjenny.com/wp-content/uploads/2018/01/Podcast-4-im-Restaurant-A1-1.mp3" type="audio/mpeg"><br></audio></p>
+<p><a href="http://germanwithjenny.com/2018/01/23/podcast-4-im-restaurant-a1/" target="_blank" rel="external nofollow noopener noreferrer">website</a><br><audio style="width:100%;" controls="controls"><br>    <source src="http://germanwithjenny.com/wp-content/uploads/2018/01/Podcast-4-im-Restaurant-A1-1.mp3" type="audio/mpeg"><br></audio></p>
 ]]></content>
       <tags>
         <tag>Deutsch A1/A2</tag>
