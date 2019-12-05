@@ -23,7 +23,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d287255cedba13357.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d28770dd74ce84681.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d2877a3b75d847277.png">
-<meta property="og:updated_time" content="2019-12-05T14:34:35.283Z">
+<meta property="og:updated_time" content="2019-12-05T14:42:02.577Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d28693b7fae839187.png">
   
@@ -185,9 +185,8 @@
 <p>AS-Interface (Actuator Sensor Interface, ASi) is an industrial networking solution (physical layer, data access method and protocol) used in PLC, DCS and PC-based automation systems. It is designed for connecting simple field I/O devices (e.g. binary ON/OFF devices such as actuators, sensors, rotary encoders, analog inputs and outputs, push buttons, and valve position sensors) in discrete manufacturing and process applications using a single two-conductor cable.</p>
 <a id="more"></a>
 
-<h3 id="ASI的概念"><a href="#ASI的概念" class="headerlink" title="ASI的概念"></a>ASI的概念</h3><p>Master slave concept using a single master<br><img src="https://i.loli.net/2019/07/12/5d28693b7fae839187.png" alt="20190712130423.png"></p>
-<h3 id="传输媒介"><a href="#传输媒介" class="headerlink" title="传输媒介"></a>传输媒介</h3><ul>
-<li>unshielded two-wire lines(-&gt;max.2A at 24V)无屏蔽的双线</li>
+<h3 id="ASI的概念"><a href="#ASI的概念" class="headerlink" title="ASI的概念"></a>ASI的概念</h3><p><img src="https://i.loli.net/2019/07/12/5d28693b7fae839187.png" alt="20190712130423.png"></p></p>
+<h3 id="传输媒介"><a href="#传输媒介" class="headerlink" title="传输媒介"></a>传输媒介</h3><li>unshielded two-wire lines(-&gt;max.2A at 24V)无屏蔽的双线</li>
 <li>two variants:<ul>
 <li>1.5$mm^2$ flat ribbon(带状)conductor-&gt;<strong>budget-priced</strong></li>
 <li>1.5$mm^2$ <strong>ASI-specific flat cable</strong>-&gt;<strong>advantageous during installation</strong></li>
@@ -201,18 +200,22 @@
 </li>
 <li>Arbitrary topologies(star,tree,line)realizable by a coupling module</li>
 </ul>
-<h3 id="ASI-slave-的结构"><a href="#ASI-slave-的结构" class="headerlink" title="ASI slave 的结构"></a>ASI slave 的结构</h3><p><img src="https://i.loli.net/2019/07/12/5d286de1f2dc395126.png" alt="20190712132415.png"></p>
-<h3 id="Modulation-Scheme-调制"><a href="#Modulation-Scheme-调制" class="headerlink" title="Modulation Scheme(调制)"></a>Modulation Scheme(调制)</h3><p><img src="https://i.loli.net/2019/07/12/5d2871efd2f8519394.png" alt="20190712134132.png"></p>
-<h4 id="Example-for-modulation"><a href="#Example-for-modulation" class="headerlink" title="Example for modulation"></a>Example for modulation</h4><p><img src="https://i.loli.net/2019/07/12/5d2872111c6e124871.png" alt="20190712134206.png"></p>
-<h3 id="Transmission-method-传输方式"><a href="#Transmission-method-传输方式" class="headerlink" title="Transmission method(传输方式)"></a>Transmission method(传输方式)</h3><p><img src="https://i.loli.net/2019/07/12/5d287255cedba13357.png" alt="20190712134315.png"></p>
+
+<h3 id="ASI-slave-的结构"><a href="#ASI-slave-的结构" class="headerlink" title="ASI-slave-的结构"></a>ASI-slave-的结构</h3><p><img src="https://i.loli.net/2019/07/12/5d286de1f2dc395126.png" alt="20190712132415.png"></p>
+
+<h3 id="Modulation-Scheme-调制"><a href="#Modulation-Scheme-调制" class="headerlink" title="Modulation-Scheme-调制"></a>Modulation-Scheme-调制</h3><p><img src="https://i.loli.net/2019/07/12/5d2871efd2f8519394.png" alt="20190712134132.png"></p>
+
+<h4 id="Example-for-modulation”-gt"><a href="#Example-for-modulation”-gt" class="headerlink" title="Example-for-modulation”&gt;"></a>Example-for-modulation”&gt;</h4><p><img src="https://i.loli.net/2019/07/12/5d2872111c6e124871.png" alt="20190712134206.png"></p>
+
+<h4 id="Transmission-method-传输方式"><a href="#Transmission-method-传输方式" class="headerlink" title="Transmission-method-传输方式"></a>Transmission-method-传输方式</h4><p><img src="https://i.loli.net/2019/07/12/5d287255cedba13357.png" alt="20190712134315.png"></p>
 <ul>
 <li>Master Request(each bit 6$\mu$s)<br>开始位0(1 bit), 控制位(1 bit), A4-A0 slave 地址, I4-I0 信息位, 奇偶校验位(1 bit), 结束位1(1 bit)</li>
 <li>Slave answer<br>开始位0(1 bit), I3-I0, PB, EB</li>
 <li>Master pause<br>in general 3, max.10 bit</li>
 <li>Slave pause<br>1 bit time</li>
 </ul>
-<h3 id="data-integrity-数据完整性"><a href="#data-integrity-数据完整性" class="headerlink" title="data integrity (数据完整性)"></a>data integrity (数据完整性)</h3><ul>
-<li>The following rule set is tested by the slace module:<ul>
+
+<h3 id="data-integrity-数据完整性"><a href="#data-integrity-数据完整性" class="headerlink" title="data-integrity-数据完整性"></a>data-integrity-数据完整性</h3><li>The following rule set is tested by the slace module:<ul>
 <li>start and stop bits: first pulse must be negative, last pulse must be positive</li>
 <li>successive pulses must have different polarity</li>
 <li>between two pulses of a frame only one pulse is allowed to be missing</li>
@@ -363,7 +366,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ASI的概念"><span class="toc-number">1.</span> <span class="toc-text">ASI的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传输媒介"><span class="toc-number">2.</span> <span class="toc-text">传输媒介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ASI-slave-的结构"><span class="toc-number">3.</span> <span class="toc-text">ASI slave 的结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Modulation-Scheme-调制"><span class="toc-number">4.</span> <span class="toc-text">Modulation Scheme(调制)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Example-for-modulation"><span class="toc-number">4.1.</span> <span class="toc-text">Example for modulation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transmission-method-传输方式"><span class="toc-number">5.</span> <span class="toc-text">Transmission method(传输方式)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#data-integrity-数据完整性"><span class="toc-number">6.</span> <span class="toc-text">data integrity (数据完整性)</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ASI的概念"><span class="toc-number">1.</span> <span class="toc-text">ASI的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传输媒介"><span class="toc-number">2.</span> <span class="toc-text">传输媒介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ASI-slave-的结构"><span class="toc-number">3.</span> <span class="toc-text">ASI-slave-的结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Modulation-Scheme-调制"><span class="toc-number">4.</span> <span class="toc-text">Modulation-Scheme-调制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Example-for-modulation”-gt"><span class="toc-number">4.1.</span> <span class="toc-text">Example-for-modulation”&gt;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Transmission-method-传输方式"><span class="toc-number">4.2.</span> <span class="toc-text">Transmission-method-传输方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#data-integrity-数据完整性"><span class="toc-number">5.</span> <span class="toc-text">data-integrity-数据完整性</span></a></li></ol>
                     </div>
                 </span>
             </div>

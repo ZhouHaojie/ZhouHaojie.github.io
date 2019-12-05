@@ -6,20 +6,20 @@
     <content><![CDATA[<hr>
 <p>title: FireWire火线<br>tags: Communication Sysems and Protocols<br>date: 2019-07-22</p>
 <hr>
-<h3 id="Encoding-编码"><a href="#Encoding-编码" class="headerlink" title="Encoding(编码)"></a>Encoding(编码)</h3><li>数据传输用两条传输线<ul>
+<h3 id="Encoding-编码"><a href="#Encoding-编码" class="headerlink" title="Encoding(编码)"></a>Encoding(编码)</h3><p>数据传输用两条传输线</p>
+<ul>
 <li>NRZ coding</li>
-<li>No stuffing or other measures for clock recovery<a id="more"></a> </li>
+<li>No stuffing or other measures for clock recovery</li>
 </ul>
-</li>
 <a id="more"></a>
-<li>STROBE 信号被用于恢复时钟信号<ul>
-<li>当相同数据被发送时, STROBE 信号会改变它的状态</li>
+
+<p>STROBE 信号被用于恢复时钟信号</p>
+<ul>
+<li>当相同数据被发送时, STROBE 信号会改变它的状</li>
 <li>Recovery through XOR combination of both signals</li>
 <li>Advantages:<ul>
 <li>Insensitive for interference</li>
 <li>Lower bandwidth required</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -83,9 +83,8 @@
 <p>AS-Interface (Actuator Sensor Interface, ASi) is an industrial networking solution (physical layer, data access method and protocol) used in PLC, DCS and PC-based automation systems. It is designed for connecting simple field I/O devices (e.g. binary ON/OFF devices such as actuators, sensors, rotary encoders, analog inputs and outputs, push buttons, and valve position sensors) in discrete manufacturing and process applications using a single two-conductor cable.</p>
 <a id="more"></a>
 
-<h3 id="ASI的概念"><a href="#ASI的概念" class="headerlink" title="ASI的概念"></a>ASI的概念</h3><p>Master slave concept using a single master<br><img src="https://i.loli.net/2019/07/12/5d28693b7fae839187.png" alt="20190712130423.png"></p>
-<h3 id="传输媒介"><a href="#传输媒介" class="headerlink" title="传输媒介"></a>传输媒介</h3><ul>
-<li>unshielded two-wire lines(-&gt;max.2A at 24V)无屏蔽的双线</li>
+<h3 id="ASI的概念"><a href="#ASI的概念" class="headerlink" title="ASI的概念"></a>ASI的概念</h3><p><img src="https://i.loli.net/2019/07/12/5d28693b7fae839187.png" alt="20190712130423.png"></p></p>
+<h3 id="传输媒介"><a href="#传输媒介" class="headerlink" title="传输媒介"></a>传输媒介</h3><li>unshielded two-wire lines(-&gt;max.2A at 24V)无屏蔽的双线</li>
 <li>two variants:<ul>
 <li>1.5$mm^2$ flat ribbon(带状)conductor-&gt;<strong>budget-priced</strong></li>
 <li>1.5$mm^2$ <strong>ASI-specific flat cable</strong>-&gt;<strong>advantageous during installation</strong></li>
@@ -99,18 +98,22 @@
 </li>
 <li>Arbitrary topologies(star,tree,line)realizable by a coupling module</li>
 </ul>
-<h3 id="ASI-slave-的结构"><a href="#ASI-slave-的结构" class="headerlink" title="ASI slave 的结构"></a>ASI slave 的结构</h3><p><img src="https://i.loli.net/2019/07/12/5d286de1f2dc395126.png" alt="20190712132415.png"></p>
-<h3 id="Modulation-Scheme-调制"><a href="#Modulation-Scheme-调制" class="headerlink" title="Modulation Scheme(调制)"></a>Modulation Scheme(调制)</h3><p><img src="https://i.loli.net/2019/07/12/5d2871efd2f8519394.png" alt="20190712134132.png"></p>
-<h4 id="Example-for-modulation"><a href="#Example-for-modulation" class="headerlink" title="Example for modulation"></a>Example for modulation</h4><p><img src="https://i.loli.net/2019/07/12/5d2872111c6e124871.png" alt="20190712134206.png"></p>
-<h3 id="Transmission-method-传输方式"><a href="#Transmission-method-传输方式" class="headerlink" title="Transmission method(传输方式)"></a>Transmission method(传输方式)</h3><p><img src="https://i.loli.net/2019/07/12/5d287255cedba13357.png" alt="20190712134315.png"></p>
+
+<h3 id="ASI-slave-的结构"><a href="#ASI-slave-的结构" class="headerlink" title="ASI-slave-的结构"></a>ASI-slave-的结构</h3><p><img src="https://i.loli.net/2019/07/12/5d286de1f2dc395126.png" alt="20190712132415.png"></p>
+
+<h3 id="Modulation-Scheme-调制"><a href="#Modulation-Scheme-调制" class="headerlink" title="Modulation-Scheme-调制"></a>Modulation-Scheme-调制</h3><p><img src="https://i.loli.net/2019/07/12/5d2871efd2f8519394.png" alt="20190712134132.png"></p>
+
+<h4 id="Example-for-modulation”-gt"><a href="#Example-for-modulation”-gt" class="headerlink" title="Example-for-modulation”&gt;"></a>Example-for-modulation”&gt;</h4><p><img src="https://i.loli.net/2019/07/12/5d2872111c6e124871.png" alt="20190712134206.png"></p>
+
+<h4 id="Transmission-method-传输方式"><a href="#Transmission-method-传输方式" class="headerlink" title="Transmission-method-传输方式"></a>Transmission-method-传输方式</h4><p><img src="https://i.loli.net/2019/07/12/5d287255cedba13357.png" alt="20190712134315.png"></p>
 <ul>
 <li>Master Request(each bit 6$\mu$s)<br>开始位0(1 bit), 控制位(1 bit), A4-A0 slave 地址, I4-I0 信息位, 奇偶校验位(1 bit), 结束位1(1 bit)</li>
 <li>Slave answer<br>开始位0(1 bit), I3-I0, PB, EB</li>
 <li>Master pause<br>in general 3, max.10 bit</li>
 <li>Slave pause<br>1 bit time</li>
 </ul>
-<h3 id="data-integrity-数据完整性"><a href="#data-integrity-数据完整性" class="headerlink" title="data integrity (数据完整性)"></a>data integrity (数据完整性)</h3><ul>
-<li>The following rule set is tested by the slace module:<ul>
+
+<h3 id="data-integrity-数据完整性"><a href="#data-integrity-数据完整性" class="headerlink" title="data-integrity-数据完整性"></a>data-integrity-数据完整性</h3><li>The following rule set is tested by the slace module:<ul>
 <li>start and stop bits: first pulse must be negative, last pulse must be positive</li>
 <li>successive pulses must have different polarity</li>
 <li>between two pulses of a frame only one pulse is allowed to be missing</li>
