@@ -158,8 +158,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-<article id="post-加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA)" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA)" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -173,9 +172,9 @@
 		<!--显示阅读次数-->
 		
 			<br/>
-			<a class="cloud-tie-join-count" href="javascript:void(0);" target="_blank" rel="noopener" style="color:gray;font-size:14px;">
+			<a class="cloud-tie-join-count" href="javascript:void(0);" target="_blank" rel="noopener" style="color:gray;font-size:12px;">
 			<span class="icon-sort"></span>
-			<span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+			<span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:12px;">
 					阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
 			</span>
 			</a>
@@ -203,7 +202,14 @@
 <p>4位超前进位加法器对应的Verilog HDL代码为：</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> four_bits_fast_adder(sum_out,c_out,a,b,c_in);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">input</span> [<span class="number">3</span>:<span class="number">0</span>] a,b;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">input</span> c_in;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">output</span> [<span class="number">3</span>:<span class="number">0</span>] sum_out;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">output</span> c_out;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">wire</span> [<span class="number">4</span>:<span class="number">0</span>] g,p,c;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> c[<span class="number">0</span>] = c_in;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> g = a|b;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> p = a&amp;b;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> c[<span class="number">1</span>] = g[<span class="number">0</span>]|(p[<span class="number">0</span>]&amp;c[<span class="number">0</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> c[<span class="number">2</span>] = g[<span class="number">1</span>]|(p[<span class="number">1</span>]&amp;(g[<span class="number">0</span>]|(p[<span class="number">0</span>]&amp;c[<span class="number">0</span>])));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> c[<span class="number">3</span>] = g[<span class="number">2</span>]|(p[<span class="number">2</span>]&amp;g[<span class="number">1</span>]|(p[<span class="number">1</span>]&amp;(g[<span class="number">0</span>]|(p[<span class="number">0</span>]&amp;c[<span class="number">0</span>]))));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> c[<span class="number">4</span>] = g[<span class="number">3</span>]|(p[<span class="number">3</span>]&amp;g[<span class="number">2</span>]|(p[<span class="number">2</span>]&amp;g[<span class="number">1</span>]|(p[<span class="number">1</span>]&amp;(g[<span class="number">0</span>]|(p[<span class="number">0</span>]&amp;c[<span class="number">0</span>])))));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> sum_out = p^c[<span class="number">3</span>:<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> c_out = c[<span class="number">4</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endmodule</span></span></pre></td></tr></table></figure>
       
+	<!-- 增加版权声明 -->
 
+	
+	
+	  <div class="declare" hidden="hidden"></div>
+	
+
+	<!-- 增加版权声明结束 -->
       
         <div class="page-reward">
           <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
