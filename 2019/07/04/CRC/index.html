@@ -219,7 +219,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-07-04 18:22:47" itemprop="dateCreated datePublished" datetime="2019-07-04T18:22:47+02:00">2019-07-04</time>
+              <time title="创建时间：2019-07-04 16:22:47" itemprop="dateCreated datePublished" datetime="2019-07-04T16:22:47+02:00">2019-07-04</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -282,7 +282,7 @@
 <p>位宽W=1的生成多项式(CRC1)有两种，分别是X1和X1+X0，10对应的就是奇偶校验中的奇校验，而11对应则是偶校验。</p>
 <h4 id="原始CRC算法"><a href="#原始CRC算法" class="headerlink" title="原始CRC算法"></a>原始CRC算法</h4><p>假设生成多项式(被除数)为：100110001（简记为0x31），也就是CRC-8，<br>原始CRC计算步骤如下：</p>
 <p>1.将CRC寄存器（8-bits，比生成多项式少1bit）赋初值0<br>2.在待传输信息流后面加入8个0<br>3.While (数据未处理完)<br>4.Begin<br>5.—If (CRC寄存器首位是1)<br>6.——reg = reg XOR 0x31<br>7.— CRC寄存器左移一位，读入一个新的数据于CRC寄存器的0 bit的位置。<br>8.End<br>CRC寄存器就是我们所要求的余数。<br>实际C代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> <span class="title">crc8_gen</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *data,<span class="keyword">unsigned</span> <span class="keyword">char</span> length)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> j;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> crc_reg = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span>(length--)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        crc_reg ^= *data++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;<span class="number">8</span>;j++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span>(crc_reg &amp; <span class="number">0x80</span>)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                crc_reg = (crc_reg &lt;&lt; <span class="number">1</span>) ^ <span class="number">0x31</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            &#125;<span class="keyword">else</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                crc_reg = crc_reg &lt;&lt; <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> crc_reg;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">unsigned char crc8_gen(unsigned char *data,unsigned char length)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    int j;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    unsigned char crc_reg &#x3D; 0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    while(length--)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        crc_reg ^&#x3D; *data++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        for(j&#x3D;0;j&lt;8;j++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            if(crc_reg &amp; 0x80)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                crc_reg &#x3D; (crc_reg &lt;&lt; 1) ^ 0x31;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            &#125;else&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                crc_reg &#x3D; crc_reg &lt;&lt; 1;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    return crc_reg;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 <p>实际上，真正的CRC 计算通常与上面描述的还有些出入。这是因为这种最基本的CRC除法有个很明显的缺陷，就是数据流的开头添加一些0并不影响最后校验字的结果。因此真正应用的CRC 算法基本都在原始的CRC算法的基础上做了些小的改动。所谓的改动，也就是增加了两个概念，第一个是“余数初始值”，第二个是“结果异或值”。</p>
 <p>所谓的“余数初始值”就是在计算CRC值的开始，给CRC寄存器一个初始值。“结果异或值”是在其余计算完成后将CRC寄存器的值在与这个值进行一下异或操作作为最后的校验值。</p>
 <h4 id="实际CRC算法"><a href="#实际CRC算法" class="headerlink" title="实际CRC算法"></a>实际CRC算法</h4><p>实际CRC计算步骤如下：</p>
@@ -370,7 +370,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -411,12 +411,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">42k</span>
+    <span title="站点总字数">45k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">38 分钟</span>
+    <span title="站点阅读时长">41 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>
