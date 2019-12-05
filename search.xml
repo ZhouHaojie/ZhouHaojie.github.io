@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>I2C总线协议</title>
-    <url>/2019/12/05/I2C%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/</url>
+    <url>/archives/9043.html</url>
     <content><![CDATA[<p>I2C(Inter－Integrated Circuit)总线是80年代PHILIPS公司开发的两线式串行总线，如今已经成为芯片间低速串行通信的事实标准，被广泛使用在消费、控制类电子设备场合。这里的两个关键词<strong>两线</strong>和<strong>低速</strong>：<br>两线意味着结构简单，低速意味着好实现，做电路的都知道速度越慢电路实现起来就越容易，而且协议方式也很优雅。</p>
 <a id="more"></a>
 
@@ -79,7 +79,7 @@
   </entry>
   <entry>
     <title>ASI总线协议</title>
-    <url>/2019/12/05/ASI%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/</url>
+    <url>/archives/36387.html</url>
     <content><![CDATA[<p>AS-Interface (Actuator Sensor Interface, ASi) is an industrial networking solution (physical layer, data access method and protocol) used in PLC, DCS and PC-based automation systems. It is designed for connecting simple field I/O devices (e.g. binary ON/OFF devices such as actuators, sensors, rotary encoders, analog inputs and outputs, push buttons, and valve position sensors) in discrete manufacturing and process applications using a single two-conductor cable.</p>
 <a id="more"></a>
 
@@ -131,7 +131,7 @@
   </entry>
   <entry>
     <title>FireWire火线协议</title>
-    <url>/2019/12/05/FireWire%E7%81%AB%E7%BA%BF%E5%8D%8F%E8%AE%AE/</url>
+    <url>/archives/43397.html</url>
     <content><![CDATA[<h3 id="Encoding-编码"><a href="#Encoding-编码" class="headerlink" title="Encoding(编码)"></a>Encoding(编码)</h3><p>数据传输用两条传输线</p>
 <ul>
 <li>NRZ coding</li>
@@ -208,7 +208,7 @@
   </entry>
   <entry>
     <title>Line Search Method</title>
-    <url>/2019/12/05/%E6%95%B0%E5%80%BC%E4%BC%98%E5%8C%96-%E7%BA%BF%E6%90%9C%E7%B4%A2Line%20Search%20Method/</url>
+    <url>/archives/4991.html</url>
     <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在求解unconstrajined Parameter Optimization问题中，线搜索是一类非常重要的迭代算法。线搜索的迭代过程是$x_{k+1}=x_{k}+\alpha_{k} p_{k}$。其中αkαk和pkpk分别表示搜索步长和搜索方向，因此线搜索需要解决如何求解步长和确定搜索方向，该小结主要介绍</p>
 <ol>
 <li>步长$\alpha_{k}$的选择</li>
@@ -223,7 +223,7 @@
   </entry>
   <entry>
     <title>const和constptr的区别C++</title>
-    <url>/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <url>/archives/37649.html</url>
     <content><![CDATA[<ul>
 <li>const: wird nachfolgend nicht verändert</li>
 <li>constexpr: wird zur Zeit des Üersetzens ausgerechnet<a id="more"></a>
@@ -239,7 +239,7 @@
   </entry>
   <entry>
     <title>Hexo主题yilia增加gitalk评论插件</title>
-    <url>/2019/07/11/Hexo%E4%B8%BB%E9%A2%98yilia%E5%A2%9E%E5%8A%A0gitalk%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/</url>
+    <url>/archives/17506.html</url>
     <content><![CDATA[<p>之前使用的gitment没有更新了，而且移动端适配做的不够好，故将评论功能迁移至gitalk,以下是替换过程</p>
 <a id="more"></a>
 <p><a id="more"></a></p>
@@ -257,7 +257,7 @@
   </entry>
   <entry>
     <title>Register-Memory-FIFO</title>
-    <url>/2019/07/10/Register-Memory-FIFO/</url>
+    <url>/archives/36767.html</url>
     <content><![CDATA[ <h3 id="FIFO-功能"><a href="#FIFO-功能" class="headerlink" title="FIFO 功能"></a>FIFO 功能</h3><p>FIFO指先入先出（First-In, First-Out), 先写入FIFO的数据会先读出来，类似流水线操作，先流入的会先流出来。<br>FIFO是一类寄存器或存储器堆栈，它必须有两个不同的指针，分别只想读数据和写数据。FIFO的一种应用是作为芯片里两个不同时钟域之间的缓存，突发的读写操作被FIFO缓解了，这样数据在两个时钟域上都能以令人满意的速率传递，而不需要在每个时钟节拍上等待另一个时钟。FIFO的其他应用是在RS-422或以太网串行链路上，这两种链路通常都需要在不同的时钟域之间进行通信。</p>
  <a id="more"></a>
 
@@ -308,7 +308,7 @@
   </entry>
   <entry>
     <title>FPGA闲聊</title>
-    <url>/2019/07/05/FPGA/</url>
+    <url>/archives/34095.html</url>
     <content><![CDATA[<h3 id="一、入门首先要掌握HDL（HDL-verilog-VHDL）。"><a href="#一、入门首先要掌握HDL（HDL-verilog-VHDL）。" class="headerlink" title="一、入门首先要掌握HDL（HDL=verilog+VHDL）。"></a>一、入门首先要掌握HDL（HDL=verilog+VHDL）。</h3><p>第一句话是：还没学数电的先学数电。然后你可以选择verilog或者VHDL，有C语言基础的，建议选择VHDL。因为verilog太像C了，很容易混淆，最后你会发现，你花了大量时间去区分这两种语言，而不是在学习如何使用它。当然，你思维能转得过来，也可以选verilog，毕竟在国内verilog用得比较多。</p>
 <a id="more"></a>
 <p>接下来，首先找本实例抄代码。抄代码的意义在于熟悉语法规则和编译器（这里的编译器是硅编译器又叫综合器，常用的编译器有：Quartus、ISE、Vivado、Design Compiler 、Synopsys的VCS、iverilog、Lattice的Diamond、Microsemi/Actel的Libero、Synplify pro），然后再模仿着写，最后不看书也能写出来。编译完代码，就打开RTL图，看一下综合出来是什么样的电路。</p>
@@ -368,7 +368,7 @@
   </entry>
   <entry>
     <title>CRC循环冗余校验算法</title>
-    <url>/2019/07/04/CRC/</url>
+    <url>/archives/1476.html</url>
     <content><![CDATA[<p>循环冗余校验（Cyclic redundancy check，通称“CRC”）是一种根据网络数据数据包或计算机文件等数据产生简短固定位数校验码的一种散列函數，主要用来检测或校验数据传输或者保存后可能出现的错误。生成的数字在传输或者存储之前计算出来并且附加到数据后面，然后接收方进行检验确定数据是否发生变化。</p>
 <a id="more"></a>
 <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>CRC校验（循环冗余校验）是数据通讯中最常采用的校验方式。在嵌入式软件开发中，经常要用到CRC 算法对各种数据进行校验。</p>
@@ -407,7 +407,7 @@
   </entry>
   <entry>
     <title>明斯特小镇</title>
-    <url>/2019/07/01/Reise/</url>
+    <url>/archives/23493.html</url>
     <content><![CDATA[<img src="https://github.com/ZhouHaojie/Cloud/raw/master/Photos/%E6%98%8E%E6%96%AF%E7%89%B91.JPG" width="70%" height="70%">]]></content>
       <tags>
         <tag>随笔</tag>
@@ -415,7 +415,7 @@
   </entry>
   <entry>
     <title>CMOS Schaltung</title>
-    <url>/2019/06/04/CMOS%20Schaltung/</url>
+    <url>/archives/55821.html</url>
     <content><![CDATA[<p>CMOS: bedeuted Komplementäre Metal-Oxid-Semiconductor Transistoren.</p>
 <a id="more"></a>
 
@@ -461,7 +461,7 @@
   </entry>
   <entry>
     <title>同步FIFO</title>
-    <url>/2019/05/10/%E5%90%8C%E6%AD%A5FIFO/</url>
+    <url>/archives/5589.html</url>
     <content><![CDATA[<p>FIFO (First-In-First-Out) 是一种先进先出的数据交互方式，在数字ASIC设计中常常被使用。FIFO按工作时钟域的不同又可以分为：同步FIFO和异步FIFO。</p>
 <a id="more"></a>
 
@@ -495,7 +495,7 @@
   </entry>
   <entry>
     <title>CDMA原理</title>
-    <url>/2019/05/04/CDMA/</url>
+    <url>/archives/56936.html</url>
     <content><![CDATA[<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>假设有四组数据[1,0,1,1],[0,0,1,1],[1,1,0,0],[0,1,0,1],通过四组相互正交的向量[1,1,1,1],[1,1,-1,-1],[1,-1,1,-1]，[1,-1,-1,1]，经过以下变换：</p>
 <a id="more"></a>
 <h3 id="调制"><a href="#调制" class="headerlink" title="调制"></a>调制</h3><p>数据中的1用原向量替换，0用负的原向量替换。</p>
@@ -517,7 +517,7 @@
   </entry>
   <entry>
     <title>DDS-复习1</title>
-    <url>/2019/05/04/DDS-%E5%A4%8D%E4%B9%A01/</url>
+    <url>/archives/46839.html</url>
     <content><![CDATA[<h3 id="Fully-Customised-Design-und-Semi-Customised-Design"><a href="#Fully-Customised-Design-und-Semi-Customised-Design" class="headerlink" title="Fully Customised Design und Semi Customised Design"></a>Fully Customised Design und Semi Customised Design</h3><li>Fully Customised Design:<br>jede Schaltung wird für gegebene Anwendung entworfen, um die Performanz zu optimieren. Schaltungen werden als Schaltplan beschrieben.<a id="more"></a></li>
 <li><strong>Semi Customised Design</strong>:<br>Logische Schaltung ist in einer Computer-Sprache definiert, Schaltplan wird dann automatisch generiert. Der Schaltplan verwendet fertige Bauteile, logische Gatter.</li>
 </ul>
@@ -534,7 +534,7 @@
   </entry>
   <entry>
     <title>DDS-复习2-CMOS Schaltung</title>
-    <url>/2019/05/03/DDS-%E5%A4%8D%E4%B9%A02-CMOS%20Schaltung/</url>
+    <url>/archives/1696.html</url>
     <content><![CDATA[<p>CMOS: bedeuted Komplementäre Metal-Oxid-Semiconductor Transistoren.</p>
 <a id="more"></a>
 
@@ -639,7 +639,7 @@
   </entry>
   <entry>
     <title>Maxwell equation</title>
-    <url>/2019/04/05/maxwell/</url>
+    <url>/archives/37625.html</url>
     <content><![CDATA[<p>$$<br>\begin{eqnarray}<br>\nabla\cdot\vec{E} &amp;=&amp; \frac{\rho}{\epsilon_0} \<br>\nabla\cdot\vec{B} &amp;=&amp; 0 \<br>\nabla\times\vec{E} &amp;=&amp; -\frac{\partial B}{\partial t} \<br>\nabla\times\vec{B} &amp;=&amp; \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right)<br>\end{eqnarray}<br>$$</p>
 ]]></content>
       <tags>
@@ -648,7 +648,7 @@
   </entry>
   <entry>
     <title>模值M的计数器</title>
-    <url>/2019/04/04/%E4%BB%BB%E6%84%8F%E6%A8%A1%E5%80%BC%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
+    <url>/archives/52434.html</url>
     <content><![CDATA[<p>任意模值M的计数器，第一步需要确定计数器所需要触发器个数。N个触发器对应了2N个状态。应有2N&gt;M。任意模值计数器选取满足条件的最小N，N为计数器中触发器的个数。有两种方法实现：反馈清零法和反馈置数法。</p>
 <a id="more"></a>
 <p>反馈清零法Verilog代码：</p>
@@ -659,7 +659,7 @@
   </entry>
   <entry>
     <title>Podcast 4-Im Restaurant</title>
-    <url>/2019/03/05/A1A2%20Podcast%204%20-%20Im%20Restaurant/</url>
+    <url>/archives/21871.html</url>
     <content><![CDATA[<h3 id="听力错词"><a href="#听力错词" class="headerlink" title="听力错词"></a>听力错词</h3><p>teur-teuer, Hauptgericht, Glass-Glas, pappsatt, schöne-schöner, Kerze蜡烛</p>
 <a id="more"></a>
 
@@ -718,7 +718,7 @@
   </entry>
   <entry>
     <title>zu Hause - nach Hause - daheim - heim</title>
-    <url>/2019/03/05/zu%20Hause%20-%20nach%20Hause%20-%20daheim%20-%20heim/</url>
+    <url>/archives/11807.html</url>
     <content><![CDATA[<p>zu Hause = daheim<br>z.B.<br>Ich bin zu Hause.<br>Ich bin daheim.          Umgangssprachlich</p>
 <a id="more"></a>
 <p>nach Hause = heim<br>z.B.<br>Ich gehe nach Hause.   Das ist Komisch<br>Ich gehe heim.</p>
@@ -733,7 +733,7 @@
   </entry>
   <entry>
     <title>8-bits 奇偶校验器</title>
-    <url>/2019/03/04/%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C%E5%99%A8/</url>
+    <url>/archives/6865.html</url>
     <content><![CDATA[<p>奇偶校验器的功能是检测数据中包含“1”的个数是奇数还是偶数。在计算机和一些数字通信系统中，常用奇偶校验器来检查数据传输和数码记录中是否存在错误。</p>
 <a id="more"></a>
 <p>奇偶校验包含两种方式：奇校验和偶校验。奇校验保证传输数据和校验位中“1”的总数为奇数。如果数据中包含奇数个“1”，则校验位置“0”，如果数据中包含偶数个“1”，则校验位置“1”。偶校验保证传输数据和校验位中“1”的总数为偶数。如果数据中包含奇数个“1”，则校验位置“1”，如果数据中包含偶数个“1”，则校验位置“0”。</p>
@@ -747,7 +747,7 @@
   </entry>
   <entry>
     <title>Easy German</title>
-    <url>/2019/03/01/A1A2%20Easy%20German%20-%20Basic%20Conversation%20Phrases%201/</url>
+    <url>/archives/28384.html</url>
     <content><![CDATA[<h3 id="Easy-German-Basic-Conversation-Phrases-1"><a href="#Easy-German-Basic-Conversation-Phrases-1" class="headerlink" title="Easy German - Basic Conversation Phrases 1"></a>Easy German - Basic Conversation Phrases 1</h3><p>-Wie geht es dir?<br>-Mir geht es gut/schlecht.</p>
 <a id="more"></a>
 
@@ -778,7 +778,7 @@
   </entry>
   <entry>
     <title>静态互补CMOS逻辑门的设计</title>
-    <url>/2019/02/04/%E9%9D%99%E6%80%81%E4%BA%92%E8%A1%A5CMOS%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E8%AE%BE%E8%AE%A1/</url>
+    <url>/archives/32090.html</url>
     <content><![CDATA[<ul>
 <li>静态逻辑原理</li>
 <li>互补的PUN和PDN</li>
@@ -804,7 +804,7 @@
   </entry>
   <entry>
     <title>加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA）</title>
-    <url>/2019/01/04/%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E8%B6%85%E5%89%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8%EF%BC%88Carry-Lookahead%20Adder%EF%BC%8CCLA)/</url>
+    <url>/archives/12996.html</url>
     <content><![CDATA[<p>RCA的主要问题是高位的运算必须等待低位的“进位输出信号”，那我们的优化思路就是‘能否提前计算出“进位输出信号’ ？</p>
 <a id="more"></a>
 
@@ -823,7 +823,7 @@
   </entry>
   <entry>
     <title>搭建Hexo-Github Pages博客遇到的一些问题</title>
-    <url>/2018/12/01/%E6%90%AD%E5%BB%BAHexo-github%20Pages%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/</url>
+    <url>/archives/42797.html</url>
     <content><![CDATA[<h3 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h3><p>首先介绍一下绑定域名的过程<br>1.ping github pages 的IP地址</p>
 <a id="more"></a> 
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">ping</span> <span class="selector-tag">zhouhaojie</span><span class="selector-class">.github</span><span class="selector-class">.io</span></span></pre></td></tr></table></figure>
@@ -840,7 +840,7 @@
   </entry>
   <entry>
     <title>Hello World</title>
-    <url>/2018/07/05/hello-world/</url>
+    <url>/archives/16107.html</url>
     <content><![CDATA[<p>花了一天的时间，我的个人博客终于搭建起来了。<br></p>
 <a id="more"></a>
 <p>搭建这个博客主要是为了记录一下我学习以及生活上的些许灵感，希望它能成为我自己的一块小小领地，伴随我一路成长。<br><br>感谢Litten提供的Yilia主题，我很喜欢他的设计风格。</p>
