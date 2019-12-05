@@ -5,14 +5,14 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://yoursite.com">
+  <link rel="dns-prefetch" href="/grenze.cn">
   <title>加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA） | ZhouHaojie的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="RCA的主要问题是高位的运算必须等待低位的“进位输出信号”，那我们的优化思路就是‘能否提前计算出“进位输出信号’ ？">
 <meta name="keywords" content="Verilog HDL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA）">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;01&#x2F;04&#x2F;%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E8%B6%85%E5%89%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8%EF%BC%88Carry-Lookahead%20Adder%EF%BC%8CCLA)&#x2F;index.html">
+<meta property="og:url" content="2019&#x2F;01&#x2F;04&#x2F;%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E8%B6%85%E5%89%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8%EF%BC%88Carry-Lookahead%20Adder%EF%BC%8CCLA)&#x2F;index.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
 <meta property="og:description" content="RCA的主要问题是高位的运算必须等待低位的“进位输出信号”，那我们的优化思路就是‘能否提前计算出“进位输出信号’ ？">
 <meta property="og:locale" content="en">
@@ -64,7 +64,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+				<li><a href="/tags/随笔/">随笔</a></li>
 	        
 			</ul>
 		</nav>
@@ -91,7 +91,7 @@
 		        
 					<a class="weibo" target="_blank" href="https://weibo.com/u/5176893838" title="weibo"><i class="icon-weibo"></i></a>
 		        
-					<a class="rss" target="_blank" href="/%20" title="rss"><i class="icon-rss"></i></a>
+					<a class="rss" target="_blank" href=" " title="rss"><i class="icon-rss"></i></a>
 		        
 			</div>
 		</nav>
@@ -132,7 +132,7 @@
 			        
 						<a class="weibo" target="_blank" href="https://weibo.com/u/5176893838" title="weibo"><i class="icon-weibo"></i></a>
 			        
-						<a class="rss" target="_blank" href="/%20" title="rss"><i class="icon-rss"></i></a>
+						<a class="rss" target="_blank" href=" " title="rss"><i class="icon-rss"></i></a>
 			        
 				</div>
 			</nav>
@@ -143,7 +143,7 @@
 				
 					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -181,7 +181,7 @@
 		
 		<!--显示阅读次数完毕-->
         
-        <a href="/2019/01/04/%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E8%B6%85%E5%89%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8%EF%BC%88Carry-Lookahead%20Adder%EF%BC%8CCLA)/" class="archive-article-date">
+        <a href="2019/01/04/加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA)/" class="archive-article-date">
   	<time datetime="2019-01-04T15:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-04</time>
 </a>
         
@@ -307,7 +307,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/04/%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E8%B6%85%E5%89%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8%EF%BC%88Carry-Lookahead%20Adder%EF%BC%8CCLA)/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:2019/01/04/加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA)/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -321,7 +321,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/02/04/%E9%9D%99%E6%80%81%E4%BA%92%E8%A1%A5CMOS%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E8%AE%BE%E8%AE%A1/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="2019/02/04/静态互补CMOS逻辑门的设计/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -331,7 +331,7 @@
     </a>
   
   
-    <a href="/2018/12/01/%E6%90%AD%E5%BB%BAHexo-github%20Pages%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="2018/12/01/搭建Hexo-github Pages博客遇到的一些问题/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">搭建Hexo-Github Pages博客遇到的一些问题</div>
       <i class="icon-circle-right"></i>
     </a>
