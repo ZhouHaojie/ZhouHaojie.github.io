@@ -6,22 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>同步FIFO | ZhouHaojie的博客</title>
+  <title>ASI总线协议 | ZhouHaojie的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="FIFO (First-In-First-Out) 是一种先进先出的数据交互方式，在数字ASIC设计中常常被使用。FIFO按工作时钟域的不同又可以分为：同步FIFO和异步FIFO。">
-<meta name="keywords" content="Verilog HDL">
+  <meta name="description" content="AS-Interface (Actuator Sensor Interface, ASi) is an industrial networking solution (physical layer, data access method and protocol) used in PLC, DCS and PC-based automation systems. It is designed fo">
+<meta name="keywords" content="Communication Sysems and Protocols">
 <meta property="og:type" content="article">
-<meta property="og:title" content="同步FIFO">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;05&#x2F;10&#x2F;%E5%90%8C%E6%AD%A5FIFO&#x2F;index.html">
+<meta property="og:title" content="ASI总线协议">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;05&#x2F;ASI%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE&#x2F;index.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
-<meta property="og:description" content="FIFO (First-In-First-Out) 是一种先进先出的数据交互方式，在数字ASIC设计中常常被使用。FIFO按工作时钟域的不同又可以分为：同步FIFO和异步FIFO。">
+<meta property="og:description" content="AS-Interface (Actuator Sensor Interface, ASi) is an industrial networking solution (physical layer, data access method and protocol) used in PLC, DCS and PC-based automation systems. It is designed fo">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;14&#x2F;5d2b1ff494e1963015.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;14&#x2F;5d2b203f0271734148.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;14&#x2F;5d2b20d0e9a0d57334.png">
-<meta property="og:updated_time" content="2019-12-05T14:32:38.453Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d28693b7fae839187.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d286de1f2dc395126.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d2871efd2f8519394.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d2872111c6e124871.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d287255cedba13357.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d28770dd74ce84681.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d2877a3b75d847277.png">
+<meta property="og:updated_time" content="2019-12-05T15:10:24.449Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;14&#x2F;5d2b1ff494e1963015.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d28693b7fae839187.png">
   
     <link rel="alternative" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
   
@@ -155,52 +159,70 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-同步FIFO" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-ASI总线协议" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      同步FIFO
+      ASI总线协议
     </h1>
   
 
         
-        <a href="/2019/05/10/%E5%90%8C%E6%AD%A5FIFO/" class="archive-article-date">
-  	<time datetime="2019-05-09T22:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-10</time>
+        <a href="/2019/12/05/ASI%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/" class="archive-article-date">
+  	<time datetime="2019-12-05T15:09:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>FIFO (First-In-First-Out) 是一种先进先出的数据交互方式，在数字ASIC设计中常常被使用。FIFO按工作时钟域的不同又可以分为：同步FIFO和异步FIFO。</p>
+        <p>AS-Interface (Actuator Sensor Interface, ASi) is an industrial networking solution (physical layer, data access method and protocol) used in PLC, DCS and PC-based automation systems. It is designed for connecting simple field I/O devices (e.g. binary ON/OFF devices such as actuators, sensors, rotary encoders, analog inputs and outputs, push buttons, and valve position sensors) in discrete manufacturing and process applications using a single two-conductor cable.</p>
 <a id="more"></a>
 
-<p>同步FIFO的写时钟和读时钟为同一个时钟，FIFO内部所有逻辑都是同步逻辑，常常用于交互数据缓冲。异步FIFO的写时钟和读时钟为异步时钟，FIFO内部的写逻辑和读逻辑的交互需要异步处理，异步FIFO常用于跨时钟域交互。</p>
-<p>本文介绍同步FIFO的典型设计方法。</p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>典型同步FIFO有三部分组成: （1） FIFO写控制逻辑； （2）FIFO读控制逻辑； （3）FIFO 存储实体（如Memory、Reg）
-　　</p>
-<ul>
-<li>FIFO写控制逻辑主要功能：产生FIFO写地址、写有效信号，同时产生FIFO写满等状态信号</li>
-<li>FIFO读控制逻辑主要功能：产生FIFO读地址、读有效信号，同时产生FIFO读空等状态信号</li>
+<h3 id="ASI的概念"><a href="#ASI的概念" class="headerlink" title="ASI的概念"></a>ASI的概念</h3><img src="https://i.loli.net/2019/07/12/5d28693b7fae839187.png" alt="20190712130423.png">
+
+<h3 id="传输媒介"><a href="#传输媒介" class="headerlink" title="传输媒介"></a>传输媒介</h3><li>unshielded two-wire lines(-&gt;max.2A at 24V)无屏蔽的双线</li>
+<li>two variants:<ul>
+<li>1.5$mm^2$ flat ribbon(带状)conductor-&gt;<strong>budget-priced</strong></li>
+<li>1.5$mm^2$ <strong>ASI-specific flat cable</strong>-&gt;<strong>advantageous during installation</strong></li>
 </ul>
-<p><img src="https://i.loli.net/2019/07/14/5d2b1ff494e1963015.png" alt="20190714142832.png"></p>
-<p>如下图所示，FIFO读写过程的地址控制：</p>
-<ol>
-<li>当FIFO初始化（复位）时fifo_write_addr与fifo_read_addr同指到0x0，此时FIFO处于空状态；</li>
-<li>当FIFO进行写操作时，fifo_write_addr递增（增加到FIFO DEPTH时回绕），与fifo_read_addr错开，此时FIFO处于非空状态；</li>
-<li>当FIFO进行读操作时，fifo_read_addr递增；</li>
-</ol>
-<p><img src="https://i.loli.net/2019/07/14/5d2b203f0271734148.png" alt="20190714142947.png"></p>
-<p>FIFO空满状态产生：<br>为产生FIFO空满标志，引入FIFO Count计数器，FIFO Count寄数器用于指示FIFO内部存储数据个数；</p>
-<ol>
-<li>当只有写操作时，FIFO Count加1；只有读操作是，FIFO Count减1；其他情况下，FIFO Count保持；</li>
-<li>当FIFO Count为0时，说明FIFO为空，fifo_empty置位；</li>
-<li>当FIFO Count等于FIFO_DEPTH时，说明FIFO已满，fifo_full置位；<br><img src="https://i.loli.net/2019/07/14/5d2b20d0e9a0d57334.png" alt="20190714143212.png"></li>
-</ol>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> (</span><br><span class="line">    <span class="keyword">input</span>       shift_in,</span><br><span class="line">    <span class="keyword">input</span>       clk,</span><br><span class="line">    <span class="keyword">input</span>       shift_out,</span><br><span class="line">    <span class="keyword">input</span>       rst_n,</span><br><span class="line">    <span class="keyword">input</span>       w_data,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    full,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    almostfull,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    empty,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    almostempty,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    r_data</span><br><span class="line">);</span><br><span class="line"><span class="keyword">parameter</span> DEPTH = <span class="number">2</span>**ADEPTH;</span><br><span class="line"><span class="keyword">reg</span> [DEPTH : <span class="number">0</span>] w_addr;</span><br><span class="line"><span class="keyword">reg</span> [DEPTH : <span class="number">0</span>] r_addr;</span><br><span class="line"><span class="keyword">reg</span> [WIDTH-<span class="number">1</span> : <span class="number">0</span>] memory [DEPTH : <span class="number">0</span>];</span><br><span class="line"><span class="keyword">reg</span> [DEPTH : <span class="number">0</span>] cnt;</span><br><span class="line"><span class="keyword">integer</span> i;</span><br><span class="line"><span class="comment">// write control</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(rst_n == <span class="number">1'b0</span>)<span class="keyword">begin</span></span><br><span class="line">        w_addr &lt;= <span class="number">'b0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_in &amp; (!full))<span class="keyword">begin</span></span><br><span class="line">        w_addr &lt;= w_addr + <span class="number">1'b1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="comment">// read control</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(rst_n == <span class="number">1'b0</span>)<span class="keyword">begin</span></span><br><span class="line">        r_addr &lt;= <span class="number">'b0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_out &amp; (!empty))<span class="keyword">begin</span></span><br><span class="line">        r_addr &lt;= r_addr + <span class="number">1'b1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">//write data</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(rst_n == <span class="number">1'b0</span>)<span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>, i&lt;=DEPTH, i++)</span><br><span class="line">            memory[i] &lt;= &#123;WIDTH&#123;<span class="number">1'b0</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_in &amp; (!full))<span class="keyword">begin</span></span><br><span class="line">        memory[w_addr] &lt;= w_data;   </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">// read data</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(rst_n == <span class="number">1'b0</span>)<span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>, i&lt;=DEPTH, i++)</span><br><span class="line">            memory[i] &lt;= &#123;WIDTH&#123;<span class="number">1'b0</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_out &amp; (!empty))<span class="keyword">begin</span></span><br><span class="line">        r_data &lt;= memory[r_addr];   </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(!rst_n)<span class="keyword">begin</span></span><br><span class="line">        cnt &lt;= <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_in &amp; (!full) &amp; (!almostfull) &amp; !(shift_out &amp; (!empty) &amp;（!almostempty)))<span class="keyword">begin</span></span><br><span class="line">        cnt &lt;= cnt + <span class="number">1'b1</span>;  </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_out &amp; (!empty) &amp;（!almostempty) &amp; !(shift_in &amp; (!full) &amp; (!almostfull)))<span class="keyword">begin</span></span><br><span class="line">        cnt &lt;= cnt - <span class="number">1'b1</span>;  </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> full = (cnt == DEPTH);</span><br><span class="line"><span class="keyword">assign</span> almostfull = (cnt == (DEPTH-<span class="number">1</span>));</span><br><span class="line"><span class="keyword">assign</span> empty = (cnt == <span class="number">0</span>);</span><br><span class="line"><span class="keyword">assign</span> almostempty = (cnt == <span class="number">1</span>);</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>Features:<ul>
+<li>Entire length of the line: 100m(extendable by a repeater中继器 to 300m) </li>
+<li>Max. 100mA current consumption per slave</li>
+<li>Max. 1 master ind 31 slaves(-&gt; max.124 sensors/actuators) per bus but several ASI-lines can be used in parallel</li>
+</ul>
+</li>
+<li>Arbitrary topologies(star,tree,line)realizable by a coupling module</li>
+</ul>
+
+<h3 id="ASI-slave-的结构"><a href="#ASI-slave-的结构" class="headerlink" title="ASI-slave-的结构"></a>ASI-slave-的结构</h3><p><img src="https://i.loli.net/2019/07/12/5d286de1f2dc395126.png" alt="20190712132415.png"></p>
+
+<h3 id="Modulation-Scheme-调制"><a href="#Modulation-Scheme-调制" class="headerlink" title="Modulation-Scheme-调制"></a>Modulation-Scheme-调制</h3><p><img src="https://i.loli.net/2019/07/12/5d2871efd2f8519394.png" alt="20190712134132.png"></p>
+
+<h4 id="Example-for-modulation”-gt"><a href="#Example-for-modulation”-gt" class="headerlink" title="Example-for-modulation”&gt;"></a>Example-for-modulation”&gt;</h4><p><img src="https://i.loli.net/2019/07/12/5d2872111c6e124871.png" alt="20190712134206.png"></p>
+
+<h4 id="Transmission-method-传输方式"><a href="#Transmission-method-传输方式" class="headerlink" title="Transmission-method-传输方式"></a>Transmission-method-传输方式</h4><p><img src="https://i.loli.net/2019/07/12/5d287255cedba13357.png" alt="20190712134315.png"></p>
+<ul>
+<li>Master Request(each bit 6$\mu$s)<br>开始位0(1 bit), 控制位(1 bit), A4-A0 slave 地址, I4-I0 信息位, 奇偶校验位(1 bit), 结束位1(1 bit)</li>
+<li>Slave answer<br>开始位0(1 bit), I3-I0, PB, EB</li>
+<li>Master pause<br>in general 3, max.10 bit</li>
+<li>Slave pause<br>1 bit time</li>
+</ul>
+
+<h3 id="data-integrity-数据完整性"><a href="#data-integrity-数据完整性" class="headerlink" title="data-integrity-数据完整性"></a>data-integrity-数据完整性</h3><li>The following rule set is tested by the slace module:<ul>
+<li>start and stop bits: first pulse must be negative, last pulse must be positive</li>
+<li>successive pulses must have different polarity</li>
+<li>between two pulses of a frame only one pulse is allowed to be missing</li>
+<li>no puulse during pause time </li>
+<li>even parity</li>
+</ul>
+</li>
+</ul>
+<p><strong>附：</strong><br><img src="https://i.loli.net/2019/07/12/5d28770dd74ce84681.png" alt="20190712140322.png"><br><img src="https://i.loli.net/2019/07/12/5d2877a3b75d847277.png" alt="20190712140550.png"></p>
 
       
 
@@ -245,7 +267,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Verilog HDL</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">Communication Sysems and Protocols</a>
         		</li>
       		
 		</ul>
@@ -301,7 +323,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/05/10/%E5%90%8C%E6%AD%A5FIFO/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/05/ASI%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -315,18 +337,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/06/04/CMOS%20Schaltung/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/12/05/I2C%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          CMOS Schaltung
+          I2C总线协议
         
       </div>
     </a>
   
   
-    <a href="/2019/05/04/CDMA/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">CDMA原理</div>
+    <a href="/2019/12/05/FireWire%E7%81%AB%E7%BA%BF%E5%8D%8F%E8%AE%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">FireWire火线协议</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -353,7 +375,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#原理"><span class="toc-number">1.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-number">2.</span> <span class="toc-text">代码实现</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ASI的概念"><span class="toc-number">1.</span> <span class="toc-text">ASI的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传输媒介"><span class="toc-number">2.</span> <span class="toc-text">传输媒介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ASI-slave-的结构"><span class="toc-number">3.</span> <span class="toc-text">ASI-slave-的结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Modulation-Scheme-调制"><span class="toc-number">4.</span> <span class="toc-text">Modulation-Scheme-调制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Example-for-modulation”-gt"><span class="toc-number">4.1.</span> <span class="toc-text">Example-for-modulation”&gt;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Transmission-method-传输方式"><span class="toc-number">4.2.</span> <span class="toc-text">Transmission-method-传输方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#data-integrity-数据完整性"><span class="toc-number">5.</span> <span class="toc-text">data-integrity-数据完整性</span></a></li></ol>
                     </div>
                 </span>
             </div>
