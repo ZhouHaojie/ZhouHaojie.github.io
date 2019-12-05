@@ -6,17 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://grenze.cn">
-  <title>Archives | ZhouHaojie的博客</title>
+  <title>I2C总线协议 | ZhouHaojie的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
-<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ZhouHaojie的博客">
-<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;index.html">
+  <meta name="description" content="I2C(Inter－Integrated Circuit)总线是80年代PHILIPS公司开发的两线式串行总线，如今已经成为芯片间低速串行通信的事实标准，被广泛使用在消费、控制类电子设备场合。这里的两个关键词两线和低速：两线意味着结构简单，低速意味着好实现，做电路的都知道速度越慢电路实现起来就越容易，而且协议方式也很优雅。">
+<meta name="keywords" content="Communication Sysems and Protocols">
+<meta property="og:type" content="article">
+<meta property="og:title" content="I2C总线协议">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9043.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
-<meta property="og:description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+<meta property="og:description" content="I2C(Inter－Integrated Circuit)总线是80年代PHILIPS公司开发的两线式串行总线，如今已经成为芯片间低速串行通信的事实标准，被广泛使用在消费、控制类电子设备场合。这里的两个关键词两线和低速：两线意味着结构简单，低速意味着好实现，做电路的都知道速度越慢电路实现起来就越容易，而且协议方式也很优雅。">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d273e357921699929.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d2757b486c0227768.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d2739d9d35e168697.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d273a544282995281.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d2759deaefb538707.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d275ac48723014712.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d275b3958b7752692.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d275c6ddcf4948696.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d275e937c01943449.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d275eeab223391701.png">
+<meta property="og:updated_time" content="2019-12-05T17:11:31.136Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d273e357921699929.png">
   
   
     <link rel="icon" href="/favicon.png">
@@ -149,990 +161,316 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-I2C总线协议" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      I2C总线协议
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/9043.html" class="archive-article-date">
+
+		<!--显示阅读次数-->
+		
+			<br/>
+			<a class="cloud-tie-join-count" href="javascript:void(0);" target="_blank" rel="noopener" style="color:gray;font-size:13px;">
+			<span class="icon-sort"></span>
+			<span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:13px;">
+					阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+			</span>
+			</a>
+		
+		<!--显示阅读次数完毕-->
+        
+        <a href="/archives/9043.html" class="archive-article-date">
   	<time datetime="2019-12-05T15:11:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/9043.html">I2C总线协议</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">Communication Sysems and Protocols</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+        
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/36387.html" class="archive-article-date">
-  	<time datetime="2019-12-05T15:09:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/36387.html">ASI总线协议</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">Communication Sysems and Protocols</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/43397.html" class="archive-article-date">
-  	<time datetime="2019-12-05T15:05:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/43397.html">FireWire火线协议</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">Communication Sysems and Protocols</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/4991.html" class="archive-article-date">
-  	<time datetime="2019-12-04T23:14:00.740Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/4991.html">Line Search Method</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Optimization of Dynamic Systems</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/37649.html" class="archive-article-date">
-  	<time datetime="2019-12-04T15:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/37649.html">const和constptr的区别C++</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/17506.html" class="archive-article-date">
-  	<time datetime="2019-07-11T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/17506.html">Hexo主题yilia增加gitalk评论插件</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">Hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/36767.html" class="archive-article-date">
-  	<time datetime="2019-07-10T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/36767.html">Register-Memory-FIFO</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Verilog HDL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/34095.html" class="archive-article-date">
-  	<time datetime="2019-07-05T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/34095.html">FPGA闲聊</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">FPGA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/1476.html" class="archive-article-date">
-  	<time datetime="2019-07-04T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/1476.html">CRC循环冗余校验算法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">Communication Sysems and Protocols</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/23493.html" class="archive-article-date">
-  	<time datetime="2019-07-01T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/23493.html">明斯特小镇</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/55821.html" class="archive-article-date">
-  	<time datetime="2019-06-04T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/55821.html">CMOS Schaltung</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Design Digitaler Schaltung</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/5589.html" class="archive-article-date">
-  	<time datetime="2019-05-09T22:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/5589.html">同步FIFO</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Verilog HDL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/56936.html" class="archive-article-date">
-  	<time datetime="2019-05-04T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/56936.html">CDMA原理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">Communication Sysems and Protocols</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/46839.html" class="archive-article-date">
-  	<time datetime="2019-05-03T22:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/46839.html">DDS-复习1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Design Digitaler Schaltung</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/1696.html" class="archive-article-date">
-  	<time datetime="2019-05-02T22:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/1696.html">DDS-复习2-CMOS Schaltung</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Design Digitaler Schaltung</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/37625.html" class="archive-article-date">
-  	<time datetime="2019-04-05T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/37625.html">Maxwell equation</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">Microwave</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/52434.html" class="archive-article-date">
-  	<time datetime="2019-04-04T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/52434.html">模值M的计数器</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Verilog HDL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/21871.html" class="archive-article-date">
-  	<time datetime="2019-03-05T15:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/21871.html">Podcast 4-Im Restaurant</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color4">Deutsch A1/A2</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">Hörverstehen</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/11807.html" class="archive-article-date">
-  	<time datetime="2019-03-05T12:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/11807.html">zu Hause - nach Hause - daheim - heim</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">Wortschatz</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/6865.html" class="archive-article-date">
-  	<time datetime="2019-03-04T15:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/6865.html">8-bits 奇偶校验器</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Verilog HDL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/28384.html" class="archive-article-date">
-  	<time datetime="2019-03-01T15:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/28384.html">Easy German</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color4">Deutsch A1/A2</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Easy German</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/32090.html" class="archive-article-date">
-  	<time datetime="2019-02-04T15:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/32090.html">静态互补CMOS逻辑门的设计</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">数字超大规模集成电路设计</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/12996.html" class="archive-article-date">
-  	<time datetime="2019-01-04T15:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/12996.html">加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Verilog HDL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
+    <div class="article-entry" itemprop="articleBody">
       
-        </div></section>
+        <p>I2C(Inter－Integrated Circuit)总线是80年代PHILIPS公司开发的两线式串行总线，如今已经成为芯片间低速串行通信的事实标准，被广泛使用在消费、控制类电子设备场合。这里的两个关键词<strong>两线</strong>和<strong>低速</strong>：<br>两线意味着结构简单，低速意味着好实现，做电路的都知道速度越慢电路实现起来就越容易，而且协议方式也很优雅。</p>
+<a id="more"></a>
+
+<h3 id="I2C总线的系统结构"><a href="#I2C总线的系统结构" class="headerlink" title="I2C总线的系统结构"></a>I2C总线的系统结构</h3><p><img src="https://i.loli.net/2019/07/11/5d273e357921699929.png" alt="20190711154834.png"></p>
+<h3 id="I2C总线接口的内部结构"><a href="#I2C总线接口的内部结构" class="headerlink" title="I2C总线接口的内部结构"></a>I2C总线接口的内部结构</h3><p>I2C总线使用的是<strong>开漏结构</strong>，这样它可以进行数据的双向传输。下图是一个SDA/SCL线的基本结构:</p>
+<ul>
+<li><strong>如果Slave或者Master内部的逻辑要用SDA/SCL线的时候，会通过内部的NMOS把SDA/SCL线下拉为地或者0</strong></li>
+<li><strong>如果没有Slave或者Master使用SDA/SCL线的时候，上拉电阻Rpu会把SDA/SCL上拉为VDD或high</strong></li>
+<li><strong>由于SDA、SCL为漏极开路结构，借助于外部的上拉电阻实现了信号的“线与”逻辑</strong></li>
+<li><strong>引脚在输出信号的同时还将引脚上的电平进行检测，检测是否与刚才输出一致。为 “时钟同步”和“总线仲裁”提供硬件基础</strong><br><img src="https://i.loli.net/2019/07/11/5d2757b486c0227768.png" alt="20190711173720.png"></li>
+</ul>
+<h3 id="I2C总线的工作过程与原理"><a href="#I2C总线的工作过程与原理" class="headerlink" title="I2C总线的工作过程与原理"></a>I2C总线的工作过程与原理</h3><p>总线上的所有通信都是由主控器引发的。在一次通信中，主控器与被控器总是在扮演着<br>两种不同的角色。<br>总线上有这么多器件，显然需要靠地址来确定访问哪一个器件。主器件与从器件的通信需要发送一个开始条件和一个结束条件。如下图所示：</p>
+<ul>
+<li><strong>开始条件：SCL high， SDA high-to-low 转换</strong></li>
+<li><strong>结束条件：SCL high， SDA low-to-high 转换</strong><br><img src="https://i.loli.net/2019/07/11/5d2739d9d35e168697.png" alt="20190711152959.png"></li>
+</ul>
+<p>开始条件发送之后，就可以传输数据了，如下图所示I2C协议要求:</p>
+<ul>
+<li><strong>传输时钟SCL high期间，数据线SDA必须保持稳定</strong></li>
+<li><strong>SDA变化相对于SCL的go high 沿有setup时间的要求</strong></li>
+<li><strong>SDA 变化相对于SCL go low 沿有hold 时间的要求</strong></li>
+<li><strong>在SCL low 期间，数据SDA才能改变</strong><br><img src="https://i.loli.net/2019/07/11/5d273a544282995281.png" alt="20190711153202.png"></li>
+</ul>
+<p>而且这里的setup/hold 时间量级是<strong>微秒级的或者几百纳秒</strong>，慢速有点体会了吧，一般I2C的频率最快也就1Mhz左右。所以I2C总线上的从器件一般不适合高速数字逻辑电路。</p>
+<h4 id="主控制器向被控器发送数据"><a href="#主控制器向被控器发送数据" class="headerlink" title="主控制器向被控器发送数据"></a>主控制器向被控器发送数据</h4><p>操作过程如下： </p>
+<ol>
+<li>主控器在检测到总线为“空闲状态”（即SDA、SCL线均为高电平）时，发送一个启动信号“S”，开始一次通信的开始</li>
+<li>主控器接着发送一个命令字节。该字节由7位的外围器件地址和1位读写控制位R/W组成（此时R/W=0） </li>
+<li>相对应的被控器收到命令字节后向主控器回馈应答信号ACK（ACK=0）</li>
+<li>主控器收到被控器的应答信号后开始发送第一个字节的数据</li>
+<li>被控器收到数据后返回一个应答信号ACK</li>
+<li>主控器收到应答信号后再发送下一个数据字节</li>
+<li>当主控器发送最后一个数据字节并收到被控器的ACK后，通过向被控器发送一个停止信号P结束本次通信并释放总线。被控器收到P信号后也退出与主控器之间的通信。<br><img src="https://i.loli.net/2019/07/11/5d2759deaefb538707.png" alt="20190711174636.png"></li>
+</ol>
+<p>需要说明的是：</p>
+<ul>
+<li>主控器通过发送地址码与对应的被控器建立了通信关系，而挂接在总线上的其它被控器虽然同时也收到了地址码，但因为与其自身的地址不相符合，因此提前退出与主控器的通信</li>
+<li>主控器的一次发送通信，其发送的数据数量不受限制。主控器是通过P信号通知发送的结束，被控器收到P信号后退出本次通信</li>
+<li>主机的每一次发送后都是通过被控器的ACK信号了解被控器的接收状况，如果应答错误则重发。</li>
+</ul>
+<h4 id="主控器接收数据的过程"><a href="#主控器接收数据的过程" class="headerlink" title="主控器接收数据的过程"></a>主控器接收数据的过程</h4><p>过程简述如下：</p>
+<ol>
+<li>主机发送启动信号后，接着发送命令字节（其中R/W=1）</li>
+<li>对应的被控器收到地址字节后，返回一个应答信号并向主控器发送数据</li>
+<li>主控器收到数据后向被控器反馈一个应答信号</li>
+<li>被控器收到应答信号后再向主控器发送下一个数据</li>
+<li>当主机完成接收数据后，向被控器发送一个“非应答信号（ACK=1）”，被控器收到ASK=1的非应答信号后便停止发送</li>
+<li>主机发送非应答信号后，再发送一个停止信号，释放总线结束通信</li>
+</ol>
+<p>主控器所接收数据的数量是由主控器自身决定，当发送“非应答信号/A”时被控器便结束传送并释放总线（非应答信号的两个作用：前一个数据接收成功，停止从机的再次发送）。<br><img src="https://i.loli.net/2019/07/11/5d275ac48723014712.png" alt="20190711175026.png"></p>
+<h3 id="I2C总线的信号时序"><a href="#I2C总线的信号时序" class="headerlink" title="I2C总线的信号时序"></a>I2C总线的信号时序</h3><p>以主控器向被控器发送一个字节的数据（写操作R/W=0）为例。整个过程由主控器发送起始信号S开始，紧跟着发送一个字节的命令字（7位地址和一个方向位R/W=0），得到被控器的应答信号（ACK=0）后就开始按位发送一个字节的数据。得到应答后发送P信号，一个字节的数据传送完毕。其数据传送的时序如图所示。<br><img src="https://i.loli.net/2019/07/11/5d275b3958b7752692.png" alt="20190711175223.png"></p>
+<p>在数据传送中数据高位(D7)在先， SDA线上的数据在时钟脉冲SCL为低电平时允许变化（如图所示），在数据稳定后时钟脉冲为高电平期间传送数据有效。</p>
+<p>主控器接收数据(R/W=1) 的时序类似于发送，主要区别有两点：</p>
+<ol>
+<li>主机接收到数据后要向被控器发送应答信号（ACK=0）</li>
+<li>当主机接收完最后一个数据时向被控器返回一个“非应答信号/ACK=1”以通知被控器结束发送操作，最后主控器发送一位停止信号P并释放总线</li>
+</ol>
+<h3 id="I2C总线的时钟同步与总线仲裁"><a href="#I2C总线的时钟同步与总线仲裁" class="headerlink" title="I2C总线的时钟同步与总线仲裁"></a>I2C总线的时钟同步与总线仲裁</h3><p>I2C总线的SCL同步时钟脉冲一般都是由主控器发出作为串行数据的移位脉冲。每当SDA上出现一位稳定的数据后，在SCL上发送一个高电平的移位脉冲。</p>
+<h4 id="SCL信号的同步"><a href="#SCL信号的同步" class="headerlink" title="SCL信号的同步"></a>SCL信号的同步</h4><p>如果被控器希望主控器降低传送速度可以通过将SCL主动拉低延长其低电平时间的方法来通知主控器，当主控器在准备下一次传送发现SCL的电平被拉低时就进行等待，直至被控器完成操作并释放SCL线的控制控制权。这样以来，主控器实际上受到被控器的时钟同步控制。可见SCL线上的低电平是由时钟低电平最长的器件决定；高电平的时间由高电平时间最短的器件决定。这就是时钟同步，它解决了I2C总线的速度同步。</p>
+<h4 id="I2C总线上的总线仲裁"><a href="#I2C总线上的总线仲裁" class="headerlink" title="I2C总线上的总线仲裁"></a>I2C总线上的总线仲裁</h4><p>如果在同一个I2C总线系统中存有两个主控器，其时钟信号分别为SCK1、SCK2，它们都具有控制总线的能力。假设两者都开始要控制总线进行通信，由于“线与”的作用，实际的SCL的波形如图所示。在总线做出仲裁之前，两个主控器都会以“线与”的形式共同参与SCL线的使用，速度快的主控器1等待落后的主控器<br><img src="https://i.loli.net/2019/07/11/5d275c6ddcf4948696.png" alt="20190711175731.png"></p>
+<p>对于SDA线上的信号的使用，两个主控器同样也是按照“线与”的逻辑来影响SDA上的电平变化。假设主控器1要发送的数据DATA1为“101 ……”；主控器2要发送的数据DATA2为“1001 ……”。总线被启动后两个主控器在每发送一个数据位时都要对自己的输出电平进行检测，只要检测的电平与自己发出的电平一致，他们就会继续占用总线。在这种情况下总线还是得不到仲裁。当主控器1发送第3位数据“1”时（主控器2发送“0” ），由于“线与”的结果SDA上的电平为“0”，这样当主控器1检测自己的输出电平时，就会测到一个与自身不相符的“0”电平。这时主控器1只好放弃对总线的控制权；因此主控器2就成为总线的唯一主宰者。<br>不难看出： </p>
+<ol>
+<li>对于整个仲裁过程主控器1和主控器2都不会丢失数据； </li>
+<li>各个主控器没有对总线实施控制的优先级别；③总线控制随即而定，他们遵循“低电平优先”的原则，即谁先发送低电平谁就会掌握对总线的控制权。<br>根据上面的描述，“时钟同步”与“总线仲裁”可以总结如下规律： </li>
+<li>主控器通过检测SCL上的电平来调节与从器件的速度同步问题——时钟同步； </li>
+<li>主控器通过检测SDA上自身发送的电平来判断是否发生总线“冲突”——总线仲裁。因此，I2C总线的“时钟同步”与“总线仲裁”是靠器件自身接口的特殊结构得以实现的。</li>
+</ol>
+<p>基本上I2C通用的读和写的操作就讲完了，来个总结：I2C最大的优点是结构简单，2根线完美连接所有器件。缺点是速度太慢，最快也就几 Mbps左右，而且每传一个BYTE就要ACK/NACK，感觉也挺烦的。有没有既简单又不那么慢的串行总线协议呢？确实有，SPI (Serial Peripheral Interface)协议</p>
+<p><strong>附：</strong><br><img src="https://i.loli.net/2019/07/12/5d275e937c01943449.png" alt="20190711180639.png"><br><img src="https://i.loli.net/2019/07/12/5d275eeab223391701.png" alt="20190711180806.png"></p>
+
+      
+	<!-- 增加版权声明 -->
+
+	
+	
+	  <div class="declare">
+		<strong>本文作者：</strong>
+		
+		  ZhouHaojie
+		
+		<br>
+		<strong>本文链接：</strong>
+		<a rel="license" href="http://grenze.cn/archives/9043.html">http://grenze.cn/archives/9043.html</a>
+		<br>
+		<strong>版权声明：</strong>
+		本作品采用
+		<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+		进行许可。转载请注明出处！
+		
+		  <br>
+		  <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>
+		
+	  </div>
+	
+
+	<!-- 增加版权声明结束 -->
+      
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://farm2.staticflickr.com/1722/42773195431_4b473e29c9_m.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://farm1.staticflickr.com/887/42773195091_f5dcb6870d_m.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/42797.html" class="archive-article-date">
-  	<time datetime="2018-12-01T15:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/42797.html">搭建Hexo-Github Pages博客遇到的一些问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">错误调试</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">Communication Sysems and Protocols</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://grenze.cn/archives/9043.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/archives/16107.html" class="archive-article-date">
-  	<time datetime="2018-07-05T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-05</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/archives/36387.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ASI总线协议</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/archives/16107.html">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#I2C总线的系统结构"><span class="toc-number">1.</span> <span class="toc-text">I2C总线的系统结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I2C总线接口的内部结构"><span class="toc-number">2.</span> <span class="toc-text">I2C总线接口的内部结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I2C总线的工作过程与原理"><span class="toc-number">3.</span> <span class="toc-text">I2C总线的工作过程与原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#主控制器向被控器发送数据"><span class="toc-number">3.1.</span> <span class="toc-text">主控制器向被控器发送数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主控器接收数据的过程"><span class="toc-number">3.2.</span> <span class="toc-text">主控器接收数据的过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I2C总线的信号时序"><span class="toc-number">4.</span> <span class="toc-text">I2C总线的信号时序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I2C总线的时钟同步与总线仲裁"><span class="toc-number">5.</span> <span class="toc-text">I2C总线的时钟同步与总线仲裁</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SCL信号的同步"><span class="toc-number">5.1.</span> <span class="toc-text">SCL信号的同步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#I2C总线上的总线仲裁"><span class="toc-number">5.2.</span> <span class="toc-text">I2C总线上的总线仲裁</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
+  
+
+      <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+
+<script>
+var gitalk = new Gitalk({
+  clientID: '037aa3a17f11795b7607',
+  clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+  repo: 'Comment',
+  owner: 'ZhouHaojie',
+  admin: ['ZhouHaojie'],
+  id: md5(window.location.pathname),
+  distractionFreeMode: true
+})
+
+gitalk.render('gitalk-container')
+</script>
+  
+
+
 
 
           </div>
@@ -1159,8 +497,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
