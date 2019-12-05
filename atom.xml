@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
+  <title>ZhouHaojie的博客</title>
   
-  
+  <subtitle>只有你拼劲全力，才会在人前显得毫不费劲</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://grenze.cn/"/>
   <updated>2019-12-05T19:13:08.491Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://grenze.cn/</id>
   
   <author>
     <name>ZhouHaojie</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hexo-yilia进阶笔记</title>
-    <link href="http://yoursite.com/2019/12/05/Hexo-yilia%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/"/>
-    <id>http://yoursite.com/2019/12/05/Hexo-yilia%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/</id>
+    <link href="http://grenze.cn/2019/12/05/Hexo-yilia%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/"/>
+    <id>http://grenze.cn/2019/12/05/Hexo-yilia%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/</id>
     <published>2019-12-05T19:42:52.000Z</published>
     <updated>2019-12-05T19:13:08.491Z</updated>
     
@@ -33,14 +33,14 @@
     
     
     
-      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+      <category term="hexo" scheme="http://grenze.cn/tags/hexo/"/>
     
   </entry>
   
   <entry>
     <title>I2C总线协议</title>
-    <link href="http://yoursite.com/2019/12/05/I2C%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/"/>
-    <id>http://yoursite.com/2019/12/05/I2C%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/</id>
+    <link href="http://grenze.cn/2019/12/05/I2C%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/"/>
+    <id>http://grenze.cn/2019/12/05/I2C%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/</id>
     <published>2019-12-05T16:11:09.000Z</published>
     <updated>2019-12-05T17:11:31.136Z</updated>
     
@@ -54,14 +54,14 @@
     
     
     
-      <category term="Communication Sysems and Protocols" scheme="http://yoursite.com/tags/Communication-Sysems-and-Protocols/"/>
+      <category term="Communication Sysems and Protocols" scheme="http://grenze.cn/tags/Communication-Sysems-and-Protocols/"/>
     
   </entry>
   
   <entry>
     <title>ASI总线协议</title>
-    <link href="http://yoursite.com/2019/12/05/ASI%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/"/>
-    <id>http://yoursite.com/2019/12/05/ASI%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/</id>
+    <link href="http://grenze.cn/2019/12/05/ASI%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/"/>
+    <id>http://grenze.cn/2019/12/05/ASI%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/</id>
     <published>2019-12-05T16:09:26.000Z</published>
     <updated>2019-12-05T17:11:31.103Z</updated>
     
@@ -75,14 +75,14 @@
     
     
     
-      <category term="Communication Sysems and Protocols" scheme="http://yoursite.com/tags/Communication-Sysems-and-Protocols/"/>
+      <category term="Communication Sysems and Protocols" scheme="http://grenze.cn/tags/Communication-Sysems-and-Protocols/"/>
     
   </entry>
   
   <entry>
     <title>FireWire火线协议</title>
-    <link href="http://yoursite.com/2019/12/05/FireWire%E7%81%AB%E7%BA%BF%E5%8D%8F%E8%AE%AE/"/>
-    <id>http://yoursite.com/2019/12/05/FireWire%E7%81%AB%E7%BA%BF%E5%8D%8F%E8%AE%AE/</id>
+    <link href="http://grenze.cn/2019/12/05/FireWire%E7%81%AB%E7%BA%BF%E5%8D%8F%E8%AE%AE/"/>
+    <id>http://grenze.cn/2019/12/05/FireWire%E7%81%AB%E7%BA%BF%E5%8D%8F%E8%AE%AE/</id>
     <published>2019-12-05T16:05:24.000Z</published>
     <updated>2019-12-05T17:11:31.113Z</updated>
     
@@ -100,14 +100,14 @@
     
     
     
-      <category term="Communication Sysems and Protocols" scheme="http://yoursite.com/tags/Communication-Sysems-and-Protocols/"/>
+      <category term="Communication Sysems and Protocols" scheme="http://grenze.cn/tags/Communication-Sysems-and-Protocols/"/>
     
   </entry>
   
   <entry>
     <title>Line Search Method</title>
-    <link href="http://yoursite.com/2019/12/05/%E6%95%B0%E5%80%BC%E4%BC%98%E5%8C%96-%E7%BA%BF%E6%90%9C%E7%B4%A2Line%20Search%20Method/"/>
-    <id>http://yoursite.com/2019/12/05/%E6%95%B0%E5%80%BC%E4%BC%98%E5%8C%96-%E7%BA%BF%E6%90%9C%E7%B4%A2Line%20Search%20Method/</id>
+    <link href="http://grenze.cn/2019/12/05/%E6%95%B0%E5%80%BC%E4%BC%98%E5%8C%96-%E7%BA%BF%E6%90%9C%E7%B4%A2Line%20Search%20Method/"/>
+    <id>http://grenze.cn/2019/12/05/%E6%95%B0%E5%80%BC%E4%BC%98%E5%8C%96-%E7%BA%BF%E6%90%9C%E7%B4%A2Line%20Search%20Method/</id>
     <published>2019-12-04T23:14:00.740Z</published>
     <updated>2019-12-05T17:11:31.127Z</updated>
     
@@ -124,14 +124,14 @@
     
     
     
-      <category term="Optimization of Dynamic Systems" scheme="http://yoursite.com/tags/Optimization-of-Dynamic-Systems/"/>
+      <category term="Optimization of Dynamic Systems" scheme="http://grenze.cn/tags/Optimization-of-Dynamic-Systems/"/>
     
   </entry>
   
   <entry>
     <title>const和constptr的区别C++</title>
-    <link href="http://yoursite.com/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
-    <id>http://yoursite.com/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/</id>
+    <link href="http://grenze.cn/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://grenze.cn/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/</id>
     <published>2019-12-04T16:22:47.000Z</published>
     <updated>2019-12-05T17:11:31.117Z</updated>
     
@@ -147,14 +147,14 @@
     
     
     
-      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+      <category term="C++" scheme="http://grenze.cn/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>Hexo主题yilia增加gitalk评论插件</title>
-    <link href="http://yoursite.com/2019/07/11/Hexo%E4%B8%BB%E9%A2%98yilia%E5%A2%9E%E5%8A%A0gitalk%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/"/>
-    <id>http://yoursite.com/2019/07/11/Hexo%E4%B8%BB%E9%A2%98yilia%E5%A2%9E%E5%8A%A0gitalk%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/</id>
+    <link href="http://grenze.cn/2019/07/11/Hexo%E4%B8%BB%E9%A2%98yilia%E5%A2%9E%E5%8A%A0gitalk%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/"/>
+    <id>http://grenze.cn/2019/07/11/Hexo%E4%B8%BB%E9%A2%98yilia%E5%A2%9E%E5%8A%A0gitalk%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/</id>
     <published>2019-07-11T16:22:47.000Z</published>
     <updated>2019-12-05T17:11:31.135Z</updated>
     
@@ -168,14 +168,14 @@
     
     
     
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://grenze.cn/tags/Hexo/"/>
     
   </entry>
   
   <entry>
     <title>Register-Memory-FIFO</title>
-    <link href="http://yoursite.com/2019/07/10/Register-Memory-FIFO/"/>
-    <id>http://yoursite.com/2019/07/10/Register-Memory-FIFO/</id>
+    <link href="http://grenze.cn/2019/07/10/Register-Memory-FIFO/"/>
+    <id>http://grenze.cn/2019/07/10/Register-Memory-FIFO/</id>
     <published>2019-07-10T16:22:47.000Z</published>
     <updated>2019-12-05T17:11:31.115Z</updated>
     
@@ -189,14 +189,14 @@
     
     
     
-      <category term="Verilog HDL" scheme="http://yoursite.com/tags/Verilog-HDL/"/>
+      <category term="Verilog HDL" scheme="http://grenze.cn/tags/Verilog-HDL/"/>
     
   </entry>
   
   <entry>
     <title>FPGA闲聊</title>
-    <link href="http://yoursite.com/2019/07/05/FPGA/"/>
-    <id>http://yoursite.com/2019/07/05/FPGA/</id>
+    <link href="http://grenze.cn/2019/07/05/FPGA/"/>
+    <id>http://grenze.cn/2019/07/05/FPGA/</id>
     <published>2019-07-05T16:22:47.000Z</published>
     <updated>2019-12-05T17:11:31.134Z</updated>
     
@@ -210,14 +210,14 @@
     
     
     
-      <category term="FPGA" scheme="http://yoursite.com/tags/FPGA/"/>
+      <category term="FPGA" scheme="http://grenze.cn/tags/FPGA/"/>
     
   </entry>
   
   <entry>
     <title>CRC循环冗余校验算法</title>
-    <link href="http://yoursite.com/2019/07/04/CRC/"/>
-    <id>http://yoursite.com/2019/07/04/CRC/</id>
+    <link href="http://grenze.cn/2019/07/04/CRC/"/>
+    <id>http://grenze.cn/2019/07/04/CRC/</id>
     <published>2019-07-04T16:22:47.000Z</published>
     <updated>2019-12-05T17:11:31.133Z</updated>
     
@@ -231,14 +231,14 @@
     
     
     
-      <category term="Communication Sysems and Protocols" scheme="http://yoursite.com/tags/Communication-Sysems-and-Protocols/"/>
+      <category term="Communication Sysems and Protocols" scheme="http://grenze.cn/tags/Communication-Sysems-and-Protocols/"/>
     
   </entry>
   
   <entry>
     <title>明斯特小镇</title>
-    <link href="http://yoursite.com/2019/07/01/Reise/"/>
-    <id>http://yoursite.com/2019/07/01/Reise/</id>
+    <link href="http://grenze.cn/2019/07/01/Reise/"/>
+    <id>http://grenze.cn/2019/07/01/Reise/</id>
     <published>2019-07-01T16:22:47.000Z</published>
     <updated>2019-12-05T17:11:31.118Z</updated>
     
@@ -255,14 +255,14 @@
     
     
     
-      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://grenze.cn/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
   <entry>
     <title>CMOS Schaltung</title>
-    <link href="http://yoursite.com/2019/06/04/CMOS%20Schaltung/"/>
-    <id>http://yoursite.com/2019/06/04/CMOS%20Schaltung/</id>
+    <link href="http://grenze.cn/2019/06/04/CMOS%20Schaltung/"/>
+    <id>http://grenze.cn/2019/06/04/CMOS%20Schaltung/</id>
     <published>2019-06-04T16:22:47.000Z</published>
     <updated>2019-12-05T17:11:31.111Z</updated>
     
@@ -276,14 +276,14 @@
     
     
     
-      <category term="Design Digitaler Schaltung" scheme="http://yoursite.com/tags/Design-Digitaler-Schaltung/"/>
+      <category term="Design Digitaler Schaltung" scheme="http://grenze.cn/tags/Design-Digitaler-Schaltung/"/>
     
   </entry>
   
   <entry>
     <title>同步FIFO</title>
-    <link href="http://yoursite.com/2019/05/10/%E5%90%8C%E6%AD%A5FIFO/"/>
-    <id>http://yoursite.com/2019/05/10/%E5%90%8C%E6%AD%A5FIFO/</id>
+    <link href="http://grenze.cn/2019/05/10/%E5%90%8C%E6%AD%A5FIFO/"/>
+    <id>http://grenze.cn/2019/05/10/%E5%90%8C%E6%AD%A5FIFO/</id>
     <published>2019-05-10T00:00:00.000Z</published>
     <updated>2019-12-05T17:11:31.138Z</updated>
     
@@ -297,14 +297,14 @@
     
     
     
-      <category term="Verilog HDL" scheme="http://yoursite.com/tags/Verilog-HDL/"/>
+      <category term="Verilog HDL" scheme="http://grenze.cn/tags/Verilog-HDL/"/>
     
   </entry>
   
   <entry>
     <title>CDMA原理</title>
-    <link href="http://yoursite.com/2019/05/04/CDMA/"/>
-    <id>http://yoursite.com/2019/05/04/CDMA/</id>
+    <link href="http://grenze.cn/2019/05/04/CDMA/"/>
+    <id>http://grenze.cn/2019/05/04/CDMA/</id>
     <published>2019-05-04T16:22:47.000Z</published>
     <updated>2019-12-05T17:11:31.106Z</updated>
     
@@ -318,14 +318,14 @@
     
     
     
-      <category term="Communication Sysems and Protocols" scheme="http://yoursite.com/tags/Communication-Sysems-and-Protocols/"/>
+      <category term="Communication Sysems and Protocols" scheme="http://grenze.cn/tags/Communication-Sysems-and-Protocols/"/>
     
   </entry>
   
   <entry>
     <title>DDS-复习1</title>
-    <link href="http://yoursite.com/2019/05/04/DDS-%E5%A4%8D%E4%B9%A01/"/>
-    <id>http://yoursite.com/2019/05/04/DDS-%E5%A4%8D%E4%B9%A01/</id>
+    <link href="http://grenze.cn/2019/05/04/DDS-%E5%A4%8D%E4%B9%A01/"/>
+    <id>http://grenze.cn/2019/05/04/DDS-%E5%A4%8D%E4%B9%A01/</id>
     <published>2019-05-04T00:00:00.000Z</published>
     <updated>2019-12-05T17:11:31.112Z</updated>
     
@@ -340,14 +340,14 @@
     
     
     
-      <category term="Design Digitaler Schaltung" scheme="http://yoursite.com/tags/Design-Digitaler-Schaltung/"/>
+      <category term="Design Digitaler Schaltung" scheme="http://grenze.cn/tags/Design-Digitaler-Schaltung/"/>
     
   </entry>
   
   <entry>
     <title>DDS-复习2-CMOS Schaltung</title>
-    <link href="http://yoursite.com/2019/05/03/DDS-%E5%A4%8D%E4%B9%A02-CMOS%20Schaltung/"/>
-    <id>http://yoursite.com/2019/05/03/DDS-%E5%A4%8D%E4%B9%A02-CMOS%20Schaltung/</id>
+    <link href="http://grenze.cn/2019/05/03/DDS-%E5%A4%8D%E4%B9%A02-CMOS%20Schaltung/"/>
+    <id>http://grenze.cn/2019/05/03/DDS-%E5%A4%8D%E4%B9%A02-CMOS%20Schaltung/</id>
     <published>2019-05-03T00:00:00.000Z</published>
     <updated>2019-12-05T17:11:31.132Z</updated>
     
@@ -361,14 +361,14 @@
     
     
     
-      <category term="Design Digitaler Schaltung" scheme="http://yoursite.com/tags/Design-Digitaler-Schaltung/"/>
+      <category term="Design Digitaler Schaltung" scheme="http://grenze.cn/tags/Design-Digitaler-Schaltung/"/>
     
   </entry>
   
   <entry>
     <title>Maxwell equation</title>
-    <link href="http://yoursite.com/2019/04/05/maxwell/"/>
-    <id>http://yoursite.com/2019/04/05/maxwell/</id>
+    <link href="http://grenze.cn/2019/04/05/maxwell/"/>
+    <id>http://grenze.cn/2019/04/05/maxwell/</id>
     <published>2019-04-05T16:22:47.000Z</published>
     <updated>2019-12-05T17:11:31.119Z</updated>
     
@@ -385,14 +385,14 @@
     
     
     
-      <category term="Microwave" scheme="http://yoursite.com/tags/Microwave/"/>
+      <category term="Microwave" scheme="http://grenze.cn/tags/Microwave/"/>
     
   </entry>
   
   <entry>
     <title>模值M的计数器</title>
-    <link href="http://yoursite.com/2019/04/04/%E4%BB%BB%E6%84%8F%E6%A8%A1%E5%80%BC%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8/"/>
-    <id>http://yoursite.com/2019/04/04/%E4%BB%BB%E6%84%8F%E6%A8%A1%E5%80%BC%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8/</id>
+    <link href="http://grenze.cn/2019/04/04/%E4%BB%BB%E6%84%8F%E6%A8%A1%E5%80%BC%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8/"/>
+    <id>http://grenze.cn/2019/04/04/%E4%BB%BB%E6%84%8F%E6%A8%A1%E5%80%BC%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8/</id>
     <published>2019-04-04T16:22:47.000Z</published>
     <updated>2019-12-05T17:11:31.121Z</updated>
     
@@ -406,14 +406,14 @@
     
     
     
-      <category term="Verilog HDL" scheme="http://yoursite.com/tags/Verilog-HDL/"/>
+      <category term="Verilog HDL" scheme="http://grenze.cn/tags/Verilog-HDL/"/>
     
   </entry>
   
   <entry>
     <title>Podcast 4-Im Restaurant</title>
-    <link href="http://yoursite.com/2019/03/05/A1A2%20Podcast%204%20-%20Im%20Restaurant/"/>
-    <id>http://yoursite.com/2019/03/05/A1A2%20Podcast%204%20-%20Im%20Restaurant/</id>
+    <link href="http://grenze.cn/2019/03/05/A1A2%20Podcast%204%20-%20Im%20Restaurant/"/>
+    <id>http://grenze.cn/2019/03/05/A1A2%20Podcast%204%20-%20Im%20Restaurant/</id>
     <published>2019-03-05T16:22:47.000Z</published>
     <updated>2019-12-05T17:11:31.108Z</updated>
     
@@ -427,16 +427,16 @@
     
     
     
-      <category term="Deutsch A1/A2" scheme="http://yoursite.com/tags/Deutsch-A1-A2/"/>
+      <category term="Deutsch A1/A2" scheme="http://grenze.cn/tags/Deutsch-A1-A2/"/>
     
-      <category term="Hörverstehen" scheme="http://yoursite.com/tags/Horverstehen/"/>
+      <category term="Hörverstehen" scheme="http://grenze.cn/tags/Horverstehen/"/>
     
   </entry>
   
   <entry>
     <title>zu Hause - nach Hause - daheim - heim</title>
-    <link href="http://yoursite.com/2019/03/05/zu%20Hause%20-%20nach%20Hause%20-%20daheim%20-%20heim/"/>
-    <id>http://yoursite.com/2019/03/05/zu%20Hause%20-%20nach%20Hause%20-%20daheim%20-%20heim/</id>
+    <link href="http://grenze.cn/2019/03/05/zu%20Hause%20-%20nach%20Hause%20-%20daheim%20-%20heim/"/>
+    <id>http://grenze.cn/2019/03/05/zu%20Hause%20-%20nach%20Hause%20-%20daheim%20-%20heim/</id>
     <published>2019-03-05T13:22:47.000Z</published>
     <updated>2019-12-05T17:11:31.123Z</updated>
     
@@ -450,7 +450,7 @@
     
     
     
-      <category term="Wortschatz" scheme="http://yoursite.com/tags/Wortschatz/"/>
+      <category term="Wortschatz" scheme="http://grenze.cn/tags/Wortschatz/"/>
     
   </entry>
   
