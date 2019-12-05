@@ -152,6 +152,532 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-DDS-复习2-CMOS Schaltung" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/05/DDS-%E5%A4%8D%E4%B9%A02-CMOS%20Schaltung/">DDS-复习2-CMOS Schaltung</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/05/DDS-%E5%A4%8D%E4%B9%A02-CMOS%20Schaltung/" class="archive-article-date">
+  	<time datetime="2019-12-05T13:31:39.701Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: DDS-复习2-CMOS Schaltung<br>tags: DDS<br>date: 2019-07-17 18:22:47</p>
+<hr>
+<p>CMOS: bedeuted Komplementäre Metal-Oxid-Semiconductor Transistoren.</p>
+
+<p><a id="more"></a></p>
+<h3 id="NMOS-und-PMOS"><a href="#NMOS-und-PMOS" class="headerlink" title="NMOS und PMOS"></a>NMOS und PMOS</h3><p>Die Datierung von Source und Drain bestimmt die Ladungsträger.</p>
+<ul>
+<li><code>NMOS benutzt die n-dotierten Source und Drain - die Ladungsträger sind Elektronen.</code></li>
+<li><code>PMOS benutzt die p-dotierten Source und Drain – die Ladungsträger sind Löcher.</code></li>
+</ul>
+<h4 id="NMOS"><a href="#NMOS" class="headerlink" title="NMOS"></a>NMOS</h4><ul>
+<li><p>leitet bei einer positiven Gate-Source Spannung.</p>
+</li>
+<li><p><strong>Wichtig</strong>: <code>NMOS leitet auch wenn der Drain ein höheres Potential als das Gate hat. Wichtig ist nur</code>$V_{gs}&gt;V_{th}$</p>
+</li>
+<li><p><strong><em>Transistorschwelle</em></strong> $V_{th}$: <code>die minimale Gate-Source Spannung, die den Transistor einschaltet.(0.3-0.5V)</code><br><img src="https://i.loli.net/2019/07/19/5d30d71f8e12376363.png" alt="20190718223124.png"></p>
+</li>
+</ul>
+<p>Wie wissen wir dann, welcher Kontakt Drain und welcher Source ist?</p>
+<blockquote>
+<p>Es gilt: für ein NMOS ist die Source der Kontakt mit niedrigerem Potential.</p>
+</blockquote>
+<h4 id="PMOS"><a href="#PMOS" class="headerlink" title="PMOS"></a>PMOS</h4><ul>
+<li><p>P-dotierte Source und Drain (Diffusion). Bereich zwischen Source und Drain ist N-Dotiert. </p>
+</li>
+<li><p>Negatives Gate – Source Spannung erzeugt die <strong><em>Typinversion</em></strong>(反型层) im N-Bereich. Elektronen werden abgestoßen und die Löcher an die Silizium/Oxid Oberfläche angezogen. Transistor leitet.</p>
+</li>
+<li><p>Im PMOS ist Source der Kontakt mit höherem Potential.<br><img src="https://i.loli.net/2019/07/19/5d30d740111cd86449.png" alt="20190718223157.png"></p>
+</li>
+</ul>
+<h4 id="NMOS-Inverter-mit-PullupWiderstand"><a href="#NMOS-Inverter-mit-PullupWiderstand" class="headerlink" title="NMOS Inverter mit PullupWiderstand"></a>NMOS Inverter mit PullupWiderstand</h4><p><img src="https://i.loli.net/2019/08/08/DkKniGeZumwOSMh.png" alt="20190808134929.png"></p>
+<h4 id="PMOS-Inverter-mit-PullupWiderstand"><a href="#PMOS-Inverter-mit-PullupWiderstand" class="headerlink" title="PMOS Inverter mit PullupWiderstand"></a>PMOS Inverter mit PullupWiderstand</h4><p>Wenn das Gate Potential GND ist, ist Vgs = -VDD, was kleiner als die Schwelle ist. (Die Schwelle ist typischerweise -0.4V.) Der Transistor leitet und die Ausgangsspannung ist ~ VDD.<br><img src="https://i.loli.net/2019/08/08/LVpQKAv853oOMr4.png" alt="20190808133038.png"></p>
+<h4 id="PUN：NMOS网络-or-PMOS网络？"><a href="#PUN：NMOS网络-or-PMOS网络？" class="headerlink" title="PUN：NMOS网络 or PMOS网络？"></a>PUN：NMOS网络 or PMOS网络？</h4><p><img src="https://i.loli.net/2019/07/18/5d2f692ac3edd55380.png" alt="20190717202958.png"></p>
+<ul>
+<li>Logische Schaltungen mit NMOS und Pullup-Widerständen, mit PMOS und Pulldown-Widerständen sind möglich.</li>
+</ul>
+<p><img src="https://i.loli.net/2019/07/18/5d2f6b3da8b5463714.png" alt="20190717203850.png"></p>
+<h4 id="RTL-Logik-Familie"><a href="#RTL-Logik-Familie" class="headerlink" title="RTL-Logik Familie"></a>RTL-Logik Familie</h4><ul>
+<li>Nachteile: <strong>DC Stromverbrauch</strong><ul>
+<li>Lösung: Man könnte R vergrößern, um Strom zu sparen </li>
+<li>Nachteile:<ol>
+<li>große Polysilizium Widerstände sind auf einem Chip <strong>groß</strong></li>
+<li>Logische Schaltung wären <strong>langsam</strong>.</li>
+</ol>
+<strong>Grund</strong>: Oft werden die logischen Schaltungen an viele andere Gatter angelschlossen. Das führt zu einer kapazitiven Last. Die Schwiedigkeit hängt von $R\times C$ ab.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Idee-CMOS-Inverter"><a href="#Idee-CMOS-Inverter" class="headerlink" title="Idee: CMOS Inverter"></a>Idee: CMOS Inverter</h3><p><img src="https://i.loli.net/2019/07/18/5d2f6eb11fd9873777.png" alt="20190717205333.png"><br>NMOS-Transistoren können eine Leitung ans Potential der Masse gut „ziehen“ und PMOS-Transistoren ans VDD-Potential.</p>
+<p>Vorteil:</p>
+<ul>
+<li>Kein DC Strom</li>
+<li>Inverter besteht nur aus Transistoren-Klein im Layout</li>
+<li>Die Umlade-Zeit hängt vom Widerstand des leitenden Transistors und der Ausgangskapazität. Die Transistoren können passend dimensioniert werden -&gt; die Schaltung ist schnell.</li>
+</ul>
+<h4 id="DC-Kennlinie特性曲线-–Analyse"><a href="#DC-Kennlinie特性曲线-–Analyse" class="headerlink" title="DC (Kennlinie特性曲线)–Analyse"></a>DC (Kennlinie特性曲线)–Analyse</h4><p>$I_{ds}=\mu C_{ox}\frac{W}{L}((V_{gs}-V_{th})V_{ds}-\frac{V^2_{ds}}{2})$<br><strong>NMOS</strong><br><img src="https://i.loli.net/2019/07/18/5d2f734c35dc845115.png" alt="20190717211312.png"><br>Für $V_{gs} &lt; V_{th}$, der Strom ist null – der Transistor sperrt.<br>Für $V_{ds} &lt; V_{gs}-V_{th}$ 可变电阻区Variable Widerstand<br>Für $V_{ds} &gt; V_{gs}-V_{th}$ ist der Transistor in Sättigung: $I_{ds}=\frac{1}{2}\mu C_{ox}\frac{W}{L}(V_{gs}-V_{th})^2$</p>
+<blockquote>
+<p>Für höhere $V_{gs}$ Spannung gibt es mehr Elektronen im Kanal – der spezifische Leitwert ist höher, Widerstand kleiner – der Strom steigt</p>
+</blockquote>
+<p><strong>PMOS</strong><br><img src="https://i.loli.net/2019/08/08/48mQdGeWXqHrMaY.png" alt="20190808155027.png"><img src="https://i.loli.net/2019/08/08/kRm3lNVA97YGaB4.png" alt="20190808155006.png"><br><strong>Folgendes ist wichtig</strong>:<br>Man kann den Leitwert des Transistors erhöhen indem man W/L erhöht. Man kann den Transistor nach dem Bedarf breiter oder kürzer machen.</p>
+<h4 id="Unterschied-PMOS-NMOS-z-B-Mobilitat-von-Ladungstragern"><a href="#Unterschied-PMOS-NMOS-z-B-Mobilitat-von-Ladungstragern" class="headerlink" title="Unterschied PMOS/NMOS (z.B. Mobilität von Ladungsträgern)"></a>Unterschied PMOS/NMOS (z.B. Mobilität von Ladungsträgern)</h4><p>Die Beweglichkeit der Löcher im PMOS $\mu_p$ ist etwa 2x niedriger, deshalb leitet ein PMOS mit gleichem W/L Verhältnis etwa 2x schlechter. Das soll beim Design berücksichtigt werden.</p>
+<h4 id="Die-DC-Kennlinie-des-Inverters"><a href="#Die-DC-Kennlinie-des-Inverters" class="headerlink" title="Die DC-Kennlinie des Inverters"></a>Die DC-Kennlinie des Inverters</h4><p>Für den geneisamen Graph gilt:</p>
+<ul>
+<li>$V_{ds}$ des NMOS Transistors = $V_{out}$.</li>
+<li>$V_{gs}$ des NMOS Transistors = $V_{in}$.</li>
+<li>$|V_{ds}|$ (Betrag绝对值) des PMOS Transistors = $V_{DD}-V_{out}$. </li>
+<li>$\left| V_{gs}\right|$  des PMOS = $V_{DD}-V_{in}$</li>
+<li>$|V_{th}|$von NMOS und PMOS sind normalerweise gleich.</li>
+</ul>
+<p><img src="https://i.loli.net/2019/07/18/5d2f80501601b19273.png" alt="20190717220842.png"></p>
+<ol>
+<li>Für $V_{in}&lt;V_{th}$, NMOS leitet nicht, PMOS leitet.<br>$\Rightarrow V_{out}=V_{DD}$</li>
+<li>Für $V_{in}&gt;V_{DD}-V_{th}$, PMOS leitet nicht, NMOS leitet.<br>$\Rightarrow V_{out}=0$</li>
+<li>Für $V_{th}&lt;V_{in}&lt;V_{DD}-V_{th}$, beide Transistoren leiten.</li>
+</ol>
+<ul>
+<li>Für NMOS ist Sättigung für $V_{ds}&gt;V_{gs}-V_{th} \rightarrow V_{out}&gt;V_{in}-V_{th}$</li>
+<li>Für PMOS ist Sättigung für $|V_{ds}|&gt;|V_{gs}|-|V_{th}| \rightarrow V_{out}&lt;V_{in}+V_{th}$<br><img src="https://i.loli.net/2019/08/08/dGxn1ToNlCFK3br.png" alt="![20190808154815.png](httpsi.loli.net20190808CFTHatAqohn3Ilw.png)"><img src="https://i.loli.net/2019/08/08/iXr57bqSNWsVyB6.png" alt="20190808155107.png"></li>
+</ul>
+<p>开关阈值VM定义为Vin = Vout的点(在此区域由于VDS = VGS ，PMOS和NMOS总是饱和的)。 $$V_M = \frac{rV_{dd}}{1+r}, r=\frac{K_p V_{DSAT_P}}{K_n V_{DSAT_n}}$$当NMOS的$\mu W/L$更大时，r $\downarrow$ $V_M \downarrow$ 曲线往左移。</p>
+<p><img src="https://i.loli.net/2019/07/19/5d30bd690bfe126913.png" alt="20190718204133.png"><br>Die Kennlinie ist besonders steil im Breich wo beide Transistoren in Sättigung sind.</p>
+<p>器件尺寸的变化只是引起开关阈值的平移</p>
+<h4 id="Nichtlinearitat-von-Kennlinie"><a href="#Nichtlinearitat-von-Kennlinie" class="headerlink" title="Nichtlinearität von Kennlinie"></a>Nichtlinearität von Kennlinie</h4><p>die Kennlinie ist stark nichtlinear –es ist in Ordnung weil</p>
+<ul>
+<li>wir möchten, dass der Ausgang auf jeden Fall logische 0 ist wenn der Eingang = 1</li>
+<li>wenn der Eingang = 0, sollte Ausgang logische 1 sein</li>
+</ul>
+<p>Logische eins -z.B. V &gt; VDD –Vth<br>Logische Null als V &lt; Vth.<br><img src="https://i.loli.net/2019/08/08/OCvl4SyNsrD1nQK.png" alt="20190808161638.png"></p>
+<h3 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h3><p><img src="https://i.loli.net/2019/07/19/5d30c19f3eac068357.png" alt="20190718205938.png"></p>
+<p>Standardzelle<br><img src="https://i.loli.net/2019/07/19/5d30c1d98ecea95297.png" alt="20190718210038.png"></p>
+<h3 id="Geschwindigkeit-des-Inverters"><a href="#Geschwindigkeit-des-Inverters" class="headerlink" title="Geschwindigkeit des Inverters"></a>Geschwindigkeit des Inverters</h3><p><img src="https://i.loli.net/2019/07/19/5d30c4501f71652206.png" alt="20190718211108.png"><br>Der Entladestrom im Bereich 1 ist am größten.Deshalb befindet sich das Potential $V_{ds}$viel kürzere Zeit im Bereich 1 als im Bereich 2.</p>
+<p>Die Differentialgleichung:<br>$$I_{ds}=-C\frac{\mathrm{d}U}{\mathrm{d}t}=\mu C_{ox}\frac{W}{L}((V_{gs}-V_{th})V_{ds}-\frac{V^2_{ds}}{2})$$<br>$$\Rightarrow I_{ds}=K(V_{gst}V_{ds}-\frac{V^2_{ds}}{2})$$<br>$$\Rightarrow \frac{1}{(V_{gst}V_{ds}-\frac{V^2_{ds}}{2})} \mathrm{d}U=-\frac{k}{c}\mathrm{d}t$$<br>Die Lösung:<br>$$U(t)=2V_{gst}\frac{e^{\frac{-t}{T}}}{1+e^{\frac{-t}{T}}} (T=\frac{C}{K})$$<br>Diese Formel ist sehr ähnlich wie die Formel wenn wir eine Kapazität mit einem linearen Widerstand entladen würden.$$U(t) = U(0)e^{\frac{-t}{RC}}$$<br>Unterschied zwischen zwei Funktionen.</p>
+<ul>
+<li>Widerstand -Entladezeit etwa 3*RC</li>
+<li>Transistor -im Entladezeit etwa <strong>4*RC</strong>.</li>
+</ul>
+<p>Die Entladezeit hängt direkt von der Lastkapazität ab und umgekehrt vom Faktor K, also $$4\frac{C}{K}=4\frac{C}{\mu C_{ox}\frac{W}{L}}$$</p>
+<p>Faktor K hängt vom Mobilität der Ladungsträger $\mu$ und vom $\frac{W}{L}$ ab.</p>
+<p>Wenn fallende und steigende flanke gleich sein sollen, müssen wir unterschiedliche Beweglichkeiten für Elektronen und Löcher mit verschiedenen $\frac{W}{L}$ kompensieren(补偿).一般电子的迁移率比空穴更大，所对应的电流也更大，所以需要增大PMOS管的宽长比来平衡。</p>
+<p>Deshalb sind die PMOS Transistoren normalerweise breiter.<br><img src="https://i.loli.net/2019/07/19/5d30cef0a66d797079.png" alt="20190718215622.png"></p>
+<h3 id="Taktbaum-Optimierung-von-Inverterketten"><a href="#Taktbaum-Optimierung-von-Inverterketten" class="headerlink" title="Taktbaum: Optimierung von Inverterketten"></a>Taktbaum: Optimierung von Inverterketten</h3><p>Oft werden Invertern als Treiber für die Takt-Leitung verwendet. Eine Taktleitung ist an viele Flip Flips angeschlossen und hat große Kapazität.</p>
+<p>Invertern mit großem W/L Verhältnis werden benutzt.<br><img src="https://i.loli.net/2019/08/08/RIQFU3NMup7YqKr.png" alt="20190808164728.png"><br>Wir brauchen eine Kaskade(级联) von Invertern. Optimal wäre, dass der nächste Inverter immer um Faktor e=2.718 größer ist als der vorherige.<br>因为反相器有很多的电容，造成速度变慢，为了让反相器链达到最小延时，根据上面的分析，我们需要增大后级反相器的尺寸，使它们具有相同的延时。这个比例为e=2.718<br><img src="https://i.loli.net/2019/07/19/5d30d39304ca053777.png" alt="20190718221615.png"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/05/DDS-%E5%A4%8D%E4%B9%A02-CMOS%20Schaltung/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-DDS-复习1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/05/DDS-%E5%A4%8D%E4%B9%A01/">DDS-复习1</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/05/DDS-%E5%A4%8D%E4%B9%A01/" class="archive-article-date">
+  	<time datetime="2019-12-05T13:28:29.111Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: DDS-复习1<br>tags: DDS<br>date: 2019-07-17 18:22:47</p>
+<hr>
+<h3 id="Fully-Customised-Design-und-Semi-Customised-Design"><a href="#Fully-Customised-Design-und-Semi-Customised-Design" class="headerlink" title="Fully Customised Design und Semi Customised Design"></a>Fully Customised Design und Semi Customised Design</h3><ul>
+<li>Fully Customised Design:<br>jede Schaltung wird für gegebene Anwendung entworfen, um die Performanz zu optimieren. Schaltungen werden als Schaltplan beschrieben.<a id="more"></a></li>
+<li><strong>Semi Customised Design</strong>:<br>Logische Schaltung ist in einer Computer-Sprache definiert, Schaltplan wird dann automatisch generiert. Der Schaltplan verwendet fertige Bauteile, logische Gatter.</li>
+</ul>
+        
+          <a class="article-more-a" href="/2019/12/05/DDS-%E5%A4%8D%E4%B9%A01/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/05/DDS-%E5%A4%8D%E4%B9%A01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-FireWire火线" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/05/FireWire%E7%81%AB%E7%BA%BF/">FireWire火线</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/05/FireWire%E7%81%AB%E7%BA%BF/" class="archive-article-date">
+  	<time datetime="2019-12-05T13:24:27.914Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: FireWire火线<br>tags: Communication Sysems and Protocols<br>date: 2019-07-12 18:22:47</p>
+<hr>
+<h3 id="Encoding-编码"><a href="#Encoding-编码" class="headerlink" title="Encoding(编码)"></a>Encoding(编码)</h3><ul>
+<li>数据传输用两条传输线<ul>
+<li>NRZ coding</li>
+<li>No stuffing or other measures for clock recovery<a id="more"></a> </li>
+</ul>
+</li>
+        
+          <a class="article-more-a" href="/2019/12/05/FireWire%E7%81%AB%E7%BA%BF/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/05/FireWire%E7%81%AB%E7%BA%BF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-ASI总线" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/05/ASI%E6%80%BB%E7%BA%BF/">ASI总线</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/05/ASI%E6%80%BB%E7%BA%BF/" class="archive-article-date">
+  	<time datetime="2019-12-05T13:21:53.135Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: ASI总线<br>tags: Communication Sysems and Protocols<br>date: 2019-07-12 17:22:47</p>
+<hr>
+<p>AS-Interface (Actuator Sensor Interface, ASi) is an industrial networking solution (physical layer, data access method and protocol) used in PLC, DCS and PC-based automation systems. It is designed for connecting simple field I/O devices (e.g. binary ON/OFF devices such as actuators, sensors, rotary encoders, analog inputs and outputs, push buttons, and valve position sensors) in discrete manufacturing and process applications using a single two-conductor cable.</p>
+        
+          <a class="article-more-a" href="/2019/12/05/ASI%E6%80%BB%E7%BA%BF/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/05/ASI%E6%80%BB%E7%BA%BF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-I2C总线" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/05/I2C%E6%80%BB%E7%BA%BF/">I2C总线</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/05/I2C%E6%80%BB%E7%BA%BF/" class="archive-article-date">
+  	<time datetime="2019-12-05T13:18:45.802Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: I2C总线协议<br>tags: Communication Sysems and Protocols<br>date: 2019-07-11 17:22:47</p>
+<hr>
+<p>I2C(Inter－Integrated Circuit)总线是80年代PHILIPS公司开发的两线式串行总线，如今已经成为芯片间低速串行通信的事实标准，被广泛使用在消费、控制类电子设备场合。这里的两个关键词<strong>两线</strong>和<strong>低速</strong>：<br>两线意味着结构简单，低速意味着好实现，做电路的都知道速度越慢电路实现起来就越容易，而且协议方式也很优
+雅。</p>
+        
+          <a class="article-more-a" href="/2019/12/05/I2C%E6%80%BB%E7%BA%BF/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/05/I2C%E6%80%BB%E7%BA%BF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-同步FIFO" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/05/%E5%90%8C%E6%AD%A5FIFO/">同步FIFO</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/05/%E5%90%8C%E6%AD%A5FIFO/" class="archive-article-date">
+  	<time datetime="2019-12-05T13:11:35.904Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: 同步FIFO<br>tags: - Verilog HDL<br>date: 2019-07-14 18:22:47</p>
+<hr>
+<p>FIFO (First-In-First-Out) 是一种先进先出的数据交互方式，在数字ASIC设计中常常被使用。FIFO按工作时钟域的不同又可以分为：同步FIFO和异步FIFO。</p>
+        
+          <a class="article-more-a" href="/2019/12/05/%E5%90%8C%E6%AD%A5FIFO/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/05/%E5%90%8C%E6%AD%A5FIFO/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
     <article id="post-数值优化-线搜索Line Search Method" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -312,476 +838,9 @@
 
 
   
-    <article id="post-const和constptr的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/">const和constptr的区别C++</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/" class="archive-article-date">
-  	<time datetime="2019-12-04T15:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>const: wird nachfolgend nicht verändert</li>
-<li>constexpr: wird zur Zeit des Üersetzens ausgerechnet
-        
-          <a class="article-more-a" href="/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-FIFO" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/05/FIFO/">FIFO</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/05/FIFO/" class="archive-article-date">
-  	<time datetime="2019-08-05T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="FIFO-功能"><a href="#FIFO-功能" class="headerlink" title="FIFO 功能"></a>FIFO 功能</h3><p>FIFO指先入先出（First-In, First-Out), 先写入FIFO的数据会先读出来，类似流水线操作，先流入的会先流出来。<br>FIFO是一类寄存器或存储器堆栈，它必须有两个不同的指针，分别只想读数据和写数据。FIFO的一种应用是作为芯片里两个不同时钟域之间的缓存，突发的读写操作被FIFO缓解了，这样数据在两个时钟域上都能以令人满意的速率传递，而不需要在每个时钟节拍上等待另一个时钟。FIFO的其他应用是在RS-422或以太网串行链路上，这两种链路通常都需要在不同的时钟域之间进行通信。</p>
-        
-          <a class="article-more-a" href="/2019/08/05/FIFO/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Verilog HDL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/05/FIFO/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-FPGA" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/05/FPGA/">FPGA闲聊</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/05/FPGA/" class="archive-article-date">
-  	<time datetime="2019-07-05T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一、入门首先要掌握HDL（HDL-verilog-VHDL）。"><a href="#一、入门首先要掌握HDL（HDL-verilog-VHDL）。" class="headerlink" title="一、入门首先要掌握HDL（HDL=verilog+VHDL）。"></a>一、入门首先要掌握HDL（HDL=verilog+VHDL）。</h3><p>第一句话是：还没学数电的先学数电。然后你可以选择verilog或者VHDL，有C语言基础的，建议选择VHDL。因为verilog太像C了，很容易混淆，最后你会发现，你花了大量时间去区分这两种语言，而不是在学习如何使用它。当然，你思维能转得过来，也可以选verilog，毕竟在国内verilog用得比较多。</p>
-        
-          <a class="article-more-a" href="/2019/07/05/FPGA/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">FPGA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/05/FPGA/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-CRC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/04/CRC/">CRC循环冗余校验算法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/04/CRC/" class="archive-article-date">
-  	<time datetime="2019-07-04T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>循环冗余校验（Cyclic redundancy check，通称“CRC”）是一种根据网络数据数据包或计算机文件等数据产生简短固定位数校验码的一种散列函數，主要用来检测或校验数据传输或者保存后可能出现的错误。生成的数字在传输或者存储之前计算出来并且附加到数据后面，然后接收方进行检验确定数据是否发生变化。</p>
-        
-          <a class="article-more-a" href="/2019/07/04/CRC/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">Communication Sysems and Protocols</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/04/CRC/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-Reise" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/01/Reise/">明斯特小镇</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/01/Reise/" class="archive-article-date">
-  	<time datetime="2019-07-01T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <img src="https://github.com/ZhouHaojie/Cloud/raw/master/Photos/%E6%98%8E%E6%96%AF%E7%89%B91.JPG" width="70%" height="70%">
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/01/Reise/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-CMOS Schaltung" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/04/CMOS%20Schaltung/">CMOS Schaltung</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/04/CMOS%20Schaltung/" class="archive-article-date">
-  	<time datetime="2019-06-04T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>CMOS: bedeuted Komplementäre Metal-Oxid-Semiconductor Transistoren.</p>
-        
-          <a class="article-more-a" href="/2019/06/04/CMOS%20Schaltung/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Design Digitaler Schaltung</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/04/CMOS%20Schaltung/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -946,6 +1005,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">Hexo</a>
               </li>
             
             <div class="clearfix"></div>

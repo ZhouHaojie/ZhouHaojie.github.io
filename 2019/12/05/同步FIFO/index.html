@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>搭建Hexo-Github Pages博客遇到的一些问题 | ZhouHaojie的博客</title>
+  <title>同步FIFO | ZhouHaojie的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="绑定域名首先介绍一下绑定域名的过程1.ping github pages 的IP地址">
-<meta name="keywords" content="错误调试">
+  <meta name="description" content="title: 同步FIFOtags: - Verilog HDLdate: 2019-07-14 18:22:47  FIFO (First-In-First-Out) 是一种先进先出的数据交互方式，在数字ASIC设计中常常被使用。FIFO按工作时钟域的不同又可以分为：同步FIFO和异步FIFO。">
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
 <meta property="og:type" content="article">
-<meta property="og:title" content="搭建Hexo-Github Pages博客遇到的一些问题">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;12&#x2F;01&#x2F;%E6%90%AD%E5%BB%BAHexo-github%20Pages%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98&#x2F;index.html">
+<meta property="og:title" content="同步FIFO">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;05&#x2F;%E5%90%8C%E6%AD%A5FIFO&#x2F;index.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
-<meta property="og:description" content="绑定域名首先介绍一下绑定域名的过程1.ping github pages 的IP地址">
+<meta property="og:description" content="title: 同步FIFOtags: - Verilog HDLdate: 2019-07-14 18:22:47  FIFO (First-In-First-Out) 是一种先进先出的数据交互方式，在数字ASIC设计中常常被使用。FIFO按工作时钟域的不同又可以分为：同步FIFO和异步FIFO。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-05T12:54:36.216Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;14&#x2F;5d2b1ff494e1963015.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;14&#x2F;5d2b203f0271734148.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;14&#x2F;5d2b20d0e9a0d57334.png">
+<meta property="og:updated_time" content="2019-12-05T13:28:05.286Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;14&#x2F;5d2b1ff494e1963015.png">
   
     <link rel="alternative" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
   
@@ -151,35 +155,55 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-搭建Hexo-github Pages博客遇到的一些问题" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-同步FIFO" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      搭建Hexo-Github Pages博客遇到的一些问题
+      同步FIFO
     </h1>
   
 
         
-        <a href="/2018/12/01/%E6%90%AD%E5%BB%BAHexo-github%20Pages%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2018-12-01T15:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-01</time>
+        <a href="/2019/12/05/%E5%90%8C%E6%AD%A5FIFO/" class="archive-article-date">
+  	<time datetime="2019-12-05T13:11:35.904Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h3><p>首先介绍一下绑定域名的过程<br>1.ping github pages 的IP地址</p>
-<a id="more"></a> 
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ping</span> <span class="selector-tag">zhouhaojie</span><span class="selector-class">.github</span><span class="selector-class">.io</span></span></pre></td></tr></table></figure>
-
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">C:\Users\zhj19&gt;ping zhouhaojie.github.io</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">正在 Ping sni.github.map.fastly.net [<span class="number">185.199</span><span class="number">.109</span><span class="number">.153</span>] 具有 <span class="number">32</span> 字节的数据:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">来自 <span class="number">185.199</span><span class="number">.109</span><span class="number">.153</span> 的回复: 字节=<span class="number">32</span> 时间=<span class="number">235</span>ms TTL=<span class="number">54</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">来自 <span class="number">185.199</span><span class="number">.109</span><span class="number">.153</span> 的回复: 字节=<span class="number">32</span> 时间=<span class="number">239</span>ms TTL=<span class="number">54</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">来自 <span class="number">185.199</span><span class="number">.109</span><span class="number">.153</span> 的回复: 字节=<span class="number">32</span> 时间=<span class="number">257</span>ms TTL=<span class="number">54</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">来自 <span class="number">185.199</span><span class="number">.109</span><span class="number">.153</span> 的回复: 字节=<span class="number">32</span> 时间=<span class="number">236</span>ms TTL=<span class="number">54</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="number">185.199</span><span class="number">.109</span><span class="number">.153</span> 的 Ping 统计信息:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    数据包: 已发送 = <span class="number">4</span>，已接收 = <span class="number">4</span>，丢失 = <span class="number">0</span> (<span class="number">0</span>% 丢失)，</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">往返行程的估计时间(以毫秒为单位):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    最短 = <span class="number">235</span>ms，最长 = <span class="number">257</span>ms，平均 = <span class="number">241</span>ms</span></pre></td></tr></table></figure>
-
-<p>2.把获取的IP绑定到域名上<br>腾讯云进入控制台，点击云解析<br>记录类型：A 主机记录：www 解析线路：默认 记录值：185.199.109.153<br>记录类型：A 主机记录：@ 解析线路：默认 记录值：185.199.109.153<br>3.在zhouhaojie.github.io的根目录下添加CNAME<br>内容为域名：grenze.cn</p>
-<h3 id="出错"><a href="#出错" class="headerlink" title="出错"></a>出错</h3><p>CNAME文件在每次hexo g -d后就会消失，需要重新创建</p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>将需要上传到GitHub的内容放到source文件夹中，如CNAME</p>
+        <hr>
+<p>title: 同步FIFO<br>tags: - Verilog HDL<br>date: 2019-07-14 18:22:47</p>
+<hr>
+<p>FIFO (First-In-First-Out) 是一种先进先出的数据交互方式，在数字ASIC设计中常常被使用。FIFO按工作时钟域的不同又可以分为：同步FIFO和异步FIFO。</p>
+<a id="more"></a>
+<a id="more"></a>
+<p>同步FIFO的写时钟和读时钟为同一个时钟，FIFO内部所有逻辑都是同步逻辑，常常用于交互数据缓冲。异步FIFO的写时钟和读时钟为异步时钟，FIFO内部的写逻辑和读逻辑的交互需要异步处理，异步FIFO常用于跨时钟域交互。</p>
+<p>本文介绍同步FIFO的典型设计方法。</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>典型同步FIFO有三部分组成: （1） FIFO写控制逻辑； （2）FIFO读控制逻辑； （3）FIFO 存储实体（如Memory、Reg）
+　　</p>
+<ul>
+<li>FIFO写控制逻辑主要功能：产生FIFO写地址、写有效信号，同时产生FIFO写满等状态信号</li>
+<li>FIFO读控制逻辑主要功能：产生FIFO读地址、读有效信号，同时产生FIFO读空等状态信号</li>
+</ul>
+<p><img src="https://i.loli.net/2019/07/14/5d2b1ff494e1963015.png" alt="20190714142832.png"></p>
+<p>如下图所示，FIFO读写过程的地址控制：</p>
+<ol>
+<li>当FIFO初始化（复位）时fifo_write_addr与fifo_read_addr同指到0x0，此时FIFO处于空状态；</li>
+<li>当FIFO进行写操作时，fifo_write_addr递增（增加到FIFO DEPTH时回绕），与fifo_read_addr错开，此时FIFO处于非空状态；</li>
+<li>当FIFO进行读操作时，fifo_read_addr递增；</li>
+</ol>
+<p><img src="https://i.loli.net/2019/07/14/5d2b203f0271734148.png" alt="20190714142947.png"></p>
+<p>FIFO空满状态产生：<br>为产生FIFO空满标志，引入FIFO Count计数器，FIFO Count寄数器用于指示FIFO内部存储数据个数；</p>
+<ol>
+<li>当只有写操作时，FIFO Count加1；只有读操作是，FIFO Count减1；其他情况下，FIFO Count保持；</li>
+<li>当FIFO Count为0时，说明FIFO为空，fifo_empty置位；</li>
+<li>当FIFO Count等于FIFO_DEPTH时，说明FIFO已满，fifo_full置位；<br><img src="https://i.loli.net/2019/07/14/5d2b20d0e9a0d57334.png" alt="20190714143212.png"></li>
+</ol>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> (</span><br><span class="line">    <span class="keyword">input</span>       shift_in,</span><br><span class="line">    <span class="keyword">input</span>       clk,</span><br><span class="line">    <span class="keyword">input</span>       shift_out,</span><br><span class="line">    <span class="keyword">input</span>       rst_n,</span><br><span class="line">    <span class="keyword">input</span>       w_data,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    full,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    almostfull,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    empty,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    almostempty,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    r_data</span><br><span class="line">);</span><br><span class="line"><span class="keyword">parameter</span> DEPTH = <span class="number">2</span>**ADEPTH;</span><br><span class="line"><span class="keyword">reg</span> [DEPTH : <span class="number">0</span>] w_addr;</span><br><span class="line"><span class="keyword">reg</span> [DEPTH : <span class="number">0</span>] r_addr;</span><br><span class="line"><span class="keyword">reg</span> [WIDTH-<span class="number">1</span> : <span class="number">0</span>] memory [DEPTH : <span class="number">0</span>];</span><br><span class="line"><span class="keyword">reg</span> [DEPTH : <span class="number">0</span>] cnt;</span><br><span class="line"><span class="keyword">integer</span> i;</span><br><span class="line"><span class="comment">// write control</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(rst_n == <span class="number">1'b0</span>)<span class="keyword">begin</span></span><br><span class="line">        w_addr &lt;= <span class="number">'b0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_in &amp; (!full))<span class="keyword">begin</span></span><br><span class="line">        w_addr &lt;= w_addr + <span class="number">1'b1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="comment">// read control</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(rst_n == <span class="number">1'b0</span>)<span class="keyword">begin</span></span><br><span class="line">        r_addr &lt;= <span class="number">'b0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_out &amp; (!empty))<span class="keyword">begin</span></span><br><span class="line">        r_addr &lt;= r_addr + <span class="number">1'b1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">//write data</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(rst_n == <span class="number">1'b0</span>)<span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>, i&lt;=DEPTH, i++)</span><br><span class="line">            memory[i] &lt;= &#123;WIDTH&#123;<span class="number">1'b0</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_in &amp; (!full))<span class="keyword">begin</span></span><br><span class="line">        memory[w_addr] &lt;= w_data;   </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">// read data</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(rst_n == <span class="number">1'b0</span>)<span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>, i&lt;=DEPTH, i++)</span><br><span class="line">            memory[i] &lt;= &#123;WIDTH&#123;<span class="number">1'b0</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_out &amp; (!empty))<span class="keyword">begin</span></span><br><span class="line">        r_data &lt;= memory[r_addr];   </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(!rst_n)<span class="keyword">begin</span></span><br><span class="line">        cnt &lt;= <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_in &amp; (!full) &amp; (!almostfull) &amp; !(shift_out &amp; (!empty) &amp;（!almostempty)))<span class="keyword">begin</span></span><br><span class="line">        cnt &lt;= cnt + <span class="number">1'b1</span>;  </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_out &amp; (!empty) &amp;（!almostempty) &amp; !(shift_in &amp; (!full) &amp; (!almostfull)))<span class="keyword">begin</span></span><br><span class="line">        cnt &lt;= cnt - <span class="number">1'b1</span>;  </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> full = (cnt == DEPTH);</span><br><span class="line"><span class="keyword">assign</span> almostfull = (cnt == (DEPTH-<span class="number">1</span>));</span><br><span class="line"><span class="keyword">assign</span> empty = (cnt == <span class="number">0</span>);</span><br><span class="line"><span class="keyword">assign</span> almostempty = (cnt == <span class="number">1</span>);</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 
       
 
@@ -219,17 +243,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">错误调试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -280,7 +293,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/12/01/%E6%90%AD%E5%BB%BAHexo-github%20Pages%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/05/%E5%90%8C%E6%AD%A5FIFO/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -294,18 +307,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/01/04/%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E8%B6%85%E5%89%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8%EF%BC%88Carry-Lookahead%20Adder%EF%BC%8CCLA)/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/12/05/I2C%E6%80%BB%E7%BA%BF/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA）
+          I2C总线
         
       </div>
     </a>
   
   
-    <a href="/2018/07/05/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2019/12/05/%E6%95%B0%E5%80%BC%E4%BC%98%E5%8C%96-%E7%BA%BF%E6%90%9C%E7%B4%A2Line%20Search%20Method/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Line Search Method</div>
       <i class="icon-circle-right"></i>
     </a>
   

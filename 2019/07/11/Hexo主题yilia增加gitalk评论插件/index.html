@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>搭建Hexo-Github Pages博客遇到的一些问题 | ZhouHaojie的博客</title>
+  <title>Hexo主题yilia增加gitalk评论插件 | ZhouHaojie的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="绑定域名首先介绍一下绑定域名的过程1.ping github pages 的IP地址">
-<meta name="keywords" content="错误调试">
+  <meta name="description" content="之前使用的gitment没有更新了，而且移动端适配做的不够好，故将评论功能迁移至gitalk,以下是替换过程">
+<meta name="keywords" content="Hexo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="搭建Hexo-Github Pages博客遇到的一些问题">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;12&#x2F;01&#x2F;%E6%90%AD%E5%BB%BAHexo-github%20Pages%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98&#x2F;index.html">
+<meta property="og:title" content="Hexo主题yilia增加gitalk评论插件">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;07&#x2F;11&#x2F;Hexo%E4%B8%BB%E9%A2%98yilia%E5%A2%9E%E5%8A%A0gitalk%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6&#x2F;index.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
-<meta property="og:description" content="绑定域名首先介绍一下绑定域名的过程1.ping github pages 的IP地址">
+<meta property="og:description" content="之前使用的gitment没有更新了，而且移动端适配做的不够好，故将评论功能迁移至gitalk,以下是替换过程">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-05T12:54:36.216Z">
+<meta property="og:updated_time" content="2019-12-05T13:17:39.051Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
@@ -151,35 +151,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-搭建Hexo-github Pages博客遇到的一些问题" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Hexo主题yilia增加gitalk评论插件" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      搭建Hexo-Github Pages博客遇到的一些问题
+      Hexo主题yilia增加gitalk评论插件
     </h1>
   
 
         
-        <a href="/2018/12/01/%E6%90%AD%E5%BB%BAHexo-github%20Pages%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2018-12-01T15:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-01</time>
+        <a href="/2019/07/11/Hexo%E4%B8%BB%E9%A2%98yilia%E5%A2%9E%E5%8A%A0gitalk%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/" class="archive-article-date">
+  	<time datetime="2019-07-11T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h3><p>首先介绍一下绑定域名的过程<br>1.ping github pages 的IP地址</p>
-<a id="more"></a> 
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ping</span> <span class="selector-tag">zhouhaojie</span><span class="selector-class">.github</span><span class="selector-class">.io</span></span></pre></td></tr></table></figure>
+        <p>之前使用的gitment没有更新了，而且移动端适配做的不够好，故将评论功能迁移至gitalk,以下是替换过程</p>
+<a id="more"></a>
+<p><a id="more"></a></p>
+<h4 id="在layout-partial-post目录下新增gitalk-ejs文件"><a href="#在layout-partial-post目录下新增gitalk-ejs文件" class="headerlink" title="在layout/_partial/post目录下新增gitalk.ejs文件"></a>在layout/_partial/post目录下新增gitalk.ejs文件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"gitalk-container"</span> style=<span class="string">"padding: 0px 30px 0px 30px;"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span> </span><br><span class="line"></span><br><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"</span>&gt;</span><br><span class="line">&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="xml"><span class="tag">&lt;<span class="name">%=theme.gitalk.enable%</span>&gt;</span>)&#123;</span></span><br><span class="line"><span class="xml">    var gitalk = new Gitalk(&#123;</span></span><br><span class="line"><span class="xml">      clientID: '<span class="tag">&lt;<span class="name">%=theme.gitalk.ClientID%</span>&gt;</span>',</span></span><br><span class="line"><span class="xml">      clientSecret: '<span class="tag">&lt;<span class="name">%=theme.gitalk.ClientSecret%</span>&gt;</span>',</span></span><br><span class="line"><span class="xml">      repo: '<span class="tag">&lt;<span class="name">%=theme.gitalk.repo%</span>&gt;</span>',</span></span><br><span class="line"><span class="xml">      owner: '<span class="tag">&lt;<span class="name">%=theme.gitalk.githubID%</span>&gt;</span>',</span></span><br><span class="line"><span class="xml">      admin: ['<span class="tag">&lt;<span class="name">%=theme.gitalk.adminUser%</span>&gt;</span>'],</span></span><br><span class="line"><span class="xml">      id: '<span class="tag">&lt;<span class="name">%=</span> <span class="attr">page.date</span> %&gt;</span>',</span></span><br><span class="line"><span class="xml">      distractionFreeMode: '<span class="tag">&lt;<span class="name">%=theme.gitalk.distractionFreeMode%</span>&gt;</span>'</span></span><br><span class="line"><span class="xml">&#125;)</span></span><br><span class="line"><span class="xml">gitalk.render('gitalk-container') </span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">C:\Users\zhj19&gt;ping zhouhaojie.github.io</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">正在 Ping sni.github.map.fastly.net [<span class="number">185.199</span><span class="number">.109</span><span class="number">.153</span>] 具有 <span class="number">32</span> 字节的数据:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">来自 <span class="number">185.199</span><span class="number">.109</span><span class="number">.153</span> 的回复: 字节=<span class="number">32</span> 时间=<span class="number">235</span>ms TTL=<span class="number">54</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">来自 <span class="number">185.199</span><span class="number">.109</span><span class="number">.153</span> 的回复: 字节=<span class="number">32</span> 时间=<span class="number">239</span>ms TTL=<span class="number">54</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">来自 <span class="number">185.199</span><span class="number">.109</span><span class="number">.153</span> 的回复: 字节=<span class="number">32</span> 时间=<span class="number">257</span>ms TTL=<span class="number">54</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">来自 <span class="number">185.199</span><span class="number">.109</span><span class="number">.153</span> 的回复: 字节=<span class="number">32</span> 时间=<span class="number">236</span>ms TTL=<span class="number">54</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="number">185.199</span><span class="number">.109</span><span class="number">.153</span> 的 Ping 统计信息:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    数据包: 已发送 = <span class="number">4</span>，已接收 = <span class="number">4</span>，丢失 = <span class="number">0</span> (<span class="number">0</span>% 丢失)，</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">往返行程的估计时间(以毫秒为单位):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    最短 = <span class="number">235</span>ms，最长 = <span class="number">257</span>ms，平均 = <span class="number">241</span>ms</span></pre></td></tr></table></figure>
+<h4 id="修改source-src-css-目录下comment-scss文件"><a href="#修改source-src-css-目录下comment-scss文件" class="headerlink" title="修改source-src/css/目录下comment.scss文件"></a>修改source-src/css/目录下comment.scss文件</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#disqus_thread</span>, <span class="selector-class">.duoshuo</span>, <span class="selector-class">.cloud-tie-wrapper</span>, <span class="selector-id">#SOHUCS</span>, <span class="selector-id">#gitment-ctn</span>, <span class="selector-id">#gitalk-container</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">30px</span> !important;</span><br><span class="line">    <span class="attribute">min-height</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#SOHUCS</span> &#123;</span><br><span class="line">    <span class="selector-id">#SOHU_MAIN</span> <span class="selector-class">.module-cmt-list</span> <span class="selector-class">.block-cont-gw</span> &#123;</span><br><span class="line">        <span class="attribute">border-bottom</span>: <span class="number">1px</span> dashed <span class="number">#c8c8c8</span> !important;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>2.把获取的IP绑定到域名上<br>腾讯云进入控制台，点击云解析<br>记录类型：A 主机记录：www 解析线路：默认 记录值：185.199.109.153<br>记录类型：A 主机记录：@ 解析线路：默认 记录值：185.199.109.153<br>3.在zhouhaojie.github.io的根目录下添加CNAME<br>内容为域名：grenze.cn</p>
-<h3 id="出错"><a href="#出错" class="headerlink" title="出错"></a>出错</h3><p>CNAME文件在每次hexo g -d后就会消失，需要重新创建</p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>将需要上传到GitHub的内容放到source文件夹中，如CNAME</p>
+<h4 id="在layout-partial目录下的article-ejs文件内新增gitalk相关的配置代码："><a href="#在layout-partial目录下的article-ejs文件内新增gitalk相关的配置代码：" class="headerlink" title="在layout/_partial目录下的article.ejs文件内新增gitalk相关的配置代码："></a>在layout/_partial目录下的article.ejs文件内新增gitalk相关的配置代码：</h4><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="meta">%</span> <span class="keyword">if</span><span class="comment">(theme.gitalk.enable)</span>&#123; <span class="meta">%</span>&gt;</span><br><span class="line">  &lt;<span class="meta">%</span>- partial<span class="comment">('post/gitalk', &#123;</span></span><br><span class="line"><span class="comment">      key: post.slug,</span></span><br><span class="line"><span class="comment">      title: post.title,</span></span><br><span class="line"><span class="comment">      url: config.url+url_for(post.path)</span></span><br><span class="line">    &#125;) <span class="meta">%</span>&gt;</span><br><span class="line">  &lt;<span class="meta">%</span> &#125; <span class="meta">%</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="最后在yilia主题配置文件中新增gitalk相关的配置："><a href="#最后在yilia主题配置文件中新增gitalk相关的配置：" class="headerlink" title="最后在yilia主题配置文件中新增gitalk相关的配置："></a>最后在yilia主题配置文件中新增gitalk相关的配置：</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#6、gitalk评论</span></span><br><span class="line"><span class="attr">gitalk:</span></span><br><span class="line"><span class="attr">  enable:</span>  <span class="literal">true</span></span><br><span class="line"><span class="attr">  githubID:</span>  <span class="string">Ziven-n</span>   </span><br><span class="line"><span class="attr">  repo:</span>  <span class="string">'mycomments'</span></span><br><span class="line"><span class="attr">  ClientID:</span>  <span class="string">'29fd06ce234338fe233'</span></span><br><span class="line"><span class="attr">  ClientSecret:</span>  <span class="string">'090b271a3e6ce6fae6fc80ce4d4344671aa'</span></span><br><span class="line"><span class="attr">  adminUser:</span>  <span class="string">Ziven-n</span></span><br><span class="line"><span class="attr">  distractionFreeMode:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
       
 
@@ -224,7 +225,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">错误调试</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">Hexo</a>
         		</li>
       		
 		</ul>
@@ -280,7 +281,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/12/01/%E6%90%AD%E5%BB%BAHexo-github%20Pages%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/11/Hexo%E4%B8%BB%E9%A2%98yilia%E5%A2%9E%E5%8A%A0gitalk%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -294,18 +295,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/01/04/%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E8%B6%85%E5%89%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8%EF%BC%88Carry-Lookahead%20Adder%EF%BC%8CCLA)/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA）
+          const和constptr的区别C++
         
       </div>
     </a>
   
   
-    <a href="/2018/07/05/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2019/07/10/Register-Memory-FIFO/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Register-Memory-FIFO</div>
       <i class="icon-circle-right"></i>
     </a>
   
