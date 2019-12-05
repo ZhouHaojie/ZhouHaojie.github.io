@@ -3,10 +3,7 @@
   <entry>
     <title>DDS-复习2-CMOS Schaltung</title>
     <url>/2019/12/05/DDS-%E5%A4%8D%E4%B9%A02-CMOS%20Schaltung/</url>
-    <content><![CDATA[<hr>
-<p>title: DDS-复习2-CMOS Schaltung<br>tags: DDS<br>date: 2019-07-17 19:02:47</p>
-<hr>
-<p>CMOS: bedeuted Komplementäre Metal-Oxid-Semiconductor Transistoren.</p>
+    <content><![CDATA[<p>CMOS: bedeuted Komplementäre Metal-Oxid-Semiconductor Transistoren.</p>
 <a id="more"></a>
 <p><a id="more"></a></p>
 <h3 id="NMOS-und-PMOS"><a href="#NMOS-und-PMOS" class="headerlink" title="NMOS und PMOS"></a>NMOS und PMOS</h3><p>Die Datierung von Source und Drain bestimmt die Ladungsträger.</p>
@@ -111,10 +108,7 @@
   <entry>
     <title>DDS-复习1</title>
     <url>/2019/12/05/DDS-%E5%A4%8D%E4%B9%A01/</url>
-    <content><![CDATA[<hr>
-<p>title: DDS-复习1<br>tags: DDS<br>date: 2019-07-17 18:03:47</p>
-<hr>
-<h3 id="Fully-Customised-Design-und-Semi-Customised-Design"><a href="#Fully-Customised-Design-und-Semi-Customised-Design" class="headerlink" title="Fully Customised Design und Semi Customised Design"></a>Fully Customised Design und Semi Customised Design</h3><li>Fully Customised Design:<br>jede Schaltung wird für gegebene Anwendung entworfen, um die Performanz zu optimieren. Schaltungen werden als Schaltplan beschrieben.<a id="more"></a></li>
+    <content><![CDATA[<h3 id="Fully-Customised-Design-und-Semi-Customised-Design"><a href="#Fully-Customised-Design-und-Semi-Customised-Design" class="headerlink" title="Fully Customised Design und Semi Customised Design"></a>Fully Customised Design und Semi Customised Design</h3><li>Fully Customised Design:<br>jede Schaltung wird für gegebene Anwendung entworfen, um die Performanz zu optimieren. Schaltungen werden als Schaltplan beschrieben.<a id="more"></a></li>
 <li><strong>Semi Customised Design</strong>:<br>Logische Schaltung ist in einer Computer-Sprache definiert, Schaltplan wird dann automatisch generiert. Der Schaltplan verwendet fertige Bauteile, logische Gatter.</li>
 </ul>
 <a id="more"></a>
@@ -128,10 +122,7 @@
   <entry>
     <title>FireWire火线</title>
     <url>/2019/12/05/FireWire%E7%81%AB%E7%BA%BF/</url>
-    <content><![CDATA[<hr>
-<p>title: FireWire火线<br>tags: Communication Sysems and Protocols<br>date: 2019-07-12 18:05:47</p>
-<hr>
-<h3 id="Encoding-编码"><a href="#Encoding-编码" class="headerlink" title="Encoding(编码)"></a>Encoding(编码)</h3><li>数据传输用两条传输线<ul>
+    <content><![CDATA[<h3 id="Encoding-编码"><a href="#Encoding-编码" class="headerlink" title="Encoding(编码)"></a>Encoding(编码)</h3><li>数据传输用两条传输线<ul>
 <li>NRZ coding</li>
 <li>No stuffing or other measures for clock recovery<a id="more"></a> </li>
 </ul>
@@ -324,10 +315,7 @@
   <entry>
     <title>同步FIFO</title>
     <url>/2019/12/05/%E5%90%8C%E6%AD%A5FIFO/</url>
-    <content><![CDATA[<hr>
-<p>title: 同步FIFO<br>tags: - Verilog HDL<br>date: 2019-07-14 18:01:47</p>
-<hr>
-<p>FIFO (First-In-First-Out) 是一种先进先出的数据交互方式，在数字ASIC设计中常常被使用。FIFO按工作时钟域的不同又可以分为：同步FIFO和异步FIFO。</p>
+    <content><![CDATA[<p>FIFO (First-In-First-Out) 是一种先进先出的数据交互方式，在数字ASIC设计中常常被使用。FIFO按工作时钟域的不同又可以分为：同步FIFO和异步FIFO。</p>
 <a id="more"></a>
 <p><a id="more"></a></p>
 <p>同步FIFO的写时钟和读时钟为同一个时钟，FIFO内部所有逻辑都是同步逻辑，常常用于交互数据缓冲。异步FIFO的写时钟和读时钟为异步时钟，FIFO内部的写逻辑和读逻辑的交互需要异步处理，异步FIFO常用于跨时钟域交互。</p>
