@@ -6,17 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/4 | ZhouHaojie的博客</title>
+  <title>FireWire火线协议 | ZhouHaojie的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
-<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ZhouHaojie的博客">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;archives&#x2F;2019&#x2F;04&#x2F;index.html">
+  <meta name="description" content="Encoding(编码)数据传输用两条传输线  NRZ coding No stuffing or other measures for clock recovery">
+<meta name="keywords" content="Communication Sysems and Protocols">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FireWire火线协议">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;05&#x2F;FireWire%E7%81%AB%E7%BA%BF%E5%8D%8F%E8%AE%AE&#x2F;index.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
-<meta property="og:description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+<meta property="og:description" content="Encoding(编码)数据传输用两条传输线  NRZ coding No stuffing or other measures for clock recovery">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d288654bda1120985.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d288e0c584ca50546.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d2891737898b99082.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d2898fe96bab58664.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d289fc8b8ac073334.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d2896e7a576715994.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d28972adc2d858936.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d289a41f1ac161214.png">
+<meta property="og:updated_time" content="2019-12-05T15:06:07.979Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d288654bda1120985.png">
   
     <link rel="alternative" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
   
@@ -150,98 +160,281 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-FireWire火线协议" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/05/maxwell/" class="archive-article-date">
-  	<time datetime="2019-04-05T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/05/maxwell/">Maxwell equation</a>
+    <h1 class="article-title" itemprop="name">
+      FireWire火线协议
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/12/05/FireWire%E7%81%AB%E7%BA%BF%E5%8D%8F%E8%AE%AE/" class="archive-article-date">
+  	<time datetime="2019-12-05T15:05:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Encoding-编码"><a href="#Encoding-编码" class="headerlink" title="Encoding(编码)"></a>Encoding(编码)</h3><p>数据传输用两条传输线</p>
+<ul>
+<li>NRZ coding</li>
+<li>No stuffing or other measures for clock recovery</li>
+</ul>
+<a id="more"></a>
+
+<p>STROBE 信号被用于恢复时钟信号</p>
+<ul>
+<li>当相同数据被发送时, STROBE 信号会改变它的状</li>
+<li>Recovery through XOR combination of both signals</li>
+<li>Advantages:<ul>
+<li>Insensitive for interference</li>
+<li>Lower bandwidth required</li>
+</ul>
+</li>
+</ul>
+<img src="https://i.loli.net/2019/07/12/5d288654bda1120985.png" alt="20190712150832.png">
+
+<h3 id="Configuration-of-the-bus"><a href="#Configuration-of-the-bus" class="headerlink" title="Configuration-of-the-bus"></a>Configuration-of-the-bus</h3><p>没有专用控制器，每一个总线都能成为root of the tree, Bus assignment is done in three steps:</p>
+<ul>
+<li>Initialization</li>
+<li>Tree identification</li>
+<li>Self identification</li>
+</ul>
+<h4 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h4><p>在总线复位后，每一个subscriber 只知道outgoing connections 的数量</p>
+<ul>
+<li>One single connection –&gt; <strong>Leaf</strong></li>
+<li>Several connections –&gt; <strong>Branch</strong><img src="https://i.loli.net/2019/07/12/5d288e0c584ca50546.png" alt="20190712154129.png">
+
+</li>
+</ul>
+<h4 id="Tree-identification"><a href="#Tree-identification" class="headerlink" title="Tree-identification"></a>Tree-identification</h4><ul>
+<li>Method:<ul>
+<li>每一个leaf发送一个”parent-notify” packet, 标记这个相应的port为”P”(parent) </li>
+<li>那个接收到”parent-notify” packet的node会标记对应的port为”ch”(child)</li>
+<li>如果在一个node里仅存在一个未被标记的port, 则这个node会使用它发”parent-notify” packet, 并标记”p”</li>
+<li>那个等待时间最长，所有ports都标记为ch的将成为root </li>
+</ul>
+</li>
+</ul>
+<img src="https://i.loli.net/2019/07/12/5d2891737898b99082.png" alt="20190712155601.png">
+
+<h4 id="Self-identification"><a href="#Self-identification" class="headerlink" title="Self-identification"></a>Self-identification</h4><ul>
+<li>Assigning the node address<ul>
+<li>Root把控制权给#1 port的node</li>
+<li>如果这个node有ch, 则继续把控制权传给第一个ch node</li>
+<li>When a leaf is reached, it will claim the next address that is available and sends a packet with its address and additional status information to the bus</li>
+<li>After that, control is returned to the parent node that pocesses the next port</li>
+<li>When a node has processed all of its children, it self-assigns an address and transfers control to its parent node  li&gt;</li>
+</ul>
+</li>
+</ul>
+<img src="https://i.loli.net/2019/07/12/5d2898fe96bab58664.png" alt="20190712162811.png">
+
+<h3 id="Arbitration"><a href="#Arbitration" class="headerlink" title="Arbitration"></a>Arbitration</h3><p>The node sends a request packet to its parent</p>
+<ul>
+<li>If no other request already reached the parent node, it will forward the request one level up. A data prefix(前缀) packet is send to the other ports in order to suppress(抑制) other request</li>
+<li>If there is already another request, the last node gets back a data prefix packet to inform the node that the request has been denied</li>
+</ul>
+<p>When the request reaches the root, a grant packet is send back to the source node of the request<br>The requesting node acknowledges with a data prefix and starts the transmission</p>
+<h3 id="Fairness"><a href="#Fairness" class="headerlink" title="Fairness"></a>Fairness</h3><p>原则上，和root直接相连的那个节点有最大的机会获得总线，为了保证公平，每一个节点只能在一个周期内获得bus一次</p>
+<ul>
+<li>Therefore every node has an arbitration enable bit, that is cleared after a successful access</li>
+<li>The node is then not allowed to apply for the bus again</li>
+</ul>
+<p>If there was no access to the bus for a certain amount if time(arbitration reset gap, 20$\mu$s), all nodes reset their arbitration enable bit and a new cycle is started.</p>
+<h3 id="Isochronous-同步-transfer"><a href="#Isochronous-同步-transfer" class="headerlink" title="Isochronous-同步-transfer"></a>Isochronous-同步-transfer</h3><img src="https://i.loli.net/2019/07/12/5d289fc8b8ac073334.png" alt="20190712165709.png">
+<img src="https://i.loli.net/2019/07/12/5d2896e7a576715994.png" alt="20190712161915.png"><br><img src="https://i.loli.net/2019/07/12/5d28972adc2d858936.png" alt="20190712162024.png"><br><img src="https://i.loli.net/2019/07/12/5d289a41f1ac161214.png" alt="20190712163335.png">
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://farm2.staticflickr.com/1722/42773195431_4b473e29c9_m.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://farm1.staticflickr.com/887/42773195091_f5dcb6870d_m.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">Microwave</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">Communication Sysems and Protocols</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/05/FireWire%E7%81%AB%E7%BA%BF%E5%8D%8F%E8%AE%AE/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/04/%E4%BB%BB%E6%84%8F%E6%A8%A1%E5%80%BC%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2019-04-04T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-04</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/05/ASI%E6%80%BB%E7%BA%BF/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ASI总线</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/04/%E4%BB%BB%E6%84%8F%E6%A8%A1%E5%80%BC%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8/">模值M的计数器</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Verilog HDL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Encoding-编码"><span class="toc-number">1.</span> <span class="toc-text">Encoding(编码)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Configuration-of-the-bus"><span class="toc-number">2.</span> <span class="toc-text">Configuration-of-the-bus</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Initialization"><span class="toc-number">2.1.</span> <span class="toc-text">Initialization</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Tree-identification"><span class="toc-number">2.2.</span> <span class="toc-text">Tree-identification</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Self-identification"><span class="toc-number">2.3.</span> <span class="toc-text">Self-identification</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Arbitration"><span class="toc-number">3.</span> <span class="toc-text">Arbitration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fairness"><span class="toc-number">4.</span> <span class="toc-text">Fairness</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Isochronous-同步-transfer"><span class="toc-number">5.</span> <span class="toc-text">Isochronous-同步-transfer</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
+  
+
+      <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+
+<script>
+var gitalk = new Gitalk({
+  clientID: '037aa3a17f11795b7607',
+  clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+  repo: 'Comment',
+  owner: 'ZhouHaojie',
+  admin: ['ZhouHaojie'],
+  id: md5(window.location.pathname),
+  distractionFreeMode: true
+})
+
+gitalk.render('gitalk-container')
+</script>
+  
+
+
 
 
           </div>
@@ -264,8 +457,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

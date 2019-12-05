@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>FireWire火线</title>
-    <url>/2019/12/05/FireWire%E7%81%AB%E7%BA%BF/</url>
-    <content><![CDATA[<hr>
-<p>title: FireWire火线<br>tags: Communication Sysems and Protocols</p>
-<hr>
-<h3 id="Encoding-编码"><a href="#Encoding-编码" class="headerlink" title="Encoding(编码)"></a>Encoding(编码)</h3><p>数据传输用两条传输线</p>
+    <title>FireWire火线协议</title>
+    <url>/2019/12/05/FireWire%E7%81%AB%E7%BA%BF%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<h3 id="Encoding-编码"><a href="#Encoding-编码" class="headerlink" title="Encoding(编码)"></a>Encoding(编码)</h3><p>数据传输用两条传输线</p>
 <ul>
 <li>NRZ coding</li>
 <li>No stuffing or other measures for clock recovery</li>
@@ -76,6 +73,9 @@
 <h3 id="Isochronous-同步-transfer"><a href="#Isochronous-同步-transfer" class="headerlink" title="Isochronous-同步-transfer"></a>Isochronous-同步-transfer</h3><img src="https://i.loli.net/2019/07/12/5d289fc8b8ac073334.png" alt="20190712165709.png">
 <img src="https://i.loli.net/2019/07/12/5d2896e7a576715994.png" alt="20190712161915.png"><br><img src="https://i.loli.net/2019/07/12/5d28972adc2d858936.png" alt="20190712162024.png"><br><img src="https://i.loli.net/2019/07/12/5d289a41f1ac161214.png" alt="20190712163335.png">
 ]]></content>
+      <tags>
+        <tag>Communication Sysems and Protocols</tag>
+      </tags>
   </entry>
   <entry>
     <title>ASI总线</title>
@@ -218,51 +218,6 @@
 <h2 id="步长-alpha-的选择"><a href="#步长-alpha-的选择" class="headerlink" title="步长$\alpha$的选择"></a>步长$\alpha$的选择</h2>]]></content>
       <tags>
         <tag>Optimization of Dynamic Systems</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>计数器设计小结</title>
-    <url>/2019/12/05/Johnson%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
-    <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>计数器 在数字电路设计 和 计算机程序设计 中都应用非常广泛，其功能顾名思义，就是用来计数。这里只讨论数字电路设计中的计数器。<br>通常，将包含触发器 flip-flop 的电路（即使含有组合电路部分）认为是时序电路。时序电路通常不以电路命名，而是以功能进行分类，分别是 寄存器 和 计数器。<br>计数器 counter 从本质上来说也是寄存器，不过它是在预先设定好的状态序列中转移，尽管计数器是寄存器的一种特殊形式，通常还是以不同的名称来加以区分</p>
-<a id="more"></a>
-<h2 id="Type"><a href="#Type" class="headerlink" title="Type"></a>Type</h2><p>按照不同的标准来划分，计数器可以有不同的划分方法：</p>
-<ol>
-<li>触发方式<br>同步 / 异步 计数器</li>
-<li>计数增减<br>加法 / 减法 / 可逆计数器</li>
-</ol>
-<p>因为第二种方法没有明确显示计数器的计数方式，所以一般使用第一种方法。<br>这里总结了一些常见的计数器：</p>
-<ol>
-<li>Basic Binary Counter</li>
-<li>BCD Counter</li>
-<li>Ring Counter</li>
-<li>Johnson Counter</li>
-<li>Ripple Counter</li>
-</ol>
-<p>计数器在数字电路中的用途非常广，可以作为定时器、实用计数器、状态机等。在具体实现时，有前面总结的不同的计数器类型可供选择，每种计数器由其特点决定了适用场合，我们要做到就是在不同计数器类型和配置之间进行权衡，选择正确的设计，以节省大量逻辑资源，并提高性能。</p>
-<p>下面分别讨论各种计数器的特点和 HDL 实现。</p>
-<h2 id="Implement"><a href="#Implement" class="headerlink" title="Implement"></a>Implement</h2><h3 id="Binary-Counter"><a href="#Binary-Counter" class="headerlink" title="Binary Counter"></a>Binary Counter</h3><p>最简单、最基本的计数器就是 二进制计数器 Binary Counter。它的计数方式就是从 0 开始每个脉冲进行 “+1” 操作，直到最大值，然后重新从 0 开始。<br><strong>code</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> free_run_bin_counter(</span></pre></td></tr><tr><td class="code"><pre><span class="line">    clk, rst, max_tick, q</span></pre></td></tr><tr><td class="code"><pre><span class="line">    );</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">parameter</span>   N = <span class="number">8</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">input</span>                     clk;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">input</span>                     rst;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>               max_tick;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>  [N - <span class="number">1</span> : <span class="number">0</span>]  q;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">// count</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk) <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">if</span> (rst) <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="comment">// reset</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">            q &lt;= <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">else</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">            q &lt;=  q + <span class="number">1</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">// max_tick</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk) <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">if</span> (rst) <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">            max_tick &lt;= <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">else</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="keyword">if</span> (q == &#123;N&#123;<span class="number">1'b1</span>&#125;&#125;) <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">                max_tick &lt;= <span class="number">1</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="keyword">else</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">                max_tick &lt;= <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">endmodule</span></span></pre></td></tr></table></figure>
-
-<p>###BCD Counter (mod-m counter)<br>人类更习惯使用十进制进行计数，十进制一共有 10 个符号，我们只需要从 4 bit 的二进制计数器中选取 10 个数字，只使用这 10 个数字进行计数即可，通常去掉 1010 ~ 1111 这 6 个数字，即使用 8421BCD码 来对十进制数进行编码、计数，即 BCD Counter。</p>
-<p>将十进制进行推广，我们就可以写出任意的 模 m 的计数器，在下面的例子中，M 表示计数器的模值（默认为 10），N 表示计数器需要的位数（默认为 4）。在例化时如果要修改，则需要手动计算这两个参数进行赋值。</p>
-<p><strong>Code</strong></p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> bcd_counter(</span></pre></td></tr><tr><td class="code"><pre><span class="line">    clk, rst, max_tick, q</span></pre></td></tr><tr><td class="code"><pre><span class="line">    );</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">parameter</span>   N = <span class="number">4</span>,  <span class="comment">// number of bits in counter</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">                M = <span class="number">10</span>; <span class="comment">// mod-M</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">input</span>       clk;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">input</span>       rst;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>  [N - <span class="number">1</span> : <span class="number">0</span>]    q;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>                 max_tick;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk) <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">if</span> (rst) <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="comment">// reset</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">            q &lt;= <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">else</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="keyword">if</span> (q == (M - <span class="number">1</span>)) <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">                q &lt;= <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="keyword">else</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">                q &lt;= q + <span class="number">1</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk) <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">if</span> (rst) <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="comment">// reset</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">            max_tick &lt;= <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">else</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="keyword">if</span> (q == (M - <span class="number">1</span>)) <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">                max_tick &lt;= <span class="number">1</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="keyword">else</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">                max_tick &lt;= <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">endmodule</span></span></pre></td></tr></table></figure>
-
-<h3 id="Ring-Counter"><a href="#Ring-Counter" class="headerlink" title="Ring Counter"></a>Ring Counter</h3><p>基于线性移位寄存器 LFSR (Linear feedback shift register) 可以衍生出两种计数器：环形计数器 (ring counter) 和 扭环计数器（约翰逊计数器）。</p>
-<p>将 LFSR 中存储的数字设置为独热码的形式，即只有一位为 1，其他位为 0。然后把最后一级的输出直接反馈到第一级的输入，这样，输入和输出组成了一个环形，所以称为 环形计数器。4 bit 的环形计数器电路图如下：<br><img src="https://i.loli.net/2019/06/18/5d08ee6d449ed32491.png" alt="20190618160009.png"></p>
-<p>Adv</p>
-<ul>
-<li>相比于 binary counter，ring counter 不需要后者必需的加法器来实现计数，所以它在电路上占用的资源要更少。</li>
-<li>因为没有额外的加法器，所以 ring counter 也不存在加法器带来的进位时延，它的最大时延是固定值，和计数器的模值无关。所以它的时序性能也比 binary counter 好。</li>
-<li>因为 ring counter 的汉明距离为 2，所以它可以检查单比特翻转的错误。</li>
-</ul>
-<p>Disadv</p>
-<ul>
-<li>Ring counter 最大的缺点就是它的低密度码，同样适用 N 个寄存器，binary counter 可以计数到 2^N，而 ring counter 只能计数到 N，经过改良后的 Johnson counter 也才能到 2N。所以，如果寄存器比组合逻辑更加珍贵的情况下，不适合使用 ring counter。</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>Verilog HDL</tag>
       </tags>
   </entry>
   <entry>
