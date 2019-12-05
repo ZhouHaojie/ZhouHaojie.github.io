@@ -1,38 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>DDS-复习2-CMOS Schaltung</title>
+    <title>DDS-复习1</title>
     <url>/2019/12/05/DDS-%E5%A4%8D%E4%B9%A02-CMOS%20Schaltung/</url>
     <content><![CDATA[<p>CMOS: bedeuted Komplementäre Metal-Oxid-Semiconductor Transistoren.</p>
 <a id="more"></a>
-<p><a id="more"></a></p>
+
 <h3 id="NMOS-und-PMOS"><a href="#NMOS-und-PMOS" class="headerlink" title="NMOS und PMOS"></a>NMOS und PMOS</h3><p>Die Datierung von Source und Drain bestimmt die Ladungsträger.</p>
 <ul>
 <li><code>NMOS benutzt die n-dotierten Source und Drain - die Ladungsträger sind Elektronen.</code></li>
 <li><code>PMOS benutzt die p-dotierten Source und Drain – die Ladungsträger sind Löcher.</code></li>
 </ul>
+
 <h4 id="NMOS"><a href="#NMOS" class="headerlink" title="NMOS"></a>NMOS</h4><ul>
-<li><p>leitet bei einer positiven Gate-Source Spannung.</p>
-</li>
-<li><p><strong>Wichtig</strong>: <code>NMOS leitet auch wenn der Drain ein höheres Potential als das Gate hat. Wichtig ist nur</code>$V_{gs}&gt;V_{th}$</p>
-</li>
-<li><p><strong><em>Transistorschwelle</em></strong> $V_{th}$: <code>die minimale Gate-Source Spannung, die den Transistor einschaltet.(0.3-0.5V)</code><br><img src="https://i.loli.net/2019/07/19/5d30d71f8e12376363.png" alt="20190718223124.png"></p>
-</li>
+<li>leitet bei einer positiven Gate-Source Spannung.</li>
+<li><strong>Wichtig</strong>: <code>NMOS leitet auch wenn der Drain ein höheres Potential als das Gate hat. Wichtig ist nur</code>$V_{gs}&gt;V_{th}$</li>
+<li><strong><em>Transistorschwelle</em></strong> $V_{th}$: <code>die minimale Gate-Source Spannung, die den Transistor einschaltet.(0.3-0.5V)</code><br><img src="https://i.loli.net/2019/07/19/5d30d71f8e12376363.png" alt="20190718223124.png"></p></li>
 </ul>
 <p>Wie wissen wir dann, welcher Kontakt Drain und welcher Source ist?</p>
 <blockquote>
 <p>Es gilt: für ein NMOS ist die Source der Kontakt mit niedrigerem Potential.</p>
 </blockquote>
+
 <h4 id="PMOS"><a href="#PMOS" class="headerlink" title="PMOS"></a>PMOS</h4><ul>
-<li><p>P-dotierte Source und Drain (Diffusion). Bereich zwischen Source und Drain ist N-Dotiert. </p>
-</li>
-<li><p>Negatives Gate – Source Spannung erzeugt die <strong><em>Typinversion</em></strong>(反型层) im N-Bereich. Elektronen werden abgestoßen und die Löcher an die Silizium/Oxid Oberfläche angezogen. Transistor leitet.</p>
-</li>
-<li><p>Im PMOS ist Source der Kontakt mit höherem Potential.<br><img src="https://i.loli.net/2019/07/19/5d30d740111cd86449.png" alt="20190718223157.png"></p>
-</li>
+<li>P-dotierte Source und Drain (Diffusion). Bereich zwischen Source und Drain ist N-Dotiert. </li>
+<li>Negatives Gate – Source Spannung erzeugt die <strong><em>Typinversion</em></strong>(反型层) im N-Bereich. Elektronen werden abgestoßen und die Löcher an die Silizium/Oxid Oberfläche angezogen. Transistor leitet.</li>
+<li>Im PMOS ist Source der Kontakt mit höherem Potential.<br><img src="https://i.loli.net/2019/07/19/5d30d740111cd86449.png" alt="20190718223157.png"></li>
 </ul>
-<h4 id="NMOS-Inverter-mit-PullupWiderstand"><a href="#NMOS-Inverter-mit-PullupWiderstand" class="headerlink" title="NMOS Inverter mit PullupWiderstand"></a>NMOS Inverter mit PullupWiderstand</h4><p><img src="https://i.loli.net/2019/08/08/DkKniGeZumwOSMh.png" alt="20190808134929.png"></p>
-<h4 id="PMOS-Inverter-mit-PullupWiderstand"><a href="#PMOS-Inverter-mit-PullupWiderstand" class="headerlink" title="PMOS Inverter mit PullupWiderstand"></a>PMOS Inverter mit PullupWiderstand</h4><p>Wenn das Gate Potential GND ist, ist Vgs = -VDD, was kleiner als die Schwelle ist. (Die Schwelle ist typischerweise -0.4V.) Der Transistor leitet und die Ausgangsspannung ist ~ VDD.<br><img src="https://i.loli.net/2019/08/08/LVpQKAv853oOMr4.png" alt="20190808133038.png"></p>
+<h4 id="NMOS-Inverter-mit-PullupWiderstand"><a href="#NMOS-Inverter-mit-PullupWiderstand" class="headerlink" title="NMOS-Inverter-mit-PullupWiderstand"></a>NMOS-Inverter-mit-PullupWiderstand</h4><img src="https://i.loli.net/2019/08/08/DkKniGeZumwOSMh.png" alt="20190808134929.png">
+
+<h4 id="PMOS-Inverter-mit-PullupWiderstand”"><a href="#PMOS-Inverter-mit-PullupWiderstand”" class="headerlink" title="PMOS-Inverter-mit-PullupWiderstand”"></a>PMOS-Inverter-mit-PullupWiderstand”</h4><p>Wenn das Gate Potential GND ist, ist Vgs = -VDD, was kleiner als die Schwelle ist. (Die Schwelle ist typischerweise -0.4V.) Der Transistor leitet und die Ausgangsspannung ist ~ VDD.<br><img src="https://i.loli.net/2019/08/08/LVpQKAv853oOMr4.png" alt="20190808133038.png"></p>
 <h4 id="PUN：NMOS网络-or-PMOS网络？"><a href="#PUN：NMOS网络-or-PMOS网络？" class="headerlink" title="PUN：NMOS网络 or PMOS网络？"></a>PUN：NMOS网络 or PMOS网络？</h4><p><img src="https://i.loli.net/2019/07/18/5d2f692ac3edd55380.png" alt="20190717202958.png"></p>
 <ul>
 <li>Logische Schaltungen mit NMOS und Pullup-Widerständen, mit PMOS und Pulldown-Widerständen sind möglich.</li>
@@ -104,6 +101,9 @@
 <h3 id="Taktbaum-Optimierung-von-Inverterketten"><a href="#Taktbaum-Optimierung-von-Inverterketten" class="headerlink" title="Taktbaum: Optimierung von Inverterketten"></a>Taktbaum: Optimierung von Inverterketten</h3><p>Oft werden Invertern als Treiber für die Takt-Leitung verwendet. Eine Taktleitung ist an viele Flip Flips angeschlossen und hat große Kapazität.</p>
 <p>Invertern mit großem W/L Verhältnis werden benutzt.<br><img src="https://i.loli.net/2019/08/08/RIQFU3NMup7YqKr.png" alt="20190808164728.png"><br>Wir brauchen eine Kaskade(级联) von Invertern. Optimal wäre, dass der nächste Inverter immer um Faktor e=2.718 größer ist als der vorherige.<br>因为反相器有很多的电容，造成速度变慢，为了让反相器链达到最小延时，根据上面的分析，我们需要增大后级反相器的尺寸，使它们具有相同的延时。这个比例为e=2.718<br><img src="https://i.loli.net/2019/07/19/5d30d39304ca053777.png" alt="20190718221615.png"></p>
 ]]></content>
+      <tags>
+        <tag>Design Digitaler Schaltung</tag>
+      </tags>
   </entry>
   <entry>
     <title>DDS-复习1</title>

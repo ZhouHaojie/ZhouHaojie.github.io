@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>DDS-复习2-CMOS Schaltung | ZhouHaojie的博客</title>
+  <title>DDS-复习1 | ZhouHaojie的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="CMOS: bedeuted Komplementäre Metal-Oxid-Semiconductor Transistoren.">
-<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
+<meta name="keywords" content="Design Digitaler Schaltung">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DDS-复习2-CMOS Schaltung">
+<meta property="og:title" content="DDS-复习1">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;05&#x2F;DDS-%E5%A4%8D%E4%B9%A02-CMOS%20Schaltung&#x2F;index.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
 <meta property="og:description" content="CMOS: bedeuted Komplementäre Metal-Oxid-Semiconductor Transistoren.">
@@ -37,7 +37,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;19&#x2F;5d30cef0a66d797079.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;08&#x2F;08&#x2F;RIQFU3NMup7YqKr.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;19&#x2F;5d30d39304ca053777.png">
-<meta property="og:updated_time" content="2019-12-05T14:12:35.619Z">
+<meta property="og:updated_time" content="2019-12-05T14:27:29.488Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;19&#x2F;5d30d71f8e12376363.png">
   
@@ -180,7 +180,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      DDS-复习2-CMOS Schaltung
+      DDS-复习1
     </h1>
   
 
@@ -195,34 +195,31 @@
       
         <p>CMOS: bedeuted Komplementäre Metal-Oxid-Semiconductor Transistoren.</p>
 <a id="more"></a>
-<p><a id="more"></a></p>
+
 <h3 id="NMOS-und-PMOS"><a href="#NMOS-und-PMOS" class="headerlink" title="NMOS und PMOS"></a>NMOS und PMOS</h3><p>Die Datierung von Source und Drain bestimmt die Ladungsträger.</p>
 <ul>
 <li><code>NMOS benutzt die n-dotierten Source und Drain - die Ladungsträger sind Elektronen.</code></li>
 <li><code>PMOS benutzt die p-dotierten Source und Drain – die Ladungsträger sind Löcher.</code></li>
 </ul>
+
 <h4 id="NMOS"><a href="#NMOS" class="headerlink" title="NMOS"></a>NMOS</h4><ul>
-<li><p>leitet bei einer positiven Gate-Source Spannung.</p>
-</li>
-<li><p><strong>Wichtig</strong>: <code>NMOS leitet auch wenn der Drain ein höheres Potential als das Gate hat. Wichtig ist nur</code>$V_{gs}&gt;V_{th}$</p>
-</li>
-<li><p><strong><em>Transistorschwelle</em></strong> $V_{th}$: <code>die minimale Gate-Source Spannung, die den Transistor einschaltet.(0.3-0.5V)</code><br><img src="https://i.loli.net/2019/07/19/5d30d71f8e12376363.png" alt="20190718223124.png"></p>
-</li>
+<li>leitet bei einer positiven Gate-Source Spannung.</li>
+<li><strong>Wichtig</strong>: <code>NMOS leitet auch wenn der Drain ein höheres Potential als das Gate hat. Wichtig ist nur</code>$V_{gs}&gt;V_{th}$</li>
+<li><strong><em>Transistorschwelle</em></strong> $V_{th}$: <code>die minimale Gate-Source Spannung, die den Transistor einschaltet.(0.3-0.5V)</code><br><img src="https://i.loli.net/2019/07/19/5d30d71f8e12376363.png" alt="20190718223124.png"></p></li>
 </ul>
 <p>Wie wissen wir dann, welcher Kontakt Drain und welcher Source ist?</p>
 <blockquote>
 <p>Es gilt: für ein NMOS ist die Source der Kontakt mit niedrigerem Potential.</p>
 </blockquote>
+
 <h4 id="PMOS"><a href="#PMOS" class="headerlink" title="PMOS"></a>PMOS</h4><ul>
-<li><p>P-dotierte Source und Drain (Diffusion). Bereich zwischen Source und Drain ist N-Dotiert. </p>
-</li>
-<li><p>Negatives Gate – Source Spannung erzeugt die <strong><em>Typinversion</em></strong>(反型层) im N-Bereich. Elektronen werden abgestoßen und die Löcher an die Silizium/Oxid Oberfläche angezogen. Transistor leitet.</p>
-</li>
-<li><p>Im PMOS ist Source der Kontakt mit höherem Potential.<br><img src="https://i.loli.net/2019/07/19/5d30d740111cd86449.png" alt="20190718223157.png"></p>
-</li>
+<li>P-dotierte Source und Drain (Diffusion). Bereich zwischen Source und Drain ist N-Dotiert. </li>
+<li>Negatives Gate – Source Spannung erzeugt die <strong><em>Typinversion</em></strong>(反型层) im N-Bereich. Elektronen werden abgestoßen und die Löcher an die Silizium/Oxid Oberfläche angezogen. Transistor leitet.</li>
+<li>Im PMOS ist Source der Kontakt mit höherem Potential.<br><img src="https://i.loli.net/2019/07/19/5d30d740111cd86449.png" alt="20190718223157.png"></li>
 </ul>
-<h4 id="NMOS-Inverter-mit-PullupWiderstand"><a href="#NMOS-Inverter-mit-PullupWiderstand" class="headerlink" title="NMOS Inverter mit PullupWiderstand"></a>NMOS Inverter mit PullupWiderstand</h4><p><img src="https://i.loli.net/2019/08/08/DkKniGeZumwOSMh.png" alt="20190808134929.png"></p>
-<h4 id="PMOS-Inverter-mit-PullupWiderstand"><a href="#PMOS-Inverter-mit-PullupWiderstand" class="headerlink" title="PMOS Inverter mit PullupWiderstand"></a>PMOS Inverter mit PullupWiderstand</h4><p>Wenn das Gate Potential GND ist, ist Vgs = -VDD, was kleiner als die Schwelle ist. (Die Schwelle ist typischerweise -0.4V.) Der Transistor leitet und die Ausgangsspannung ist ~ VDD.<br><img src="https://i.loli.net/2019/08/08/LVpQKAv853oOMr4.png" alt="20190808133038.png"></p>
+<h4 id="NMOS-Inverter-mit-PullupWiderstand"><a href="#NMOS-Inverter-mit-PullupWiderstand" class="headerlink" title="NMOS-Inverter-mit-PullupWiderstand"></a>NMOS-Inverter-mit-PullupWiderstand</h4><img src="https://i.loli.net/2019/08/08/DkKniGeZumwOSMh.png" alt="20190808134929.png">
+
+<h4 id="PMOS-Inverter-mit-PullupWiderstand”"><a href="#PMOS-Inverter-mit-PullupWiderstand”" class="headerlink" title="PMOS-Inverter-mit-PullupWiderstand”"></a>PMOS-Inverter-mit-PullupWiderstand”</h4><p>Wenn das Gate Potential GND ist, ist Vgs = -VDD, was kleiner als die Schwelle ist. (Die Schwelle ist typischerweise -0.4V.) Der Transistor leitet und die Ausgangsspannung ist ~ VDD.<br><img src="https://i.loli.net/2019/08/08/LVpQKAv853oOMr4.png" alt="20190808133038.png"></p>
 <h4 id="PUN：NMOS网络-or-PMOS网络？"><a href="#PUN：NMOS网络-or-PMOS网络？" class="headerlink" title="PUN：NMOS网络 or PMOS网络？"></a>PUN：NMOS网络 or PMOS网络？</h4><p><img src="https://i.loli.net/2019/07/18/5d2f692ac3edd55380.png" alt="20190717202958.png"></p>
 <ul>
 <li>Logische Schaltungen mit NMOS und Pullup-Widerständen, mit PMOS und Pulldown-Widerständen sind möglich.</li>
@@ -332,6 +329,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Design Digitaler Schaltung</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -425,7 +433,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#NMOS-und-PMOS"><span class="toc-number">1.</span> <span class="toc-text">NMOS und PMOS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NMOS"><span class="toc-number">1.1.</span> <span class="toc-text">NMOS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PMOS"><span class="toc-number">1.2.</span> <span class="toc-text">PMOS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NMOS-Inverter-mit-PullupWiderstand"><span class="toc-number">1.3.</span> <span class="toc-text">NMOS Inverter mit PullupWiderstand</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PMOS-Inverter-mit-PullupWiderstand"><span class="toc-number">1.4.</span> <span class="toc-text">PMOS Inverter mit PullupWiderstand</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PUN：NMOS网络-or-PMOS网络？"><span class="toc-number">1.5.</span> <span class="toc-text">PUN：NMOS网络 or PMOS网络？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RTL-Logik-Familie"><span class="toc-number">1.6.</span> <span class="toc-text">RTL-Logik Familie</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Idee-CMOS-Inverter"><span class="toc-number">2.</span> <span class="toc-text">Idee: CMOS Inverter</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DC-Kennlinie特性曲线-–Analyse"><span class="toc-number">2.1.</span> <span class="toc-text">DC (Kennlinie特性曲线)–Analyse</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Unterschied-PMOS-NMOS-z-B-Mobilitat-von-Ladungstragern"><span class="toc-number">2.2.</span> <span class="toc-text">Unterschied PMOS/NMOS (z.B. Mobilität von Ladungsträgern)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Die-DC-Kennlinie-des-Inverters"><span class="toc-number">2.3.</span> <span class="toc-text">Die DC-Kennlinie des Inverters</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Nichtlinearitat-von-Kennlinie"><span class="toc-number">2.4.</span> <span class="toc-text">Nichtlinearität von Kennlinie</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Layout"><span class="toc-number">3.</span> <span class="toc-text">Layout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Geschwindigkeit-des-Inverters"><span class="toc-number">4.</span> <span class="toc-text">Geschwindigkeit des Inverters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Taktbaum-Optimierung-von-Inverterketten"><span class="toc-number">5.</span> <span class="toc-text">Taktbaum: Optimierung von Inverterketten</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#NMOS-und-PMOS"><span class="toc-number">1.</span> <span class="toc-text">NMOS und PMOS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NMOS"><span class="toc-number">1.1.</span> <span class="toc-text">NMOS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PMOS"><span class="toc-number">1.2.</span> <span class="toc-text">PMOS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NMOS-Inverter-mit-PullupWiderstand"><span class="toc-number">1.3.</span> <span class="toc-text">NMOS-Inverter-mit-PullupWiderstand</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PMOS-Inverter-mit-PullupWiderstand”"><span class="toc-number">1.4.</span> <span class="toc-text">PMOS-Inverter-mit-PullupWiderstand”</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PUN：NMOS网络-or-PMOS网络？"><span class="toc-number">1.5.</span> <span class="toc-text">PUN：NMOS网络 or PMOS网络？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RTL-Logik-Familie"><span class="toc-number">1.6.</span> <span class="toc-text">RTL-Logik Familie</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Idee-CMOS-Inverter"><span class="toc-number">2.</span> <span class="toc-text">Idee: CMOS Inverter</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DC-Kennlinie特性曲线-–Analyse"><span class="toc-number">2.1.</span> <span class="toc-text">DC (Kennlinie特性曲线)–Analyse</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Unterschied-PMOS-NMOS-z-B-Mobilitat-von-Ladungstragern"><span class="toc-number">2.2.</span> <span class="toc-text">Unterschied PMOS/NMOS (z.B. Mobilität von Ladungsträgern)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Die-DC-Kennlinie-des-Inverters"><span class="toc-number">2.3.</span> <span class="toc-text">Die DC-Kennlinie des Inverters</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Nichtlinearitat-von-Kennlinie"><span class="toc-number">2.4.</span> <span class="toc-text">Nichtlinearität von Kennlinie</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Layout"><span class="toc-number">3.</span> <span class="toc-text">Layout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Geschwindigkeit-des-Inverters"><span class="toc-number">4.</span> <span class="toc-text">Geschwindigkeit des Inverters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Taktbaum-Optimierung-von-Inverterketten"><span class="toc-number">5.</span> <span class="toc-text">Taktbaum: Optimierung von Inverterketten</span></a></li></ol>
                     </div>
                 </span>
             </div>
