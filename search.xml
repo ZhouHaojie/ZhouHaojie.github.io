@@ -202,10 +202,7 @@
   <entry>
     <title>ASI总线</title>
     <url>/2019/12/05/ASI%E6%80%BB%E7%BA%BF/</url>
-    <content><![CDATA[<hr>
-<p>title: ASI总线<br>tags: [Communication Sysems and Protocols]</p>
-<hr>
-<p>AS-Interface (Actuator Sensor Interface, ASi) is an industrial networking solution (physical layer, data access method and protocol) used in PLC, DCS and PC-based automation systems. It is designed for connecting simple field I/O devices (e.g. binary ON/OFF devices such as actuators, sensors, rotary encoders, analog inputs and outputs, push buttons, and valve position sensors) in discrete manufacturing and process applications using a single two-conductor cable.</p>
+    <content><![CDATA[<p>AS-Interface (Actuator Sensor Interface, ASi) is an industrial networking solution (physical layer, data access method and protocol) used in PLC, DCS and PC-based automation systems. It is designed for connecting simple field I/O devices (e.g. binary ON/OFF devices such as actuators, sensors, rotary encoders, analog inputs and outputs, push buttons, and valve position sensors) in discrete manufacturing and process applications using a single two-conductor cable.</p>
 <a id="more"></a>
 <p><a id="more"></a></p>
 <h3 id="ASI的概念"><a href="#ASI的概念" class="headerlink" title="ASI的概念"></a>ASI的概念</h3><p>Master slave concept using a single master<br><img src="https://i.loli.net/2019/07/12/5d28693b7fae839187.png" alt="20190712130423.png"></p>

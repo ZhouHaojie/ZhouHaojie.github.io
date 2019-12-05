@@ -152,31 +152,29 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-const和constptr的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Johnson计数器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/">const和constptr的区别C++</a>
+      <a class="article-title" href="/2019/12/05/Johnson%E8%AE%A1%E6%95%B0%E5%99%A8/">计数器设计小结</a>
     </h1>
   
 
         
-        <a href="/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/" class="archive-article-date">
-  	<time datetime="2019-12-04T15:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
+        <a href="/2019/12/05/Johnson%E8%AE%A1%E6%95%B0%E5%99%A8/" class="archive-article-date">
+  	<time datetime="2019-12-04T23:14:00.709Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>const: wird nachfolgend nicht verändert</li>
-<li>constexpr: wird zur Zeit des Üersetzens ausgerechnet
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>计数器 在数字电路设计 和 计算机程序设计 中都应用非常广泛，其功能顾名思义，就是用来计数。这里只讨论数字电路设计中的计数器。<br>通常，将包含触发器 flip-flop 的电路（即使含有组合电路部分）认为是时序电路。时序电路通常不以电路命名，而是以功能进行分类，分别是 寄存器 和 计数器。<br>计数器 counter 从本质上来说也是寄存器，不过它是在预先设定好的状态序列中转移，尽管计数器是寄存器的一种特殊形式，通常还是以不同的名称来加以区分</p>
         
-          <a class="article-more-a" href="/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/#more">more >></a>
+          <a class="article-more-a" href="/2019/12/05/Johnson%E8%AE%A1%E6%95%B0%E5%99%A8/#more">more >></a>
         
       
 
@@ -184,18 +182,13 @@
     </div>
     <div class="article-info article-info-index">
       
-        <div class="article-pop-out tagcloud">
-          <i class="icon-tuding"></i>
-          <a class="article-tag-list-link color3">置顶</a>
-        </div>
-      
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color4">C++</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Verilog HDL</a>
         		</li>
       		
 		</ul>
@@ -205,7 +198,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/05/Johnson%E8%AE%A1%E6%95%B0%E5%99%A8/">展开全文 >></a>
         </p>
       
 
