@@ -3,7 +3,7 @@
   <entry>
     <title>Hexo-yilia进阶笔记</title>
     <url>/archives/b4801944.html</url>
-    <content><![CDATA[<h3 id="一、添加gitalk评论"><a href="#一、添加gitalk评论" class="headerlink" title="一、添加gitalk评论"></a>一、添加gitalk评论</h3><p>Gitalk 是一个基于 Github Issue 和 Preact 开发的评论插件。<br>主页：<a href="https://github.com/gitalk/gitalk/blob/master/readme-cn.md" target="_blank" rel="noopener">https://github.com/gitalk/gitalk/blob/master/readme-cn.md</a><br>gitalk 需要添加的部分主页有详细介绍，这里只谈针对 yilia 需要的改动。</p>
+    <content><![CDATA[<h3 id="一、添加gitalk评论"><a href="#一、添加gitalk评论" class="headerlink" title="一、添加gitalk评论"></a>一、添加gitalk评论</h3><p>Gitalk 是一个基于 Github Issue 和 Preact 开发的评论插件。<br>主页：<a href="https://github.com/gitalk/gitalk/blob/master/readme-cn.md" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/gitalk/gitalk/blob/master/readme-cn.md</a><br>gitalk 需要添加的部分主页有详细介绍，这里只谈针对 yilia 需要的改动。</p>
 <a id="more"></a>
 <h4 id="1、创建-gitalk-ejs"><a href="#1、创建-gitalk-ejs" class="headerlink" title="1、创建 gitalk.ejs"></a>1、创建 gitalk.ejs</h4><p>在你的 hexo 目录 /theme/yilia/layout/_partial/post/ 目录下创建 gitalk.ejs 并写入如下内容：</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;div id=<span class="string">"gitalk-container"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"</span>&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&lt;script&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> gitalk = <span class="keyword">new</span> Gitalk(&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  clientID: <span class="string">'&lt;%=theme.gitalk.clientID%&gt;'</span>,</span></pre></td></tr><tr><td class="code"><pre><span class="line">  clientSecret: <span class="string">'&lt;%=theme.gitalk.clientSecret%&gt;'</span>,</span></pre></td></tr><tr><td class="code"><pre><span class="line">  repo: <span class="string">'&lt;%=theme.gitalk.repo%&gt;'</span>,</span></pre></td></tr><tr><td class="code"><pre><span class="line">  owner: <span class="string">'&lt;%=theme.gitalk.owner%&gt;'</span>,</span></pre></td></tr><tr><td class="code"><pre><span class="line">  admin: [<span class="string">'&lt;%=theme.gitalk.admin%&gt;'</span>],</span></pre></td></tr><tr><td class="code"><pre><span class="line">  id: md5(<span class="built_in">window</span>.location.pathname),</span></pre></td></tr><tr><td class="code"><pre><span class="line">  distractionFreeMode: <span class="xml"><span class="tag">&lt;<span class="name">%=theme.gitalk.distractionFreeMode%</span>&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="xml">&#125;)</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="xml">gitalk.render('gitalk-container')</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span></pre></td></tr></table></figure>
@@ -14,7 +14,7 @@
 <h4 id="3、添加配置文件"><a href="#3、添加配置文件" class="headerlink" title="3、添加配置文件"></a>3、添加配置文件</h4><p>在 yilia 的配置文件_config.yml 中 gitment 配置下面添加如下配置文件</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#6. Gitalk</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="attr">gitalk:</span> </span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span>    <span class="comment">#用来做启用判断可以不用</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attr">clientID:</span> <span class="string">'your clientID'</span>    <span class="comment">#Github上生成的</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attr">clientSecret:</span> <span class="string">'your clientSecret'</span>   <span class="comment">#同上</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attr">repo:</span> <span class="string">git_comment</span>    <span class="comment">#评论所在的github project</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attr">owner:</span> <span class="string">findtheonlyway</span>    <span class="comment">#github用户名</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attr">admin:</span> <span class="string">erbiduo</span>    <span class="comment">#可以初始化评论issue的github账户名称</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="attr">distractionFreeMode:</span> <span class="literal">true</span></span></pre></td></tr></table></figure>
 
-<h3 id="二、添加“不蒜子”访问量统计"><a href="#二、添加“不蒜子”访问量统计" class="headerlink" title="二、添加“不蒜子”访问量统计"></a>二、添加“不蒜子”访问量统计</h3><p>Hexo添加访问量统计功能可以用百度统计、Leancloud，还有不蒜子。<br>百度统计只能在后台查看数据，而今天新添加的不蒜子，可以将统计信息直接显示在网页上，更加直观一些，也减少了登录后台的麻烦。<br>主页: 不蒜子：<a href="https://busuanzi.ibruce.info/" target="_blank" rel="noopener">https://busuanzi.ibruce.info/</a></p>
+<h3 id="二、添加“不蒜子”访问量统计"><a href="#二、添加“不蒜子”访问量统计" class="headerlink" title="二、添加“不蒜子”访问量统计"></a>二、添加“不蒜子”访问量统计</h3><p>Hexo添加访问量统计功能可以用百度统计、Leancloud，还有不蒜子。<br>百度统计只能在后台查看数据，而今天新添加的不蒜子，可以将统计信息直接显示在网页上，更加直观一些，也减少了登录后台的麻烦。<br>主页: 不蒜子：<a href="https://busuanzi.ibruce.info/" target="_blank" rel="external nofollow noopener noreferrer">https://busuanzi.ibruce.info/</a></p>
 <h4 id="1、添加不蒜子"><a href="#1、添加不蒜子" class="headerlink" title="1、添加不蒜子"></a>1、添加不蒜子</h4><p>将下面的代码添加到/themes/根据个人目录修改/layout/_partial/footer.ejs（代码添加到不同的位置，在页面上显示的位置也不同）：</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr></table></figure>
 <p>这段代码我写在了footer.ejs里，也可以写在header.ejs里或者layout.ejs里。</p>
@@ -158,7 +158,7 @@
 </ul>
 </li>
 <li>Arbitrary topologies(star,tree,line)realizable by a coupling module</li>
-</ul>
+
 
 <h3 id="ASI-slave-的结构"><a href="#ASI-slave-的结构" class="headerlink" title="ASI-slave-的结构"></a>ASI-slave-的结构</h3><p><img src="https://i.loli.net/2019/07/12/5d286de1f2dc395126.png" alt="20190712132415.png"></p>
 
@@ -182,7 +182,7 @@
 <li>even parity</li>
 </ul>
 </li>
-</ul>
+
 <p><strong>附：</strong><br><img src="https://i.loli.net/2019/07/12/5d28770dd74ce84681.png" alt="20190712140322.png"><br><img src="https://i.loli.net/2019/07/12/5d2877a3b75d847277.png" alt="20190712140550.png"></p>
 ]]></content>
       <tags>
@@ -580,12 +580,12 @@
     <url>/archives/46839.html</url>
     <content><![CDATA[<h3 id="Fully-Customised-Design-und-Semi-Customised-Design"><a href="#Fully-Customised-Design-und-Semi-Customised-Design" class="headerlink" title="Fully Customised Design und Semi Customised Design"></a>Fully Customised Design und Semi Customised Design</h3><li>Fully Customised Design:<br>jede Schaltung wird für gegebene Anwendung entworfen, um die Performanz zu optimieren. Schaltungen werden als Schaltplan beschrieben.<a id="more"></a></li>
 <li><strong>Semi Customised Design</strong>:<br>Logische Schaltung ist in einer Computer-Sprache definiert, Schaltplan wird dann automatisch generiert. Der Schaltplan verwendet fertige Bauteile, logische Gatter.</li>
-</ul>
+
 <a id="more"></a>
 
 <h3 id="FPGA-und-ASIC"><a href="#FPGA-und-ASIC" class="headerlink" title="FPGA-und-ASIC"></a>FPGA-und-ASIC</h3><li>FPGAs sind konfigurierbare ASICs, welche viele fertige Hardware-ressourcen haben(z.b. Mikroprocessor)</li>
 <li>ASIC is wie ein leeres Zeichnungsblatt, der Designer muss alle Komponenten entwerfen.</li>
-</ul>
+
 <img src="https://i.loli.net/2019/07/17/5d2f3b32d9d0c85496.png" alt="20190717171349.png">
 ]]></content>
       <tags>
@@ -607,7 +607,7 @@
 <h4 id="NMOS"><a href="#NMOS" class="headerlink" title="NMOS"></a>NMOS</h4><ul>
 <li>leitet bei einer positiven Gate-Source Spannung.</li>
 <li><strong>Wichtig</strong>: <code>NMOS leitet auch wenn der Drain ein höheres Potential als das Gate hat. Wichtig ist nur</code>$V_{gs}&gt;V_{th}$</li>
-<li><strong><em>Transistorschwelle</em></strong> $V_{th}$: <code>die minimale Gate-Source Spannung, die den Transistor einschaltet.(0.3-0.5V)</code><br><img src="https://i.loli.net/2019/07/19/5d30d71f8e12376363.png" alt="20190718223124.png"></p></li>
+<li><strong><em>Transistorschwelle</em></strong> $V_{th}$: <code>die minimale Gate-Source Spannung, die den Transistor einschaltet.(0.3-0.5V)</code><br><img src="https://i.loli.net/2019/07/19/5d30d71f8e12376363.png" alt="20190718223124.png"><p></p></li>
 </ul>
 <p>Wie wissen wir dann, welcher Kontakt Drain und welcher Source ist?</p>
 <blockquote>
@@ -769,7 +769,7 @@
 <td>The bill, please!</td>
 </tr>
 </tbody></table>
-<p><a href="http://germanwithjenny.com/2018/01/23/podcast-4-im-restaurant-a1/" target="_blank" rel="noopener">website</a><br><audio style="width:100%;" controls="controls"><br>    <source src="http://germanwithjenny.com/wp-content/uploads/2018/01/Podcast-4-im-Restaurant-A1-1.mp3" type="audio/mpeg"><br></audio></p>
+<p><a href="http://germanwithjenny.com/2018/01/23/podcast-4-im-restaurant-a1/" target="_blank" rel="external nofollow noopener noreferrer">website</a><br><audio style="width:100%;" controls="controls"><br>    <source src="http://germanwithjenny.com/wp-content/uploads/2018/01/Podcast-4-im-Restaurant-A1-1.mp3" type="audio/mpeg"><br></audio></p>
 ]]></content>
       <tags>
         <tag>Deutsch A1/A2</tag>
