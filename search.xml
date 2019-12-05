@@ -23,8 +23,9 @@
 </ul>
 </li>
 </ul>
-<p><img src="https://i.loli.net/2019/07/12/5d288654bda1120985.png" alt="20190712150832.png"></p>
-<h3 id="Configuration-of-the-bus"><a href="#Configuration-of-the-bus" class="headerlink" title="Configuration of the bus"></a>Configuration of the bus</h3><p>没有专用控制器，每一个总线都能成为root of the tree, Bus assignment is done in three steps:</p>
+<img src="https://i.loli.net/2019/07/12/5d288654bda1120985.png" alt="20190712150832.png">
+
+<h3 id="Configuration-of-the-bus"><a href="#Configuration-of-the-bus" class="headerlink" title="Configuration-of-the-bus"></a>Configuration-of-the-bus</h3><p>没有专用控制器，每一个总线都能成为root of the tree, Bus assignment is done in three steps:</p>
 <ul>
 <li>Initialization</li>
 <li>Tree identification</li>
@@ -33,45 +34,47 @@
 <h4 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h4><p>在总线复位后，每一个subscriber 只知道outgoing connections 的数量</p>
 <ul>
 <li>One single connection –&gt; <strong>Leaf</strong></li>
-<li>Several connections –&gt; <strong>Branch</strong></li>
+<li>Several connections –&gt; <strong>Branch</strong><img src="https://i.loli.net/2019/07/12/5d288e0c584ca50546.png" alt="20190712154129.png">
+
+</li>
 </ul>
-<p><img src="https://i.loli.net/2019/07/12/5d288e0c584ca50546.png" alt="20190712154129.png"></p>
-<h4 id="Tree-identification"><a href="#Tree-identification" class="headerlink" title="Tree identification"></a>Tree identification</h4><ul>
-<li>Method:<ol>
+<h4 id="Tree-identification"><a href="#Tree-identification" class="headerlink" title="Tree-identification"></a>Tree-identification</h4><ul>
+<li>Method:<ul>
 <li>每一个leaf发送一个”parent-notify” packet, 标记这个相应的port为”P”(parent) </li>
 <li>那个接收到”parent-notify” packet的node会标记对应的port为”ch”(child)</li>
 <li>如果在一个node里仅存在一个未被标记的port, 则这个node会使用它发”parent-notify” packet, 并标记”p”</li>
 <li>那个等待时间最长，所有ports都标记为ch的将成为root </li>
-</ol>
+</ul>
 </li>
 </ul>
-<p><img src="https://i.loli.net/2019/07/12/5d2891737898b99082.png" alt="20190712155601.png"></p>
-<h4 id="Self-identification"><a href="#Self-identification" class="headerlink" title="Self identification"></a>Self identification</h4><ul>
-<li>Assigning the node address<ol>
+<img src="https://i.loli.net/2019/07/12/5d2891737898b99082.png" alt="20190712155601.png">
+
+<h4 id="Self-identification"><a href="#Self-identification" class="headerlink" title="Self-identification"></a>Self-identification</h4><ul>
+<li>Assigning the node address<ul>
 <li>Root把控制权给#1 port的node</li>
 <li>如果这个node有ch, 则继续把控制权传给第一个ch node</li>
 <li>When a leaf is reached, it will claim the next address that is available and sends a packet with its address and additional status information to the bus</li>
 <li>After that, control is returned to the parent node that pocesses the next port</li>
-<li>When a node has processed all of its children, it self-assigns an address and transfers control to its parent node    </li>
-</ol>
+<li>When a node has processed all of its children, it self-assigns an address and transfers control to its parent node  li&gt;</li>
+</ul>
 </li>
 </ul>
-<p><img src="https://i.loli.net/2019/07/12/5d2898fe96bab58664.png" alt="20190712162811.png"></p>
+<img src="https://i.loli.net/2019/07/12/5d2898fe96bab58664.png" alt="20190712162811.png">
+
 <h3 id="Arbitration"><a href="#Arbitration" class="headerlink" title="Arbitration"></a>Arbitration</h3><p>The node sends a request packet to its parent</p>
 <ul>
 <li>If no other request already reached the parent node, it will forward the request one level up. A data prefix(前缀) packet is send to the other ports in order to suppress(抑制) other request</li>
 <li>If there is already another request, the last node gets back a data prefix packet to inform the node that the request has been denied</li>
 </ul>
-<p>When the request reaches the root, a grant packet is send back to the source node of the request</p>
-<p>The requesting node acknowledges with a data prefix and starts the transmission</p>
+<p>When the request reaches the root, a grant packet is send back to the source node of the request<br>The requesting node acknowledges with a data prefix and starts the transmission</p>
 <h3 id="Fairness"><a href="#Fairness" class="headerlink" title="Fairness"></a>Fairness</h3><p>原则上，和root直接相连的那个节点有最大的机会获得总线，为了保证公平，每一个节点只能在一个周期内获得bus一次</p>
 <ul>
 <li>Therefore every node has an arbitration enable bit, that is cleared after a successful access</li>
 <li>The node is then not allowed to apply for the bus again</li>
 </ul>
 <p>If there was no access to the bus for a certain amount if time(arbitration reset gap, 20$\mu$s), all nodes reset their arbitration enable bit and a new cycle is started.</p>
-<h3 id="Isochronous-同步-transfers"><a href="#Isochronous-同步-transfers" class="headerlink" title="Isochronous(同步) transfers"></a>Isochronous(同步) transfers</h3><p><img src="https://i.loli.net/2019/07/12/5d289fc8b8ac073334.png" alt="20190712165709.png"></p>
-<p><img src="https://i.loli.net/2019/07/12/5d2896e7a576715994.png" alt="20190712161915.png"><br><img src="https://i.loli.net/2019/07/12/5d28972adc2d858936.png" alt="20190712162024.png"><br><img src="https://i.loli.net/2019/07/12/5d289a41f1ac161214.png" alt="20190712163335.png"></p>
+<h3 id="Isochronous-同步-transfer"><a href="#Isochronous-同步-transfer" class="headerlink" title="Isochronous-同步-transfer"></a>Isochronous-同步-transfer</h3><img src="https://i.loli.net/2019/07/12/5d289fc8b8ac073334.png" alt="20190712165709.png">
+<img src="https://i.loli.net/2019/07/12/5d2896e7a576715994.png" alt="20190712161915.png"><br><img src="https://i.loli.net/2019/07/12/5d28972adc2d858936.png" alt="20190712162024.png"><br><img src="https://i.loli.net/2019/07/12/5d289a41f1ac161214.png" alt="20190712163335.png">
 ]]></content>
   </entry>
   <entry>
