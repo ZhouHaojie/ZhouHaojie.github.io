@@ -66,13 +66,13 @@
 		<nav class="header-smart-menu">
     		
     			
-    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)" target="_blank" rel="noopener">所有文章</a>
+    			<a q-on="click: openSlider(e, 'innerArchive')" target = "_parent" href="javascript:void(0)" target="_blank" rel="noopener">所有文章</a>
     			
             
     			
             
     			
-    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)" target="_blank" rel="noopener">关于我</a>
+    			<a q-on="click: openSlider(e, 'aboutme')" target = "_parent" href="javascript:void(0)" target="_blank" rel="noopener">关于我</a>
     			
             
 		</nav>
@@ -234,33 +234,29 @@
 
 
   
-    <article id="post-静态互补CMOS逻辑门的设计" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Johnson计数器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/05/%E9%9D%99%E6%80%81%E4%BA%92%E8%A1%A5CMOS%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E8%AE%BE%E8%AE%A1/">静态互补CMOS逻辑门的设计</a>
+      <a class="article-title" href="/2019/12/05/Johnson%E8%AE%A1%E6%95%B0%E5%99%A8/">计数器设计小结</a>
     </h1>
   
 
         
-        <a href="/2019/12/05/%E9%9D%99%E6%80%81%E4%BA%92%E8%A1%A5CMOS%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E8%AE%BE%E8%AE%A1/" class="archive-article-date">
-  	<time datetime="2019-12-04T23:14:00.740Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
+        <a href="/2019/12/05/Johnson%E8%AE%A1%E6%95%B0%E5%99%A8/" class="archive-article-date">
+  	<time datetime="2019-12-04T23:14:00.709Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>静态逻辑原理</li>
-<li>互补的PUN和PDN</li>
-<li>PUN采用PMOS网络，PDN采用NMOS网络</li>
-</ul>
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>计数器 在数字电路设计 和 计算机程序设计 中都应用非常广泛，其功能顾名思义，就是用来计数。这里只讨论数字电路设计中的计数器。<br>通常，将包含触发器 flip-flop 的电路（即使含有组合电路部分）认为是时序电路。时序电路通常不以电路命名，而是以功能进行分类，分别是 寄存器 和 计数器。<br>计数器 counter 从本质上来说也是寄存器，不过它是在预先设定好的状态序列中转移，尽管计数器是寄存器的一种特殊形式，通常还是以不同的名称来加以区分</p>
         
-          <a class="article-more-a" href="/2019/12/05/%E9%9D%99%E6%80%81%E4%BA%92%E8%A1%A5CMOS%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E8%AE%BE%E8%AE%A1/#more">more >></a>
+          <a class="article-more-a" href="/2019/12/05/Johnson%E8%AE%A1%E6%95%B0%E5%99%A8/#more">more >></a>
         
       
 
@@ -274,7 +270,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">数字超大规模集成电路设计</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Verilog HDL</a>
         		</li>
       		
 		</ul>
@@ -284,7 +280,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/05/%E9%9D%99%E6%80%81%E4%BA%92%E8%A1%A5CMOS%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E8%AE%BE%E8%AE%A1/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/05/Johnson%E8%AE%A1%E6%95%B0%E5%99%A8/">展开全文 >></a>
         </p>
       
 
@@ -316,26 +312,31 @@
 
 
   
-    <article id="post-Sampling, Channel Capacity, Line Codes" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-const和constptr的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/05/Sampling,%20Channel%20Capacity,%20Line%20Codes/">Sampling, Channel Capacity, Line Codes</a>
+      <a class="article-title" href="/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/">const和constptr的区别C++</a>
     </h1>
   
 
         
-        <a href="/2019/12/05/Sampling,%20Channel%20Capacity,%20Line%20Codes/" class="archive-article-date">
-  	<time datetime="2019-12-04T23:14:00.724Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
+        <a href="/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/" class="archive-article-date">
+  	<time datetime="2019-12-04T15:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
+        <ul>
+<li>const: wird nachfolgend nicht verändert</li>
+<li>constexpr: wird zur Zeit des Üersetzens ausgerechnet
+        
+          <a class="article-more-a" href="/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/#more">more >></a>
         
       
 
@@ -349,7 +350,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">Communication Systems and Protocols</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color4">C++</a>
         		</li>
       		
 		</ul>
@@ -359,7 +360,263 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/05/Sampling,%20Channel%20Capacity,%20Line%20Codes/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/04/const%E5%92%8Cconstptr%E7%9A%84%E5%8C%BA%E5%88%AB/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-FIFO" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/05/FIFO/">FIFO</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/05/FIFO/" class="archive-article-date">
+  	<time datetime="2019-08-05T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="FIFO-功能"><a href="#FIFO-功能" class="headerlink" title="FIFO 功能"></a>FIFO 功能</h3><p>FIFO指先入先出（First-In, First-Out), 先写入FIFO的数据会先读出来，类似流水线操作，先流入的会先流出来。<br>FIFO是一类寄存器或存储器堆栈，它必须有两个不同的指针，分别只想读数据和写数据。FIFO的一种应用是作为芯片里两个不同时钟域之间的缓存，突发的读写操作被FIFO缓解了，这样数据在两个时钟域上都能以令人满意的速率传递，而不需要在每个时钟节拍上等待另一个时钟。FIFO的其他应用是在RS-422或以太网串行链路上，这两种链路通常都需要在不同的时钟域之间进行通信。</p>
+        
+          <a class="article-more-a" href="/2019/08/05/FIFO/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Verilog HDL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/05/FIFO/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-FPGA" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/05/FPGA/">FPGA闲聊</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/05/FPGA/" class="archive-article-date">
+  	<time datetime="2019-07-05T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一、入门首先要掌握HDL（HDL-verilog-VHDL）。"><a href="#一、入门首先要掌握HDL（HDL-verilog-VHDL）。" class="headerlink" title="一、入门首先要掌握HDL（HDL=verilog+VHDL）。"></a>一、入门首先要掌握HDL（HDL=verilog+VHDL）。</h3><p>第一句话是：还没学数电的先学数电。然后你可以选择verilog或者VHDL，有C语言基础的，建议选择VHDL。因为verilog太像C了，很容易混淆，最后你会发现，你花了大量时间去区分这两种语言，而不是在学习如何使用它。当然，你思维能转得过来，也可以选verilog，毕竟在国内verilog用得比较多。</p>
+        
+          <a class="article-more-a" href="/2019/07/05/FPGA/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">FPGA</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/05/FPGA/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-CRC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/04/CRC/">CRC循环冗余校验算法</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/04/CRC/" class="archive-article-date">
+  	<time datetime="2019-07-04T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>CRC循环冗余校验算法</p>
+<p>文章目录</p>
+<ol>
+<li>概述</li>
+<li>原理</li>
+<li><ol>
+<li>奇偶校验</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>累加和校验</li>
+</ol>
+</li>
+<li>CRC算法</li>
+<li><ol>
+<li>原始CRC算法</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>实际CRC算法</li>
+</ol>
+</li>
+</ol>
+        
+          <a class="article-more-a" href="/2019/07/04/CRC/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">Communication Sysems and Protocols</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/04/CRC/">展开全文 >></a>
         </p>
       
 
@@ -398,13 +655,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/05/Reise/">明斯特小镇</a>
+      <a class="article-title" href="/2019/07/01/Reise/">明斯特小镇</a>
     </h1>
   
 
         
-        <a href="/2019/12/05/Reise/" class="archive-article-date">
-  	<time datetime="2019-12-04T23:14:00.724Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
+        <a href="/2019/07/01/Reise/" class="archive-article-date">
+  	<time datetime="2019-07-01T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-01</time>
 </a>
         
       </header>
@@ -434,7 +691,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/05/Reise/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/07/01/Reise/">展开全文 >></a>
         </p>
       
 
@@ -466,29 +723,29 @@
 
 
   
-    <article id="post-zu Hause - nach Hause - daheim - heim" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-CMOS Schaltung" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/05/zu%20Hause%20-%20nach%20Hause%20-%20daheim%20-%20heim/">zu Hause - nach Hause - daheim - heim</a>
+      <a class="article-title" href="/2019/06/04/CMOS%20Schaltung/">CMOS Schaltung</a>
     </h1>
   
 
         
-        <a href="/2019/12/05/zu%20Hause%20-%20nach%20Hause%20-%20daheim%20-%20heim/" class="archive-article-date">
-  	<time datetime="2019-12-04T23:14:00.724Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
+        <a href="/2019/06/04/CMOS%20Schaltung/" class="archive-article-date">
+  	<time datetime="2019-06-04T14:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>zu Hause = daheim<br>z.B.<br>Ich bin zu Hause.<br>Ich bin daheim.          Umgangssprachlich</p>
+        <p>CMOS: bedeuted Komplementäre Metal-Oxid-Semiconductor Transistoren.</p>
         
-          <a class="article-more-a" href="/2019/12/05/zu%20Hause%20-%20nach%20Hause%20-%20daheim%20-%20heim/#more">more >></a>
+          <a class="article-more-a" href="/2019/06/04/CMOS%20Schaltung/#more">more >></a>
         
       
 
@@ -502,7 +759,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">Wortschatz</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Design Digitaler Schaltung</a>
         		</li>
       		
 		</ul>
@@ -512,239 +769,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/05/zu%20Hause%20-%20nach%20Hause%20-%20daheim%20-%20heim/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-maxwell" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/05/maxwell/">Max</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/05/maxwell/" class="archive-article-date">
-  	<time datetime="2019-12-04T23:14:00.724Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>$$<br>\begin{eqnarray}<br>\nabla\cdot\vec{E} &amp;=&amp; \frac{\rho}{\epsilon_0} \<br>\nabla\cdot\vec{B} &amp;=&amp; 0 \<br>\nabla\times\vec{E} &amp;=&amp; -\frac{\partial B}{\partial t} \<br>\nabla\times\vec{B} &amp;=&amp; \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right)<br>\end{eqnarray}<br>$$</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Verilog HDL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/05/maxwell/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-任意模值的计数器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/05/%E4%BB%BB%E6%84%8F%E6%A8%A1%E5%80%BC%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8/">模值M的计数器</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/05/%E4%BB%BB%E6%84%8F%E6%A8%A1%E5%80%BC%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2019-12-04T23:14:00.724Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>任意模值M的计数器，第一步需要确定计数器所需要触发器个数。N个触发器对应了2N个状态。应有2N&gt;M。任意模值计数器选取满足条件的最小N，N为计数器中触发器的个数。有两种方法实现：反馈清零法和反馈置数法。</p>
-        
-          <a class="article-more-a" href="/2019/12/05/%E4%BB%BB%E6%84%8F%E6%A8%A1%E5%80%BC%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Verilog HDL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/05/%E4%BB%BB%E6%84%8F%E6%A8%A1%E5%80%BC%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/05/%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E8%B6%85%E5%89%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8%EF%BC%88Carry-Lookahead%20Adder%EF%BC%8CCLA)/">加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA）</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/05/%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E8%B6%85%E5%89%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8%EF%BC%88Carry-Lookahead%20Adder%EF%BC%8CCLA)/" class="archive-article-date">
-  	<time datetime="2019-12-04T23:14:00.724Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>RCA的主要问题是高位的运算必须等待低位的“进位输出信号”，那我们的优化思路就是‘能否提前计算出“进位输出信号’ ？</p>
-        
-          <a class="article-more-a" href="/2019/12/05/%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E8%B6%85%E5%89%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8%EF%BC%88Carry-Lookahead%20Adder%EF%BC%8CCLA)/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">Verilog HDL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/05/%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E8%B6%85%E5%89%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8%EF%BC%88Carry-Lookahead%20Adder%EF%BC%8CCLA)/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/06/04/CMOS%20Schaltung/">展开全文 >></a>
         </p>
       
 
@@ -914,10 +939,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">Communication Systems and Protocols</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">随笔</a>
               </li>
              
@@ -927,10 +948,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">Wortschatz</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">杂谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -946,7 +963,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">CSP</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">Microwave</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">FPGA</a>
               </li>
             
             <div class="clearfix"></div>
