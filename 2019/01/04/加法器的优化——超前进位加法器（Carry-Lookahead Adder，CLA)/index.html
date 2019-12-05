@@ -5,14 +5,14 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://yoursite.com">
+  <link rel="dns-prefetch" href="http://grenze.cn">
   <title>加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA） | ZhouHaojie的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="RCA的主要问题是高位的运算必须等待低位的“进位输出信号”，那我们的优化思路就是‘能否提前计算出“进位输出信号’ ？">
 <meta name="keywords" content="Verilog HDL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA）">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;01&#x2F;04&#x2F;%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E8%B6%85%E5%89%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8%EF%BC%88Carry-Lookahead%20Adder%EF%BC%8CCLA)&#x2F;index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;2019&#x2F;01&#x2F;04&#x2F;%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E8%B6%85%E5%89%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8%EF%BC%88Carry-Lookahead%20Adder%EF%BC%8CCLA)&#x2F;index.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
 <meta property="og:description" content="RCA的主要问题是高位的运算必须等待低位的“进位输出信号”，那我们的优化思路就是‘能否提前计算出“进位输出信号’ ？">
 <meta property="og:locale" content="en">
@@ -307,7 +307,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/04/%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E8%B6%85%E5%89%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8%EF%BC%88Carry-Lookahead%20Adder%EF%BC%8CCLA)/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://grenze.cn/2019/01/04/%E5%8A%A0%E6%B3%95%E5%99%A8%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E8%B6%85%E5%89%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8%EF%BC%88Carry-Lookahead%20Adder%EF%BC%8CCLA)/" alt="微信分享二维码">
     </div>
 </div>
 
