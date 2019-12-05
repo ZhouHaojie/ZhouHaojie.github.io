@@ -1,26 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>DDS-复习1</title>
-    <url>/2019/12/05/DDS-%E5%A4%8D%E4%B9%A01/</url>
-    <content><![CDATA[<h3 id="Fully-Customised-Design-und-Semi-Customised-Design"><a href="#Fully-Customised-Design-und-Semi-Customised-Design" class="headerlink" title="Fully Customised Design und Semi Customised Design"></a>Fully Customised Design und Semi Customised Design</h3><li>Fully Customised Design:<br>jede Schaltung wird für gegebene Anwendung entworfen, um die Performanz zu optimieren. Schaltungen werden als Schaltplan beschrieben.<a id="more"></a></li>
-<li><strong>Semi Customised Design</strong>:<br>Logische Schaltung ist in einer Computer-Sprache definiert, Schaltplan wird dann automatisch generiert. Der Schaltplan verwendet fertige Bauteile, logische Gatter.</li>
-</ul>
-<a id="more"></a>
-
-<h3 id="FPGA-und-ASIC"><a href="#FPGA-und-ASIC" class="headerlink" title="FPGA-und-ASIC"></a>FPGA-und-ASIC</h3><li>FPGAs sind konfigurierbare ASICs, welche viele fertige Hardware-ressourcen haben(z.b. Mikroprocessor)</li>
-<li>ASIC is wie ein leeres Zeichnungsblatt, der Designer muss alle Komponenten entwerfen.</li>
-</ul>
-<img src="https://i.loli.net/2019/07/17/5d2f3b32d9d0c85496.png" alt="20190717171349.png">
-]]></content>
-      <tags>
-        <tag>Design Digitaler Schaltung</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>FireWire火线</title>
     <url>/2019/12/05/FireWire%E7%81%AB%E7%BA%BF/</url>
-    <content><![CDATA[<h3 id="Encoding-编码"><a href="#Encoding-编码" class="headerlink" title="Encoding(编码)"></a>Encoding(编码)</h3><li>数据传输用两条传输线<ul>
+    <content><![CDATA[<hr>
+<p>title: FireWire火线<br>tags: Communication Sysems and Protocols<br>date: 2019-07-22</p>
+<hr>
+<h3 id="Encoding-编码"><a href="#Encoding-编码" class="headerlink" title="Encoding(编码)"></a>Encoding(编码)</h3><li>数据传输用两条传输线<ul>
 <li>NRZ coding</li>
 <li>No stuffing or other measures for clock recovery<a id="more"></a> </li>
 </ul>
@@ -91,9 +77,12 @@
   <entry>
     <title>ASI总线</title>
     <url>/2019/12/05/ASI%E6%80%BB%E7%BA%BF/</url>
-    <content><![CDATA[<p>AS-Interface (Actuator Sensor Interface, ASi) is an industrial networking solution (physical layer, data access method and protocol) used in PLC, DCS and PC-based automation systems. It is designed for connecting simple field I/O devices (e.g. binary ON/OFF devices such as actuators, sensors, rotary encoders, analog inputs and outputs, push buttons, and valve position sensors) in discrete manufacturing and process applications using a single two-conductor cable.</p>
+    <content><![CDATA[<hr>
+<p>title: ASI总线<br>tags: Communication Sysems and Protocols<br>date: 2019-07-21</p>
+<hr>
+<p>AS-Interface (Actuator Sensor Interface, ASi) is an industrial networking solution (physical layer, data access method and protocol) used in PLC, DCS and PC-based automation systems. It is designed for connecting simple field I/O devices (e.g. binary ON/OFF devices such as actuators, sensors, rotary encoders, analog inputs and outputs, push buttons, and valve position sensors) in discrete manufacturing and process applications using a single two-conductor cable.</p>
 <a id="more"></a>
-<p><a id="more"></a></p>
+
 <h3 id="ASI的概念"><a href="#ASI的概念" class="headerlink" title="ASI的概念"></a>ASI的概念</h3><p>Master slave concept using a single master<br><img src="https://i.loli.net/2019/07/12/5d28693b7fae839187.png" alt="20190712130423.png"></p>
 <h3 id="传输媒介"><a href="#传输媒介" class="headerlink" title="传输媒介"></a>传输媒介</h3><ul>
 <li>unshielded two-wire lines(-&gt;max.2A at 24V)无屏蔽的双线</li>
@@ -141,7 +130,7 @@
 <hr>
 <p>I2C(Inter－Integrated Circuit)总线是80年代PHILIPS公司开发的两线式串行总线，如今已经成为芯片间低速串行通信的事实标准，被广泛使用在消费、控制类电子设备场合。这里的两个关键词<strong>两线</strong>和<strong>低速</strong>：<br>两线意味着结构简单，低速意味着好实现，做电路的都知道速度越慢电路实现起来就越容易，而且协议方式也很优<br>雅。</p>
 <a id="more"></a>
-<p><a id="more"></a></p>
+
 <h3 id="I2C总线的系统结构"><a href="#I2C总线的系统结构" class="headerlink" title="I2C总线的系统结构"></a>I2C总线的系统结构</h3><p><img src="https://i.loli.net/2019/07/11/5d273e357921699929.png" alt="20190711154834.png"></p>
 <h3 id="I2C总线接口的内部结构"><a href="#I2C总线接口的内部结构" class="headerlink" title="I2C总线接口的内部结构"></a>I2C总线接口的内部结构</h3><p>I2C总线使用的是<strong>开漏结构</strong>，这样它可以进行数据的双向传输。下图是一个SDA/SCL线的基本结构:</p>
 <ul>
@@ -208,37 +197,6 @@
 </ol>
 <p>基本上I2C通用的读和写的操作就讲完了，来个总结：I2C最大的优点是结构简单，2根线完美连接所有器件。缺点是速度太慢，最快也就几 Mbps左右，而且每传一个BYTE就要ACK/NACK，感觉也挺烦的。有没有既简单又不那么慢的串行总线协议呢？确实有，SPI (Serial Peripheral Interface)协议</p>
 <p><strong>附：</strong><br><img src="https://i.loli.net/2019/07/12/5d275e937c01943449.png" alt="20190711180639.png"><br><img src="https://i.loli.net/2019/07/12/5d275eeab223391701.png" alt="20190711180806.png"></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>同步FIFO</title>
-    <url>/2019/12/05/%E5%90%8C%E6%AD%A5FIFO/</url>
-    <content><![CDATA[<p>FIFO (First-In-First-Out) 是一种先进先出的数据交互方式，在数字ASIC设计中常常被使用。FIFO按工作时钟域的不同又可以分为：同步FIFO和异步FIFO。</p>
-<a id="more"></a>
-<p><a id="more"></a></p>
-<p>同步FIFO的写时钟和读时钟为同一个时钟，FIFO内部所有逻辑都是同步逻辑，常常用于交互数据缓冲。异步FIFO的写时钟和读时钟为异步时钟，FIFO内部的写逻辑和读逻辑的交互需要异步处理，异步FIFO常用于跨时钟域交互。</p>
-<p>本文介绍同步FIFO的典型设计方法。</p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>典型同步FIFO有三部分组成: （1） FIFO写控制逻辑； （2）FIFO读控制逻辑； （3）FIFO 存储实体（如Memory、Reg）
-　　</p>
-<ul>
-<li>FIFO写控制逻辑主要功能：产生FIFO写地址、写有效信号，同时产生FIFO写满等状态信号</li>
-<li>FIFO读控制逻辑主要功能：产生FIFO读地址、读有效信号，同时产生FIFO读空等状态信号</li>
-</ul>
-<p><img src="https://i.loli.net/2019/07/14/5d2b1ff494e1963015.png" alt="20190714142832.png"></p>
-<p>如下图所示，FIFO读写过程的地址控制：</p>
-<ol>
-<li>当FIFO初始化（复位）时fifo_write_addr与fifo_read_addr同指到0x0，此时FIFO处于空状态；</li>
-<li>当FIFO进行写操作时，fifo_write_addr递增（增加到FIFO DEPTH时回绕），与fifo_read_addr错开，此时FIFO处于非空状态；</li>
-<li>当FIFO进行读操作时，fifo_read_addr递增；</li>
-</ol>
-<p><img src="https://i.loli.net/2019/07/14/5d2b203f0271734148.png" alt="20190714142947.png"></p>
-<p>FIFO空满状态产生：<br>为产生FIFO空满标志，引入FIFO Count计数器，FIFO Count寄数器用于指示FIFO内部存储数据个数；</p>
-<ol>
-<li>当只有写操作时，FIFO Count加1；只有读操作是，FIFO Count减1；其他情况下，FIFO Count保持；</li>
-<li>当FIFO Count为0时，说明FIFO为空，fifo_empty置位；</li>
-<li>当FIFO Count等于FIFO_DEPTH时，说明FIFO已满，fifo_full置位；<br><img src="https://i.loli.net/2019/07/14/5d2b20d0e9a0d57334.png" alt="20190714143212.png"></li>
-</ol>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> (</span><br><span class="line">    <span class="keyword">input</span>       shift_in,</span><br><span class="line">    <span class="keyword">input</span>       clk,</span><br><span class="line">    <span class="keyword">input</span>       shift_out,</span><br><span class="line">    <span class="keyword">input</span>       rst_n,</span><br><span class="line">    <span class="keyword">input</span>       w_data,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    full,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    almostfull,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    empty,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    almostempty,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    r_data</span><br><span class="line">);</span><br><span class="line"><span class="keyword">parameter</span> DEPTH = <span class="number">2</span>**ADEPTH;</span><br><span class="line"><span class="keyword">reg</span> [DEPTH : <span class="number">0</span>] w_addr;</span><br><span class="line"><span class="keyword">reg</span> [DEPTH : <span class="number">0</span>] r_addr;</span><br><span class="line"><span class="keyword">reg</span> [WIDTH-<span class="number">1</span> : <span class="number">0</span>] memory [DEPTH : <span class="number">0</span>];</span><br><span class="line"><span class="keyword">reg</span> [DEPTH : <span class="number">0</span>] cnt;</span><br><span class="line"><span class="keyword">integer</span> i;</span><br><span class="line"><span class="comment">// write control</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(rst_n == <span class="number">1'b0</span>)<span class="keyword">begin</span></span><br><span class="line">        w_addr &lt;= <span class="number">'b0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_in &amp; (!full))<span class="keyword">begin</span></span><br><span class="line">        w_addr &lt;= w_addr + <span class="number">1'b1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="comment">// read control</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(rst_n == <span class="number">1'b0</span>)<span class="keyword">begin</span></span><br><span class="line">        r_addr &lt;= <span class="number">'b0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_out &amp; (!empty))<span class="keyword">begin</span></span><br><span class="line">        r_addr &lt;= r_addr + <span class="number">1'b1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">//write data</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(rst_n == <span class="number">1'b0</span>)<span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>, i&lt;=DEPTH, i++)</span><br><span class="line">            memory[i] &lt;= &#123;WIDTH&#123;<span class="number">1'b0</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_in &amp; (!full))<span class="keyword">begin</span></span><br><span class="line">        memory[w_addr] &lt;= w_data;   </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">// read data</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(rst_n == <span class="number">1'b0</span>)<span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>, i&lt;=DEPTH, i++)</span><br><span class="line">            memory[i] &lt;= &#123;WIDTH&#123;<span class="number">1'b0</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_out &amp; (!empty))<span class="keyword">begin</span></span><br><span class="line">        r_data &lt;= memory[r_addr];   </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(!rst_n)<span class="keyword">begin</span></span><br><span class="line">        cnt &lt;= <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_in &amp; (!full) &amp; (!almostfull) &amp; !(shift_out &amp; (!empty) &amp;（!almostempty)))<span class="keyword">begin</span></span><br><span class="line">        cnt &lt;= cnt + <span class="number">1'b1</span>;  </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_out &amp; (!empty) &amp;（!almostempty) &amp; !(shift_in &amp; (!full) &amp; (!almostfull)))<span class="keyword">begin</span></span><br><span class="line">        cnt &lt;= cnt - <span class="number">1'b1</span>;  </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> full = (cnt == DEPTH);</span><br><span class="line"><span class="keyword">assign</span> almostfull = (cnt == (DEPTH-<span class="number">1</span>));</span><br><span class="line"><span class="keyword">assign</span> empty = (cnt == <span class="number">0</span>);</span><br><span class="line"><span class="keyword">assign</span> almostempty = (cnt == <span class="number">1</span>);</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 ]]></content>
   </entry>
   <entry>
@@ -340,7 +298,7 @@
     <url>/2019/07/10/Register-Memory-FIFO/</url>
     <content><![CDATA[ <h3 id="FIFO-功能"><a href="#FIFO-功能" class="headerlink" title="FIFO 功能"></a>FIFO 功能</h3><p>FIFO指先入先出（First-In, First-Out), 先写入FIFO的数据会先读出来，类似流水线操作，先流入的会先流出来。<br>FIFO是一类寄存器或存储器堆栈，它必须有两个不同的指针，分别只想读数据和写数据。FIFO的一种应用是作为芯片里两个不同时钟域之间的缓存，突发的读写操作被FIFO缓解了，这样数据在两个时钟域上都能以令人满意的速率传递，而不需要在每个时钟节拍上等待另一个时钟。FIFO的其他应用是在RS-422或以太网串行链路上，这两种链路通常都需要在不同的时钟域之间进行通信。</p>
  <a id="more"></a>
-<a id="more"></a>
+
 <h3 id="FIFO-操作的细节"><a href="#FIFO-操作的细节" class="headerlink" title="FIFO 操作的细节"></a>FIFO 操作的细节</h3><ul>
 <li>第一种情况（empty1）<br>如图1所示，W指针能向上移动，但是R指针在j位置读取数据后，不能移动到j+1位置上，因为那个位置上的数据是无效的。<br><img src="https://i.loli.net/2019/07/11/5d26eaa3ce64a86137.png" alt="图1 Empty1"></li>
 <li>第二种情况(almost empty1)<br>在第一种情况下，假设写入了一个写数据，FIFO不再为空，这个数据将会被写入寄存器j+1，W移动并指向下一个空寄存器j+2。现在我们可以读取j+1位置的数据了，R指向j+1，如图2。<br><img src="https://i.loli.net/2019/07/11/5d26ed255ed3e98215.png" alt="20190711100233.png"></li>
@@ -540,6 +498,40 @@
       </tags>
   </entry>
   <entry>
+    <title>同步FIFO</title>
+    <url>/2019/05/10/%E5%90%8C%E6%AD%A5FIFO/</url>
+    <content><![CDATA[<p>FIFO (First-In-First-Out) 是一种先进先出的数据交互方式，在数字ASIC设计中常常被使用。FIFO按工作时钟域的不同又可以分为：同步FIFO和异步FIFO。</p>
+<a id="more"></a>
+
+<p>同步FIFO的写时钟和读时钟为同一个时钟，FIFO内部所有逻辑都是同步逻辑，常常用于交互数据缓冲。异步FIFO的写时钟和读时钟为异步时钟，FIFO内部的写逻辑和读逻辑的交互需要异步处理，异步FIFO常用于跨时钟域交互。</p>
+<p>本文介绍同步FIFO的典型设计方法。</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>典型同步FIFO有三部分组成: （1） FIFO写控制逻辑； （2）FIFO读控制逻辑； （3）FIFO 存储实体（如Memory、Reg）
+　　</p>
+<ul>
+<li>FIFO写控制逻辑主要功能：产生FIFO写地址、写有效信号，同时产生FIFO写满等状态信号</li>
+<li>FIFO读控制逻辑主要功能：产生FIFO读地址、读有效信号，同时产生FIFO读空等状态信号</li>
+</ul>
+<p><img src="https://i.loli.net/2019/07/14/5d2b1ff494e1963015.png" alt="20190714142832.png"></p>
+<p>如下图所示，FIFO读写过程的地址控制：</p>
+<ol>
+<li>当FIFO初始化（复位）时fifo_write_addr与fifo_read_addr同指到0x0，此时FIFO处于空状态；</li>
+<li>当FIFO进行写操作时，fifo_write_addr递增（增加到FIFO DEPTH时回绕），与fifo_read_addr错开，此时FIFO处于非空状态；</li>
+<li>当FIFO进行读操作时，fifo_read_addr递增；</li>
+</ol>
+<p><img src="https://i.loli.net/2019/07/14/5d2b203f0271734148.png" alt="20190714142947.png"></p>
+<p>FIFO空满状态产生：<br>为产生FIFO空满标志，引入FIFO Count计数器，FIFO Count寄数器用于指示FIFO内部存储数据个数；</p>
+<ol>
+<li>当只有写操作时，FIFO Count加1；只有读操作是，FIFO Count减1；其他情况下，FIFO Count保持；</li>
+<li>当FIFO Count为0时，说明FIFO为空，fifo_empty置位；</li>
+<li>当FIFO Count等于FIFO_DEPTH时，说明FIFO已满，fifo_full置位；<br><img src="https://i.loli.net/2019/07/14/5d2b20d0e9a0d57334.png" alt="20190714143212.png"></li>
+</ol>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> (</span><br><span class="line">    <span class="keyword">input</span>       shift_in,</span><br><span class="line">    <span class="keyword">input</span>       clk,</span><br><span class="line">    <span class="keyword">input</span>       shift_out,</span><br><span class="line">    <span class="keyword">input</span>       rst_n,</span><br><span class="line">    <span class="keyword">input</span>       w_data,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    full,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    almostfull,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    empty,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    almostempty,</span><br><span class="line">    <span class="keyword">output</span>  <span class="keyword">reg</span>    r_data</span><br><span class="line">);</span><br><span class="line"><span class="keyword">parameter</span> DEPTH = <span class="number">2</span>**ADEPTH;</span><br><span class="line"><span class="keyword">reg</span> [DEPTH : <span class="number">0</span>] w_addr;</span><br><span class="line"><span class="keyword">reg</span> [DEPTH : <span class="number">0</span>] r_addr;</span><br><span class="line"><span class="keyword">reg</span> [WIDTH-<span class="number">1</span> : <span class="number">0</span>] memory [DEPTH : <span class="number">0</span>];</span><br><span class="line"><span class="keyword">reg</span> [DEPTH : <span class="number">0</span>] cnt;</span><br><span class="line"><span class="keyword">integer</span> i;</span><br><span class="line"><span class="comment">// write control</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(rst_n == <span class="number">1'b0</span>)<span class="keyword">begin</span></span><br><span class="line">        w_addr &lt;= <span class="number">'b0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_in &amp; (!full))<span class="keyword">begin</span></span><br><span class="line">        w_addr &lt;= w_addr + <span class="number">1'b1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="comment">// read control</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(rst_n == <span class="number">1'b0</span>)<span class="keyword">begin</span></span><br><span class="line">        r_addr &lt;= <span class="number">'b0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_out &amp; (!empty))<span class="keyword">begin</span></span><br><span class="line">        r_addr &lt;= r_addr + <span class="number">1'b1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">//write data</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(rst_n == <span class="number">1'b0</span>)<span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>, i&lt;=DEPTH, i++)</span><br><span class="line">            memory[i] &lt;= &#123;WIDTH&#123;<span class="number">1'b0</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_in &amp; (!full))<span class="keyword">begin</span></span><br><span class="line">        memory[w_addr] &lt;= w_data;   </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">// read data</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(rst_n == <span class="number">1'b0</span>)<span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>, i&lt;=DEPTH, i++)</span><br><span class="line">            memory[i] &lt;= &#123;WIDTH&#123;<span class="number">1'b0</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_out &amp; (!empty))<span class="keyword">begin</span></span><br><span class="line">        r_data &lt;= memory[r_addr];   </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)<span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(!rst_n)<span class="keyword">begin</span></span><br><span class="line">        cnt &lt;= <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_in &amp; (!full) &amp; (!almostfull) &amp; !(shift_out &amp; (!empty) &amp;（!almostempty)))<span class="keyword">begin</span></span><br><span class="line">        cnt &lt;= cnt + <span class="number">1'b1</span>;  </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(shift_out &amp; (!empty) &amp;（!almostempty) &amp; !(shift_in &amp; (!full) &amp; (!almostfull)))<span class="keyword">begin</span></span><br><span class="line">        cnt &lt;= cnt - <span class="number">1'b1</span>;  </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> full = (cnt == DEPTH);</span><br><span class="line"><span class="keyword">assign</span> almostfull = (cnt == (DEPTH-<span class="number">1</span>));</span><br><span class="line"><span class="keyword">assign</span> empty = (cnt == <span class="number">0</span>);</span><br><span class="line"><span class="keyword">assign</span> almostempty = (cnt == <span class="number">1</span>);</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Verilog HDL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CDMA原理</title>
     <url>/2019/05/04/CDMA/</url>
     <content><![CDATA[<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>假设有四组数据[1,0,1,1],[0,0,1,1],[1,1,0,0],[0,1,0,1],通过四组相互正交的向量[1,1,1,1],[1,1,-1,-1],[1,-1,1,-1]，[1,-1,-1,1]，经过以下变换：</p>
@@ -559,6 +551,23 @@
 ]]></content>
       <tags>
         <tag>Communication Sysems and Protocols</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DDS-复习1</title>
+    <url>/2019/05/04/DDS-%E5%A4%8D%E4%B9%A01/</url>
+    <content><![CDATA[<h3 id="Fully-Customised-Design-und-Semi-Customised-Design"><a href="#Fully-Customised-Design-und-Semi-Customised-Design" class="headerlink" title="Fully Customised Design und Semi Customised Design"></a>Fully Customised Design und Semi Customised Design</h3><li>Fully Customised Design:<br>jede Schaltung wird für gegebene Anwendung entworfen, um die Performanz zu optimieren. Schaltungen werden als Schaltplan beschrieben.<a id="more"></a></li>
+<li><strong>Semi Customised Design</strong>:<br>Logische Schaltung ist in einer Computer-Sprache definiert, Schaltplan wird dann automatisch generiert. Der Schaltplan verwendet fertige Bauteile, logische Gatter.</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="FPGA-und-ASIC"><a href="#FPGA-und-ASIC" class="headerlink" title="FPGA-und-ASIC"></a>FPGA-und-ASIC</h3><li>FPGAs sind konfigurierbare ASICs, welche viele fertige Hardware-ressourcen haben(z.b. Mikroprocessor)</li>
+<li>ASIC is wie ein leeres Zeichnungsblatt, der Designer muss alle Komponenten entwerfen.</li>
+</ul>
+<img src="https://i.loli.net/2019/07/17/5d2f3b32d9d0c85496.png" alt="20190717171349.png">
+]]></content>
+      <tags>
+        <tag>Design Digitaler Schaltung</tag>
       </tags>
   </entry>
   <entry>

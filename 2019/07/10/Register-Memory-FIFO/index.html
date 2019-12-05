@@ -19,7 +19,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d26eaa3ce64a86137.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d26ed255ed3e98215.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;10&#x2F;5d25ed09e5eb456361.png">
-<meta property="og:updated_time" content="2019-12-05T13:12:38.688Z">
+<meta property="og:updated_time" content="2019-12-05T14:33:35.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d26eaa3ce64a86137.png">
   
@@ -177,7 +177,7 @@
       
          <h3 id="FIFO-功能"><a href="#FIFO-功能" class="headerlink" title="FIFO 功能"></a>FIFO 功能</h3><p>FIFO指先入先出（First-In, First-Out), 先写入FIFO的数据会先读出来，类似流水线操作，先流入的会先流出来。<br>FIFO是一类寄存器或存储器堆栈，它必须有两个不同的指针，分别只想读数据和写数据。FIFO的一种应用是作为芯片里两个不同时钟域之间的缓存，突发的读写操作被FIFO缓解了，这样数据在两个时钟域上都能以令人满意的速率传递，而不需要在每个时钟节拍上等待另一个时钟。FIFO的其他应用是在RS-422或以太网串行链路上，这两种链路通常都需要在不同的时钟域之间进行通信。</p>
  <a id="more"></a>
-<a id="more"></a>
+
 <h3 id="FIFO-操作的细节"><a href="#FIFO-操作的细节" class="headerlink" title="FIFO 操作的细节"></a>FIFO 操作的细节</h3><ul>
 <li>第一种情况（empty1）<br>如图1所示，W指针能向上移动，但是R指针在j位置读取数据后，不能移动到j+1位置上，因为那个位置上的数据是无效的。<br><img src="https://i.loli.net/2019/07/11/5d26eaa3ce64a86137.png" alt="图1 Empty1"></li>
 <li>第二种情况(almost empty1)<br>在第一种情况下，假设写入了一个写数据，FIFO不再为空，这个数据将会被写入寄存器j+1，W移动并指向下一个空寄存器j+2。现在我们可以读取j+1位置的数据了，R指向j+1，如图2。<br><img src="https://i.loli.net/2019/07/11/5d26ed255ed3e98215.png" alt="20190711100233.png"></li>
