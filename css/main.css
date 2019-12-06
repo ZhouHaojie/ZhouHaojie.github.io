@@ -1282,7 +1282,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff5070;
+  background: #044dc4;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2928,4 +2928,28 @@ body {
 }
 .post-body {
   color: #444;
+}
+.menu .menu-item a {
+  font-size: 15px;
+  border-bottom: none;
+}
+blockquote {
+  font-family: 'EB Garamond', 'STKaiti', 'KaiTi', 'SimKai', 'Noto Serif SC', sans-serif;
+}
+.posts-expand .post-tags {
+  margin: 0;
+  padding: 20px 0;
+}
+.posts-expand .post-tags a {
+  border-bottom: none;
+  margin-right: 0px;
+  font-size: 13px;
+  padding: 0px 5px;
+  border-radius: 3px;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+}
+.posts-expand .post-tags a:hover {
+  background: #eee;
 }
