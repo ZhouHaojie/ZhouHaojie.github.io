@@ -179,22 +179,22 @@ h6 {
   margin: 20px 0 15px;
 }
 h1 {
-  font-size: 1.325em;
+  font-size: 1.475em;
 }
 h2 {
-  font-size: 1.2em;
+  font-size: 1.35em;
 }
 h3 {
-  font-size: 1.075em;
+  font-size: 1.225em;
 }
 h4 {
-  font-size: 0.95em;
+  font-size: 1.1em;
 }
 h5 {
-  font-size: 0.825em;
+  font-size: 0.975em;
 }
 h6 {
-  font-size: 0.7em;
+  font-size: 0.85em;
 }
 p {
   margin: 0 0 20px 0;
@@ -998,7 +998,7 @@ pre .javascript .function {
   border-bottom: none;
   color: #fff;
   display: inline-block;
-  line-height: 1.4em;
+  line-height: 1.6em;
   padding: 0 40px;
   position: relative;
 }
@@ -1008,7 +1008,7 @@ pre .javascript .function {
 .site-title {
   display: inline-block;
   font-family: 'STSong', 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 1.4em;
+  font-size: 1.6em;
   font-weight: normal;
   line-height: 1.5;
   vertical-align: top;
@@ -1200,7 +1200,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #492a0b;
+  background: #fcffff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
