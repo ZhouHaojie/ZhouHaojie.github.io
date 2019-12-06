@@ -157,7 +157,7 @@ body {
 body {
   background: #eee;
   color: #555;
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'EB Garamond', "Noto Serif SC", sans-serif;
   font-size: 0.875em;
   line-height: 2;
 }
@@ -173,7 +173,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'STSong', 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Cinzel Decorative', 'EB Garamond', "Noto Serif SC", sans-serif;
   font-weight: bold;
   line-height: 1.5;
   margin: 20px 0 15px;
@@ -403,7 +403,7 @@ pre {
 }
 pre,
 code {
-  font-family: 'consolas', consolas, Menlo, monospace, "PingFang SC", "Microsoft YaHei";
+  font-family: 'consolas', consolas, Menlo, monospace, "Noto Serif SC";
 }
 code {
   background: #eee;
@@ -1065,7 +1065,7 @@ pre .javascript .function {
 }
 .site-title {
   display: inline-block;
-  font-family: 'STSong', 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Cinzel Decorative', 'EB Garamond', "Noto Serif SC", sans-serif;
   font-size: 1.7em;
   font-weight: normal;
   line-height: 1.5;
@@ -1282,7 +1282,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #5bf4da;
+  background: #d1ffc7;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1589,6 +1589,23 @@ pre .javascript .function {
     transform: scale(1.1);
   }
 }
+.back-to-top {
+  background: #eee;
+  font-size: 12px;
+  margin: 8px -10px -20px;
+  opacity: 0;
+  text-align: center;
+  transition-delay: 0s;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+.back-to-top.back-to-top-on {
+  cursor: pointer;
+  opacity: 0.6;
+}
+.back-to-top.back-to-top-on:hover {
+  opacity: 0.8;
+}
 .reading-progress-bar {
   background: #37c6c0;
   display: block;
@@ -1600,7 +1617,7 @@ pre .javascript .function {
   z-index: 1500;
 }
 .post-body {
-  font-family: 'Arial', 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'EB Garamond', 'EB Garamond', "Noto Serif SC", sans-serif;
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
@@ -1905,7 +1922,7 @@ pre .javascript .function {
 }
 .posts-expand .post-meta {
   color: #999;
-  font-family: 'Arial', 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'EB Garamond', 'EB Garamond', "Noto Serif SC", sans-serif;
   font-size: 0.75em;
   margin: 3px 0 60px 0;
   text-align: center;
@@ -2390,6 +2407,73 @@ ul.breadcrumb li + li:last-child {
   line-height: 2.4;
   margin: 0;
 }
+.has-jax {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+body {
+  overscroll-behavior: none;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  body::before {
+    animation: rainbow 15s ease infinite;
+    background: linear-gradient(124deg, #f00, #ff7f00, #ff0, #7fff00, #0f0, #00ff7f, #0ff, #007fff, #00f, #7f00ff, #f0f, #ff007f, #f00);
+    background-size: 1000% 1000%;
+    content: '';
+    display: block;
+    height: 100px;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: translateY(-99.99px);
+    z-index: 1500;
+  }
+}
+@-moz-keyframes rainbow {
+  0% {
+    background-position: 0 80%;
+  }
+  50% {
+    background-position: 100% 20%;
+  }
+  100% {
+    background-position: 0 80%;
+  }
+}
+@-webkit-keyframes rainbow {
+  0% {
+    background-position: 0 80%;
+  }
+  50% {
+    background-position: 100% 20%;
+  }
+  100% {
+    background-position: 0 80%;
+  }
+}
+@-o-keyframes rainbow {
+  0% {
+    background-position: 0 80%;
+  }
+  50% {
+    background-position: 100% 20%;
+  }
+  100% {
+    background-position: 0 80%;
+  }
+}
+@keyframes rainbow {
+  0% {
+    background-position: 0 80%;
+  }
+  50% {
+    background-position: 100% 20%;
+  }
+  100% {
+    background-position: 0 80%;
+  }
+}
 .header {
   margin: 0 auto;
   position: relative;
@@ -2841,4 +2925,7 @@ body {
 }
 .popup {
   opacity: 0.9;
+}
+.post-body {
+  color: #333;
 }
