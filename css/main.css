@@ -1282,7 +1282,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #c13082;
+  background: #ff1c9a;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2939,9 +2939,6 @@ body {
   border-bottom: none;
 }
 .menu .menu-item a:hover {
-  border-bottom: none;
-}
-.post-body a {
   border-bottom: none;
 }
 .post-body a:hover {
