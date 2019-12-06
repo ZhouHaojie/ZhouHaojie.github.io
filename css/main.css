@@ -1282,7 +1282,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff1c9a;
+  background: #f753ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2951,6 +2951,9 @@ body {
 .posts-expand .post-meta a:hover,
 .post-copyright a:hover {
   text-decoration: underline;
+}
+a {
+  border-bottom: none;
 }
 blockquote {
   font-family: 'EB Garamond', 'STKaiti', 'KaiTi', 'SimKai', 'Noto Serif SC', sans-serif;
