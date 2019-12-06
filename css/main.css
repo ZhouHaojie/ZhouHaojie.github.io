@@ -1282,7 +1282,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #3ecc94;
+  background: #cd71b0;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2991,16 +2991,6 @@ blockquote {
 .posts-expand {
   padding-top: 0px;
 }
-.header-inner {
-  box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.5);
-  border-radius: 0.5rem;
-  margin-top: 38px;
-}
-.sidebar-inner {
-  box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.5);
-  border-radius: 0.5rem;
-  margin-top: 35px;
-}
 .sidebar {
   box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.5);
   border-radius: 0.5rem;
@@ -3011,8 +3001,4 @@ blockquote {
 }
 .site-description {
   font-size: 13px;
-}
-back-to-top {
-  font-size: 14px;
-  margin: 8px -1px -12px;
 }
