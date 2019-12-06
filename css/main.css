@@ -1282,7 +1282,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff05a7;
+  background: #60d5ad;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2994,6 +2994,7 @@ blockquote {
 .sidebar {
   box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.5);
   border-radius: 0.5rem;
+  margin-top: 30px;
 }
 .site-author-name {
   font-size: 14px;
