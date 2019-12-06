@@ -1282,7 +1282,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff14ff;
+  background: #7eed86;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2980,5 +2980,8 @@ blockquote {
   border-radius: 0.5rem;
 }
 .content {
-  padding-top: 60px;
+  padding-top: 20px;
+}
+.posts-expand {
+  padding-top: 0px;
 }
