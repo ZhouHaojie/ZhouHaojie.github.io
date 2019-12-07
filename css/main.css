@@ -1258,7 +1258,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #29af2b;
+  background: #c861ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2959,7 +2959,7 @@ blockquote {
 .post-block {
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
   border-radius: 0.5rem;
-  margin-top: 30px;
+  margin-top: -3px;
 }
 .content {
   padding-top: 10px;
@@ -2970,6 +2970,7 @@ blockquote {
 .header-inner {
   box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.5);
   border-radius: 0.5rem;
+  margin-top: 5px;
 }
 .site-author-name {
   font-size: 15px;
