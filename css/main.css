@@ -1258,7 +1258,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #40ab95;
+  background: #9aff17;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2982,7 +2982,6 @@ blockquote {
   padding-top: 0px;
 }
 .header-inner {
-  box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.5);
   border-radius: 0.5rem;
   margin-top: 5px;
 }
@@ -2990,11 +2989,9 @@ blockquote {
   border-radius: initial;
 }
 .sidebar-inner {
-  box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.5);
   border-radius: 0.5rem;
 }
 .sidebar {
-  box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.5);
   border-radius: 0.5rem;
 }
 .site-author-name {
@@ -3017,9 +3014,11 @@ span.exturl {
   color: #f5f5f5;
 }
 .pagination {
-  box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.5);
   border-radius: 8px;
 }
 .with-love {
   color: #e3d39d;
+}
+.comments {
+  border-radius: 8px;
 }
