@@ -1258,7 +1258,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #9aff17;
+  background: #3bffff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2966,12 +2966,10 @@ blockquote {
   background: #eee;
 }
 .post-block + .post-block {
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
   border-radius: 0.5rem;
   margin-top: 30px;
 }
 .post-block {
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
   border-radius: 0.5rem;
   margin-top: -3px;
 }
@@ -3021,4 +3019,10 @@ span.exturl {
 }
 .comments {
   border-radius: 8px;
+}
+.post-toc {
+  font-size: 14px;
+}
+.sidebar-nav li {
+  font-size: 15px;
 }
