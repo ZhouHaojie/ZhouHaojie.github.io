@@ -4,6 +4,7 @@
     <title>使用 Gulp 压缩博客静态资源</title>
     <url>/archives/ac74f14e.html</url>
     <content><![CDATA[<h3 id="为什么要压缩源码"><a href="#为什么要压缩源码" class="headerlink" title="为什么要压缩源码"></a>为什么要压缩源码</h3><p>我是采用 Hexo 博客框架搭建的博客，文章的书写是先写入 Markdown 文件，然后通过 Hexo 将 Markdown 文件转换成 HTML 文件。在转换后的 HTML 文件代码中，会留下大量的空白空间，毕竟计算机程序不如人的大脑那么灵活。<br>不只是 HTML 文件，网站中引入的 CSS、JavaScript 等文件中也会存在一定的空白。而这些空白在网页的载入的时候，浏览器并不会忽略掉，会消耗一定的时间。因此将这些空白的区域去除很重要。<br>使用 Gulp 工具，能够很好地压缩静态资源，去除这些空白。</p>
+<a id="more"></a>
 <h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><h4 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h4><p>全局安装</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install gulp -g</span></pre></td></tr></table></figure>
 <p>然后到站点文件夹的根目录安装：</p>
@@ -15,11 +16,12 @@
 
 <p>如果不压缩 JavaScript 文件，则将上述代码中有关 minify-js 的代码删除即可。</p>
 <p><strong>同时删除最后一行代码中的’minify-js’</strong>, 否则会报错</p>
-<p>执行命令</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean	&#x2F;&#x2F;先清理文件</span></pre></td></tr><tr><td class="code"><pre><span class="line">hexo g	&#x2F;&#x2F;编译生成静态文件</span></pre></td></tr><tr><td class="code"><pre><span class="line">gulp	&#x2F;&#x2F;Gulp 插件执行压缩任务</span></pre></td></tr></table></figure>
+<h4 id="执行命令"><a href="#执行命令" class="headerlink" title="执行命令"></a>执行命令</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean	&#x2F;&#x2F;先清理文件</span></pre></td></tr><tr><td class="code"><pre><span class="line">hexo g	&#x2F;&#x2F;编译生成静态文件</span></pre></td></tr><tr><td class="code"><pre><span class="line">gulp	&#x2F;&#x2F;Gulp 插件执行压缩任务</span></pre></td></tr></table></figure>
 <p>正常运行后应该显示：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ gulp</span></pre></td></tr><tr><td class="code"><pre><span class="line">[00:08:51] Using gulpfile C:\blog\gulpfile.js</span></pre></td></tr><tr><td class="code"><pre><span class="line">[00:08:51] Starting &#39;default&#39;...</span></pre></td></tr><tr><td class="code"><pre><span class="line">[00:08:51] Starting &#39;minify-html&#39;...</span></pre></td></tr><tr><td class="code"><pre><span class="line">[00:08:51] Starting &#39;minify-css&#39;...</span></pre></td></tr><tr><td class="code"><pre><span class="line">[00:08:51] Finished &#39;minify-css&#39; after 767 ms</span></pre></td></tr><tr><td class="code"><pre><span class="line">[00:08:53] Finished &#39;minify-html&#39; after 2.18 s</span></pre></td></tr><tr><td class="code"><pre><span class="line">[00:08:53] Finished &#39;default&#39; after 2.18 s</span></pre></td></tr></table></figure>
 <p>然后你就可以从站点中的 /public/ 文件夹中检查这些文件是否被压缩</p>
+<h3 id="部署命令"><a href="#部署命令" class="headerlink" title="部署命令"></a>部署命令</h3><p>因为添加了新的外部工具，博客的部署命令需要随之更改，具体如下:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; gulp &amp;&amp; hexo d</span></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>工具使用</category>
