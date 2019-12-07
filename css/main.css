@@ -1258,7 +1258,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #0411a2;
+  background: #40ab95;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3015,4 +3015,11 @@ blockquote {
 .footer a,
 span.exturl {
   color: #f5f5f5;
+}
+.pagination {
+  box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.5);
+  border-radius: 8px;
+}
+.with-love {
+  color: #e3d39d;
 }
