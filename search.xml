@@ -3,7 +3,7 @@
   <entry>
     <title>Hexo-NexT Tag 插件的使用</title>
     <url>/archives/29bfe8c9.html</url>
-    <content><![CDATA[<p>description: Tag Plugin 是一种使 Hexo 支持特殊样式内容的方法。例如，我们无法在标准 Markdown 中显示具有自定义尺寸的图像。然后我们可以使用标签插件来解决它。 Hexo 有很多可以帮助用户的标签。 Hexo 还具有主题接口，使主题能够创建自己的标签。</p>
+    <content><![CDATA[<p>Description: Tag Plugin 是一种使 Hexo 支持特殊样式内容的方法。例如，我们无法在标准 Markdown 中显示具有自定义尺寸的图像。然后我们可以使用标签插件来解决它。 Hexo 有很多可以帮助用户的标签。 Hexo 还具有主题接口，使主题能够创建自己的标签。</p>
 <h2 id="文本居中引用-Centered-Quote"><a href="#文本居中引用-Centered-Quote" class="headerlink" title="文本居中引用 - Centered Quote"></a>文本居中引用 - Centered Quote</h2><p>使用方法：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% cq %&#125;只有你拼劲全力，才会在人前显得毫不费劲&#123;% endcq %&#125;</span></pre></td></tr></table></figure>
 <p>显示效果：</p>

@@ -758,7 +758,7 @@ pre .javascript .function {
 .post-body .note h4,
 .post-body .note h5,
 .post-body .note h6 {
-  margin-top: 3px;
+  margin-top: 0;
   border-bottom: initial;
   margin-bottom: 0;
   padding-top: 0;
@@ -781,16 +781,6 @@ pre .javascript .function {
 .post-body .note img:last-child {
   margin-bottom: 0;
 }
-.post-body .note:not(.no-icon) {
-  padding-left: 45px;
-}
-.post-body .note:not(.no-icon)::before {
-  font-family: 'FontAwesome';
-  font-size: larger;
-  left: 15px;
-  position: absolute;
-  top: 13px;
-}
 .post-body .note.default {
   background: #f3f3f3;
   border-color: #e1e1e1;
@@ -805,9 +795,6 @@ pre .javascript .function {
 .post-body .note.default span.exturl:not(.btn):hover {
   border-bottom: 1px solid #454545;
   color: #454545;
-}
-.post-body .note.default:not(.no-icon)::before {
-  content: "\f0a9";
 }
 .post-body .note.primary {
   background: #f3daff;
@@ -824,9 +811,6 @@ pre .javascript .function {
   border-bottom: 1px solid #453298;
   color: #453298;
 }
-.post-body .note.primary:not(.no-icon)::before {
-  content: "\f055";
-}
 .post-body .note.info {
   background: #d9edf7;
   border-color: #b3e5ef;
@@ -841,9 +825,6 @@ pre .javascript .function {
 .post-body .note.info span.exturl:not(.btn):hover {
   border-bottom: 1px solid #215761;
   color: #215761;
-}
-.post-body .note.info:not(.no-icon)::before {
-  content: "\f05a";
 }
 .post-body .note.success {
   background: #dff0d8;
@@ -860,9 +841,6 @@ pre .javascript .function {
   border-bottom: 1px solid #32562c;
   color: #32562c;
 }
-.post-body .note.success:not(.no-icon)::before {
-  content: "\f058";
-}
 .post-body .note.warning {
   background: #fcf4e3;
   border-color: #fae4cd;
@@ -878,9 +856,6 @@ pre .javascript .function {
   border-bottom: 1px solid #714f30;
   color: #714f30;
 }
-.post-body .note.warning:not(.no-icon)::before {
-  content: "\f06a";
-}
 .post-body .note.danger {
   background: #f2dfdf;
   border-color: #ebcdd2;
@@ -895,9 +870,6 @@ pre .javascript .function {
 .post-body .note.danger span.exturl:not(.btn):hover {
   border-bottom: 1px solid #84333f;
   color: #84333f;
-}
-.post-body .note.danger:not(.no-icon)::before {
-  content: "\f056";
 }
 .pagination .prev,
 .pagination .next,
@@ -1261,7 +1233,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #e5ff52;
+  background: #9ef22a;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
