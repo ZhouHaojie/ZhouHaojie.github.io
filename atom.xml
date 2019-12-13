@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://grenze.cn/"/>
-  <updated>2019-12-12T18:37:08.846Z</updated>
+  <updated>2019-12-13T14:32:39.819Z</updated>
   <id>http://grenze.cn/</id>
   
   <author>
@@ -17,19 +17,26 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>MOSFET.md</title>
+    <title>MOSFET</title>
     <link href="http://grenze.cn/archives/8e76ae69.html"/>
     <id>http://grenze.cn/archives/8e76ae69.html</id>
     <published>2019-12-12T17:49:16.000Z</published>
-    <updated>2019-12-12T18:37:08.846Z</updated>
+    <updated>2019-12-13T14:32:39.819Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="Kontaktspannungen"><a href="#Kontaktspannungen" class="headerlink" title="Kontaktspannungen"></a>Kontaktspannungen</h3><p>Zwischen Silizium und Metallelektroden entstehen Kontaktspannungen<br><img src="https://i.loli.net/2019/12/13/mKoTdMuN2neBVpv.png" alt="20191212190336.png">{:height=”50%” width=”50%”}</p>]]></content>
+    <content type="html"><![CDATA[<style>img{    width: 60%;    padding-left: 20%;}</style><h3 id="Kontaktspannungen"><a href="#Kontaktspannungen" class="headerlink" title="Kontaktspannungen"></a>Kontaktspannungen</h3><p>Zwischen Silizium und Metallelektroden entstehen Kontaktspannungen<br><img src="https://i.loli.net/2019/12/13/mKoTdMuN2neBVpv.png" alt="20191212190336.png"></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;Kontaktspannungen&quot;&gt;&lt;a href=&quot;#Kontaktspannungen&quot; class=&quot;headerlink&quot; title=&quot;Kontaktspannungen&quot;&gt;&lt;/a&gt;Kontaktspannungen&lt;/h3&gt;&lt;p&gt;Zwischen S
+        &lt;style&gt;
+img{
+    width: 60%;
+    padding-left: 20%;
+}
+&lt;/style&gt;
+
+&lt;h3 id=&quot;Kontaktspannungen&quot;&gt;&lt;a href=&quot;#Kontaktspannungen&quot; class=&quot;headerlink&quot; t
       
     
     </summary>
