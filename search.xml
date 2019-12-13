@@ -3,14 +3,7 @@
   <entry>
     <title>MOSFET</title>
     <url>/archives/8e76ae69.html</url>
-    <content><![CDATA[<style>
-img{
-    width: 60%;
-    padding-left: 0%;
-}
-</style>
-
-<h3 id="Kontaktspannungen"><a href="#Kontaktspannungen" class="headerlink" title="Kontaktspannungen"></a>Kontaktspannungen</h3><p>Zwischen Silizium und Metallelektroden entstehen Kontaktspannungen<br><img src="https://i.loli.net/2019/12/13/mKoTdMuN2neBVpv.png" alt="20191212190336.png"></p>
+    <content><![CDATA[<h3 id="Kontaktspannungen"><a href="#Kontaktspannungen" class="headerlink" title="Kontaktspannungen"></a>Kontaktspannungen</h3><p>Zwischen Silizium und Metallelektroden entstehen Kontaktspannungen<br><img src="https://i.loli.net/2019/12/13/HzboRmIfOUcPD7q.png" width="300"><img src="https://i.loli.net/2019/12/13/6V5jnK1HA7RQU8z.png" width="110"></p>
 ]]></content>
       <categories>
         <category>模拟电路设计</category>
