@@ -47,22 +47,18 @@
   };
 </script>
 
-  <meta name="description" content="RCA的主要问题是高位的运算必须等待低位的“进位输出信号”，那我们的优化思路就是‘能否提前计算出“进位输出信号’ ？">
-<meta name="keywords" content="Verilog HDL">
+  <meta name="description" content="1. What is “structured binding declaration”? (什么是结构化绑定声明) It’s a declaration statement, which means some identifiers are declared and initialized (结构化绑定声明是一个声明语句，意味着声明了一些标识符并对标识符做了初始化)。在C++17中引入 Binds">
+<meta name="keywords" content="C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA）">
-<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;12996.html">
+<meta property="og:title" content="结构化绑定声明.md">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e70dd349.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
-<meta property="og:description" content="RCA的主要问题是高位的运算必须等待低位的“进位输出信号”，那我们的优化思路就是‘能否提前计算出“进位输出信号’ ？">
+<meta property="og:description" content="1. What is “structured binding declaration”? (什么是结构化绑定声明) It’s a declaration statement, which means some identifiers are declared and initialized (结构化绑定声明是一个声明语句，意味着声明了一些标识符并对标识符做了初始化)。在C++17中引入 Binds">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;05&#x2F;12&#x2F;5cd7fa316af62.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;05&#x2F;12&#x2F;5cd7fbb883071.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;05&#x2F;12&#x2F;5cd8237478856.png">
-<meta property="og:updated_time" content="2019-12-07T23:48:05.375Z">
+<meta property="og:updated_time" content="2019-12-15T18:20:38.160Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;05&#x2F;12&#x2F;5cd7fa316af62.png">
 
-<link rel="canonical" href="http://grenze.cn/archives/12996.html">
+<link rel="canonical" href="http://grenze.cn/archives/e70dd349.html">
 
 
 <script id="page-configurations">
@@ -76,7 +72,7 @@
   };
 </script>
 
-  <title>加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA） | ZhouHaojie的博客</title>
+  <title>结构化绑定声明.md | ZhouHaojie的博客</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
     <script pjax>
@@ -240,7 +236,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/12996.html">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/e70dd349.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -253,40 +249,31 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA）
+          结构化绑定声明.md
         </h1>
 
         <div class="post-meta">
+			
+				<font color="#FFFFFF"><b style="background-color:#A9A9A9">　Top　</b></font>
+				<span class="post-meta-divider">|</span>
 			
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-01-04 16:22:47" itemprop="dateCreated datePublished" datetime="2019-01-04T16:22:47+01:00">2019-01-04</time>
+              <time title="创建时间：2019-12-15 18:21:45 / 修改时间：19:20:38" itemprop="dateCreated datePublished" datetime="2019-12-15T18:21:45+01:00">2019-12-15</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-08 00:48:05" itemprop="dateModified" datetime="2019-12-08T00:48:05+01:00">2019-12-08</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%97IC%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index">
-                    <span itemprop="name">数字IC设计</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%97IC%E8%AE%BE%E8%AE%A1/Verilog-HDL/" itemprop="url" rel="index">
-                    <span itemprop="name">Verilog HDL</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
                   </a>
                 </span>
             </span>
@@ -304,14 +291,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>747</span>
+              <span>1.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -323,18 +310,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>RCA的主要问题是高位的运算必须等待低位的“进位输出信号”，那我们的优化思路就是‘能否提前计算出“进位输出信号’ ？</p>
-<a id="more"></a>
-
-<p>首先写出真值表<br><img src="https://i.loli.net/2019/05/12/5cd7fa316af62.png" alt="20190512124914.png"></p>
-<p>卡诺图化简后可以得到：<br>$$<br>sum = A \oplus B \oplus C<br>\ C_{i+1} = (A_i \cdot B_i)+(A_i \cdot C_i)+(B_i \cdot C_i)<br>\ =(A_i \cdot B_i)+(A_i+B_i) \cdot C_i<br>$$<br>设：</p>
-<ul>
-<li>进位函数：$G_i = A_i \cdot B_i$</li>
-<li>进位传输函数：$P_i = A_i+B_i$<br>则：$C_{i+1} = G_i + P_i \cdot C_i$</li>
+        <h4 id="1-What-is-“structured-binding-declaration”-什么是结构化绑定声明"><a href="#1-What-is-“structured-binding-declaration”-什么是结构化绑定声明" class="headerlink" title="1. What is “structured binding declaration”? (什么是结构化绑定声明)"></a>1. What is “structured binding declaration”? (什么是结构化绑定声明)</h4><ul>
+<li>It’s a declaration statement, which means some identifiers are declared and initialized (结构化绑定声明是一个声明语句，意味着声明了一些标识符并对标识符做了初始化)。在C++17中引入</li>
+<li>Binds the specified names to subobjects or elements of the initializer. (将指定的一些名字绑定到初始化器的子对象或者元素上)<a id="more"></a>
+<h4 id="2-Structured-Binding-Declaration-for-Array-用于原生数组的结构化绑定声明"><a href="#2-Structured-Binding-Declaration-for-Array-用于原生数组的结构化绑定声明" class="headerlink" title="2. Structured Binding Declaration for Array(用于原生数组的结构化绑定声明)"></a>2. Structured Binding Declaration for Array(用于原生数组的结构化绑定声明)</h4></li>
 </ul>
-<p><img src="https://i.loli.net/2019/05/12/5cd7fbb883071.png" alt="20190512125549.png"><br><img src="https://i.loli.net/2019/05/12/5cd8237478856.png" alt="20190512154518.png"></p>
-<p>4位超前进位加法器对应的Verilog HDL代码为：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> four_bits_fast_adder(sum_out,c_out,a,b,c_in);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">input</span> [<span class="number">3</span>:<span class="number">0</span>] a,b;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">input</span> c_in;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">output</span> [<span class="number">3</span>:<span class="number">0</span>] sum_out;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">output</span> c_out;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">wire</span> [<span class="number">4</span>:<span class="number">0</span>] g,p,c;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> c[<span class="number">0</span>] = c_in;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> g = a|b;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> p = a&amp;b;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> c[<span class="number">1</span>] = g[<span class="number">0</span>]|(p[<span class="number">0</span>]&amp;c[<span class="number">0</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> c[<span class="number">2</span>] = g[<span class="number">1</span>]|(p[<span class="number">1</span>]&amp;(g[<span class="number">0</span>]|(p[<span class="number">0</span>]&amp;c[<span class="number">0</span>])));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> c[<span class="number">3</span>] = g[<span class="number">2</span>]|(p[<span class="number">2</span>]&amp;g[<span class="number">1</span>]|(p[<span class="number">1</span>]&amp;(g[<span class="number">0</span>]|(p[<span class="number">0</span>]&amp;c[<span class="number">0</span>]))));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> c[<span class="number">4</span>] = g[<span class="number">3</span>]|(p[<span class="number">3</span>]&amp;g[<span class="number">2</span>]|(p[<span class="number">2</span>]&amp;g[<span class="number">1</span>]|(p[<span class="number">1</span>]&amp;(g[<span class="number">0</span>]|(p[<span class="number">0</span>]&amp;c[<span class="number">0</span>])))));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> sum_out = p^c[<span class="number">3</span>:<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> c_out = c[<span class="number">4</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endmodule</span></span></pre></td></tr></table></figure>
+<p>若初始化表达式为数组类型，则标识符列表中的名字绑定到数组元素</p>
+<p>1) 标识符数量必须等于数组元素数量</p>
+<p>2) 标识符类型与数组元素类型一致</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">int</span> priArr [] &#123;<span class="number">42</span>, <span class="number">21</span>, <span class="number">7</span>&#125;;<span class="comment">// ai/bi/ci 的基本类型都是int，只是cv标识或引用标识不同</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">auto</span> [a1, a2, a3] = priArr; <span class="comment">// a1 是 priArr[0] 的拷贝，a2, a3类推</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">const</span> <span class="keyword">auto</span> [b1, b2, b3] (priArr); <span class="comment">// b1 是 priArr[0] 的只读拷贝，b2, b3类推</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">auto</span> &amp;[c1, c2, c3] &#123;priArr&#125;; <span class="comment">// c1 是 priArr[0] 的引用，c2, c3类推</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  c3 = <span class="number">14</span>;                     <span class="comment">// priArr[2]的值变为14</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h4 id="3-Structured-Binding-Declaration-for-std-array-用于std-array的结构化绑定声明"><a href="#3-Structured-Binding-Declaration-for-std-array-用于std-array的结构化绑定声明" class="headerlink" title="3. Structured Binding Declaration for std::array(用于std::array的结构化绑定声明)"></a>3. Structured Binding Declaration for std::array(用于std::array的结构化绑定声明)</h4><p>若初始化表达式为数组类型，则标识符列表中的名字绑定到数组元素</p>
+<p>1) 标识符数量必须等于std::array数组中的元素数量</p>
+<p>2) 标识符类型与std::array中的数组元素类型一致</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;array&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">std</span>::<span class="built_in">array</span> stdArr = &#123;<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">std</span>::<span class="built_in">array</span> &lt;<span class="keyword">int</span>,3&gt; = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">auto</span> [d1, d2, d3] &#123;stdArr&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h4 id="4-Structured-Binding-Declaration-for-Object-Data-Members-用于对象数据成员的结构化绑定声明"><a href="#4-Structured-Binding-Declaration-for-Object-Data-Members-用于对象数据成员的结构化绑定声明" class="headerlink" title="4. Structured Binding Declaration for Object Data Members (用于对象数据成员的结构化绑定声明)"></a>4. Structured Binding Declaration for Object Data Members (用于对象数据成员的结构化绑定声明)</h4><p>Structured Binding Declaration for Data Members(用于数据成员的结构化绑定声明)<br>若初始化表达式为类/结构体类型，则标识符列表中的名字绑定到类/结构体的非静态数据成员上</p>
+<p>1) 数据成员必须为公有成员<br>2) 标识符数量必须等于数据成员的数量<br>3) 标识符类型与数据成员类型一致</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> &#123;</span>  <span class="comment">// 可以改用 struct C，然后去掉下面的public属性说明</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">int</span> i &#123; <span class="number">420</span> &#125;; <span class="comment">// 就地初始化</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">char</span> ca[ <span class="number">3</span> ] &#123; <span class="string">'O'</span>, <span class="string">'K'</span>, <span class="string">'!'</span> &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  C c;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">auto</span> [a1, a2] &#123;c&#125;; <span class="comment">// a1是int类型，a2是char[]类型</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"c.i:"</span> &lt;&lt; a1 &lt;&lt; <span class="string">" c.ca:"</span> &lt;&lt; b2 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>More Examples<br>auto后跟&amp;，则标识符是数据成员的引用<br>auto前可放置const，表明标识符是只读的</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  C c; <span class="comment">// c.i: 420;  c.ca: 'O','K','!'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">auto</span> [a1, a2] &#123;c&#125;; <span class="comment">// a1是c.i的拷贝，a2是char[]类型</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">auto</span>&amp; [b1, b2] &#123;c&#125;; <span class="comment">// b1是int&amp;类型，是c.i的引用，</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// b2是char(&amp;)[3]类型(数组的引用)，是c.ca的引用</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  a1 = <span class="number">100</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"c.i:"</span> &lt;&lt; c.i &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// 输出420，改a1不影响c.i</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  b1 = <span class="number">200</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"c.i:"</span> &lt;&lt; c.i &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// 输出200，通过b1修改了c.i</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
     </div>
 
     
@@ -344,19 +340,10 @@
   <div class="popular-posts-header">相关文章推荐</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\archives\36767.html" rel="bookmark">Register-Memory-FIFO</a></div>
+      <div class="popular-posts-title"><a href="\archives\73ac48ad.html" rel="bookmark">C++11智能指针</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\archives\5589.html" rel="bookmark">同步FIFO</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\archives\23478.html" rel="bookmark">计数器设计小结</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\archives\52434.html" rel="bookmark">模值M的计数器</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\archives\6865.html" rel="bookmark">8-bits 奇偶校验器</a></div>
+      <div class="popular-posts-title"><a href="\archives\37649.html" rel="bookmark">const和constptr的区别C++</a></div>
     </li>
   </ul>
 
@@ -389,7 +376,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="/http:/grenze.cn/archives/12996.html" title="加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA）">http://grenze.cn/archives/12996.html</a>
+    <a href="/http:/grenze.cn/archives/e70dd349.html" title="结构化绑定声明.md">http://grenze.cn/archives/e70dd349.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -401,7 +388,7 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Verilog-HDL/" rel="tag"><i class="fa fa-tag"></i> Verilog HDL</a>
+              <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
           </div>
 
         
@@ -415,13 +402,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/archives/42797.html" rel="prev" title="搭建Hexo-Github Pages博客遇到的一些问题">
-      <i class="fa fa-chevron-left"></i> 搭建Hexo-Github Pages博客遇到的一些问题
+    <a href="/archives/73ac48ad.html" rel="prev" title="C++11智能指针">
+      <i class="fa fa-chevron-left"></i> C++11智能指针
     </a></div>
-      <div class="post-nav-item">
-    <a href="/archives/11679.html" rel="next" title="Zug:7 Bedeutungen">
-      Zug:7 Bedeutungen <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -460,6 +444,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-What-is-“structured-binding-declaration”-什么是结构化绑定声明"><span class="nav-number">1.</span> <span class="nav-text">1. What is “structured binding declaration”? (什么是结构化绑定声明)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Structured-Binding-Declaration-for-Array-用于原生数组的结构化绑定声明"><span class="nav-number">2.</span> <span class="nav-text">2. Structured Binding Declaration for Array(用于原生数组的结构化绑定声明)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Structured-Binding-Declaration-for-std-array-用于std-array的结构化绑定声明"><span class="nav-number">3.</span> <span class="nav-text">3. Structured Binding Declaration for std::array(用于std::array的结构化绑定声明)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Structured-Binding-Declaration-for-Object-Data-Members-用于对象数据成员的结构化绑定声明"><span class="nav-number">4.</span> <span class="nav-text">4. Structured Binding Declaration for Object Data Members (用于对象数据成员的结构化绑定声明)</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -785,7 +770,7 @@ if (document.querySelectorAll('div.pdf').length) {
       repo: 'Comment',
       owner: 'ZhouHaojie',
       admin: ['ZhouHaojie'],
-      id: '8c6bf06abd5303ba248fe4db6c8a4287',
+      id: 'ae67ebc4e78c8987fc6bc79dc24ad8a1',
         language: '',
       distractionFreeMode: 'true'
     });
