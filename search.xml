@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>C++11智能指针</title>
+    <url>/archives/73ac48ad.html</url>
+    <content><![CDATA[<p>显式管理内存在是能上有优势，但容易出错。<br>C++11提供智能指针的数据类型，对垃圾回收技术提供了一些支持，实现一定程度的内存管理</p>
+<p>C++11的智能指针:<br><strong>unique_ptr</strong> ：不允许多个指针共享资源，可以用标准库中的move函数转移指针</p>
+<p><strong>shared_ptr</strong>：多个指针共享资源</p>
+<p><strong>weak_ptr</strong> ：可复制shared_ptr，但其构造或者释放对资源不产生影响</p>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MOSFET</title>
     <url>/archives/8e76ae69.html</url>
     <content><![CDATA[<h3 id="Kontaktspannungen"><a href="#Kontaktspannungen" class="headerlink" title="Kontaktspannungen"></a>Kontaktspannungen</h3><p>Zwischen Silizium und Metallelektroden entstehen Kontaktspannungen<br><img src="https://i.loli.net/2019/12/13/HzboRmIfOUcPD7q.png" width="300"><img src="https://i.loli.net/2019/12/13/6V5jnK1HA7RQU8z.png" width="110"></p>

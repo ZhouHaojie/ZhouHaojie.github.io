@@ -47,16 +47,18 @@
   };
 </script>
 
-  <meta name="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ZhouHaojie的博客">
-<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;2019&#x2F;03&#x2F;index.html">
+  <meta name="description" content="显式管理内存在是能上有优势，但容易出错。C++11提供智能指针的数据类型，对垃圾回收技术提供了一些支持，实现一定程度的内存管理 C++11的智能指针:unique_ptr ：不允许多个指针共享资源，可以用标准库中的move函数转移指针 shared_ptr：多个指针共享资源 weak_ptr ：可复制shared_ptr，但其构造或者释放对资源不产生影响">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++11智能指针">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;73ac48ad.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
-<meta property="og:description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+<meta property="og:description" content="显式管理内存在是能上有优势，但容易出错。C++11提供智能指针的数据类型，对垃圾回收技术提供了一些支持，实现一定程度的内存管理 C++11的智能指针:unique_ptr ：不允许多个指针共享资源，可以用标准库中的move函数转移指针 shared_ptr：多个指针共享资源 weak_ptr ：可复制shared_ptr，但其构造或者释放对资源不产生影响">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-15T15:51:29.145Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://grenze.cn/archives/2019/03/">
+<link rel="canonical" href="http://grenze.cn/archives/73ac48ad.html">
 
 
 <script id="page-configurations">
@@ -64,13 +66,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
-    isArchive: true
+    isArchive: false
   };
 </script>
 
-  <title>归档 | ZhouHaojie的博客</title>
+  <title>C++11智能指针 | ZhouHaojie的博客</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
     <script pjax>
@@ -229,106 +231,176 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">还行! 目前共计 31 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/73ac48ad.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++11智能指针
+        </h1>
+
+        <div class="post-meta">
+			
+				<font color="#FFFFFF"><b style="background-color:#A9A9A9">　Top　</b></font>
+				<span class="post-meta-divider">|</span>
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-15 16:46:13 / 修改时间：16:51:29" itemprop="dateCreated datePublished" datetime="2019-12-15T16:46:13+01:00">2019-12-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>173</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
+        <p>显式管理内存在是能上有优势，但容易出错。<br>C++11提供智能指针的数据类型，对垃圾回收技术提供了一些支持，实现一定程度的内存管理</p>
+<p>C++11的智能指针:<br><strong>unique_ptr</strong> ：不允许多个指针共享资源，可以用标准库中的move函数转移指针</p>
+<p><strong>shared_ptr</strong>：多个指针共享资源</p>
+<p><strong>weak_ptr</strong> ：可复制shared_ptr，但其构造或者释放对资源不产生影响</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\37649.html" rel="bookmark">const和constptr的区别C++</a></div>
+    </li>
+  </ul>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated" datetime="2019-03-05T16:22:47+01:00" content="2019-03-05">
-          03-05
-        </time>
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
       </div>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/archives/21871.html" itemprop="url">
-            <span itemprop="name">Podcast 4-Im Restaurant</span>
-          </a>
-      </h2>
+  </div>
+</div>
 
-    </header>
-  </article>
+        
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated" datetime="2019-03-05T13:22:47+01:00" content="2019-03-05">
-          03-05
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/archives/11807.html" itemprop="url">
-            <span itemprop="name">zu Hause - nach Hause - daheim - heim</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated" datetime="2019-03-04T16:22:47+01:00" content="2019-03-04">
-          03-04
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/archives/6865.html" itemprop="url">
-            <span itemprop="name">8-bits 奇偶校验器</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated" datetime="2019-03-01T16:22:47+01:00" content="2019-03-01">
-          03-01
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/archives/28384.html" itemprop="url">
-            <span itemprop="name">Easy German</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/73ac48ad.html" title="C++11智能指针">http://grenze.cn/archives/73ac48ad.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
 
 
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
     </div>
   </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/8e76ae69.html" rel="prev" title="MOSFET">
+      <i class="fa fa-chevron-left"></i> MOSFET
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
   
   
 
-  
-
+  </div>
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
         </div>
           
@@ -668,6 +740,23 @@ if (document.querySelectorAll('div.pdf').length) {
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: '210b5f304f90ca6a6986af9689b2a05f',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
 
     </div>
 </body>

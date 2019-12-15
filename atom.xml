@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://grenze.cn/"/>
-  <updated>2019-12-13T14:58:39.850Z</updated>
+  <updated>2019-12-15T15:51:29.145Z</updated>
   <id>http://grenze.cn/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++11智能指针</title>
+    <link href="http://grenze.cn/archives/73ac48ad.html"/>
+    <id>http://grenze.cn/archives/73ac48ad.html</id>
+    <published>2019-12-15T15:46:13.000Z</published>
+    <updated>2019-12-15T15:51:29.145Z</updated>
+    
+    <content type="html"><![CDATA[<p>显式管理内存在是能上有优势，但容易出错。<br>C++11提供智能指针的数据类型，对垃圾回收技术提供了一些支持，实现一定程度的内存管理</p><p>C++11的智能指针:<br><strong>unique_ptr</strong> ：不允许多个指针共享资源，可以用标准库中的move函数转移指针</p><p><strong>shared_ptr</strong>：多个指针共享资源</p><p><strong>weak_ptr</strong> ：可复制shared_ptr，但其构造或者释放对资源不产生影响</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;显式管理内存在是能上有优势，但容易出错。&lt;br&gt;C++11提供智能指针的数据类型，对垃圾回收技术提供了一些支持，实现一定程度的内存管理&lt;/p&gt;
+&lt;p&gt;C++11的智能指针:&lt;br&gt;&lt;strong&gt;unique_ptr&lt;/strong&gt; ：不允许多个指针共享资源，可以用标准库
+      
+    
+    </summary>
+    
+    
+      <category term="C++" scheme="http://grenze.cn/categories/C/"/>
+    
+    
+      <category term="C++" scheme="http://grenze.cn/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>MOSFET</title>
@@ -482,30 +509,6 @@
     
     
       <category term="Verilog HDL" scheme="http://grenze.cn/tags/Verilog-HDL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Maxwell equation</title>
-    <link href="http://grenze.cn/archives/37625.html"/>
-    <id>http://grenze.cn/archives/37625.html</id>
-    <published>2019-04-05T14:22:47.000Z</published>
-    <updated>2019-12-05T17:11:31.119Z</updated>
-    
-    <content type="html"><![CDATA[<p>$$<br>\begin{eqnarray}<br>\nabla\cdot\vec{E} &amp;=&amp; \frac{\rho}{\epsilon_0} \<br>\nabla\cdot\vec{B} &amp;=&amp; 0 \<br>\nabla\times\vec{E} &amp;=&amp; -\frac{\partial B}{\partial t} \<br>\nabla\times\vec{B} &amp;=&amp; \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right)<br>\end{eqnarray}<br>$$</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;$$&lt;br&gt;\begin{eqnarray}&lt;br&gt;\nabla\cdot\vec{E} &amp;amp;=&amp;amp; \frac{\rho}{\epsilon_0} \&lt;br&gt;\nabla\cdot\vec{B} &amp;amp;=&amp;amp; 0 \&lt;br&gt;\nabla\times\
-      
-    
-    </summary>
-    
-    
-    
-      <category term="Microwave" scheme="http://grenze.cn/tags/Microwave/"/>
     
   </entry>
   
