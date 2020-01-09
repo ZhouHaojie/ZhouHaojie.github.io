@@ -252,6 +252,37 @@
       </tags>
   </entry>
   <entry>
+    <title>Penalty Function Methods</title>
+    <url>/archives/982c1b29.html</url>
+    <content><![CDATA[<h3 id="Penalty-Function-Methods-惩罚函数"><a href="#Penalty-Function-Methods-惩罚函数" class="headerlink" title="Penalty Function Methods(惩罚函数)"></a>Penalty Function Methods(惩罚函数)</h3><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>根据约束条件的特点，构造 Penalty Function, 将其加入到目标函数中，将约束函数的求解转换为一系列无约束问题的求解。“惩罚”是指在求解过程中，那些违反约束的迭代点会得到很大的目标函数值。</p>
+<a id="more"></a>
+
+<h3 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h3><p>Original Problem</p>
+<p>$\begin{aligned} \min <em>{\underline{\theta}}{J(\underline{\theta})} &amp; \text { s.t. } c</em>{i}=0, \quad i \in \mathcal{E} \quad等式约束 \ &amp; c_{i} \geq 0, \quad i \in \mathcal{J} \quad 不等式约束 \end{aligned}$  </p>
+<p>将上述问题转化为非约束问题:</p>
+<p>$\begin{aligned} \min <em>{\underline{\theta}}{\tilde{J}}=\min _{\underline{\theta}}\left{J+\frac{\mu}{2} \sum</em>{i \in \mathcal{E}} c_{i}(\underline{\theta})^{2}+\frac{\mu}{2} \sum_{i \in \mathcal{J}}\left(\max \left{0,-c_{i}(\underline{\theta})\right}\right)^{2}\right}\end{aligned}$ </p>
+<h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><img src="/archives/982c1b29/image-20191225162602025.png" alt="image-20191225162602025" style="zoom: 50%;">
+
+<h3 id="惩罚因子-mu-的选取"><a href="#惩罚因子-mu-的选取" class="headerlink" title="惩罚因子 $\mu$ 的选取"></a>惩罚因子 $\mu$ 的选取</h3><p>一开始取一个小的$\mu_0$ ，求解$min{\tilde{J}}$的解是否符合精度要求，若不，则放大$\mu_0$成$\mu_1$ ，重复这一过程，直到得到符合要求的近似解。</p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>Contour plots of $J=\theta_1 +\theta_2$ with $c: \theta_1^2+\theta_2^2-2=0$ for diffirent $\mu$ </p>
+<img src="/archives/982c1b29/image-20191225164636301.png" alt="image-20191225164636301" style="zoom:50%;">
+
+<p>可以看出随着$\mu$的增大，得到的点越靠近精确解</p>
+<h3 id="Remark"><a href="#Remark" class="headerlink" title="Remark"></a>Remark</h3><ol>
+<li>If each iterate 𝑘𝑘 yields a global minimizer of the approximated problem, then the limit of the algorithm yields the global solution of the constrained problem.</li>
+<li>The Hessian may be ill conditioned and hence the solution may converge poorly. $\mu$越大，计算量越大，甚至有的无法求解</li>
+<li>The solution may move away from the feasible region when the penalty parameter is not large enough</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Optimization of Dynamic Systems</category>
+        <category>constrained Parameter Optimization</category>
+      </categories>
+      <tags>
+        <tag>Optimization of Dynamic Systems</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>结构化绑定声明</title>
     <url>/archives/e70dd349.html</url>
     <content><![CDATA[<h4 id="1-What-is-“structured-binding-declaration”-什么是结构化绑定声明"><a href="#1-What-is-“structured-binding-declaration”-什么是结构化绑定声明" class="headerlink" title="1. What is “structured binding declaration”? (什么是结构化绑定声明)"></a>1. What is “structured binding declaration”? (什么是结构化绑定声明)</h4><ul>
