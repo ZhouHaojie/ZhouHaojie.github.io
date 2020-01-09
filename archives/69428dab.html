@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|Cinzel Decorative:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Phase ModelsWhat is a phase model? sequence of working tasks(design steps, phase concept)  according activities  definition of expected results  criteria for completion of tasks  According budget and">
+<meta name="keywords" content="Lifecycle Models">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lifecycle Models">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;69428dab.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="Phase ModelsWhat is a phase model? sequence of working tasks(design steps, phase concept)  according activities  definition of expected results  criteria for completion of tasks  According budget and">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="c:&#x2F;Blog&#x2F;source&#x2F;_posts&#x2F;Lifecycle%20Models.assets&#x2F;image-20200109161343900.png">
+<meta property="og:image" content="c:&#x2F;Blog&#x2F;source&#x2F;_posts&#x2F;Lifecycle%20Models.assets&#x2F;image-20200108212237558.png">
+<meta property="og:image" content="c:&#x2F;Blog&#x2F;source&#x2F;_posts&#x2F;Lifecycle%20Models.assets&#x2F;image-20200108213218560.png">
+<meta property="og:image" content="c:&#x2F;Blog&#x2F;source&#x2F;_posts&#x2F;Lifecycle%20Models.assets&#x2F;image-20200108214542200.png">
+<meta property="og:image" content="c:&#x2F;Blog&#x2F;source&#x2F;_posts&#x2F;Lifecycle%20Models.assets&#x2F;image-20200108214710885.png">
+<meta property="og:image" content="c:&#x2F;Blog&#x2F;source&#x2F;_posts&#x2F;Lifecycle%20Models.assets&#x2F;image-20200108215041493.png">
+<meta property="og:image" content="c:&#x2F;Blog&#x2F;source&#x2F;_posts&#x2F;Lifecycle%20Models.assets&#x2F;image-20200109101808579.png">
+<meta property="og:image" content="c:&#x2F;Blog&#x2F;source&#x2F;_posts&#x2F;Lifecycle%20Models.assets&#x2F;image-20200109102605277.png">
+<meta property="og:image" content="c:&#x2F;Blog&#x2F;source&#x2F;_posts&#x2F;Lifecycle%20Models.assets&#x2F;image-20200109114650771.png">
+<meta property="og:image" content="c:&#x2F;Blog&#x2F;source&#x2F;_posts&#x2F;Lifecycle%20Models.assets&#x2F;image-20200109143954157.png">
+<meta property="og:image" content="c:&#x2F;Blog&#x2F;source&#x2F;_posts&#x2F;Lifecycle%20Models.assets&#x2F;image-20200109151028770.png">
+<meta property="og:image" content="c:&#x2F;Blog&#x2F;source&#x2F;_posts&#x2F;Lifecycle%20Models.assets&#x2F;image-20200109161044105.png">
+<meta property="og:image" content="c:&#x2F;Blog&#x2F;source&#x2F;_posts&#x2F;Lifecycle%20Models.assets&#x2F;image-20200109154039415.png">
+<meta property="og:image" content="c:&#x2F;Blog&#x2F;source&#x2F;_posts&#x2F;Lifecycle%20Models.assets&#x2F;image-20200109154837513.png">
+<meta property="og:image" content="c:&#x2F;Blog&#x2F;source&#x2F;_posts&#x2F;Lifecycle%20Models.assets&#x2F;image-20200109155042572.png">
+<meta property="og:updated_time" content="2020-01-09T15:20:06.338Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:&#x2F;Blog&#x2F;source&#x2F;_posts&#x2F;Lifecycle%20Models.assets&#x2F;image-20200109161343900.png">
+
+<link rel="canonical" href="http://grenze.cn/archives/69428dab.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Lifecycle Models | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">33</span></a>
+
+  </li>
+        <li class="menu-item menu-item-top">
+
+    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热榜</a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/69428dab.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Lifecycle Models
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-08 21:08:44" itemprop="dateCreated datePublished" datetime="2020-01-08T21:08:44+01:00">2020-01-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-09 16:20:06" itemprop="dateModified" datetime="2020-01-09T16:20:06+01:00">2020-01-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Systems-and-Software-Engineering/" itemprop="url" rel="index">
+                    <span itemprop="name">Systems and Software Engineering</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Systems-and-Software-Engineering/Lifecycle-Models/" itemprop="url" rel="index">
+                    <span itemprop="name">Lifecycle Models</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Phase-Models"><a href="#Phase-Models" class="headerlink" title="Phase Models"></a>Phase Models</h3><p>What is a phase model?</p>
+<p>sequence of working tasks(design steps, phase concept)</p>
+<ul>
+<li>according activities </li>
+<li>definition of expected results </li>
+<li>criteria for completion of tasks </li>
+<li>According budget and schedule</li>
+</ul>
+<a id="more"></a>
+
+<p><strong>SDLC: System Development Life Cycle</strong></p>
+<p>Describes a process for planning, creating, testing, maintenance and deploying a system. The system can be composed of hardware only, software only, or a combination of both</p>
+<img src="C:\Blog\source\_posts\Lifecycle Models.assets\image-20200109161343900.png" alt="image-20200109161343900" style="zoom:50%;">
+
+<h4 id="Waterfall-Model"><a href="#Waterfall-Model" class="headerlink" title="Waterfall Model"></a>Waterfall Model</h4><img src="C:\Blog\source\_posts\Lifecycle Models.assets\image-20200108212237558.png" alt="image-20200108212237558" style="zoom: 33%;">
+
+<p><strong>Pros:</strong></p>
+<ul>
+<li>simple and easy to understand and use</li>
+<li>easy to manage</li>
+<li>works well for <em>smaller projects</em> </li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>No working software is produced until late during the life cycle</li>
+<li>High amounts of risk and uncertainty</li>
+<li>Not a good model  for complex and object-oriented project</li>
+</ul>
+<h4 id="Spiral-Model"><a href="#Spiral-Model" class="headerlink" title="Spiral Model"></a>Spiral Model</h4><p>Spiral Model is a generalization of the waterfall model and is an iterative model.</p>
+<img src="C:\Blog\source\_posts\Lifecycle Models.assets\image-20200108213218560.png" alt="image-20200108213218560" style="zoom: 33%;">
+
+<p>Initiating and terminating the spiral:</p>
+<ul>
+<li><p>Initiating the process</p>
+<p>The spiral gets started by a hypothesis that a particular operational mission could be improved by a software effort.</p>
+</li>
+<li><p>Terminating the process</p>
+<p>The spiral process involves a test of this hypothesis: At any time, if the hypothesis fails the test, the spiral is terminated.</p>
+</li>
+</ul>
+<p>Advantages:</p>
+<ul>
+<li>Estimates (budget, schedule) become more and more realistic as work progresses.</li>
+<li>Software engineers can get their hands in and start working on a project earlier. </li>
+<li>Easier to cope with the changes inherent to software development.</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>Highly customized limiting re-usability because different for each application.</li>
+<li>Estimates of budget and time are harder to judge at the beginning of the project since the requirements evolve through the process.</li>
+<li>Risk of not meeting initial budget or schedule</li>
+</ul>
+<h4 id="Y-Diagram"><a href="#Y-Diagram" class="headerlink" title="Y-Diagram"></a>Y-Diagram</h4><p>The Y-Diagram depicts(描绘) the different perspectives in the hardware design(VLSI). Mostly, it is used for the development of IC.</p>
+<img src="C:\Blog\source\_posts\Lifecycle Models.assets\image-20200108214542200.png" alt="image-20200108214542200" style="zoom: 33%;">
+
+<img src="C:\Blog\source\_posts\Lifecycle Models.assets\image-20200108214710885.png" alt="image-20200108214710885" style="zoom: 33%;">
+
+<p><strong>Global transformation</strong>: The general model for the designing process is based on a sequence of transformation steps and level (or view) changes with every step. </p>
+<p><strong>Local transformation</strong>: The design is often optimized or verified on a given level. Since there is no level or view change.</p>
+<img src="C:\Blog\source\_posts\Lifecycle Models.assets\image-20200108215041493.png" alt="image-20200108215041493" style="zoom: 33%;">
+
+<h4 id="V-Model"><a href="#V-Model" class="headerlink" title="V-Model"></a>V-Model</h4><p>The V-Model is an internationally recognized development standard for IT systems.</p>
+<img src="C:\Blog\source\_posts\Lifecycle Models.assets\image-20200109101808579.png" alt="image-20200109101808579" style="zoom: 33%;">
+
+<h5 id="The-Sub-Models"><a href="#The-Sub-Models" class="headerlink" title="The Sub-Models"></a>The Sub-Models</h5><p>Four sub-models are closely linked to on another and influence each other concerning the exchange of products/results.</p>
+<p>PM: Project Management</p>
+<p>SD: System Development</p>
+<p>QA: Quality Assurance</p>
+<p>CM: Configuration Management</p>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li>Does not handle iterations </li>
+<li>Does not easily handle dynamic changes in requirements </li>
+<li>Does not contain risk analysis activities</li>
+</ul>
+<h4 id="Prototyping-Model"><a href="#Prototyping-Model" class="headerlink" title="Prototyping Model"></a>Prototyping Model</h4><p>Naturally, Waterfall and V-Model assume their requirements specification as complete and consistent after their specification phase and are therefore rather strict.</p>
+<p>A prototype demonstrates selected characteristic features of the product in practical use</p>
+<img src="C:\Blog\source\_posts\Lifecycle Models.assets\image-20200109102605277.png" alt="image-20200109102605277" style="zoom: 33%;">
+
+<p>Advantages:</p>
+<ul>
+<li>Reduced time and costs for first example </li>
+<li>Speed for first examples Improved and increased user involvement</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>Insufficient analysis </li>
+<li>User confusion of prototype and finished system </li>
+<li>Excessive development time of the prototype </li>
+<li>Expense of implementing prototyping</li>
+</ul>
+<h4 id="Agile-Model-敏捷性模型"><a href="#Agile-Model-敏捷性模型" class="headerlink" title="Agile Model(敏捷性模型)"></a><a href="https://www.cnblogs.com/edisonchou/p/5187346.html" rel="external nofollow noopener noreferrer" target="_blank">Agile Model(敏捷性模型)</a></h4><p>Main points:(敏捷开发宣言内容)</p>
+<ul>
+<li>Individuals and interactions(个体与交互) &gt;(胜过)        processes and tools</li>
+<li>Working software                                         &gt;                  comprehensive documentation</li>
+<li>customer collaboration(客户协作)             &gt;                  contract negotiation(合同谈判)</li>
+<li>Responding to change                                 &gt;                  following a plan</li>
+</ul>
+<p><strong>Life Cycle</strong></p>
+<img src="C:\Blog\source\_posts\Lifecycle Models.assets\image-20200109114650771.png" alt="image-20200109114650771" style="zoom: 50%;">
+
+<h5 id="Scrum-Roles-Scrum-团队成员"><a href="#Scrum-Roles-Scrum-团队成员" class="headerlink" title="Scrum - Roles(Scrum 团队成员)"></a>Scrum - Roles(Scrum 团队成员)</h5><p>Scrum is an agile, lightweight process for managing and controlling software and product development in rapidly changing environments.</p>
+<p>敏捷开发是一种软件开发方法，基于迭代和增量开发，通过自组织，跨团队，沟通协作完成开发工作。</p>
+<ul>
+<li><p>Scrum Master</p>
+<ul>
+<li>Represents management to the project and vice  versa</li>
+<li>Typically filed(提交) by a project manager</li>
+<li>Responsible for enacting scrum values and practices</li>
+<li>Acts as moderator and coach</li>
+<li>Guiding and protecting the team</li>
+</ul>
+</li>
+<li><p>Scrum Team:</p>
+<ul>
+<li>Typically 5-10 people </li>
+<li>Cross-functional (QA, programmers, UI designers etc.) </li>
+<li>Team is self-organizing </li>
+<li>Membership can only change between sprints</li>
+</ul>
+</li>
+<li><p>Product Owner:</p>
+<ul>
+<li>Acts like one voice </li>
+<li>Is responsible for product features and backlog </li>
+<li>Typically a product manager -&gt;  knows what needs to be build and in which order</li>
+</ul>
+</li>
+</ul>
+<p><strong>Sprint Meeting(Sprint 会议)</strong></p>
+<img src="C:\Blog\source\_posts\Lifecycle Models.assets\image-20200109143954157.png" alt="image-20200109143954157" style="zoom: 50%;">
+
+<ol>
+<li><p>Daily Scrum Meeting (每日站立会议)</p>
+<ul>
+<li>Is a short (15 min) meeting, which is held dead on time everyday before the Team starts working 会议时长为15分钟，会议应在固定地点和每天的同一时间举行</li>
+<li>Participants: Scrum Master, Scrum Team</li>
+<li>Every Team member should answer on 3 questions<ul>
+<li>What did you do since the last scrum? 昨天你完成了那些工作？</li>
+<li>What are you doing until the next scrum? 今天你打算做什么？</li>
+<li>What is stopping you getting on with the work? 完成你的目标是否存在什么障碍？（Scrum主管需要记下这些障碍）</li>
+</ul>
+</li>
+</ul>
+<img src="C:\Blog\source\_posts\Lifecycle Models.assets\image-20200109151028770.png" alt="image-20200109151028770" style="zoom: 50%;">
+</li>
+<li><p>Sprint Planning Meeting (Sprint 计划会议)</p>
+<ul>
+<li>select what work is to be done</li>
+<li>prepare the Sprint Backlog(需求) that details the time it will take to do that work, with the entire team</li>
+<li>Identify and communicate how much of the work is likely to be done during the current sprint</li>
+<li>8 hours limited<ul>
+<li>(1st 4 hours) Entire team: dialog for prioritizing the product Backlog</li>
+<li>(2nd 4 hours) Development team: hashing out a plan for the sprint, resulting in the sprint backlog</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Sprint Review Meeting (评审会议)</p>
+<ul>
+<li>Is held at the end of each Sprint 评审会议在每个迭代结束后举行，在会议上团队演示此次迭代中完成了那些工作，一般会有相关的DEMO演示。</li>
+<li>Business functionality which was created during the Sprint is demonstrated to the Product Owner Informal, should not distract team of doing its work</li>
+</ul>
+</li>
+<li><p>Pre-Project/Kickoff Meeting</p>
+<ul>
+<li>A special form of Sprint Planning Meeting</li>
+<li>Meeting before the begin of the project</li>
+</ul>
+</li>
+</ol>
+<p><strong>User Stories (用户故事)</strong> </p>
+<p>a user story is one or more sentences in the everyday or business language of the end user or user of a system that captures what a user does or needs to do as part of his or her job function. <strong>‘who’, ‘what’, ‘why’</strong> .</p>
+<p>As far as now, the most common way of tackling(解决) agile product management is to create some User Stories and then split them into tasks.</p>
+<p><strong>Themes, Epics, User Stories, Tasks</strong> </p>
+<p>Sometimes the User Story is too big for being delivered in a sprint. To solve this, you have to use the Epic concept.</p>
+<img src="C:\Blog\source\_posts\Lifecycle Models.assets\image-20200109161044105.png" alt="image-20200109161044105" style="zoom:50%;">
+
+<p><strong>Scrum Artifacts</strong> (文档)</p>
+<ul>
+<li>Product Backlog<ul>
+<li>Requirements for a system, expressed as a prioritized list of backlog Items (Spreadsheet) 整个系统的需求文档，有优先级的描述(电子表格) / Is not exact粗略</li>
+<li>Is managed and owned by a Product Owner</li>
+<li>can be changed and re-prioritized before each PM</li>
+</ul>
+</li>
+</ul>
+<img src="C:\Blog\source\_posts\Lifecycle Models.assets\image-20200109154039415.png" alt="image-20200109154039415" style="zoom:50%;">
+
+<ul>
+<li><p>Estimation of Product Backlog Items(产品订单的估算)</p>
+<ul>
+<li>Establishes team’s velocity</li>
+<li>Determining units of complexity(story points, work days/hours)</li>
+<li>Methods of estimation</li>
+</ul>
+</li>
+<li><p>Sprint Backlog</p>
+<ul>
+<li>Sprint Backlog is a <strong>subset</strong> of Product Backlog Items, which defines the work for a Sprint<ul>
+<li>Is created ONLY by Team members </li>
+<li>Each Item has it’s own status </li>
+<li>Should be updated every day</li>
+</ul>
+</li>
+<li>Sprint Backlog<ul>
+<li>No more then 300 tasks in the list </li>
+<li>If a task requires more than 16 hours, it should be broken down </li>
+<li>Team can add or subtract items from the list. </li>
+<li>Product Owner is not allowed to do it. </li>
+<li>It’s a FORECAST! It’s a good warning monitor</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Burn Down Charts(燃尽图)</p>
+<p>A burn down chart is a graphical representation of work left to do versus time 显示当前冲刺中未完成的任务数目</p>
+<img src="C:\Blog\source\_posts\Lifecycle Models.assets\image-20200109154837513.png" alt="image-20200109154837513" style="zoom: 50%;">
+
+</li>
+</ul>
+<p><strong>Scrum Board</strong> </p>
+<img src="C:\Blog\source\_posts\Lifecycle Models.assets\image-20200109155042572.png" alt="image-20200109155042572" style="zoom:50%;">
+
+<p>Advantages:</p>
+<ul>
+<li>Completely developed and tested features in short iterations </li>
+<li>Simplicity of the process </li>
+<li>Clearly defined rules </li>
+<li>Increasing productivity </li>
+<li>Self-organizing each team member carries a lot of responsibility improved communication</li>
+</ul>
+<p>Drawbacks:</p>
+<ul>
+<li>“Undisciplined hacking” (no written documentation) </li>
+<li>Violation of responsibility </li>
+<li>Current mainly carried by the inventors </li>
+<li>Focused on SW mainly</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/69428dab.html" title="Lifecycle Models">http://grenze.cn/archives/69428dab.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Lifecycle-Models/" rel="tag"><i class="fa fa-tag"></i> Lifecycle Models</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/e70dd349.html" rel="prev" title="结构化绑定声明">
+      <i class="fa fa-chevron-left"></i> 结构化绑定声明
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Phase-Models"><span class="nav-number">1.</span> <span class="nav-text">Phase Models</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Waterfall-Model"><span class="nav-number">1.1.</span> <span class="nav-text">Waterfall Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spiral-Model"><span class="nav-number">1.2.</span> <span class="nav-text">Spiral Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Y-Diagram"><span class="nav-number">1.3.</span> <span class="nav-text">Y-Diagram</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#V-Model"><span class="nav-number">1.4.</span> <span class="nav-text">V-Model</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#The-Sub-Models"><span class="nav-number">1.4.1.</span> <span class="nav-text">The Sub-Models</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Prototyping-Model"><span class="nav-number">1.5.</span> <span class="nav-text">Prototyping Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Agile-Model-敏捷性模型"><span class="nav-number">1.6.</span> <span class="nav-text">Agile Model(敏捷性模型)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Scrum-Roles-Scrum-团队成员"><span class="nav-number">1.6.1.</span> <span class="nav-text">Scrum - Roles(Scrum 团队成员)</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">56k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">51 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: '1c3d29b2a07bda1a3712bd3a412c92c2',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
