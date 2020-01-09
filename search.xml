@@ -237,6 +237,94 @@
       </tags>
   </entry>
   <entry>
+    <title>Quadratic Programming</title>
+    <url>/archives/5b75db85.html</url>
+    <content><![CDATA[<h3 id="Definitions"><a href="#Definitions" class="headerlink" title="Definitions"></a>Definitions</h3><p>Lagrange</p>
+<script type="math/tex; mode=display">
+L(\underline{\theta}, \underline{\lambda})=J(\underline{\theta})-\sum_{i \in \mathcal{E} \cup \mathcal{I}} \lambda_{i} c_{i}(\underline{\theta})</script><p>Lagrange multiplier</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\underline{\lambda}=&\left[\lambda_{1}, \ldots, \lambda_{i}, \ldots\right]^{T} \\
+& i \in \mathcal{E} \cup \mathcal{I}
+\end{aligned}</script><p><strong>Active Set</strong>（积极约束集）</p>
+<p>The active set $\mathcal{A}(\underline{\theta})$ at any feasible point $\underline{\theta}$ consists of the equality constraints $\mathcal{E}$ and the inequality constraints $\mathcal{J}$ for which $c_{i}(\underline{\theta})=0$ : </p>
+<script type="math/tex; mode=display">
+\mathcal{A}(\underline{\theta})=\varepsilon \cup\left\{i \in \mathcal{J} | c_{i}(\underline{\theta})=0\right\}</script><p><strong>Linear Independence of Constraints</strong></p>
+<p>The active set $\mathcal{A}(\underline{\theta})$ is said to be linear independent if the gradient vectors</p>
+<script type="math/tex; mode=display">
+\left\{\frac{d c_{i}(\underline{\theta})}{d \underline{\theta}}, i \in \mathcal{A}(\underline{\theta})\right\}</script><p>are linear independent.</p>
+<p><strong>Working Set</strong></p>
+<p>$\mathcal{W}^{(k)} \subseteq \mathcal{A}(\underline{\theta}^{(k)})$ at point $\underline{\theta}^{(k)}$ 是 active set 的子集</p>
+<p>Working set 必须包含所有的等式约束，一些不等式约束可以被忽略</p>
+<h3 id="KKT-Conditions-first-order-necessary-conditions"><a href="#KKT-Conditions-first-order-necessary-conditions" class="headerlink" title="KKT Conditions(first order necessary conditions)"></a>KKT Conditions(first order necessary conditions)</h3><script type="math/tex; mode=display">
+L(\underline{\theta}, \underline{\lambda})=J(\underline{\theta})-\sum_{i \in \mathcal{E}} \lambda_{i} c_{i}(\underline{\theta})-\sum_{i \in \mathcal{I}} \lambda_{i} c_{i}(\underline{\theta})</script><script type="math/tex; mode=display">
+\begin{aligned}
+\frac{d L(\underline{\theta}, \underline{\lambda})}{d \underline{\theta}} |_{{\underline{\theta}^*},\underline{\lambda}^*} &=\underline{0} & \\
+\lambda_{i}^{*} c_{i}\left(\underline{\theta}^{*}\right) &=0 & & i \in I \cup E \\
+\lambda_{i}^{*} & \geq 0 & & i \in I \\
+c_{i}\left(\underline{\theta}^{*}\right) & \geq 0 & & i \in I \\
+c_{i}\left(\underline{\theta}^{*}\right) &=0 & & i \in E
+\end{aligned}
+$$
+
+### Equality Constrained QP(EQP)
+
+$$
+L(\underline{\theta}, \underline{\lambda})=J(\underline{\theta})-\sum_{i \in \mathcal{E}} \lambda_{i} c_{i}(\underline{\theta})</script><p>等式约束的KKT条件：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{d L(\underline{\theta}, \underline{\lambda})}{d \underline{\theta}} |_{{\underline{\theta}^*},\underline{\lambda}^*} ={0} & \\
+c_i(\underline{\theta}^*) =0 & & i \in E
+
+\end{aligned}
+$$
+i.e.
+$$
+J(\underline{\theta})=\frac{1}{2} \underline{\theta}^{T} \underline{G} \underline{\theta}+\underline{\theta}^{T} \underline{d}
+$$
+subject to $\underline{a}_{i}^{T} \underline{\theta}=b_{i}$, $i \in \mathcal{E}$ or $\underline{A}\underline{\theta}=b$ with
+$$
+\underset{(m, n)}{\underline{A}}=\left[a_{i}^{T}\right], \quad \underset{(m, 1)}{\underline{b}}=\left[b_{i}\right], \quad i \in \mathcal{E}</script><p>  The KKT condition for a solution of the EQP(根据两个KKT等式) is </p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{cc}
+{\underline{G}} & {-\underline{A}^{T}} \\
+{\underline{A}} & {\underline{0}}
+\end{array}\right]\left[\begin{array}{cc}{\underline{\theta}^{*}}\\
+{\underline{\lambda}^*} \end{array}\right]=\left[\begin{array}{c}
+{-\underline{d}} \\
+{\underline{b}}
+\end{array}\right]</script><p>为计算方便，重写等式：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{cc}
+{\underline{G}} & {\underline{A}^{T}} \\
+{\underline{A}} & {\underline{0}}
+\end{array}\right]\left[\begin{array}{c}
+{-\underline{p}} \\
+{\underline{\lambda}^{*}}
+\end{array}\right]=\left[\begin{array}{c}
+{\underline{g}} \\
+{\underline{h}}
+\end{array}\right]</script><script type="math/tex; mode=display">
+\left[\begin{array}{c}
+{-\underline{p}} \\
+{\underline{\lambda}^{*}}
+\end{array}\right]=\underline{K}^{-1}\left[\begin{array}{c}
+{\underline{g}} \\
+{\underline{h}}
+\end{array}\right]</script><p>The KKT Matrix $\underline K:=\left[\begin{array}{cc}<br>{\underline{G}} &amp; {\underline{A}^{T}} \\<br>{\underline{A}} &amp; {\underline{0}}<br>\end{array}\right]$has to be nonsingular and</p>
+<p>$\underline{h}=\underline{A} \underline{\theta}-\underline{b}, \quad \underline{g}=\underline{d}+\underline{G} \underline{\theta}, \quad \underline{p}=\underline{\theta}^{*}-\underline{\theta}$</p>
+<h3 id="Inequality-Constrained-QP-IQP"><a href="#Inequality-Constrained-QP-IQP" class="headerlink" title="Inequality Constrained QP(IQP)"></a>Inequality Constrained QP(IQP)</h3><h4 id="Idea"><a href="#Idea" class="headerlink" title="Idea:"></a>Idea:</h4><p>reduce the IQP into a EQP by calculating the active set</p>
+<p><img src="/archives/5b75db85/image-20200102200605187.png" alt="image-20200102200605187" style="zoom:50%;"></p>
+]]></content>
+      <categories>
+        <category>Optimization of Dynamic Systems</category>
+        <category>constrained Parameter Optimization</category>
+      </categories>
+      <tags>
+        <tag>Optimization of Dynamic Systems</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Penalty Function Methods</title>
     <url>/archives/982c1b29.html</url>
     <content><![CDATA[<h3 id="Penalty-Function-Methods-惩罚函数"><a href="#Penalty-Function-Methods-惩罚函数" class="headerlink" title="Penalty Function Methods(惩罚函数)"></a>Penalty Function Methods(惩罚函数)</h3><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>根据约束条件的特点，构造 Penalty Function, 将其加入到目标函数中，将约束函数的求解转换为一系列无约束问题的求解。“惩罚”是指在求解过程中，那些违反约束的迭代点会得到很大的目标函数值。</p>
