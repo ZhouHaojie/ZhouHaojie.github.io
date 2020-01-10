@@ -237,6 +237,19 @@
       </tags>
   </entry>
   <entry>
+    <title>Quadratic Programming</title>
+    <url>/archives/5b75db85.html</url>
+    <content><![CDATA[<h3 id="Definitions"><a href="#Definitions" class="headerlink" title="Definitions"></a>Definitions</h3><p>Lagrange</p>
+<script type="math/tex; mode=display">L(\underline{\theta}, \underline{\lambda})=J(\underline{\theta})-\sum_{i \in \mathcal{E} \cup \mathcal{I}} \lambda_{i} c_{i}(\underline{\theta})</script>]]></content>
+      <categories>
+        <category>Optimization of Dynamic Systems</category>
+        <category>constrained Parameter Optimization</category>
+      </categories>
+      <tags>
+        <tag>Optimization of Dynamic Systems</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Penalty Function Methods</title>
     <url>/archives/982c1b29.html</url>
     <content><![CDATA[<h3 id="Penalty-Function-Methods-惩罚函数"><a href="#Penalty-Function-Methods-惩罚函数" class="headerlink" title="Penalty Function Methods(惩罚函数)"></a>Penalty Function Methods(惩罚函数)</h3><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>根据约束条件的特点，构造 Penalty Function, 将其加入到目标函数中，将约束函数的求解转换为一系列无约束问题的求解。“惩罚”是指在求解过程中，那些违反约束的迭代点会得到很大的目标函数值。</p>
