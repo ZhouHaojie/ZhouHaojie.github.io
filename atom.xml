@@ -53,9 +53,9 @@
     <link href="http://grenze.cn/archives/5b75db85.html"/>
     <id>http://grenze.cn/archives/5b75db85.html</id>
     <published>2019-12-25T16:24:05.000Z</published>
-    <updated>2020-01-10T11:13:35.920Z</updated>
+    <updated>2020-01-10T11:20:02.621Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="Definitions"><a href="#Definitions" class="headerlink" title="Definitions"></a>Definitions</h3><p>Lagrange</p><script type="math/tex; mode=display">L(\underline{\theta}, \underline{\lambda})=J(\underline{\theta})-\sum_{i \in \mathcal{E} \cup \mathcal{I}} \lambda_{i} c_{i}(\underline{\theta})</script>]]></content>
+    <content type="html"><![CDATA[<h3 id="Definitions"><a href="#Definitions" class="headerlink" title="Definitions"></a>Definitions</h3><p>Lagrange</p><script type="math/tex; mode=display">L(\underline{\theta}, \underline{\lambda})=J(\underline{\theta})-\sum_{i \in \mathcal{E} \cup \mathcal{I}} \lambda_{i} c_{i}(\underline{\theta})</script><p>Lagrange multiplier</p><script type="math/tex; mode=display">\begin{aligned}\underline{\lambda}=&\left[\lambda_{1}, \ldots, \lambda_{i}, \ldots\right]^{T} ,  i \in \mathcal{E} \cup \mathcal{I}\end{aligned}</script><p><strong>Active Set</strong>（积极约束集）</p><p>The active set $\mathcal{A}(\underline{\theta})$ at any feasible point $\underline{\theta}$ consists of the equality constraints $\mathcal{E}$ and the inequality constraints $\mathcal{J}$ for which $c_{i}(\underline{\theta})=0$ : </p><script type="math/tex; mode=display">\mathcal{A}(\underline{\theta})=\varepsilon \cup\left\{i \in \mathcal{J} | c_{i}(\underline{\theta})=0\right\}</script>]]></content>
     
     <summary type="html">
     
