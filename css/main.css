@@ -158,7 +158,7 @@ body {
   background: #eee;
   color: #555;
   font-family: 'EB Garamond', "Noto Serif SC", sans-serif;
-  font-size: 0.975em;
+  font-size: 0.9em;
   line-height: 2;
 }
 @media (max-width: 991px) {
@@ -173,7 +173,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Cinzel Decorative', 'EB Garamond', "Noto Serif SC", sans-serif;
+  font-family: 'EB Garamond', 'EB Garamond', "Noto Serif SC", sans-serif;
   font-weight: bold;
   line-height: 1.5;
   margin: 20px 0 15px;
@@ -1046,7 +1046,7 @@ pre .javascript .function {
 }
 .site-title {
   display: inline-block;
-  font-family: 'Cinzel Decorative', 'EB Garamond', "Noto Serif SC", sans-serif;
+  font-family: 'EB Garamond', 'EB Garamond', "Noto Serif SC", sans-serif;
   font-size: 1.375em;
   font-weight: normal;
   line-height: 1.5;
@@ -1239,7 +1239,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff65ff;
+  background: #ff24d4;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3017,4 +3017,7 @@ span.exturl {
   color: #5073b8;
   border-bottom: none;
   text-decoration: none;
+}
+.post-body p {
+  margin: 0 0 2px 0;
 }
