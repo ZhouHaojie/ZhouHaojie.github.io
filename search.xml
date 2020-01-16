@@ -1,7 +1,336 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Lifecycle Models</title>
+    <title>Lifecycle Models-Creativity techniques</title>
+    <url>/archives/dbd33824.html</url>
+    <content><![CDATA[<h3 id="Creativity-continued"><a href="#Creativity-continued" class="headerlink" title="Creativity continued"></a>Creativity continued</h3><h4 id="Brainstorming"><a href="#Brainstorming" class="headerlink" title="Brainstorming"></a>Brainstorming</h4><p>RULE:</p>
+<ol>
+<li>“Never say no”</li>
+<li>“There are no bad ideas”</li>
+<li>“Defer judgment”</li>
+<li>“Avoid Buzzwords”</li>
+<li>“Be energized”</li>
+<li>“Be supportive”</li>
+</ol>
+<a id="more"></a>
+<h4 id="Mindmapping"><a href="#Mindmapping" class="headerlink" title="Mindmapping"></a>Mindmapping</h4><p>Example of Mind Map for SCRUM</p>
+<p><img src="/archives/dbd33824/image-20200116135407729.png" style="zoom:50%;"></p>
+<h4 id="SWOT-Analysis"><a href="#SWOT-Analysis" class="headerlink" title="SWOT Analysis"></a>SWOT Analysis</h4><p><img src="/archives/dbd33824/image-20200116135501618.png" style="zoom:50%;"></p>
+<p>Example: “Replay Plastics”</p>
+<p><img src="/archives/dbd33824/image-20200116135627358.png" style="zoom: 50%;"></p>
+<p><img src="/archives/dbd33824/image-20200116135731436.png" style="zoom:50%;"></p>
+<h3 id="Morphological-analysis"><a href="#Morphological-analysis" class="headerlink" title="Morphological analysis"></a>Morphological analysis</h3><ul>
+<li><p>Combination to actionable concepts </p>
+<ul>
+<li>A morphological box is defined as a two-dimensional matrix solution.  </li>
+<li>The first column of the matrix contains the partial function/realisation of the product. 第一列包含产品的部分功能/实现</li>
+<li>For each sub-function line by line, the associated solution alternatives are then listed.  列出相关的解决方案</li>
+<li>The solutions for the sub-functions are illustrated as words, sketches or combinations.</li>
+</ul>
+</li>
+<li><p>Combination of partial solutions </p>
+<ul>
+<li>Are all partial solutions in the morphological box documented, step by step combining of the partial solutions forms alternatives for an overall concept </li>
+<li>It does not make sense to consider all theoretical concepts combined. </li>
+<li>Not every solution alternative of a function can be combined with the partial solutions of other functions.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Requirement"><a href="#Requirement" class="headerlink" title="Requirement"></a>Requirement</h3><h4 id="Basic-types-of-requirement"><a href="#Basic-types-of-requirement" class="headerlink" title="Basic types of requirement"></a>Basic types of requirement</h4><ul>
+<li>Business Requirements</li>
+<li>User Requirements</li>
+<li>Functional Requirements</li>
+</ul>
+<h4 id="Standards-for-SRS-and-SyRS"><a href="#Standards-for-SRS-and-SyRS" class="headerlink" title="Standards for SRS and SyRS"></a>Standards for SRS and SyRS</h4><ul>
+<li><p>The standards are based on a model that produces a document that helps</p>
+<ul>
+<li>customers to accurately describe what they wish to obtain </li>
+<li>suppliers to understand exactly what the customer wants </li>
+<li>individuals to a accomplish the following goals: <ul>
+<li>develop SRS/SyRS outline for their own organizations </li>
+<li>develop the format and content of their SRS/SyRS</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Benefits by using Standards: </p>
+<ul>
+<li>A simple framework for the organization of the document itself </li>
+<li>Particularly beneficial to the requirements engineer because it has been widely deployed across a broad range of application domains</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/dbd33824/image-20200116145809258.png" style="zoom:50%;"></p>
+<p><img src="/archives/dbd33824/image-20200116145837670.png" style="zoom:50%;"></p>
+<h3 id="Quality-Function-Deployment-QFD"><a href="#Quality-Function-Deployment-QFD" class="headerlink" title="Quality Function Deployment(QFD)"></a>Quality Function Deployment(QFD)</h3><h4 id="QFD-House-of-Quality"><a href="#QFD-House-of-Quality" class="headerlink" title="QFD House of Quality"></a>QFD House of Quality</h4><p><img src="/archives/dbd33824/image-20200116152345705.png" style="zoom:50%;"></p>
+<p>Example:</p>
+<h5 id="Customer-Wants"><a href="#Customer-Wants" class="headerlink" title="Customer Wants"></a>Customer Wants</h5><p>customer importance rating(5 = highest)</p>
+<p><img src="/archives/dbd33824/image-20200116152813668.png" style="zoom:50%;"></p>
+<h5 id="Customer-Rating-of-the-Competition"><a href="#Customer-Rating-of-the-Competition" class="headerlink" title="Customer Rating of the Competition"></a>Customer Rating of the Competition</h5><p><img src="/archives/dbd33824/image-20200116152949213.png" style="zoom:50%;"></p>
+<h5 id="satisfy-Customer-Wants-Technical-Specs"><a href="#satisfy-Customer-Wants-Technical-Specs" class="headerlink" title="satisfy Customer Wants(Technical Specs.)"></a>satisfy Customer Wants(Technical Specs.)</h5><p><img src="/archives/dbd33824/image-20200116153121242.png" style="zoom:50%;"></p>
+<h5 id="Relationship-Matrix"><a href="#Relationship-Matrix" class="headerlink" title="Relationship Matrix"></a>Relationship Matrix</h5><p>The relationship matrix is where the relationship between customer needs and the company’s ability to meet those needs is shown.</p>
+<p><img src="/archives/dbd33824/image-20200116153409286.png" style="zoom:50%;"></p>
+<h5 id="Interrelationships"><a href="#Interrelationships" class="headerlink" title="Interrelationships"></a>Interrelationships</h5><p>“Roof” part identifies how “hows” items support (positive) or conflict (negative) with one another</p>
+<p><img src="/archives/dbd33824/image-20200116153751628.png" style="zoom:50%;"></p>
+<h5 id="Importance-Ratings"><a href="#Importance-Ratings" class="headerlink" title="Importance Ratings"></a>Importance Ratings</h5><p>The team calculates the absolute importance for each technical descriptor</p>
+<p><img src="/archives/dbd33824/image-20200116154104930.png" style="zoom:50%;"></p>
+<h5 id="Target-Values-Technical-attributes-and-Evaluation"><a href="#Target-Values-Technical-attributes-and-Evaluation" class="headerlink" title="Target Values(Technical attributes) and Evaluation"></a>Target Values(Technical attributes) and Evaluation</h5><p>Answers a common design question: “How much is good enough (to satisfy the customer)?“</p>
+<p><img src="/archives/dbd33824/image-20200116154312538.png" style="zoom:50%;"></p>
+<h5 id="Summary-of-QFD-Example"><a href="#Summary-of-QFD-Example" class="headerlink" title="Summary of QFD Example"></a>Summary of QFD Example</h5><p><img src="/archives/dbd33824/image-20200116154653508.png" style="zoom:50%;"></p>
+<h5 id="Disadvantages-and-Advantages"><a href="#Disadvantages-and-Advantages" class="headerlink" title="Disadvantages and Advantages"></a>Disadvantages and Advantages</h5><ul>
+<li><p>Disadvantage of QFD </p>
+<ul>
+<li>Time and resources consuming </li>
+<li>Process limitation in iteration support </li>
+<li>Focus on quality other than functionality</li>
+</ul>
+</li>
+<li><p>Advantage of QFD </p>
+<ul>
+<li>Customer / User involvement </li>
+<li>Focus on customer needs </li>
+<li>Team builder Improve product or service quality </li>
+<li>Shorter development cycles </li>
+<li>Lower costs and greater productivity </li>
+<li>Reduces design changes </li>
+<li>Documentation requirements </li>
+<li>Good for communication, decision making and planning </li>
+<li>Allows for a lot of information in a small space</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Systems and Software Engineering</category>
+        <category>Lifecycle Models-Creativity techniques</category>
+      </categories>
+      <tags>
+        <tag>Lifecycle Models</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Struktur von Fusionssystemen.md</title>
+    <url>/archives/6f78185b.html</url>
+    <content><![CDATA[<h2 id="Strukturierung-nach-Abstraktionsgrad"><a href="#Strukturierung-nach-Abstraktionsgrad" class="headerlink" title="Strukturierung nach Abstraktionsgrad"></a>Strukturierung nach Abstraktionsgrad</h2><ul>
+<li>Abstraktionsgrad (根据抽象层级分类)<ul>
+<li>Fusion auf signalebene</li>
+<li>Fusion auf Datenebene</li>
+<li>Fusion auf Merkmalsebene (特征级融合)</li>
+<li>Fusion auf Entscheidungsebene(决策级融合)</li>
+</ul>
+</li>
+<li>Auswertungstiefe<ul>
+<li>verteilte Fusion</li>
+<li>zentralisierte Fusion</li>
+<li>Hybride Fusion</li>
+</ul>
+</li>
+</ul>
+<p>Wahl des Abstraktionsgrades:</p>
+<p><img src="/archives/6f78185b/image-20200110162754160.png" alt="image-20200110162754160" style="zoom:50%;"></p>
+<h3 id="Fusion-auf-Signalebene"><a href="#Fusion-auf-Signalebene" class="headerlink" title="Fusion auf Signalebene"></a>Fusion auf Signalebene</h3><p>Eingabe: Physikalische Größe</p>
+<p>Ausgabe: Physikalische Größe</p>
+<p>Kombination der Signale </p>
+<ul>
+<li>eines Sensors über einen gewissen Zeitraum (Akkumulation) 一个传感器在一段时间内测量，叠加</li>
+<li>einer Gruppe von Sensoren, die gleichzeitig dieselben physikalischen Größen messen 许多传感器同时测量</li>
+</ul>
+<p><img src="/archives/6f78185b/image-20200110163343644.png" alt="image-20200110163343644" style="zoom:50%;"></p>
+<h3 id="Fusion-auf-Datenebene"><a href="#Fusion-auf-Datenebene" class="headerlink" title="Fusion auf Datenebene"></a>Fusion auf Datenebene</h3><p>Anwendbar auf in Daten abgebildete Signale. 主要用于多源图像复合、图像分析和理解</p>
+<p>vorverarbeitete Daten(预处理数据): <strong>Niedriges Abstraktionsniveau</strong></p>
+<p><strong>Voraussetzungen</strong>:</p>
+<ul>
+<li><p>Homogene Sensoren (同类传感器)</p>
+<p>Gleiche oder gleichartige physikalische Eigenschaften der Szene</p>
+</li>
+<li><p>Ausgerichtete Daten (同类观测数据)</p>
+</li>
+</ul>
+<p><img src="/archives/6f78185b/image-20200110165716846.png" alt="image-20200110165716846" style="zoom:50%;"></p>
+<h3 id="Fusion-auf-Merkmalsebene"><a href="#Fusion-auf-Merkmalsebene" class="headerlink" title="Fusion auf Merkmalsebene"></a>Fusion auf Merkmalsebene</h3><p>Fusion von extrahierten Merkmalen: <strong>Mittleres Abstraktionsniveau</strong></p>
+<p>Eingabe: Merkmale(Unsicherheiten) 抽象出自己的特征向量(如目标的方向，边缘，速度等信息)</p>
+<p>Ausgabe: Merkmale/Entscheidungen</p>
+<p><strong>Voraussetzung</strong>:</p>
+<ul>
+<li>Sensoren, welche die Gewinnung gleichartiger Merkmale erlauben; Merkmale liegen unabhängig voneinander in den Daten der Sensoren vor</li>
+<li>homogene Sensoren</li>
+</ul>
+<p><strong>Ziele:</strong> </p>
+<ul>
+<li>Verbesserung der Gewinnung von Merkmalen </li>
+<li>Zugang zu Merkmalen, die über die Daten verteilt vorliegen</li>
+</ul>
+<p><img src="/archives/6f78185b/image-20200110170315103.png" alt="image-20200110170315103" style="zoom:50%;"></p>
+<h3 id="Fusion-auf-Entscheidungsebene"><a href="#Fusion-auf-Entscheidungsebene" class="headerlink" title="Fusion auf Entscheidungsebene"></a>Fusion auf Entscheidungsebene</h3><p><strong>Hohes Abstraktionsniveau</strong></p>
+<p>Eingabe: Entscheidungen </p>
+<p>Ausgabe: Entscheidungen</p>
+<p><strong>Voraussetzung:</strong> Entscheidungen können unabhängig voneinander aus den Daten und Merkmalen der Sensoren getroffen werden</p>
+<p><img src="/archives/6f78185b/image-20200110170710740.png" alt="image-20200110170710740" style="zoom:50%;"></p>
+<h2 id="Fusionsmodelle"><a href="#Fusionsmodelle" class="headerlink" title="Fusionsmodelle"></a>Fusionsmodelle</h2><h4 id="JDL-Model"><a href="#JDL-Model" class="headerlink" title="JDL-Model"></a>JDL-Model</h4><p><img src="/archives/6f78185b/image-20200110171240588.png" alt="image-20200110171240588" style="zoom:50%;"></p>
+<h4 id="Omnibus-Model"><a href="#Omnibus-Model" class="headerlink" title="Omnibus-Model"></a>Omnibus-Model</h4><p><img src="/archives/6f78185b/image-20200110171400581.png" alt="image-20200110171400581" style="zoom:50%;"></p>
+<h2 id="Strukturierung-nach-Funktionseinheiten"><a href="#Strukturierung-nach-Funktionseinheiten" class="headerlink" title="Strukturierung nach Funktionseinheiten"></a>Strukturierung nach Funktionseinheiten</h2><h3 id="Zentralisierte-Fusion"><a href="#Zentralisierte-Fusion" class="headerlink" title="Zentralisierte Fusion"></a>Zentralisierte Fusion</h3><p>加工的是原始数据</p>
+<p><strong>Prinzip:</strong></p>
+<p>Keine oder nur minimale Verarbeitung der Sensordaten in den Sensorsystemen, Verknüpfung der Informationsbeiträge erst in der Zentraleinheit</p>
+<p>Fusion auf <strong>niedrigem Abstraktionsniveau</strong> (Datenfusion) in der Zentraleinheit</p>
+<p>+ Anwendbar, wenn entscheidungsrelevante Nutzinformation über mehrere Sensorsysteme verteilt vorliegt</p>
+<p>+ Meist höhere Genauigkeit des Fusionsergebnisses 精度高</p>
+<p>- Höherer Kommunikationsaufwand, höherer Rechenaufwand in Zentraleinheit  通信负担高，统合中心计算量大</p>
+<p>- Komplexerer Aufbau im Vergleich zur verteilten Fusion</p>
+<p><strong>Ausgabe</strong> der Sensorsysteme: </p>
+<ul>
+<li>Messdaten </li>
+<li>Unsicherheiten</li>
+</ul>
+<p><img src="/archives/6f78185b/image-20200110171621640.png" alt="image-20200110171621640" style="zoom:50%;"></p>
+<h3 id="Verteilte-Fusion"><a href="#Verteilte-Fusion" class="headerlink" title="Verteilte Fusion"></a>Verteilte Fusion</h3><p>加工的是经过预处理的局部数据</p>
+<p>Maximale Verarbeitungstiefe in den Sensorsystemen (Merkmalsextraktion, Klassifikation)</p>
+<p>Fusion auf <strong>höherem Abstraktionsniveau</strong> (Merkmale, Entscheidungen) in der Zentraleinheit</p>
+<p>+ Datenauswertung individuell an die Sensordaten anpassbar </p>
+<p>+ Meist moderater Kommunikationsaufwand, moderater Rechenaufwand in Zentraleinheit </p>
+<p>+ Gute Erweiterbarkeit </p>
+<p>– <strong>Voraussetzungen:</strong>  </p>
+<p>​    – Sensorsysteme werten voneinander unabhängige Objektcharakteristika aus </p>
+<p>​    – Merkmale liegen nicht über mehrere Sensorsysteme verteilt vor</p>
+<p><strong>Ausgabe</strong> der Sensorsysteme: </p>
+<ul>
+<li>Merkmale, Entscheidungen </li>
+<li>Unsicherheit des Ergebnisses</li>
+</ul>
+<p><img src="/archives/6f78185b/image-20200110171636046.png" alt="image-20200110171636046" style="zoom:50%;"></p>
+<h3 id="Hybride-Fusion-混合"><a href="#Hybride-Fusion-混合" class="headerlink" title="Hybride Fusion (混合)"></a>Hybride Fusion (混合)</h3><p>Kombination der Ansätze der verteilten und der zentralisierten Fusion</p>
+<p>Das Ergebnis einer zentralisierten Fusion wird bei einer verteilten Fusion berücksichtigt (oder umgekehrt).</p>
+<p>加工的既有原始数据，又有预处理过的数据</p>
+<p><img src="/archives/6f78185b/image-20200114155508464.png" alt="image-20200114155508464" style="zoom:50%;"></p>
+<p><strong>Die Wahl einer geeigneten Fusionsarchitektur hängt u. a. ab von:</strong> </p>
+<ul>
+<li>Aufgabenstellung, Fusionsziel  </li>
+<li>Fähigkeiten der Sensorsysteme und der Zentraleinheit </li>
+<li>Kapazität der Kommunikationskanäle</li>
+</ul>
+<h2 id="Sensorsysteme"><a href="#Sensorsysteme" class="headerlink" title="Sensorsysteme"></a>Sensorsysteme</h2><h3 id="Struktur-von-Sensorsystemen"><a href="#Struktur-von-Sensorsystemen" class="headerlink" title="Struktur von Sensorsystemen"></a>Struktur von Sensorsystemen</h3><h4 id="Sensor"><a href="#Sensor" class="headerlink" title="Sensor"></a>Sensor</h4><ul>
+<li><p>Bindeglied zwischen Umwelt und Sensorsystem</p>
+</li>
+<li><p>Transformation der physikalischen Größe in (elektrisches) Signal </p>
+</li>
+<li>Physikalischer Effekt mit bekanntem Zusammenhang zwischen Eingangs- und Ausgangssignal:<ul>
+<li>Mathematisch einfach modellierbar (z. B. linear)</li>
+<li>Evtl. Abhängigkeiten von Störgrößen</li>
+</ul>
+</li>
+</ul>
+<h4 id="Signal-Datenaufbereitung"><a href="#Signal-Datenaufbereitung" class="headerlink" title="Signal-/Datenaufbereitung"></a>Signal-/Datenaufbereitung</h4><ul>
+<li>Vereinfachung des weiteren Verarbeitungsprozesses, z. B.<ul>
+<li>Frequenzverschiebung </li>
+<li>Zerlegung des Signals in der Zeit</li>
+<li>Analog-zu-Digital- (A/D-) Wandlung</li>
+</ul>
+</li>
+</ul>
+<h4 id="Signal-Datenverarbeitung"><a href="#Signal-Datenverarbeitung" class="headerlink" title="Signal-/Datenverarbeitung"></a>Signal-/Datenverarbeitung</h4><ul>
+<li>Selektion und Isolation der charakteristischen Signalbestandteile, z. B. <ul>
+<li>Transformationen vom Zeit-/Ortsbereich in einen korrespondierenden Frequenzbereich (z. B. Fourier-Transformation)</li>
+<li>Filterung im Zeit-/Orts- oder Frequenzbereich (z. B. Kantenfilter in Bildern)</li>
+</ul>
+</li>
+</ul>
+<h4 id="Signal-Datenauswertung"><a href="#Signal-Datenauswertung" class="headerlink" title="Signal-/Datenauswertung"></a>Signal-/Datenauswertung</h4><ul>
+<li>Abstraktion der zuvor gewonnenen Daten/Merkmale </li>
+<li>Klassifikationsverfahren: siehe Vorlesung Mustererkennung, z. B.<ul>
+<li>Detektion (Vorhandensein eines Objekts/Ereignisses) </li>
+<li>Identifikation (Zuordnung eines Objekts/Ereignisses zu einer bestimmten Klasse) </li>
+<li>Parameterschätzung: Zustandsvektoren (z. B. Ort, Geschwindigkeit)</li>
+<li>Objektverfolgung</li>
+</ul>
+</li>
+</ul>
+<h4 id="Ausgabeaufbereitung"><a href="#Ausgabeaufbereitung" class="headerlink" title="Ausgabeaufbereitung"></a>Ausgabeaufbereitung</h4><ul>
+<li>Aufbereitung und Anpassung der Daten/Merkmale/Entscheidungen für weitere Verarbeitung/Auswertung, z. B.<ul>
+<li>Puffern (getriggerte Ausgabe) 缓冲</li>
+<li>Konvertierung (z. B. Multiplexen)</li>
+<li>Koordinatentransformation</li>
+</ul>
+</li>
+</ul>
+<h4 id="Ausgabe-des-Sensorsystems"><a href="#Ausgabe-des-Sensorsystems" class="headerlink" title="Ausgabe des Sensorsystems"></a>Ausgabe des Sensorsystems</h4><ul>
+<li>Abhängig von Sensierungsaufgabe und erreichtem Abstraktionsgrad, z. B. <ul>
+<li>Ein- oder höherdimensionale Funktion (meist zeitdiskret) </li>
+<li>Zustandsvektoren (z. B. Positions- und Geschwindigkeitsparameter) </li>
+</ul>
+</li>
+<li>Spezifikation der Unsicherheit</li>
+</ul>
+<h4 id="Sensierungsanforderung-Zusatzinformationen"><a href="#Sensierungsanforderung-Zusatzinformationen" class="headerlink" title="Sensierungsanforderung,  Zusatzinformationen"></a>Sensierungsanforderung,  Zusatzinformationen</h4><ul>
+<li>Befehle und Parameter zur Steuerung des Sensors (z. B. Trigger, Beobachtungsparameter) und der Signalverarbeitung/-auswertung im Sensorsystem (z. B. Filterparameter</li>
+</ul>
+<h3 id="Homogene-und-heterogene-Sensorsysteme"><a href="#Homogene-und-heterogene-Sensorsysteme" class="headerlink" title="Homogene und heterogene Sensorsysteme"></a>Homogene und heterogene Sensorsysteme</h3><p><strong>Homogene Sensoren/Sensorsysteme</strong></p>
+<ul>
+<li><p>Identische Sensorprinzipien </p>
+</li>
+<li><p>Erfassung der gleichen bzw. von vergleichbaren physikalischen Messgrößen 检测相同或相似的物理量</p>
+</li>
+</ul>
+<p><strong>Bei homogenen Sensorsystemen:</strong> </p>
+<ul>
+<li>Verarbeitung der Daten meist ohne aufwendige Vorverarbeitung möglich 无需大量预处理</li>
+<li><p>Gleiche Störeinflüsse </p>
+</li>
+<li><p>Beispiel: Grauwertkameras mit gleicher spektraler Sensorcharakteristik </p>
+</li>
+</ul>
+<p><strong>Bei heterogenen Sensorsystemen:</strong></p>
+<ul>
+<li>Meist Vorverarbeitung der Daten (Merkmalsextraktion, Klassifikation) erforderlich, damit Information verknüpfbar wird</li>
+<li>Meist unterschiedliche Störeinflüsse</li>
+<li>Beispiele: <ul>
+<li>Sensorsysteme mit unterschiedlicher Spektralempfindlichkeit </li>
+<li>Sensorsysteme für unterschiedliche Messgrößen (z. B. Grauwert- und 3D-Daten)</li>
+</ul>
+</li>
+</ul>
+<h3 id="Aktive-und-passive-Sensorsysteme"><a href="#Aktive-und-passive-Sensorsysteme" class="headerlink" title="Aktive und passive Sensorsysteme"></a>Aktive und passive Sensorsysteme</h3><h4 id="Aktive-Sensorsysteme-Laser-Scanner"><a href="#Aktive-Sensorsysteme-Laser-Scanner" class="headerlink" title="Aktive Sensorsysteme (Laser-Scanner)"></a>Aktive Sensorsysteme (Laser-Scanner)</h4><ul>
+<li>Hilfsenergie wird vom Sensorsystem geliefert </li>
+<li>Manipulation der Umwelt, um ein physikalisches Phänomen herbeizuführen</li>
+<li>Aktives Modul: Energiewandler </li>
+<li>Tendenziell <strong>höhere Unsicherheit</strong>, da auch <strong>aktives Modul</strong> zur Unsicherheit beiträgt</li>
+</ul>
+<h4 id="Passive-Sensorsysteme-IR-Kamera"><a href="#Passive-Sensorsysteme-IR-Kamera" class="headerlink" title="Passive Sensorsysteme(IR-Kamera)"></a>Passive Sensorsysteme(IR-Kamera)</h4><ul>
+<li>Keine unerwünschte Beeinflussung der Umwelt („See but not be seen“)</li>
+<li>Tendenziell <strong>geringere Unsicherheit</strong>, da <strong>kein aktives Modul</strong> vorhanden ist</li>
+</ul>
+<h3 id="Weitere-Charakteristika"><a href="#Weitere-Charakteristika" class="headerlink" title="Weitere Charakteristika"></a>Weitere Charakteristika</h3><ul>
+<li><p>Kommensurabilität</p>
+<p>Gleichdimensionalität </p>
+<p>Bilder: Grundsätzlich kommensurable Daten (zweidimensional)</p>
+</li>
+<li><p>Virtuelle Sensoren </p>
+<p>Datenerfassung durch dasselbe Sensorsystem, aber mit mindestens einem variiertem Erfassungsparameter </p>
+<ul>
+<li>Beispiel: Grauwertkamera: Mind. unterschiedliche Erfassungszeitpunkte</li>
+</ul>
+</li>
+<li><p>Kollokiertheit </p>
+<p>Datenerfassung mit konstanter relativer Position des Sensorsystems und -ausrichtung sowie konstantem Abbildungsmaßstab: Identische Ausschnitte der Szene </p>
+</li>
+<li><p>Beispiele: </p>
+<ul>
+<li>Stationäre Kamera, die mehrere Aufnahmen macht </li>
+<li>RGB-Kamera: Unterschiedliche spektrale Empfindlichkeit</li>
+</ul>
+</li>
+<li><p>Falls Sensorsysteme nicht kollokiert sind: Registrierung erforderlich Identifikation von Merkmalen und Ausrichtung mittels geometrischer Transformationen</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Informationsfusion</category>
+        <category>Struktur von Fusionssystemen</category>
+      </categories>
+      <tags>
+        <tag>Struktur von Fusionssystemen</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Lifecycle Models-Phase Models</title>
     <url>/archives/69428dab.html</url>
     <content><![CDATA[<h3 id="Phase-Models"><a href="#Phase-Models" class="headerlink" title="Phase Models"></a>Phase Models</h3><p>What is a phase model?</p>
 <p>sequence of working tasks(design steps, phase concept)</p>
@@ -92,8 +421,7 @@
 <li>customer collaboration(客户协作)             &gt;                  contract negotiation(合同谈判)</li>
 <li>Responding to change                                 &gt;                  following a plan</li>
 </ul>
-<p><strong>Life Cycle</strong></p>
-<p><img src="/archives/69428dab/image-20200109114650771.png" alt="image-20200109114650771" style="zoom: 50%;"></p>
+<h5 id="Life-Cycle"><a href="#Life-Cycle" class="headerlink" title="Life Cycle"></a>Life Cycle</h5><p><img src="/archives/69428dab/image-20200109114650771.png" alt="image-20200109114650771" style="zoom: 50%;"></p>
 <h5 id="Scrum-Roles-Scrum-团队成员"><a href="#Scrum-Roles-Scrum-团队成员" class="headerlink" title="Scrum - Roles(Scrum 团队成员)"></a>Scrum - Roles(Scrum 团队成员)</h5><p>Scrum is an agile, lightweight process for managing and controlling software and product development in rapidly changing environments.</p>
 <p>敏捷开发是一种软件开发方法，基于迭代和增量开发，通过自组织，跨团队，沟通协作完成开发工作。</p>
 <ul>
@@ -122,8 +450,7 @@
 </ul>
 </li>
 </ul>
-<p><strong>Sprint Meeting(Sprint 会议)</strong></p>
-<p><img src="/archives/69428dab/image-20200109143954157.png" alt="image-20200109143954157" style="zoom: 50%;"></p>
+<h5 id="Sprint-Meeting-Sprint-会议"><a href="#Sprint-Meeting-Sprint-会议" class="headerlink" title="Sprint Meeting(Sprint 会议)"></a>Sprint Meeting(Sprint 会议)</h5><p><img src="/archives/69428dab/image-20200109143954157.png" alt="image-20200109143954157" style="zoom: 50%;"></p>
 <ol>
 <li><p>Daily Scrum Meeting (每日站立会议)</p>
 <ul>
@@ -163,14 +490,27 @@
 </ul>
 </li>
 </ol>
-<p><strong>User Stories (用户故事)</strong> </p>
-<p>A short description (some sentences) of what the user of the system does or needs to does as part of his job function. <strong>‘who’, ‘what’, ‘why’</strong> .</p>
+<h5 id="User-Stories-用户故事"><a href="#User-Stories-用户故事" class="headerlink" title="User Stories (用户故事)"></a>User Stories (用户故事)</h5><p>A short description (some sentences) of what the user of the system does or needs to do as part of his job function. <strong>‘who’, ‘what’, ‘why’</strong> .</p>
 <p>Most common approach in agile development is to create user stories and to split them afterwards into tasks</p>
-<p><strong>Themes, Epics, User Stories, Tasks</strong> </p>
-<p>Sometimes the User Story is too big for being delivered in a sprint. To solve this, you have to use the Epic concept.</p>
-<p><img src="/archives/69428dab/image-20200109161044105.png" alt="image-20200109161044105" style="zoom:50%;"></p>
-<p><strong>Scrum Artifacts</strong> (文档)</p>
+<h5 id="Themes-Epics-User-Stories-Tasks"><a href="#Themes-Epics-User-Stories-Tasks" class="headerlink" title="Themes, Epics, User Stories, Tasks"></a>Themes, Epics, User Stories, Tasks</h5><p>Sometimes the User Story is too big for being delivered in a sprint. To solve this, you have to use the Epic concept.</p>
 <ul>
+<li>Epic<ul>
+<li>Very big user story (too big for one single sprint) </li>
+<li>Split into several sub-stories </li>
+<li>Kept together by a common topic </li>
+<li>One big feature of a product, which can also impact other products</li>
+</ul>
+</li>
+<li>Theme <ul>
+<li>Top of everything </li>
+<li>Major release in terms of a project </li>
+<li>One of the cornerstones of the project itself </li>
+<li>Drive the strategy and express a direction</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/69428dab/image-20200109161044105.png" alt="image-20200109161044105" style="zoom:50%;"></p>
+<h5 id="Scrum-Artifacts-文档"><a href="#Scrum-Artifacts-文档" class="headerlink" title="Scrum Artifacts (文档)"></a>Scrum Artifacts (文档)</h5><ul>
 <li>Product Backlog<ul>
 <li>Requirements for a system, expressed as a prioritized list of backlog Items (Spreadsheet) 整个系统的需求文档，有优先级的描述(电子表格) / Is not exact粗略</li>
 <li>Is managed and owned by a Product Owner</li>
@@ -210,8 +550,253 @@
 <p><img src="/archives/69428dab/image-20200109154837513.png" alt="image-20200109154837513" style="zoom: 50%;"></p>
 </li>
 </ul>
-<p><strong>Scrum Board</strong> </p>
-<p><img src="/archives/69428dab/image-20200109155042572.png" alt="image-20200109155042572" style="zoom:50%;"></p>
+<h5 id="Scrum-Board"><a href="#Scrum-Board" class="headerlink" title="Scrum Board"></a>Scrum Board</h5><p><img src="/archives/69428dab/image-20200109155042572.png" alt="image-20200109155042572" style="zoom:50%;"></p>
+<p>Advantages:</p>
+<ul>
+<li>Completely developed and tested features in short iterations </li>
+<li>Simplicity of the process </li>
+<li>Clearly defined rules </li>
+<li>Increasing productivity </li>
+<li>Self-organizing each team member carries a lot of responsibility improved communication</li>
+</ul>
+<p>Drawbacks:</p>
+<ul>
+<li>“Undisciplined hacking” (no written documentation) </li>
+<li>Violation of responsibility </li>
+<li>Current mainly carried by the inventors </li>
+<li>Focused on SW mainly</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Systems and Software Engineering</category>
+        <category>Lifecycle Models</category>
+      </categories>
+      <tags>
+        <tag>Lifecycle Models</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Lifecycle Models-Phase Models</title>
+    <url>/archives/69428dab.html</url>
+    <content><![CDATA[<h3 id="Phase-Models"><a href="#Phase-Models" class="headerlink" title="Phase Models"></a>Phase Models</h3><p>What is a phase model?</p>
+<p>sequence of working tasks(design steps, phase concept)</p>
+<ul>
+<li>according activities </li>
+<li>definition of expected results </li>
+<li>criteria for completion of tasks </li>
+<li>According budget and schedule</li>
+</ul>
+<a id="more"></a>
+<p><strong>SDLC: System Development Life Cycle</strong></p>
+<p>Describes a process for planning, creating, testing, maintenance and deploying a system. The system can be composed of hardware only, software only, or a combination of both</p>
+<p><img src="/archives/69428dab/image-20200109161343900.png" alt="image-20200109161343900" style="zoom:50%;"></p>
+<h4 id="Waterfall-Model"><a href="#Waterfall-Model" class="headerlink" title="Waterfall Model"></a>Waterfall Model</h4><p><img src="/archives/69428dab/image-20200108212237558.png" alt="image-20200108212237558" style="zoom: 33%;"></p>
+<p><strong>Pros:</strong></p>
+<ul>
+<li>simple and easy to understand and use</li>
+<li>easy to manage</li>
+<li>works well for <em>smaller projects</em> </li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>No working software is produced until late during the life cycle</li>
+<li>High amounts of risk and uncertainty</li>
+<li>Not a good model  for complex and object-oriented project</li>
+</ul>
+<h4 id="Spiral-Model"><a href="#Spiral-Model" class="headerlink" title="Spiral Model"></a>Spiral Model</h4><p>Spiral Model is a generalization of the waterfall model and is an iterative model.</p>
+<p><img src="/archives/69428dab/image-20200108213218560.png" alt="image-20200108213218560" style="zoom: 33%;"></p>
+<p>Initiating and terminating the spiral:</p>
+<ul>
+<li><p>Initiating the process</p>
+<p>The spiral gets started by a hypothesis that a particular operational mission could be improved by a software effort.</p>
+</li>
+<li><p>Terminating the process</p>
+<p>The spiral process involves a test of this hypothesis: At any time, if the hypothesis fails the test, the spiral is terminated.</p>
+</li>
+</ul>
+<p>Advantages:</p>
+<ul>
+<li>Estimates (budget, schedule) become more and more realistic as work progresses.</li>
+<li>Software engineers can get their hands in and start working on a project earlier. </li>
+<li>Easier to cope with the changes inherent to software development.</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>Highly customized limiting re-usability because different for each application.</li>
+<li>Estimates of budget and time are harder to judge at the beginning of the project since the requirements evolve through the process.</li>
+<li>Risk of not meeting initial budget or schedule</li>
+</ul>
+<h4 id="Y-Diagram"><a href="#Y-Diagram" class="headerlink" title="Y-Diagram"></a>Y-Diagram</h4><p>The Y-Diagram depicts(描绘) the different perspectives in the hardware design(VLSI). Mostly, it is used for the development of IC.</p>
+<p><img src="/archives/69428dab/image-20200108214542200.png" alt="image-20200108214542200" style="zoom: 33%;"></p>
+<p><img src="/archives/69428dab/image-20200108214710885.png" alt="image-20200108214710885" style="zoom: 33%;"></p>
+<p><strong>Global transformation</strong>: The general model for the designing process is based on a sequence of transformation steps and level (or view) changes with every step. </p>
+<p><strong>Local transformation</strong>: The design is often optimized or verified on a given level. Since there is no level or view change.</p>
+<p><img src="/archives/69428dab/image-20200108215041493.png" alt="image-20200108215041493" style="zoom: 33%;"></p>
+<h4 id="V-Model"><a href="#V-Model" class="headerlink" title="V-Model"></a>V-Model</h4><p>The V-Model is an internationally recognized development standard for IT systems.</p>
+<p><img src="/archives/69428dab/image-20200109101808579.png" alt="image-20200109101808579" style="zoom: 33%;"></p>
+<h5 id="The-Sub-Models"><a href="#The-Sub-Models" class="headerlink" title="The Sub-Models"></a>The Sub-Models</h5><p>Four sub-models are closely linked to on another and influence each other concerning the exchange of products/results.</p>
+<p>PM: Project Management</p>
+<p>SD: System Development</p>
+<p>QA: Quality Assurance</p>
+<p>CM: Configuration Management</p>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li>Does not handle iterations </li>
+<li>Does not easily handle dynamic changes in requirements </li>
+<li>Does not contain risk analysis activities</li>
+</ul>
+<h4 id="Prototyping-Model"><a href="#Prototyping-Model" class="headerlink" title="Prototyping Model"></a>Prototyping Model</h4><p>Naturally, Waterfall and V-Model assume their requirements specification as complete and consistent after their specification phase and are therefore rather strict.</p>
+<p>A prototype demonstrates selected characteristic features of the product in practical use</p>
+<p><img src="/archives/69428dab/image-20200109102605277.png" alt="image-20200109102605277" style="zoom: 33%;"></p>
+<p>Advantages:</p>
+<ul>
+<li>Reduced time and costs for first example </li>
+<li>Speed for first examples Improved and increased user involvement</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>Insufficient analysis </li>
+<li>User confusion of prototype and finished system </li>
+<li>Excessive development time of the prototype </li>
+<li>Expense of implementing prototyping</li>
+</ul>
+<h4 id="Agile-Model-敏捷性模型"><a href="#Agile-Model-敏捷性模型" class="headerlink" title="Agile Model(敏捷性模型)"></a><a href="https://www.cnblogs.com/edisonchou/p/5187346.html" rel="external nofollow noopener noreferrer" target="_blank">Agile Model(敏捷性模型)</a></h4><p>Main points:(敏捷开发宣言内容)</p>
+<ul>
+<li>Individuals and interactions(个体与交互) &gt;(胜过)        processes and tools</li>
+<li>Working software                                         &gt;                  comprehensive documentation</li>
+<li>customer collaboration(客户协作)             &gt;                  contract negotiation(合同谈判)</li>
+<li>Responding to change                                 &gt;                  following a plan</li>
+</ul>
+<h5 id="Life-Cycle"><a href="#Life-Cycle" class="headerlink" title="Life Cycle"></a>Life Cycle</h5><p><img src="/archives/69428dab/image-20200109114650771.png" alt="image-20200109114650771" style="zoom: 50%;"></p>
+<h5 id="Scrum-Roles-Scrum-团队成员"><a href="#Scrum-Roles-Scrum-团队成员" class="headerlink" title="Scrum - Roles(Scrum 团队成员)"></a>Scrum - Roles(Scrum 团队成员)</h5><p>Scrum is an agile, lightweight process for managing and controlling software and product development in rapidly changing environments.</p>
+<p>敏捷开发是一种软件开发方法，基于迭代和增量开发，通过自组织，跨团队，沟通协作完成开发工作。</p>
+<ul>
+<li><p>Scrum Master</p>
+<ul>
+<li>Represents management to the project and vice  versa</li>
+<li>Typically filed(提交) by a project manager</li>
+<li>Responsible for enacting scrum values and practices</li>
+<li>Acts as moderator and coach</li>
+<li>Guiding and protecting the team</li>
+</ul>
+</li>
+<li><p>Scrum Team:</p>
+<ul>
+<li>Typically 5-10 people </li>
+<li>Cross-functional (QA, programmers, UI designers etc.) </li>
+<li>Team is self-organizing </li>
+<li>Membership can only change between sprints</li>
+</ul>
+</li>
+<li><p>Product Owner:</p>
+<ul>
+<li>Acts like one voice </li>
+<li>Is responsible for product features and backlog </li>
+<li>Typically a product manager -&gt;  knows what needs to be build and in which order</li>
+</ul>
+</li>
+</ul>
+<h5 id="Sprint-Meeting-Sprint-会议"><a href="#Sprint-Meeting-Sprint-会议" class="headerlink" title="Sprint Meeting(Sprint 会议)"></a>Sprint Meeting(Sprint 会议)</h5><p><img src="/archives/69428dab/image-20200109143954157.png" alt="image-20200109143954157" style="zoom: 50%;"></p>
+<ol>
+<li><p>Daily Scrum Meeting (每日站立会议)</p>
+<ul>
+<li>Is a short (15 min) meeting, which is held dead on time everyday before the Team starts working 会议时长为15分钟，会议应在固定地点和每天的同一时间举行</li>
+<li>Participants: Scrum Master, Scrum Team</li>
+<li>Every Team member should answer on 3 questions<ul>
+<li>What did you do since the last scrum? 昨天你完成了那些工作？</li>
+<li>What are you doing until the next scrum? 今天你打算做什么？</li>
+<li>What is stopping you getting on with the work? 完成你的目标是否存在什么障碍？（Scrum主管需要记下这些障碍）</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/69428dab/image-20200109151028770.png" alt="image-20200109151028770" style="zoom: 50%;"></p>
+</li>
+<li><p>Sprint Planning Meeting (Sprint 计划会议)</p>
+<ul>
+<li>select what work is to be done</li>
+<li>prepare the Sprint Backlog(需求) that details the time it will take to do that work, with the entire team</li>
+<li>Identify and communicate how much of the work is likely to be done during the current sprint</li>
+<li>8 hours limited<ul>
+<li>(1st 4 hours) Entire team: dialog for prioritizing the product Backlog</li>
+<li>(2nd 4 hours) Development team: hashing out a plan for the sprint, resulting in the sprint backlog</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Sprint Review Meeting (评审会议)</p>
+<ul>
+<li>Is held at the end of each Sprint 评审会议在每个迭代结束后举行，在会议上团队演示此次迭代中完成了那些工作，一般会有相关的DEMO演示。</li>
+<li>Business functionality which was created during the Sprint is demonstrated to the Product Owner Informal, should not distract team of doing its work</li>
+</ul>
+</li>
+<li><p>Pre-Project/Kickoff Meeting</p>
+<ul>
+<li>A special form of Sprint Planning Meeting</li>
+<li>Meeting before the begin of the project</li>
+</ul>
+</li>
+</ol>
+<h5 id="User-Stories-用户故事"><a href="#User-Stories-用户故事" class="headerlink" title="User Stories (用户故事)"></a>User Stories (用户故事)</h5><p>A short description (some sentences) of what the user of the system does or needs to do as part of his job function. <strong>‘who’, ‘what’, ‘why’</strong> .</p>
+<p>Most common approach in agile development is to create user stories and to split them afterwards into tasks</p>
+<h5 id="Themes-Epics-User-Stories-Tasks"><a href="#Themes-Epics-User-Stories-Tasks" class="headerlink" title="Themes, Epics, User Stories, Tasks"></a>Themes, Epics, User Stories, Tasks</h5><p>Sometimes the User Story is too big for being delivered in a sprint. To solve this, you have to use the Epic concept.</p>
+<ul>
+<li>Epic<ul>
+<li>Very big user story (too big for one single sprint) </li>
+<li>Split into several sub-stories </li>
+<li>Kept together by a common topic </li>
+<li>One big feature of a product, which can also impact other products</li>
+</ul>
+</li>
+<li>Theme <ul>
+<li>Top of everything </li>
+<li>Major release in terms of a project </li>
+<li>One of the cornerstones of the project itself </li>
+<li>Drive the strategy and express a direction</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/69428dab/image-20200109161044105.png" alt="image-20200109161044105" style="zoom:50%;"></p>
+<h5 id="Scrum-Artifacts-文档"><a href="#Scrum-Artifacts-文档" class="headerlink" title="Scrum Artifacts (文档)"></a>Scrum Artifacts (文档)</h5><ul>
+<li>Product Backlog<ul>
+<li>Requirements for a system, expressed as a prioritized list of backlog Items (Spreadsheet) 整个系统的需求文档，有优先级的描述(电子表格) / Is not exact粗略</li>
+<li>Is managed and owned by a Product Owner</li>
+<li>can be changed and re-prioritized before each PM</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/69428dab/image-20200109154039415.png" alt="image-20200109154039415" style="zoom:50%;"></p>
+<ul>
+<li><p>Estimation of Product Backlog Items(产品订单的估算)</p>
+<ul>
+<li>Establishes team’s velocity</li>
+<li>Determining units of complexity(story points, work days/hours)</li>
+<li>Methods of estimation</li>
+</ul>
+</li>
+<li><p>Sprint Backlog</p>
+<ul>
+<li>Sprint Backlog is a <strong>subset</strong> of Product Backlog Items, which defines the work for a Sprint<ul>
+<li>Is created ONLY by Team members </li>
+<li>Each Item has it’s own status </li>
+<li>Should be updated every day</li>
+</ul>
+</li>
+<li>Sprint Backlog<ul>
+<li>No more then 300 tasks in the list </li>
+<li>If a task requires more than 16 hours, it should be broken down </li>
+<li>Team can add or subtract items from the list. </li>
+<li>Product Owner is not allowed to do it. </li>
+<li>It’s a FORECAST! It’s a good warning monitor</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Burn Down Charts(燃尽图)</p>
+<p>A burn down chart is a graphical representation of work left to do versus time 显示当前冲刺中未完成的任务数目</p>
+<p><img src="/archives/69428dab/image-20200109154837513.png" alt="image-20200109154837513" style="zoom: 50%;"></p>
+</li>
+</ul>
+<h5 id="Scrum-Board"><a href="#Scrum-Board" class="headerlink" title="Scrum Board"></a>Scrum Board</h5><p><img src="/archives/69428dab/image-20200109155042572.png" alt="image-20200109155042572" style="zoom:50%;"></p>
 <p>Advantages:</p>
 <ul>
 <li>Completely developed and tested features in short iterations </li>

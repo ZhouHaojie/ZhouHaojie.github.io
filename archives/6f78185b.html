@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|Cinzel Decorative:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Strukturierung nach Abstraktionsgrad Abstraktionsgrad (根据抽象层级分类) Fusion auf signalebene Fusion auf Datenebene Fusion auf Merkmalsebene (特征级融合) Fusion auf Entscheidungsebene(决策级融合)   Auswertungstiefe v">
+<meta name="keywords" content="Struktur von Fusionssystemen">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Struktur von Fusionssystemen.md">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6f78185b.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="Strukturierung nach Abstraktionsgrad Abstraktionsgrad (根据抽象层级分类) Fusion auf signalebene Fusion auf Datenebene Fusion auf Merkmalsebene (特征级融合) Fusion auf Entscheidungsebene(决策级融合)   Auswertungstiefe v">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6f78185b&#x2F;image-20200110162754160.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6f78185b&#x2F;image-20200110163343644.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6f78185b&#x2F;image-20200110165716846.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6f78185b&#x2F;image-20200110170315103.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6f78185b&#x2F;image-20200110170710740.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6f78185b&#x2F;image-20200110171240588.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6f78185b&#x2F;image-20200110171400581.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6f78185b&#x2F;image-20200110171621640.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6f78185b&#x2F;image-20200110171636046.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6f78185b&#x2F;image-20200114155508464.png">
+<meta property="og:updated_time" content="2020-01-14T16:28:35.013Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6f78185b&#x2F;image-20200110162754160.png">
+
+<link rel="canonical" href="http://grenze.cn/archives/6f78185b.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Struktur von Fusionssystemen.md | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">19</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">19</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">37</span></a>
+
+  </li>
+        <li class="menu-item menu-item-top">
+
+    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热榜</a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/6f78185b.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Struktur von Fusionssystemen.md
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-10 16:14:47" itemprop="dateCreated datePublished" datetime="2020-01-10T16:14:47+01:00">2020-01-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-14 17:28:35" itemprop="dateModified" datetime="2020-01-14T17:28:35+01:00">2020-01-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Informationsfusion/" itemprop="url" rel="index">
+                    <span itemprop="name">Informationsfusion</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Informationsfusion/Struktur-von-Fusionssystemen/" itemprop="url" rel="index">
+                    <span itemprop="name">Struktur von Fusionssystemen</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Strukturierung-nach-Abstraktionsgrad"><a href="#Strukturierung-nach-Abstraktionsgrad" class="headerlink" title="Strukturierung nach Abstraktionsgrad"></a>Strukturierung nach Abstraktionsgrad</h2><ul>
+<li>Abstraktionsgrad (根据抽象层级分类)<ul>
+<li>Fusion auf signalebene</li>
+<li>Fusion auf Datenebene</li>
+<li>Fusion auf Merkmalsebene (特征级融合)</li>
+<li>Fusion auf Entscheidungsebene(决策级融合)</li>
+</ul>
+</li>
+<li>Auswertungstiefe<ul>
+<li>verteilte Fusion</li>
+<li>zentralisierte Fusion</li>
+<li>Hybride Fusion</li>
+</ul>
+</li>
+</ul>
+<p>Wahl des Abstraktionsgrades:</p>
+<p><img src="/archives/6f78185b/image-20200110162754160.png" alt="image-20200110162754160" style="zoom:50%;"></p>
+<h3 id="Fusion-auf-Signalebene"><a href="#Fusion-auf-Signalebene" class="headerlink" title="Fusion auf Signalebene"></a>Fusion auf Signalebene</h3><p>Eingabe: Physikalische Größe</p>
+<p>Ausgabe: Physikalische Größe</p>
+<p>Kombination der Signale </p>
+<ul>
+<li>eines Sensors über einen gewissen Zeitraum (Akkumulation) 一个传感器在一段时间内测量，叠加</li>
+<li>einer Gruppe von Sensoren, die gleichzeitig dieselben physikalischen Größen messen 许多传感器同时测量</li>
+</ul>
+<p><img src="/archives/6f78185b/image-20200110163343644.png" alt="image-20200110163343644" style="zoom:50%;"></p>
+<h3 id="Fusion-auf-Datenebene"><a href="#Fusion-auf-Datenebene" class="headerlink" title="Fusion auf Datenebene"></a>Fusion auf Datenebene</h3><p>Anwendbar auf in Daten abgebildete Signale. 主要用于多源图像复合、图像分析和理解</p>
+<p>vorverarbeitete Daten(预处理数据): <strong>Niedriges Abstraktionsniveau</strong></p>
+<p><strong>Voraussetzungen</strong>:</p>
+<ul>
+<li><p>Homogene Sensoren (同类传感器)</p>
+<p>Gleiche oder gleichartige physikalische Eigenschaften der Szene</p>
+</li>
+<li><p>Ausgerichtete Daten (同类观测数据)</p>
+</li>
+</ul>
+<p><img src="/archives/6f78185b/image-20200110165716846.png" alt="image-20200110165716846" style="zoom:50%;"></p>
+<h3 id="Fusion-auf-Merkmalsebene"><a href="#Fusion-auf-Merkmalsebene" class="headerlink" title="Fusion auf Merkmalsebene"></a>Fusion auf Merkmalsebene</h3><p>Fusion von extrahierten Merkmalen: <strong>Mittleres Abstraktionsniveau</strong></p>
+<p>Eingabe: Merkmale(Unsicherheiten) 抽象出自己的特征向量(如目标的方向，边缘，速度等信息)</p>
+<p>Ausgabe: Merkmale/Entscheidungen</p>
+<p><strong>Voraussetzung</strong>:</p>
+<ul>
+<li>Sensoren, welche die Gewinnung gleichartiger Merkmale erlauben; Merkmale liegen unabhängig voneinander in den Daten der Sensoren vor</li>
+<li>homogene Sensoren</li>
+</ul>
+<p><strong>Ziele:</strong> </p>
+<ul>
+<li>Verbesserung der Gewinnung von Merkmalen </li>
+<li>Zugang zu Merkmalen, die über die Daten verteilt vorliegen</li>
+</ul>
+<p><img src="/archives/6f78185b/image-20200110170315103.png" alt="image-20200110170315103" style="zoom:50%;"></p>
+<h3 id="Fusion-auf-Entscheidungsebene"><a href="#Fusion-auf-Entscheidungsebene" class="headerlink" title="Fusion auf Entscheidungsebene"></a>Fusion auf Entscheidungsebene</h3><p><strong>Hohes Abstraktionsniveau</strong></p>
+<p>Eingabe: Entscheidungen </p>
+<p>Ausgabe: Entscheidungen</p>
+<p><strong>Voraussetzung:</strong> Entscheidungen können unabhängig voneinander aus den Daten und Merkmalen der Sensoren getroffen werden</p>
+<p><img src="/archives/6f78185b/image-20200110170710740.png" alt="image-20200110170710740" style="zoom:50%;"></p>
+<h2 id="Fusionsmodelle"><a href="#Fusionsmodelle" class="headerlink" title="Fusionsmodelle"></a>Fusionsmodelle</h2><h4 id="JDL-Model"><a href="#JDL-Model" class="headerlink" title="JDL-Model"></a>JDL-Model</h4><p><img src="/archives/6f78185b/image-20200110171240588.png" alt="image-20200110171240588" style="zoom:50%;"></p>
+<h4 id="Omnibus-Model"><a href="#Omnibus-Model" class="headerlink" title="Omnibus-Model"></a>Omnibus-Model</h4><p><img src="/archives/6f78185b/image-20200110171400581.png" alt="image-20200110171400581" style="zoom:50%;"></p>
+<h2 id="Strukturierung-nach-Funktionseinheiten"><a href="#Strukturierung-nach-Funktionseinheiten" class="headerlink" title="Strukturierung nach Funktionseinheiten"></a>Strukturierung nach Funktionseinheiten</h2><h3 id="Zentralisierte-Fusion"><a href="#Zentralisierte-Fusion" class="headerlink" title="Zentralisierte Fusion"></a>Zentralisierte Fusion</h3><p>加工的是原始数据</p>
+<p><strong>Prinzip:</strong></p>
+<p>Keine oder nur minimale Verarbeitung der Sensordaten in den Sensorsystemen, Verknüpfung der Informationsbeiträge erst in der Zentraleinheit</p>
+<p>Fusion auf <strong>niedrigem Abstraktionsniveau</strong> (Datenfusion) in der Zentraleinheit</p>
+<p>+ Anwendbar, wenn entscheidungsrelevante Nutzinformation über mehrere Sensorsysteme verteilt vorliegt</p>
+<p>+ Meist höhere Genauigkeit des Fusionsergebnisses 精度高</p>
+<p>- Höherer Kommunikationsaufwand, höherer Rechenaufwand in Zentraleinheit  通信负担高，统合中心计算量大</p>
+<p>- Komplexerer Aufbau im Vergleich zur verteilten Fusion</p>
+<p><strong>Ausgabe</strong> der Sensorsysteme: </p>
+<ul>
+<li>Messdaten </li>
+<li>Unsicherheiten</li>
+</ul>
+<p><img src="/archives/6f78185b/image-20200110171621640.png" alt="image-20200110171621640" style="zoom:50%;"></p>
+<h3 id="Verteilte-Fusion"><a href="#Verteilte-Fusion" class="headerlink" title="Verteilte Fusion"></a>Verteilte Fusion</h3><p>加工的是经过预处理的局部数据</p>
+<p>Maximale Verarbeitungstiefe in den Sensorsystemen (Merkmalsextraktion, Klassifikation)</p>
+<p>Fusion auf <strong>höherem Abstraktionsniveau</strong> (Merkmale, Entscheidungen) in der Zentraleinheit</p>
+<p>+ Datenauswertung individuell an die Sensordaten anpassbar </p>
+<p>+ Meist moderater Kommunikationsaufwand, moderater Rechenaufwand in Zentraleinheit </p>
+<p>+ Gute Erweiterbarkeit </p>
+<p>– <strong>Voraussetzungen:</strong>  </p>
+<p>​    – Sensorsysteme werten voneinander unabhängige Objektcharakteristika aus </p>
+<p>​    – Merkmale liegen nicht über mehrere Sensorsysteme verteilt vor</p>
+<p><strong>Ausgabe</strong> der Sensorsysteme: </p>
+<ul>
+<li>Merkmale, Entscheidungen </li>
+<li>Unsicherheit des Ergebnisses</li>
+</ul>
+<p><img src="/archives/6f78185b/image-20200110171636046.png" alt="image-20200110171636046" style="zoom:50%;"></p>
+<h3 id="Hybride-Fusion-混合"><a href="#Hybride-Fusion-混合" class="headerlink" title="Hybride Fusion (混合)"></a>Hybride Fusion (混合)</h3><p>Kombination der Ansätze der verteilten und der zentralisierten Fusion</p>
+<p>Das Ergebnis einer zentralisierten Fusion wird bei einer verteilten Fusion berücksichtigt (oder umgekehrt).</p>
+<p>加工的既有原始数据，又有预处理过的数据</p>
+<p><img src="/archives/6f78185b/image-20200114155508464.png" alt="image-20200114155508464" style="zoom:50%;"></p>
+<p><strong>Die Wahl einer geeigneten Fusionsarchitektur hängt u. a. ab von:</strong> </p>
+<ul>
+<li>Aufgabenstellung, Fusionsziel  </li>
+<li>Fähigkeiten der Sensorsysteme und der Zentraleinheit </li>
+<li>Kapazität der Kommunikationskanäle</li>
+</ul>
+<h2 id="Sensorsysteme"><a href="#Sensorsysteme" class="headerlink" title="Sensorsysteme"></a>Sensorsysteme</h2><h3 id="Struktur-von-Sensorsystemen"><a href="#Struktur-von-Sensorsystemen" class="headerlink" title="Struktur von Sensorsystemen"></a>Struktur von Sensorsystemen</h3><h4 id="Sensor"><a href="#Sensor" class="headerlink" title="Sensor"></a>Sensor</h4><ul>
+<li><p>Bindeglied zwischen Umwelt und Sensorsystem</p>
+</li>
+<li><p>Transformation der physikalischen Größe in (elektrisches) Signal </p>
+</li>
+<li>Physikalischer Effekt mit bekanntem Zusammenhang zwischen Eingangs- und Ausgangssignal:<ul>
+<li>Mathematisch einfach modellierbar (z. B. linear)</li>
+<li>Evtl. Abhängigkeiten von Störgrößen</li>
+</ul>
+</li>
+</ul>
+<h4 id="Signal-Datenaufbereitung"><a href="#Signal-Datenaufbereitung" class="headerlink" title="Signal-/Datenaufbereitung"></a>Signal-/Datenaufbereitung</h4><ul>
+<li>Vereinfachung des weiteren Verarbeitungsprozesses, z. B.<ul>
+<li>Frequenzverschiebung </li>
+<li>Zerlegung des Signals in der Zeit</li>
+<li>Analog-zu-Digital- (A/D-) Wandlung</li>
+</ul>
+</li>
+</ul>
+<h4 id="Signal-Datenverarbeitung"><a href="#Signal-Datenverarbeitung" class="headerlink" title="Signal-/Datenverarbeitung"></a>Signal-/Datenverarbeitung</h4><ul>
+<li>Selektion und Isolation der charakteristischen Signalbestandteile, z. B. <ul>
+<li>Transformationen vom Zeit-/Ortsbereich in einen korrespondierenden Frequenzbereich (z. B. Fourier-Transformation)</li>
+<li>Filterung im Zeit-/Orts- oder Frequenzbereich (z. B. Kantenfilter in Bildern)</li>
+</ul>
+</li>
+</ul>
+<h4 id="Signal-Datenauswertung"><a href="#Signal-Datenauswertung" class="headerlink" title="Signal-/Datenauswertung"></a>Signal-/Datenauswertung</h4><ul>
+<li>Abstraktion der zuvor gewonnenen Daten/Merkmale </li>
+<li>Klassifikationsverfahren: siehe Vorlesung Mustererkennung, z. B.<ul>
+<li>Detektion (Vorhandensein eines Objekts/Ereignisses) </li>
+<li>Identifikation (Zuordnung eines Objekts/Ereignisses zu einer bestimmten Klasse) </li>
+<li>Parameterschätzung: Zustandsvektoren (z. B. Ort, Geschwindigkeit)</li>
+<li>Objektverfolgung</li>
+</ul>
+</li>
+</ul>
+<h4 id="Ausgabeaufbereitung"><a href="#Ausgabeaufbereitung" class="headerlink" title="Ausgabeaufbereitung"></a>Ausgabeaufbereitung</h4><ul>
+<li>Aufbereitung und Anpassung der Daten/Merkmale/Entscheidungen für weitere Verarbeitung/Auswertung, z. B.<ul>
+<li>Puffern (getriggerte Ausgabe) 缓冲</li>
+<li>Konvertierung (z. B. Multiplexen)</li>
+<li>Koordinatentransformation</li>
+</ul>
+</li>
+</ul>
+<h4 id="Ausgabe-des-Sensorsystems"><a href="#Ausgabe-des-Sensorsystems" class="headerlink" title="Ausgabe des Sensorsystems"></a>Ausgabe des Sensorsystems</h4><ul>
+<li>Abhängig von Sensierungsaufgabe und erreichtem Abstraktionsgrad, z. B. <ul>
+<li>Ein- oder höherdimensionale Funktion (meist zeitdiskret) </li>
+<li>Zustandsvektoren (z. B. Positions- und Geschwindigkeitsparameter) </li>
+</ul>
+</li>
+<li>Spezifikation der Unsicherheit</li>
+</ul>
+<h4 id="Sensierungsanforderung-Zusatzinformationen"><a href="#Sensierungsanforderung-Zusatzinformationen" class="headerlink" title="Sensierungsanforderung,  Zusatzinformationen"></a>Sensierungsanforderung,  Zusatzinformationen</h4><ul>
+<li>Befehle und Parameter zur Steuerung des Sensors (z. B. Trigger, Beobachtungsparameter) und der Signalverarbeitung/-auswertung im Sensorsystem (z. B. Filterparameter</li>
+</ul>
+<h3 id="Homogene-und-heterogene-Sensorsysteme"><a href="#Homogene-und-heterogene-Sensorsysteme" class="headerlink" title="Homogene und heterogene Sensorsysteme"></a>Homogene und heterogene Sensorsysteme</h3><p><strong>Homogene Sensoren/Sensorsysteme</strong></p>
+<ul>
+<li><p>Identische Sensorprinzipien </p>
+</li>
+<li><p>Erfassung der gleichen bzw. von vergleichbaren physikalischen Messgrößen 检测相同或相似的物理量</p>
+</li>
+</ul>
+<p><strong>Bei homogenen Sensorsystemen:</strong> </p>
+<ul>
+<li>Verarbeitung der Daten meist ohne aufwendige Vorverarbeitung möglich 无需大量预处理</li>
+<li><p>Gleiche Störeinflüsse </p>
+</li>
+<li><p>Beispiel: Grauwertkameras mit gleicher spektraler Sensorcharakteristik </p>
+</li>
+</ul>
+<p><strong>Bei heterogenen Sensorsystemen:</strong></p>
+<ul>
+<li>Meist Vorverarbeitung der Daten (Merkmalsextraktion, Klassifikation) erforderlich, damit Information verknüpfbar wird</li>
+<li>Meist unterschiedliche Störeinflüsse</li>
+<li>Beispiele: <ul>
+<li>Sensorsysteme mit unterschiedlicher Spektralempfindlichkeit </li>
+<li>Sensorsysteme für unterschiedliche Messgrößen (z. B. Grauwert- und 3D-Daten)</li>
+</ul>
+</li>
+</ul>
+<h3 id="Aktive-und-passive-Sensorsysteme"><a href="#Aktive-und-passive-Sensorsysteme" class="headerlink" title="Aktive und passive Sensorsysteme"></a>Aktive und passive Sensorsysteme</h3><h4 id="Aktive-Sensorsysteme-Laser-Scanner"><a href="#Aktive-Sensorsysteme-Laser-Scanner" class="headerlink" title="Aktive Sensorsysteme (Laser-Scanner)"></a>Aktive Sensorsysteme (Laser-Scanner)</h4><ul>
+<li>Hilfsenergie wird vom Sensorsystem geliefert </li>
+<li>Manipulation der Umwelt, um ein physikalisches Phänomen herbeizuführen</li>
+<li>Aktives Modul: Energiewandler </li>
+<li>Tendenziell <strong>höhere Unsicherheit</strong>, da auch <strong>aktives Modul</strong> zur Unsicherheit beiträgt</li>
+</ul>
+<h4 id="Passive-Sensorsysteme-IR-Kamera"><a href="#Passive-Sensorsysteme-IR-Kamera" class="headerlink" title="Passive Sensorsysteme(IR-Kamera)"></a>Passive Sensorsysteme(IR-Kamera)</h4><ul>
+<li>Keine unerwünschte Beeinflussung der Umwelt („See but not be seen“)</li>
+<li>Tendenziell <strong>geringere Unsicherheit</strong>, da <strong>kein aktives Modul</strong> vorhanden ist</li>
+</ul>
+<h3 id="Weitere-Charakteristika"><a href="#Weitere-Charakteristika" class="headerlink" title="Weitere Charakteristika"></a>Weitere Charakteristika</h3><ul>
+<li><p>Kommensurabilität</p>
+<p>Gleichdimensionalität </p>
+<p>Bilder: Grundsätzlich kommensurable Daten (zweidimensional)</p>
+</li>
+<li><p>Virtuelle Sensoren </p>
+<p>Datenerfassung durch dasselbe Sensorsystem, aber mit mindestens einem variiertem Erfassungsparameter </p>
+<ul>
+<li>Beispiel: Grauwertkamera: Mind. unterschiedliche Erfassungszeitpunkte</li>
+</ul>
+</li>
+<li><p>Kollokiertheit </p>
+<p>Datenerfassung mit konstanter relativer Position des Sensorsystems und -ausrichtung sowie konstantem Abbildungsmaßstab: Identische Ausschnitte der Szene </p>
+</li>
+<li><p>Beispiele: </p>
+<ul>
+<li>Stationäre Kamera, die mehrere Aufnahmen macht </li>
+<li>RGB-Kamera: Unterschiedliche spektrale Empfindlichkeit</li>
+</ul>
+</li>
+<li><p>Falls Sensorsysteme nicht kollokiert sind: Registrierung erforderlich Identifikation von Merkmalen und Ausrichtung mittels geometrischer Transformationen</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/6f78185b.html" title="Struktur von Fusionssystemen.md">http://grenze.cn/archives/6f78185b.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Struktur-von-Fusionssystemen/" rel="tag"><i class="fa fa-tag"></i> Struktur von Fusionssystemen</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/69428dab.html" rel="prev" title="Lifecycle Models-Phase Models">
+      <i class="fa fa-chevron-left"></i> Lifecycle Models-Phase Models
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/dbd33824.html" rel="next" title="Lifecycle Models-Creativity techniques">
+      Lifecycle Models-Creativity techniques <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Strukturierung-nach-Abstraktionsgrad"><span class="nav-number">1.</span> <span class="nav-text">Strukturierung nach Abstraktionsgrad</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fusion-auf-Signalebene"><span class="nav-number">1.1.</span> <span class="nav-text">Fusion auf Signalebene</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fusion-auf-Datenebene"><span class="nav-number">1.2.</span> <span class="nav-text">Fusion auf Datenebene</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fusion-auf-Merkmalsebene"><span class="nav-number">1.3.</span> <span class="nav-text">Fusion auf Merkmalsebene</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fusion-auf-Entscheidungsebene"><span class="nav-number">1.4.</span> <span class="nav-text">Fusion auf Entscheidungsebene</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fusionsmodelle"><span class="nav-number">2.</span> <span class="nav-text">Fusionsmodelle</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JDL-Model"><span class="nav-number">2.0.1.</span> <span class="nav-text">JDL-Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Omnibus-Model"><span class="nav-number">2.0.2.</span> <span class="nav-text">Omnibus-Model</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#Strukturierung-nach-Funktionseinheiten"><span class="nav-number">3.</span> <span class="nav-text">Strukturierung nach Funktionseinheiten</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Zentralisierte-Fusion"><span class="nav-number">3.1.</span> <span class="nav-text">Zentralisierte Fusion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Verteilte-Fusion"><span class="nav-number">3.2.</span> <span class="nav-text">Verteilte Fusion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hybride-Fusion-混合"><span class="nav-number">3.3.</span> <span class="nav-text">Hybride Fusion (混合)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sensorsysteme"><span class="nav-number">4.</span> <span class="nav-text">Sensorsysteme</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Struktur-von-Sensorsystemen"><span class="nav-number">4.1.</span> <span class="nav-text">Struktur von Sensorsystemen</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Sensor"><span class="nav-number">4.1.1.</span> <span class="nav-text">Sensor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Signal-Datenaufbereitung"><span class="nav-number">4.1.2.</span> <span class="nav-text">Signal-/Datenaufbereitung</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Signal-Datenverarbeitung"><span class="nav-number">4.1.3.</span> <span class="nav-text">Signal-/Datenverarbeitung</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Signal-Datenauswertung"><span class="nav-number">4.1.4.</span> <span class="nav-text">Signal-/Datenauswertung</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ausgabeaufbereitung"><span class="nav-number">4.1.5.</span> <span class="nav-text">Ausgabeaufbereitung</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ausgabe-des-Sensorsystems"><span class="nav-number">4.1.6.</span> <span class="nav-text">Ausgabe des Sensorsystems</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sensierungsanforderung-Zusatzinformationen"><span class="nav-number">4.1.7.</span> <span class="nav-text">Sensierungsanforderung,  Zusatzinformationen</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Homogene-und-heterogene-Sensorsysteme"><span class="nav-number">4.2.</span> <span class="nav-text">Homogene und heterogene Sensorsysteme</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Aktive-und-passive-Sensorsysteme"><span class="nav-number">4.3.</span> <span class="nav-text">Aktive und passive Sensorsysteme</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Aktive-Sensorsysteme-Laser-Scanner"><span class="nav-number">4.3.1.</span> <span class="nav-text">Aktive Sensorsysteme (Laser-Scanner)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Passive-Sensorsysteme-IR-Kamera"><span class="nav-number">4.3.2.</span> <span class="nav-text">Passive Sensorsysteme(IR-Kamera)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Weitere-Charakteristika"><span class="nav-number">4.4.</span> <span class="nav-text">Weitere Charakteristika</span></a></li></ol></li></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">72k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: '1d6eff7a03c56e20bb7813617074d30f',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
