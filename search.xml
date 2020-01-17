@@ -3,13 +3,7 @@
   <entry>
     <title>WissProg-C++(1)</title>
     <url>/archives/33e92a8c.html</url>
-    <content><![CDATA[<p>title: WissProg-C++(1)<br>categories:</p>
-<ul>
-<li>WissProg</li>
-<li>C++<br>tags:</li>
-<li>C++<br>abbrlink: 33e92a8c<br>mathjax: true<br>date: 2020-01-17 13:22:54<br>top:</li>
-</ul>
-<h3 id="Ein-und-Ausgabe"><a href="#Ein-und-Ausgabe" class="headerlink" title="Ein- und Ausgabe"></a>Ein- und Ausgabe</h3><h4 id="Standardkanal"><a href="#Standardkanal" class="headerlink" title="Standardkanal"></a>Standardkanal</h4><ul>
+    <content><![CDATA[<h3 id="Ein-und-Ausgabe"><a href="#Ein-und-Ausgabe" class="headerlink" title="Ein- und Ausgabe"></a>Ein- und Ausgabe</h3><h4 id="Standardkanal"><a href="#Standardkanal" class="headerlink" title="Standardkanal"></a>Standardkanal</h4><ul>
 <li><p><code>#include&lt;iostream&gt;</code></p>
 <p>cin, cout, cerr(- Standardfehlerausgabe), clog(- Standardfehlerausgabe gepuffert)</p>
 </li>
@@ -165,6 +159,13 @@ z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2
 <p><code>vec.tranpose()</code>: 转置, <code>vec.conjugate()</code>: 共轭, <code>vec.adjoint()</code>: 伴随</p>
 <p><code>vec.dot(vec)</code>: 点乘, 得到标量, <code>vec.cross(vec)</code>: 叉乘</p>
 ]]></content>
+      <categories>
+        <category>WissProg</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
   </entry>
   <entry>
     <title>Lifecycle Models-Creativity techniques</title>
@@ -1041,6 +1042,7 @@ z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2
 <p>More Examples:<br>auto后跟&amp;，则标识符是数据成员的引用<br>auto前可放置const，表明标识符是只读的</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  C c; <span class="comment">// c.i: 420;  c.ca: 'O','K','!'</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="keyword">auto</span> [a1, a2] &#123;c&#125;; <span class="comment">// a1是c.i的拷贝，a2是char[]类型</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="keyword">auto</span>&amp; [b1, b2] &#123;c&#125;; <span class="comment">// b1是int&amp;类型，是c.i的引用，</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="comment">// b2是char(&amp;)[3]类型(数组的引用)，是c.ca的引用</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">  a1 = <span class="number">100</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"c.i:"</span> &lt;&lt; c.i &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// 输出420，改a1不影响c.i</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">  b1 = <span class="number">200</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"c.i:"</span> &lt;&lt; c.i &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// 输出200，通过b1修改了c.i</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>]]></content>
       <categories>
+        <category>WissProg</category>
         <category>C++</category>
       </categories>
       <tags>
@@ -1056,6 +1058,7 @@ z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2
 <p><strong>weak_ptr</strong> ：可复制shared_ptr，但其构造或者释放对资源不产生影响</p>
 ]]></content>
       <categories>
+        <category>WissProg</category>
         <category>C++</category>
       </categories>
       <tags>
@@ -1356,6 +1359,7 @@ constexpr修饰的函数，简单的来说，如果其传入的参数可以在�
 </ul>
 ]]></content>
       <categories>
+        <category>WissProg</category>
         <category>C++</category>
       </categories>
       <tags>
