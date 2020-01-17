@@ -1,6 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>WissProg-C++(1)</title>
+    <url>/archives/33e92a8c.html</url>
+    <content><![CDATA[<h3 id="Ein-und-Ausgabe"><a href="#Ein-und-Ausgabe" class="headerlink" title="Ein- und Ausgabe"></a>Ein- und Ausgabe</h3><h4 id="Standardkanal"><a href="#Standardkanal" class="headerlink" title="Standardkanal"></a>Standardkanal</h4><ul>
+<li><p><code>#include&lt;iostream&gt;</code></p>
+<p>cin, cout, cerr(- Standardfehlerausgabe), clog(- Standardfehlerausgabe gepuffert)</p>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p><code>get()</code> Operator:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> c;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="built_in">cin</span>.<span class="built_in">get</span>(c); <span class="comment">// liest einen Buchstaben ein</span></span></pre></td></tr></table></figure>
+</li>
+<li><p><code>getline()</code> Operator: um z.B. Strings mit Leerzeichen einlesen zu können</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;String&gt; // Standardklasse aus STL</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> derName;</span></pre></td></tr><tr><td class="code"><pre><span class="line">getline(<span class="built_in">cin</span>, derName);</span></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Dateien-文件"><a href="#Dateien-文件" class="headerlink" title="Dateien(文件)"></a>Dateien(文件)</h4><p><code>#include&lt;fstream&gt;</code></p>
+<p>stellt Dateidatentypen/Klassen und deren Methoden zur Verfügung </p>
+<ul>
+<li>Dateiobjekt:<ul>
+<li>ifstream: Eingabe</li>
+<li>ofstream: Ausgabe</li>
+<li>fstream: Ein- und Ausgabe</li>
+</ul>
+</li>
+<li>Methoden für Dateiobjekt<ul>
+<li><code>open(Dateiname, Optionen)</code><ul>
+<li><code>ios::app</code>    öffnen und beim Schreiben an das Ende der Datei anfügen 打开文件，写入到文件的的末尾</li>
+<li><code>ios::out</code></li>
+<li><code>ios::in</code></li>
+</ul>
+</li>
+<li><code>close()</code></li>
+<li><code>get()</code></li>
+<li><code>put()</code></li>
+</ul>
+</li>
+</ul>
+<p>Funktion für Dateiobjekt:</p>
+<p><strong>Variante 1</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ifstream Datei;</span></pre></td></tr><tr><td class="code"><pre><span class="line">Datei.<span class="built_in">open</span>(<span class="string">"dummy.dat"</span>, ios::in);</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">while</span>(!Datei.eof())&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    Datei &gt;&gt; i; <span class="comment">// eof():end of file</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">Datei.<span class="built_in">close</span>();</span></pre></td></tr></table></figure>
+<p><strong>Variante 2</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ifstream</span></pre></td></tr><tr><td class="code"><pre><span class="line">Datei1(<span class="string">"dummy.dat"</span>, ios::in);</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">while</span>(!Datei1.eof())&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    Datei1 &gt;&gt; i;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h4 id="Ausgabeformatierung"><a href="#Ausgabeformatierung" class="headerlink" title="Ausgabeformatierung"></a>Ausgabeformatierung</h4><p>Die Formatierung der Ausgabe ist durch <code>#include &lt;iomanip&gt;</code> zugänglich</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt; </span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt; </span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt; </span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt; </span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">int</span> <span class="built_in">width</span>=<span class="number">12</span>; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">int</span> prec=<span class="number">5</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span>&lt;&lt; setw(<span class="built_in">width</span>)&lt;&lt;<span class="string">"12345"</span>; <span class="comment">// setzt die minimale Breite der danach folgenden Ausgabe </span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">" hallo"</span>&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span>&lt;&lt;setprecision(prec)&lt;&lt;M_PI; t</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span>&lt;&lt;setfill (<span class="string">'*'</span>)&lt;&lt;setw(<span class="built_in">width</span>)&lt;&lt;setprecision(<span class="number">10</span>)&lt;&lt;M_PI&lt;&lt;<span class="built_in">endl</span>; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt;<span class="string">"::"</span>&lt;&lt;M_PI&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt;setw(<span class="built_in">width</span>)&lt;&lt;<span class="string">"akjsd1"</span>&lt;&lt;<span class="built_in">endl</span>; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">// flags: </span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span>.setf(ios::left,ios::adjustfield); </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">// links ausgerichtet und Feld wird angepasst</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt;setw(<span class="built_in">width</span>)&lt;&lt;<span class="string">"akjsd2"</span>&lt;&lt;<span class="built_in">endl</span>; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt;<span class="string">"akjsd3"</span>&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span>.setf(ios::right,ios::adjustfield); <span class="comment">// rechts ausgerichtet und Feld wird angepasst </span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt;<span class="string">"akjsd4"</span>&lt;&lt;<span class="built_in">endl</span>; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt;setw(<span class="built_in">width</span>)&lt;&lt;<span class="string">"akjsd5"</span>&lt;&lt;<span class="built_in">endl</span>;	 			</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span>.unsetf(ios::adjustfield); <span class="comment">// Loesche Einstellung</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>Ausgabe:</p>
+<p><img src="/archives/33e92a8c/image-20200116193201138.png" alt="image-20200116193201138" style="zoom:50%;" align="left"></p>
+<p><code>std::setw()</code> ：只对其后面紧跟的输出产生作用，如上例中，表示’12345’共占5个位置，不足的7个用空格填充。若输入的内容超过<code>setw()</code>设置的长度，则按实际长度输出。</p>
+<p><code>std::setfill()</code>：设置<code>std::setw()</code>将填充什么样的字符如:<code>std::setfill(&#39;*&#39;)</code></p>
+<p><code>std::setprecision()</code>：控制输出流显示浮点数的数字个数，C++默认的流输出数值有效位是6</p>
+<p><code>std::setf()</code>: <code>cout.setf(ios::right,ios::adjustfield)</code> rechtsausgerichtet und Feld wird angepasst 取消其他对齐，设置为右对齐</p>
+<p><code>std::unsetf()</code>: Lösche Einstellung</p>
+<h3 id="Datentypen"><a href="#Datentypen" class="headerlink" title="Datentypen"></a>Datentypen</h3><h4 id="Attribute-fur-Variablendeklarationen"><a href="#Attribute-fur-Variablendeklarationen" class="headerlink" title="Attribute für Variablendeklarationen"></a>Attribute für Variablendeklarationen</h4><ul>
+<li><p>const: <code>const int i = 3; // kann später nicht mehr verändert werden</code> </p>
+</li>
+<li><p>extern: Deklaration von Symbolen ( Variablen, Funktionen)</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> k; <span class="comment">// z.B. in einer Datei *.h </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> k;        <span class="comment">// z.B. in einer Datei *.cpp des Quellcodes</span></span></pre></td></tr></table></figure>
+<p>可以置于变量或者函数前，以标示变量或者函数的定义在别的文件中，提示编译器遇到此变量和函数时在其他模块中寻找其定义。</p>
+</li>
+<li><p>static: Speicherstelle bleibt während des gesamten Programmlaufs 内存位置</p>
+<p>static变量放在全局数据区，它始终驻留在全局数据区，直到程序运行结束。</p>
+<p>对于一个完整的程序,内存中的分布情况:</p>
+<p><img src="/archives/33e92a8c/image-20200117132030778.png" alt="image-20200117132030778" style="zoom:50%;" align="left"></p>
+<p>一般程序的由new产生的动态数据存放在堆区，函数内部的自动变量存放在栈区,全局变量和static变量放在全局数据区</p>
+</li>
+</ul>
+<h3 id="Darstellung-von-Zahlen"><a href="#Darstellung-von-Zahlen" class="headerlink" title="Darstellung von Zahlen"></a>Darstellung von Zahlen</h3><ul>
+<li><p>Fließzahlen(浮点数)： Mantisse * Basis hoch Exponent</p>
+<ul>
+<li>Vorzeichenbit(符号位): </li>
+<li>Mantisse(尾数)：Kommazahl 小数点后的数字(p)</li>
+<li>Exponent zu einer gegebenen Basis 基数 (r) 指数位</li>
+</ul>
+<p><img src="/archives/33e92a8c/image-20200117084126776.png" style="zoom: 33%;" align="left"></p>
+</li>
+<li><p>32 Bit Gleitkommazahl nach IEEE 754 Standard(正规化)</p>
+<p><img src="/archives/33e92a8c/image-20200117084802005.png" style="zoom:50%;"></p>
+<script type="math/tex; mode=display">
+z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2…f_{22}$ (23 Bit für die <strong>Nachkommazahlen:</strong> Genauigkeit somit $2^{-24}$: 7 signifikante (有效位)Dezimalstellen</p>
+<p><strong>Charakteristik:</strong> $c=127+e$</p>
+<p><img src="/archives/33e92a8c/image-20200117085636180.png" alt="image-20200117085636180" style="zoom:50%;"></p>
+<p><img src="/archives/33e92a8c/image-20200117094810571.png" alt="image-20200117094810571" style="zoom:50%;"></p>
+</li>
+<li><p><strong>移码</strong> </p>
+<p>因为指数<code>e</code>有正有负，那么在8位的指数位中我们就要拿出第一位来<strong>指示符号</strong>，这样显然会造成不必要的浪费。给指数加上移码，就能保证结果<strong>总是</strong>一个非负数，也就可以将8个指数位都利用起来。对于有<code>M</code>个指数位的精度，其移码为：$2^{M-1}-1$ </p>
+<p><img src="/archives/33e92a8c/image-20200117092829126.png" alt="image-20200117092829126" style="zoom:50%;"></p>
+</li>
+<li><p>舍入规则</p>
+<p>以52位尾数位的双精度浮点数为例，舍入时需要重点参考第53位：</p>
+<ul>
+<li><p>若第53位为1，而第53位之后全部为0</p>
+<p>此时就要使第52位为0：若第52位本来就是0则不管，若第52位为1，则第53位就要向第52位进一位，这样第52位就可以为0</p>
+</li>
+<li><p>若第53位为1，但是第53位之后不全为0</p>
+<p>则第53位就要向第52位进一完成上舍入。</p>
+</li>
+<li><p>若也不是上面两种情况，那么第53位必为0，此时直接舍去不进位，称为下舍入。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Beispiel:</p>
+<blockquote>
+<p>【例】：求3.14的单精度浮点数表示。<br>首先将3.14转成二进制:</p>
+<ul>
+<li><p>整数部分3的二进制是11<code>b</code></p>
+</li>
+<li><p>小数部分0.14的二进制是：0.0010001111010111000<strong>010</strong>[10001111…..]<code>b</code>（方括号中表示小数点后第23位及之后）。</p>
+</li>
+</ul>
+<p>这样，3.14的二进制代码就是：11.0010001111010111000 010[10001111….]$×2^0$<code>b</code>，那么用正规化表示就是：1.10010001111010111000==<strong>010</strong>==[10001111….]$×2^1$<code>b</code>。<br>方括号表示的就是小数点后第24位了，由于单精度浮点数尾数只有23位，所以需要<strong>舍入</strong>（舍入方法见后）：由于第24位为1，且之后 <em>不全为</em> 0，所以需要向第23位进1完成上舍入：1.10010001111010111000==<strong>011</strong>==$×2^1$<code>b</code>。<br>而其指数是1，需要==加上移码127==，即128，也就是(1000 0000)<code>b</code>。<br>  它又是正数，所以符号为0。<br>   综上所述，3.14的单精度浮点数表示为：</p>
+<p>  1.10010001111010111000011 $\times 2^1$ </p>
+<p>   <strong>0 1000-0000 1001-0001-1110-1011-1000-011</strong><code>b</code></p>
+</blockquote>
+<h3 id="Funktion"><a href="#Funktion" class="headerlink" title="Funktion:"></a>Funktion:</h3><h4 id="Uberladung-重载"><a href="#Uberladung-重载" class="headerlink" title="Überladung(重载)"></a>Überladung(重载)</h4><p>C++ erlaubt, mehrere Funktionen mit gleichem Namen, aber unterschiedlichen Übergabeparametern zu entwickeln: dies Eigenschaft heißt <strong>Überladen</strong>.</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">addiere</span><span class="params">(<span class="keyword">int</span> arg1,<span class="keyword">int</span> arg2)</span></span>&#123; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">return</span> (arg1+arg2);</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">addiere</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span></span>&#123; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">return</span> (x+y);</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h4 id="Ubergabe-von-Argumenten-per-Referenz"><a href="#Ubergabe-von-Argumenten-per-Referenz" class="headerlink" title="Übergabe von Argumenten per Referenz"></a>Übergabe von Argumenten per Referenz</h4><p>Zweck:</p>
+<ul>
+<li>Übergabene Variable soll im Unterprogramm verändert werden</li>
+<li>Vermeiden von Herstellung von Kopien der Argumente (kostet Zeit)</li>
+</ul>
+<p>Zur Vermeidung von Overhead beim Ausführen des Programms können kurze Funktionen auch als “inline” deklariert werden.</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">addiere</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>&amp; arg1, <span class="keyword">const</span> <span class="keyword">int</span>&amp; arg2)</span> </span>&#123; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    wie vorher; </span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p><strong>inline只适合涵数体内代码简单的函数数使用</strong>，不能包含复杂的结构控制语句例如while、switch，并且<strong>内联函数本身不能是直接递归函数</strong>(自己内部还调用自己的函数)。</p>
+<p>inline 只是在调用的时候把函数体重新复制过来，<strong>内联是以代码膨胀（复制）为代价</strong>，仅仅省去了函数调用的开销，从而提高函数的执行效率。如果执行函数体内代码的时间，相比于函数调用的开销较大，那么效率的收<br>获会很少。</p>
+<h3 id="Typedef"><a href="#Typedef" class="headerlink" title="Typedef:"></a>Typedef:</h3><p>typedefs erlaubt es neuen Namen für bestehende Datentypen zu definieren, der sich exakt wie der ursprüngliche Type verhalten.</p>
+<p><strong>用途一：</strong></p>
+<p>用typedef来定义与平台无关的类型。<br>比如定义一个叫 REAL 的浮点类型，在目标平台一上，让它表示最高精度的类型为：<code>typedef long double REAL;</code><br>在不支持 long double 的平台二上，改为：<code>typedef double REAL;</code><br>在连 double 都不支持的平台三上，改为：<code>typedef float REAL;</code><br>也就是说，当跨平台时，只要改下 typedef 本身就行，不用对其他源码做任何修改。</p>
+<p><strong>用途二：</strong></p>
+<p>定义一种类型的别名，而不只是简单的宏替换。可以用作同时声明指针型的多个对象。比如：<br><code>char* pa, pb; // 这多数不符合我们的意图，它只声明了一个指向字符变量的指针，和一个字符变量；</code><br>以下则可行：<br><code>typedef char* PCHAR; // 一般用大写</code><br><code>PCHAR pa, pb; // 可行，同时声明了两个指向字符变量的指针</code><br>虽然：<br><code>char *pa, *pb;</code><br>也可行，但相对来说没有用typedef的形式直观，尤其在需要大量指针的地方，typedef的方式更省事。</p>
+<h3 id="Vektoren-und-Matrizen-Verwendung-einer-Bibliothek-Eigen3"><a href="#Vektoren-und-Matrizen-Verwendung-einer-Bibliothek-Eigen3" class="headerlink" title="Vektoren und Matrizen: Verwendung einer Bibliothek(Eigen3)"></a>Vektoren und Matrizen: Verwendung einer Bibliothek(Eigen3)</h3><p>Bibliothek Eigen3: <a href="http://eigen.tuxfamily.org" rel="external nofollow noopener noreferrer" target="_blank">http://eigen.tuxfamily.org</a></p>
+<p>Anforderungen an eine Vektor / Matrixbibliothek </p>
+<ul>
+<li>allgemeine Matrixgrößen <ul>
+<li>dicht besetzte Matrizen  (稠密矩阵，部分元素都非零)</li>
+<li>dünn besetzte Matrizen (稀疏矩阵，元素大部分为零)</li>
+</ul>
+</li>
+<li>verschiedene numerische Datentypen (Fliess-, Ganz- und komplexe Zahlen)</li>
+<li>Lineare Algebra: <ul>
+<li>Matrix-,Vektoroperationen </li>
+<li>Eigenwerte, Eigenvektoren </li>
+<li>Gleichungslöser</li>
+</ul>
+</li>
+<li>Implementierung soll „gut versteckt“ sein: Schnittstelle, Methoden werden verwendet</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Eigen/Dense&gt; // Dicht besetzte Matrix</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> Eigen::MatrixXd;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="function">MatrixXd <span class="title">m</span><span class="params">(<span class="number">2</span>,<span class="number">2</span>)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	m(<span class="number">0</span>,<span class="number">0</span>) = <span class="number">3</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	m(<span class="number">1</span>,<span class="number">0</span>) = <span class="number">2.5</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	m(<span class="number">0</span>,<span class="number">1</span>) = <span class="number">-1</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	m(<span class="number">1</span>,<span class="number">1</span>) = m(<span class="number">1</span>,<span class="number">0</span>) + m(<span class="number">0</span>,<span class="number">1</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; m &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">//  3  -1</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">//  2.5 1.5</span></span></pre></td></tr></table></figure>
+<p><strong>flexible Matrizen/Felder</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Eigen/Dense&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> Eigen;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	Matrix3d m = Matrix3d::Random();</span></pre></td></tr><tr><td class="code"><pre><span class="line">	m = (m + Matrix3d::Constant(<span class="number">1.2</span>)) * <span class="number">50</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">//MatrixXd m = MatrixXd::Random(3,3);</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="comment">// Matrix 3x3 Zufallsinitialisierung </span></span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="comment">//m = (m + MatrixXd::Constant(3,3,1.2)) * 50; </span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"m ="</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; m &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="function">Vector3d <span class="title">V</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span></span>; <span class="comment">// Initialisierung der Komponenten mit (1,2,3)</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"m * v ="</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; m * V &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<ul>
+<li>Matrix3d: 3x3 Matrix (double) </li>
+<li>Vector3d: 3 Vector (double)</li>
+</ul>
+<p><strong>Übersetzen</strong></p>
+<p><code>g++ -I /home/myself/include/ eigen_test.cpp -o eigen_test</code></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Eigen/Dense&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> Eigen;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function">Vector3d <span class="title">gib_ein_ergebnis_zurueck</span><span class="params">(Matrix3d <span class="keyword">const</span> &amp;mat,Vector3d <span class="keyword">const</span> &amp;vec)</span> </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"Ausgabe Vektor:"</span>&lt;&lt;vec&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">return</span> mat*vec;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	Matrix3d m = Matrix3d::Random(); </span></pre></td></tr><tr><td class="code"><pre><span class="line">	m = (m + Matrix3d::Constant(<span class="number">1.2</span>)) * <span class="number">50</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"m ="</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; m &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="function">Vector3d <span class="title">V</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"m * v ="</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; m * V &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	</span></pre></td></tr><tr><td class="code"><pre><span class="line">	Vector3d vec;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	vec = gib_ein_ergebnis_zurueck(m,V);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"vec:"</span>&lt;&lt;vec&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">double</span> val=vec.transpose()*vec; <span class="comment">//Skalarprodukt (eine Moeglichkeit...)</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"Skalarprodukt:"</span>&lt;&lt;val&lt;&lt;<span class="string">" oder mit .dot Methode: "</span>&lt;&lt;vec.dot(vec) &lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="comment">// aeusseres Produkt:外积</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">	Matrix3d m2=vec*vec.transpose();</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"m2: "</span>&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span>&lt;&lt;m2&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p><code>vec.tranpose()</code>: 转置, <code>vec.conjugate()</code>: 共轭, <code>vec.adjoint()</code>: 伴随</p>
+<p><code>vec.dot(vec)</code>: 点乘, 得到标量, <code>vec.cross(vec)</code>: 叉乘</p>
+]]></content>
+      <categories>
+        <category>WissProg</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Lifecycle Models-Creativity techniques</title>
     <url>/archives/dbd33824.html</url>
     <content><![CDATA[<h3 id="Creativity-continued"><a href="#Creativity-continued" class="headerlink" title="Creativity continued"></a>Creativity continued</h3><h4 id="Brainstorming"><a href="#Brainstorming" class="headerlink" title="Brainstorming"></a>Brainstorming</h4><p>RULE:</p>

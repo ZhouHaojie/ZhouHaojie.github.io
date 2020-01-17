@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Ein- und AusgabeStandardkanal #include&amp;lt;iostream&amp;gt; cin, cout, cerr(- Standardfehlerausgabe), clog(- Standardfehlerausgabe gepuffert)">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WissProg-C++(1)">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;33e92a8c.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="Ein- und AusgabeStandardkanal #include&amp;lt;iostream&amp;gt; cin, cout, cerr(- Standardfehlerausgabe), clog(- Standardfehlerausgabe gepuffert)">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;33e92a8c&#x2F;image-20200116193201138.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;33e92a8c&#x2F;image-20200117132030778.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;33e92a8c&#x2F;image-20200117084126776.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;33e92a8c&#x2F;image-20200117084802005.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;33e92a8c&#x2F;image-20200117085636180.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;33e92a8c&#x2F;image-20200117094810571.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;33e92a8c&#x2F;image-20200117092829126.png">
+<meta property="og:updated_time" content="2020-01-17T12:24:00.574Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;33e92a8c&#x2F;image-20200116193201138.png">
+
+<link rel="canonical" href="http://grenze.cn/archives/33e92a8c.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>WissProg-C++(1) | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">19</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">21</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">38</span></a>
+
+  </li>
+        <li class="menu-item menu-item-top">
+
+    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热榜</a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/33e92a8c.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WissProg-C++(1)
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-17 13:22:54 / 修改时间：13:24:00" itemprop="dateCreated datePublished" datetime="2020-01-17T13:22:54+01:00">2020-01-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WissProg/" itemprop="url" rel="index">
+                    <span itemprop="name">WissProg</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WissProg/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Ein-und-Ausgabe"><a href="#Ein-und-Ausgabe" class="headerlink" title="Ein- und Ausgabe"></a>Ein- und Ausgabe</h3><h4 id="Standardkanal"><a href="#Standardkanal" class="headerlink" title="Standardkanal"></a>Standardkanal</h4><ul>
+<li><p><code>#include&lt;iostream&gt;</code></p>
+<p>cin, cout, cerr(- Standardfehlerausgabe), clog(- Standardfehlerausgabe gepuffert)</p>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p><code>get()</code> Operator:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> c;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">cin</span>.<span class="built_in">get</span>(c); <span class="comment">// liest einen Buchstaben ein</span></span></pre></td></tr></table></figure>
+</li>
+<li><p><code>getline()</code> Operator: um z.B. Strings mit Leerzeichen einlesen zu können</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;String&gt; // Standardklasse aus STL</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> derName;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">getline(<span class="built_in">cin</span>, derName);</span></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Dateien-文件"><a href="#Dateien-文件" class="headerlink" title="Dateien(文件)"></a>Dateien(文件)</h4><p><code>#include&lt;fstream&gt;</code></p>
+<p>stellt Dateidatentypen/Klassen und deren Methoden zur Verfügung </p>
+<ul>
+<li>Dateiobjekt:<ul>
+<li>ifstream: Eingabe</li>
+<li>ofstream: Ausgabe</li>
+<li>fstream: Ein- und Ausgabe</li>
+</ul>
+</li>
+<li>Methoden für Dateiobjekt<ul>
+<li><code>open(Dateiname, Optionen)</code><ul>
+<li><code>ios::app</code>    öffnen und beim Schreiben an das Ende der Datei anfügen 打开文件，写入到文件的的末尾</li>
+<li><code>ios::out</code></li>
+<li><code>ios::in</code></li>
+</ul>
+</li>
+<li><code>close()</code></li>
+<li><code>get()</code></li>
+<li><code>put()</code></li>
+</ul>
+</li>
+</ul>
+<p>Funktion für Dateiobjekt:</p>
+<p><strong>Variante 1</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ifstream Datei;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Datei.<span class="built_in">open</span>(<span class="string">"dummy.dat"</span>, ios::in);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(!Datei.eof())&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    Datei &gt;&gt; i; <span class="comment">// eof():end of file</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">Datei.<span class="built_in">close</span>();</span></pre></td></tr></table></figure>
+<p><strong>Variante 2</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ifstream</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Datei1(<span class="string">"dummy.dat"</span>, ios::in);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(!Datei1.eof())&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    Datei1 &gt;&gt; i;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h4 id="Ausgabeformatierung"><a href="#Ausgabeformatierung" class="headerlink" title="Ausgabeformatierung"></a>Ausgabeformatierung</h4><p>Die Formatierung der Ausgabe ist durch <code>#include &lt;iomanip&gt;</code> zugänglich</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt; </span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt; </span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt; </span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt; </span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> <span class="built_in">width</span>=<span class="number">12</span>; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> prec=<span class="number">5</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span>&lt;&lt; setw(<span class="built_in">width</span>)&lt;&lt;<span class="string">"12345"</span>; <span class="comment">// setzt die minimale Breite der danach folgenden Ausgabe </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">" hallo"</span>&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span>&lt;&lt;setprecision(prec)&lt;&lt;M_PI; t</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span>&lt;&lt;setfill (<span class="string">'*'</span>)&lt;&lt;setw(<span class="built_in">width</span>)&lt;&lt;setprecision(<span class="number">10</span>)&lt;&lt;M_PI&lt;&lt;<span class="built_in">endl</span>; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt;<span class="string">"::"</span>&lt;&lt;M_PI&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt;setw(<span class="built_in">width</span>)&lt;&lt;<span class="string">"akjsd1"</span>&lt;&lt;<span class="built_in">endl</span>; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// flags: </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span>.setf(ios::left,ios::adjustfield); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// links ausgerichtet und Feld wird angepasst</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt;setw(<span class="built_in">width</span>)&lt;&lt;<span class="string">"akjsd2"</span>&lt;&lt;<span class="built_in">endl</span>; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt;<span class="string">"akjsd3"</span>&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span>.setf(ios::right,ios::adjustfield); <span class="comment">// rechts ausgerichtet und Feld wird angepasst </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt;<span class="string">"akjsd4"</span>&lt;&lt;<span class="built_in">endl</span>; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt;setw(<span class="built_in">width</span>)&lt;&lt;<span class="string">"akjsd5"</span>&lt;&lt;<span class="built_in">endl</span>;	 			</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span>.unsetf(ios::adjustfield); <span class="comment">// Loesche Einstellung</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>Ausgabe:</p>
+<p><img src="/archives/33e92a8c/image-20200116193201138.png" alt="image-20200116193201138" style="zoom:50%;" align="left"></p>
+<p><code>std::setw()</code> ：只对其后面紧跟的输出产生作用，如上例中，表示’12345’共占5个位置，不足的7个用空格填充。若输入的内容超过<code>setw()</code>设置的长度，则按实际长度输出。</p>
+<p><code>std::setfill()</code>：设置<code>std::setw()</code>将填充什么样的字符如:<code>std::setfill(&#39;*&#39;)</code></p>
+<p><code>std::setprecision()</code>：控制输出流显示浮点数的数字个数，C++默认的流输出数值有效位是6</p>
+<p><code>std::setf()</code>: <code>cout.setf(ios::right,ios::adjustfield)</code> rechtsausgerichtet und Feld wird angepasst 取消其他对齐，设置为右对齐</p>
+<p><code>std::unsetf()</code>: Lösche Einstellung</p>
+<h3 id="Datentypen"><a href="#Datentypen" class="headerlink" title="Datentypen"></a>Datentypen</h3><h4 id="Attribute-fur-Variablendeklarationen"><a href="#Attribute-fur-Variablendeklarationen" class="headerlink" title="Attribute für Variablendeklarationen"></a>Attribute für Variablendeklarationen</h4><ul>
+<li><p>const: <code>const int i = 3; // kann später nicht mehr verändert werden</code> </p>
+</li>
+<li><p>extern: Deklaration von Symbolen ( Variablen, Funktionen)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> k; <span class="comment">// z.B. in einer Datei *.h </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> k;        <span class="comment">// z.B. in einer Datei *.cpp des Quellcodes</span></span></pre></td></tr></table></figure>
+<p>可以置于变量或者函数前，以标示变量或者函数的定义在别的文件中，提示编译器遇到此变量和函数时在其他模块中寻找其定义。</p>
+</li>
+<li><p>static: Speicherstelle bleibt während des gesamten Programmlaufs 内存位置</p>
+<p>static变量放在全局数据区，它始终驻留在全局数据区，直到程序运行结束。</p>
+<p>对于一个完整的程序,内存中的分布情况:</p>
+<p><img src="/archives/33e92a8c/image-20200117132030778.png" alt="image-20200117132030778" style="zoom:50%;" align="left"></p>
+<p>一般程序的由new产生的动态数据存放在堆区，函数内部的自动变量存放在栈区,全局变量和static变量放在全局数据区</p>
+</li>
+</ul>
+<h3 id="Darstellung-von-Zahlen"><a href="#Darstellung-von-Zahlen" class="headerlink" title="Darstellung von Zahlen"></a>Darstellung von Zahlen</h3><ul>
+<li><p>Fließzahlen(浮点数)： Mantisse * Basis hoch Exponent</p>
+<ul>
+<li>Vorzeichenbit(符号位): </li>
+<li>Mantisse(尾数)：Kommazahl 小数点后的数字(p)</li>
+<li>Exponent zu einer gegebenen Basis 基数 (r) 指数位</li>
+</ul>
+<p><img src="/archives/33e92a8c/image-20200117084126776.png" style="zoom: 33%;" align="left"></p>
+</li>
+<li><p>32 Bit Gleitkommazahl nach IEEE 754 Standard(正规化)</p>
+<p><img src="/archives/33e92a8c/image-20200117084802005.png" style="zoom:50%;"></p>
+<script type="math/tex; mode=display">
+z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2…f_{22}$ (23 Bit für die <strong>Nachkommazahlen:</strong> Genauigkeit somit $2^{-24}$: 7 signifikante (有效位)Dezimalstellen</p>
+<p><strong>Charakteristik:</strong> $c=127+e$</p>
+<p><img src="/archives/33e92a8c/image-20200117085636180.png" alt="image-20200117085636180" style="zoom:50%;"></p>
+<p><img src="/archives/33e92a8c/image-20200117094810571.png" alt="image-20200117094810571" style="zoom:50%;"></p>
+</li>
+<li><p><strong>移码</strong> </p>
+<p>因为指数<code>e</code>有正有负，那么在8位的指数位中我们就要拿出第一位来<strong>指示符号</strong>，这样显然会造成不必要的浪费。给指数加上移码，就能保证结果<strong>总是</strong>一个非负数，也就可以将8个指数位都利用起来。对于有<code>M</code>个指数位的精度，其移码为：$2^{M-1}-1$ </p>
+<p><img src="/archives/33e92a8c/image-20200117092829126.png" alt="image-20200117092829126" style="zoom:50%;"></p>
+</li>
+<li><p>舍入规则</p>
+<p>以52位尾数位的双精度浮点数为例，舍入时需要重点参考第53位：</p>
+<ul>
+<li><p>若第53位为1，而第53位之后全部为0</p>
+<p>此时就要使第52位为0：若第52位本来就是0则不管，若第52位为1，则第53位就要向第52位进一位，这样第52位就可以为0</p>
+</li>
+<li><p>若第53位为1，但是第53位之后不全为0</p>
+<p>则第53位就要向第52位进一完成上舍入。</p>
+</li>
+<li><p>若也不是上面两种情况，那么第53位必为0，此时直接舍去不进位，称为下舍入。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Beispiel:</p>
+<blockquote>
+<p>【例】：求3.14的单精度浮点数表示。<br>首先将3.14转成二进制:</p>
+<ul>
+<li><p>整数部分3的二进制是11<code>b</code></p>
+</li>
+<li><p>小数部分0.14的二进制是：0.0010001111010111000<strong>010</strong>[10001111…..]<code>b</code>（方括号中表示小数点后第23位及之后）。</p>
+</li>
+</ul>
+<p>这样，3.14的二进制代码就是：11.0010001111010111000 010[10001111….]$×2^0$<code>b</code>，那么用正规化表示就是：1.10010001111010111000==<strong>010</strong>==[10001111….]$×2^1$<code>b</code>。<br>方括号表示的就是小数点后第24位了，由于单精度浮点数尾数只有23位，所以需要<strong>舍入</strong>（舍入方法见后）：由于第24位为1，且之后 <em>不全为</em> 0，所以需要向第23位进1完成上舍入：1.10010001111010111000==<strong>011</strong>==$×2^1$<code>b</code>。<br>而其指数是1，需要==加上移码127==，即128，也就是(1000 0000)<code>b</code>。<br>  它又是正数，所以符号为0。<br>   综上所述，3.14的单精度浮点数表示为：</p>
+<p>  1.10010001111010111000011 $\times 2^1$ </p>
+<p>   <strong>0 1000-0000 1001-0001-1110-1011-1000-011</strong><code>b</code></p>
+</blockquote>
+<h3 id="Funktion"><a href="#Funktion" class="headerlink" title="Funktion:"></a>Funktion:</h3><h4 id="Uberladung-重载"><a href="#Uberladung-重载" class="headerlink" title="Überladung(重载)"></a>Überladung(重载)</h4><p>C++ erlaubt, mehrere Funktionen mit gleichem Namen, aber unterschiedlichen Übergabeparametern zu entwickeln: dies Eigenschaft heißt <strong>Überladen</strong>.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">addiere</span><span class="params">(<span class="keyword">int</span> arg1,<span class="keyword">int</span> arg2)</span></span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> (arg1+arg2);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">addiere</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span></span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> (x+y);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h4 id="Ubergabe-von-Argumenten-per-Referenz"><a href="#Ubergabe-von-Argumenten-per-Referenz" class="headerlink" title="Übergabe von Argumenten per Referenz"></a>Übergabe von Argumenten per Referenz</h4><p>Zweck:</p>
+<ul>
+<li>Übergabene Variable soll im Unterprogramm verändert werden</li>
+<li>Vermeiden von Herstellung von Kopien der Argumente (kostet Zeit)</li>
+</ul>
+<p>Zur Vermeidung von Overhead beim Ausführen des Programms können kurze Funktionen auch als “inline” deklariert werden.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">addiere</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>&amp; arg1, <span class="keyword">const</span> <span class="keyword">int</span>&amp; arg2)</span> </span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    wie vorher; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p><strong>inline只适合涵数体内代码简单的函数数使用</strong>，不能包含复杂的结构控制语句例如while、switch，并且<strong>内联函数本身不能是直接递归函数</strong>(自己内部还调用自己的函数)。</p>
+<p>inline 只是在调用的时候把函数体重新复制过来，<strong>内联是以代码膨胀（复制）为代价</strong>，仅仅省去了函数调用的开销，从而提高函数的执行效率。如果执行函数体内代码的时间，相比于函数调用的开销较大，那么效率的收<br>获会很少。</p>
+<h3 id="Typedef"><a href="#Typedef" class="headerlink" title="Typedef:"></a>Typedef:</h3><p>typedefs erlaubt es neuen Namen für bestehende Datentypen zu definieren, der sich exakt wie der ursprüngliche Type verhalten.</p>
+<p><strong>用途一：</strong></p>
+<p>用typedef来定义与平台无关的类型。<br>比如定义一个叫 REAL 的浮点类型，在目标平台一上，让它表示最高精度的类型为：<code>typedef long double REAL;</code><br>在不支持 long double 的平台二上，改为：<code>typedef double REAL;</code><br>在连 double 都不支持的平台三上，改为：<code>typedef float REAL;</code><br>也就是说，当跨平台时，只要改下 typedef 本身就行，不用对其他源码做任何修改。</p>
+<p><strong>用途二：</strong></p>
+<p>定义一种类型的别名，而不只是简单的宏替换。可以用作同时声明指针型的多个对象。比如：<br><code>char* pa, pb; // 这多数不符合我们的意图，它只声明了一个指向字符变量的指针，和一个字符变量；</code><br>以下则可行：<br><code>typedef char* PCHAR; // 一般用大写</code><br><code>PCHAR pa, pb; // 可行，同时声明了两个指向字符变量的指针</code><br>虽然：<br><code>char *pa, *pb;</code><br>也可行，但相对来说没有用typedef的形式直观，尤其在需要大量指针的地方，typedef的方式更省事。</p>
+<h3 id="Vektoren-und-Matrizen-Verwendung-einer-Bibliothek-Eigen3"><a href="#Vektoren-und-Matrizen-Verwendung-einer-Bibliothek-Eigen3" class="headerlink" title="Vektoren und Matrizen: Verwendung einer Bibliothek(Eigen3)"></a>Vektoren und Matrizen: Verwendung einer Bibliothek(Eigen3)</h3><p>Bibliothek Eigen3: <a href="http://eigen.tuxfamily.org" rel="external nofollow noopener noreferrer" target="_blank">http://eigen.tuxfamily.org</a></p>
+<p>Anforderungen an eine Vektor / Matrixbibliothek </p>
+<ul>
+<li>allgemeine Matrixgrößen <ul>
+<li>dicht besetzte Matrizen  (稠密矩阵，部分元素都非零)</li>
+<li>dünn besetzte Matrizen (稀疏矩阵，元素大部分为零)</li>
+</ul>
+</li>
+<li>verschiedene numerische Datentypen (Fliess-, Ganz- und komplexe Zahlen)</li>
+<li>Lineare Algebra: <ul>
+<li>Matrix-,Vektoroperationen </li>
+<li>Eigenwerte, Eigenvektoren </li>
+<li>Gleichungslöser</li>
+</ul>
+</li>
+<li>Implementierung soll „gut versteckt“ sein: Schnittstelle, Methoden werden verwendet</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Eigen/Dense&gt; // Dicht besetzte Matrix</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Eigen::MatrixXd;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	<span class="function">MatrixXd <span class="title">m</span><span class="params">(<span class="number">2</span>,<span class="number">2</span>)</span></span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	m(<span class="number">0</span>,<span class="number">0</span>) = <span class="number">3</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	m(<span class="number">1</span>,<span class="number">0</span>) = <span class="number">2.5</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">	m(<span class="number">0</span>,<span class="number">1</span>) = <span class="number">-1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">	m(<span class="number">1</span>,<span class="number">1</span>) = m(<span class="number">1</span>,<span class="number">0</span>) + m(<span class="number">0</span>,<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; m &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//  3  -1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//  2.5 1.5</span></span></pre></td></tr></table></figure>
+<p><strong>flexible Matrizen/Felder</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Eigen/Dense&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> Eigen;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	Matrix3d m = Matrix3d::Random();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	m = (m + Matrix3d::Constant(<span class="number">1.2</span>)) * <span class="number">50</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//MatrixXd m = MatrixXd::Random(3,3);</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">// Matrix 3x3 Zufallsinitialisierung </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">//m = (m + MatrixXd::Constant(3,3,1.2)) * 50; </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"m ="</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; m &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">	<span class="function">Vector3d <span class="title">V</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span></span>; <span class="comment">// Initialisierung der Komponenten mit (1,2,3)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"m * v ="</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; m * V &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<ul>
+<li>Matrix3d: 3x3 Matrix (double) </li>
+<li>Vector3d: 3 Vector (double)</li>
+</ul>
+<p><strong>Übersetzen</strong></p>
+<p><code>g++ -I /home/myself/include/ eigen_test.cpp -o eigen_test</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Eigen/Dense&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> Eigen;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="function">Vector3d <span class="title">gib_ein_ergebnis_zurueck</span><span class="params">(Matrix3d <span class="keyword">const</span> &amp;mat,Vector3d <span class="keyword">const</span> &amp;vec)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"Ausgabe Vektor:"</span>&lt;&lt;vec&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">return</span> mat*vec;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">	Matrix3d m = Matrix3d::Random(); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">	m = (m + Matrix3d::Constant(<span class="number">1.2</span>)) * <span class="number">50</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"m ="</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; m &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">	<span class="function">Vector3d <span class="title">V</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span></span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"m * v ="</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; m * V &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">	Vector3d vec;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">	vec = gib_ein_ergebnis_zurueck(m,V);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"vec:"</span>&lt;&lt;vec&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">double</span> val=vec.transpose()*vec; <span class="comment">//Skalarprodukt (eine Moeglichkeit...)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"Skalarprodukt:"</span>&lt;&lt;val&lt;&lt;<span class="string">" oder mit .dot Methode: "</span>&lt;&lt;vec.dot(vec) &lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">// aeusseres Produkt:外积</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">	Matrix3d m2=vec*vec.transpose();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"m2: "</span>&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">	<span class="built_in">cout</span>&lt;&lt;m2&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p><code>vec.tranpose()</code>: 转置, <code>vec.conjugate()</code>: 共轭, <code>vec.adjoint()</code>: 伴随</p>
+<p><code>vec.dot(vec)</code>: 点乘, 得到标量, <code>vec.cross(vec)</code>: 叉乘</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\e70dd349.html" rel="bookmark">结构化绑定声明</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\73ac48ad.html" rel="bookmark">C++11智能指针</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\37649.html" rel="bookmark">const和constexpr的区别C++</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/33e92a8c.html" title="WissProg-C++(1)">http://grenze.cn/archives/33e92a8c.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/dbd33824.html" rel="prev" title="Lifecycle Models-Creativity techniques">
+      <i class="fa fa-chevron-left"></i> Lifecycle Models-Creativity techniques
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ein-und-Ausgabe"><span class="nav-number">1.</span> <span class="nav-text">Ein- und Ausgabe</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Standardkanal"><span class="nav-number">1.1.</span> <span class="nav-text">Standardkanal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dateien-文件"><span class="nav-number">1.2.</span> <span class="nav-text">Dateien(文件)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ausgabeformatierung"><span class="nav-number">1.3.</span> <span class="nav-text">Ausgabeformatierung</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Datentypen"><span class="nav-number">2.</span> <span class="nav-text">Datentypen</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Attribute-fur-Variablendeklarationen"><span class="nav-number">2.1.</span> <span class="nav-text">Attribute für Variablendeklarationen</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Darstellung-von-Zahlen"><span class="nav-number">3.</span> <span class="nav-text">Darstellung von Zahlen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Funktion"><span class="nav-number">4.</span> <span class="nav-text">Funktion:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Uberladung-重载"><span class="nav-number">4.1.</span> <span class="nav-text">Überladung(重载)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ubergabe-von-Argumenten-per-Referenz"><span class="nav-number">4.2.</span> <span class="nav-text">Übergabe von Argumenten per Referenz</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Typedef"><span class="nav-number">5.</span> <span class="nav-text">Typedef:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vektoren-und-Matrizen-Verwendung-einer-Bibliothek-Eigen3"><span class="nav-number">6.</span> <span class="nav-text">Vektoren und Matrizen: Verwendung einer Bibliothek(Eigen3)</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">80k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:13</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: '9f5436fc25c910337de2507be5227aed',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
