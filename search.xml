@@ -22,7 +22,7 @@
 ]]></content>
       <categories>
         <category>Systems and Software Engineering</category>
-        <category>Lifecycle Models-Testing Methods</category>
+        <category>Lifecycle Models</category>
       </categories>
       <tags>
         <tag>Lifecycle Models</tag>
@@ -158,7 +158,7 @@
 ]]></content>
       <categories>
         <category>Systems and Software Engineering</category>
-        <category>Lifecycle Models-Maturity Models</category>
+        <category>Lifecycle Models</category>
       </categories>
       <tags>
         <tag>Lifecycle Models</tag>
@@ -437,7 +437,7 @@ z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2
 ]]></content>
       <categories>
         <category>Systems and Software Engineering</category>
-        <category>Lifecycle Models-Creativity techniques</category>
+        <category>Lifecycle Models</category>
       </categories>
       <tags>
         <tag>Lifecycle Models</tag>
@@ -681,8 +681,8 @@ z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2
 <a id="more"></a>
 <p><strong>SDLC: System Development Life Cycle</strong></p>
 <p>Describes a process for planning, creating, testing, maintenance and deploying a system. The system can be composed of hardware only, software only, or a combination of both</p>
-<p><img src="/archives/69428dab/image-20200109161343900.png" alt="image-20200109161343900" style="zoom:50%;"></p>
-<h4 id="Waterfall-Model"><a href="#Waterfall-Model" class="headerlink" title="Waterfall Model"></a>Waterfall Model</h4><p><img src="/archives/69428dab/image-20200108212237558.png" alt="image-20200108212237558" style="zoom: 33%;"></p>
+<p><img src="/archives/69428dab/image-20200109161343900.png" style="zoom:50%;"></p>
+<h4 id="Waterfall-Model"><a href="#Waterfall-Model" class="headerlink" title="Waterfall Model"></a>Waterfall Model</h4><p><img src="/archives/69428dab/image-20200108212237558.png" style="zoom: 33%;"></p>
 <p><strong>Pros:</strong></p>
 <ul>
 <li>simple and easy to understand and use</li>
@@ -696,7 +696,7 @@ z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2
 <li>Not a good model  for complex and object-oriented project</li>
 </ul>
 <h4 id="Spiral-Model"><a href="#Spiral-Model" class="headerlink" title="Spiral Model"></a>Spiral Model</h4><p>Spiral Model is a generalization of the waterfall model and is an iterative model.</p>
-<p><img src="/archives/69428dab/image-20200108213218560.png" alt="image-20200108213218560" style="zoom: 33%;"></p>
+<p><img src="/archives/69428dab/image-20200108213218560.png" style="zoom: 33%;"></p>
 <p>Initiating and terminating the spiral:</p>
 <ul>
 <li><p>Initiating the process</p>
@@ -719,13 +719,13 @@ z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2
 <li>Risk of not meeting initial budget or schedule</li>
 </ul>
 <h4 id="Y-Diagram"><a href="#Y-Diagram" class="headerlink" title="Y-Diagram"></a>Y-Diagram</h4><p>The Y-Diagram depicts(描绘) the different perspectives in the hardware design(VLSI). Mostly, it is used for the development of IC.</p>
-<p><img src="/archives/69428dab/image-20200108214542200.png" alt="image-20200108214542200" style="zoom: 33%;"></p>
-<p><img src="/archives/69428dab/image-20200108214710885.png" alt="image-20200108214710885" style="zoom: 33%;"></p>
+<p><img src="/archives/69428dab/image-20200108214542200.png" style="zoom: 33%;"></p>
+<p><img src="/archives/69428dab/image-20200108214710885.png" style="zoom: 33%;"></p>
 <p><strong>Global transformation</strong>: The general model for the designing process is based on a sequence of transformation steps and level (or view) changes with every step. </p>
 <p><strong>Local transformation</strong>: The design is often optimized or verified on a given level. Since there is no level or view change.</p>
-<p><img src="/archives/69428dab/image-20200108215041493.png" alt="image-20200108215041493" style="zoom: 33%;"></p>
+<p><img src="/archives/69428dab/image-20200108215041493.png" style="zoom: 33%;"></p>
 <h4 id="V-Model"><a href="#V-Model" class="headerlink" title="V-Model"></a>V-Model</h4><p>The V-Model is an internationally recognized development standard for IT systems.</p>
-<p><img src="/archives/69428dab/image-20200109101808579.png" alt="image-20200109101808579" style="zoom: 33%;"></p>
+<p><img src="/archives/69428dab/image-20200109101808579.png" style="zoom: 33%;"></p>
 <h5 id="The-Sub-Models"><a href="#The-Sub-Models" class="headerlink" title="The Sub-Models"></a>The Sub-Models</h5><p>Four sub-models are closely linked to on another and influence each other concerning the exchange of products/results.</p>
 <p>PM: Project Management</p>
 <p>SD: System Development</p>
@@ -739,7 +739,7 @@ z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2
 </ul>
 <h4 id="Prototyping-Model"><a href="#Prototyping-Model" class="headerlink" title="Prototyping Model"></a>Prototyping Model</h4><p>Naturally, Waterfall and V-Model assume their requirements specification as complete and consistent after their specification phase and are therefore rather strict.</p>
 <p>A prototype demonstrates selected characteristic features of the product in practical use</p>
-<p><img src="/archives/69428dab/image-20200109102605277.png" alt="image-20200109102605277" style="zoom: 33%;"></p>
+<p><img src="/archives/69428dab/image-20200109102605277.png" style="zoom: 33%;"></p>
 <p>Advantages:</p>
 <ul>
 <li>Reduced time and costs for first example </li>
@@ -759,7 +759,7 @@ z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2
 <li>customer collaboration(客户协作)             &gt;                  contract negotiation(合同谈判)</li>
 <li>Responding to change                                 &gt;                  following a plan</li>
 </ul>
-<h5 id="Life-Cycle"><a href="#Life-Cycle" class="headerlink" title="Life Cycle"></a>Life Cycle</h5><p><img src="/archives/69428dab/image-20200109114650771.png" alt="image-20200109114650771" style="zoom: 50%;"></p>
+<h5 id="Life-Cycle"><a href="#Life-Cycle" class="headerlink" title="Life Cycle"></a>Life Cycle</h5><p><img src="/archives/69428dab/image-20200109114650771.png" style="zoom: 50%;"></p>
 <h5 id="Scrum-Roles-Scrum-团队成员"><a href="#Scrum-Roles-Scrum-团队成员" class="headerlink" title="Scrum - Roles(Scrum 团队成员)"></a>Scrum - Roles(Scrum 团队成员)</h5><p>Scrum is an agile, lightweight process for managing and controlling software and product development in rapidly changing environments.</p>
 <p>敏捷开发是一种软件开发方法，基于迭代和增量开发，通过自组织，跨团队，沟通协作完成开发工作。</p>
 <ul>
@@ -788,7 +788,7 @@ z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2
 </ul>
 </li>
 </ul>
-<h5 id="Sprint-Meeting-Sprint-会议"><a href="#Sprint-Meeting-Sprint-会议" class="headerlink" title="Sprint Meeting(Sprint 会议)"></a>Sprint Meeting(Sprint 会议)</h5><p><img src="/archives/69428dab/image-20200109143954157.png" alt="image-20200109143954157" style="zoom: 50%;"></p>
+<h5 id="Sprint-Meeting-Sprint-会议"><a href="#Sprint-Meeting-Sprint-会议" class="headerlink" title="Sprint Meeting(Sprint 会议)"></a>Sprint Meeting(Sprint 会议)</h5><p><img src="/archives/69428dab/image-20200109143954157.png" style="zoom: 50%;"></p>
 <ol>
 <li><p>Daily Scrum Meeting (每日站立会议)</p>
 <ul>
@@ -801,7 +801,7 @@ z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2
 </ul>
 </li>
 </ul>
-<p><img src="/archives/69428dab/image-20200109151028770.png" alt="image-20200109151028770" style="zoom: 50%;"></p>
+<p><img src="/archives/69428dab/image-20200109151028770.png" style="zoom: 50%;"></p>
 </li>
 <li><p>Sprint Planning Meeting (Sprint 计划会议)</p>
 <ul>
@@ -847,7 +847,7 @@ z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2
 </ul>
 </li>
 </ul>
-<p><img src="/archives/69428dab/image-20200109161044105.png" alt="image-20200109161044105" style="zoom:50%;"></p>
+<p><img src="/archives/69428dab/image-20200109161044105.png" style="zoom:50%;"></p>
 <h5 id="Scrum-Artifacts-文档"><a href="#Scrum-Artifacts-文档" class="headerlink" title="Scrum Artifacts (文档)"></a>Scrum Artifacts (文档)</h5><ul>
 <li>Product Backlog<ul>
 <li>Requirements for a system, expressed as a prioritized list of backlog Items (Spreadsheet) 整个系统的需求文档，有优先级的描述(电子表格) / Is not exact粗略</li>
@@ -856,7 +856,7 @@ z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2
 </ul>
 </li>
 </ul>
-<p><img src="/archives/69428dab/image-20200109154039415.png" alt="image-20200109154039415" style="zoom:50%;"></p>
+<p><img src="/archives/69428dab/image-20200109154039415.png" style="zoom:50%;"></p>
 <ul>
 <li><p>Estimation of Product Backlog Items(产品订单的估算)</p>
 <ul>
@@ -888,253 +888,7 @@ z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2
 <p><img src="/archives/69428dab/image-20200109154837513.png" alt="image-20200109154837513" style="zoom: 50%;"></p>
 </li>
 </ul>
-<h5 id="Scrum-Board"><a href="#Scrum-Board" class="headerlink" title="Scrum Board"></a>Scrum Board</h5><p><img src="/archives/69428dab/image-20200109155042572.png" alt="image-20200109155042572" style="zoom:50%;"></p>
-<p>Advantages:</p>
-<ul>
-<li>Completely developed and tested features in short iterations </li>
-<li>Simplicity of the process </li>
-<li>Clearly defined rules </li>
-<li>Increasing productivity </li>
-<li>Self-organizing each team member carries a lot of responsibility improved communication</li>
-</ul>
-<p>Drawbacks:</p>
-<ul>
-<li>“Undisciplined hacking” (no written documentation) </li>
-<li>Violation of responsibility </li>
-<li>Current mainly carried by the inventors </li>
-<li>Focused on SW mainly</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Systems and Software Engineering</category>
-        <category>Lifecycle Models</category>
-      </categories>
-      <tags>
-        <tag>Lifecycle Models</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Lifecycle Models-Phase Models</title>
-    <url>/archives/69428dab.html</url>
-    <content><![CDATA[<h3 id="Phase-Models"><a href="#Phase-Models" class="headerlink" title="Phase Models"></a>Phase Models</h3><p>What is a phase model?</p>
-<p>sequence of working tasks(design steps, phase concept)</p>
-<ul>
-<li>according activities </li>
-<li>definition of expected results </li>
-<li>criteria for completion of tasks </li>
-<li>According budget and schedule</li>
-</ul>
-<a id="more"></a>
-<p><strong>SDLC: System Development Life Cycle</strong></p>
-<p>Describes a process for planning, creating, testing, maintenance and deploying a system. The system can be composed of hardware only, software only, or a combination of both</p>
-<p><img src="/archives/69428dab/image-20200109161343900.png" alt="image-20200109161343900" style="zoom:50%;"></p>
-<h4 id="Waterfall-Model"><a href="#Waterfall-Model" class="headerlink" title="Waterfall Model"></a>Waterfall Model</h4><p><img src="/archives/69428dab/image-20200108212237558.png" alt="image-20200108212237558" style="zoom: 33%;"></p>
-<p><strong>Pros:</strong></p>
-<ul>
-<li>simple and easy to understand and use</li>
-<li>easy to manage</li>
-<li>works well for <em>smaller projects</em> </li>
-</ul>
-<p><strong>Cons:</strong></p>
-<ul>
-<li>No working software is produced until late during the life cycle</li>
-<li>High amounts of risk and uncertainty</li>
-<li>Not a good model  for complex and object-oriented project</li>
-</ul>
-<h4 id="Spiral-Model"><a href="#Spiral-Model" class="headerlink" title="Spiral Model"></a>Spiral Model</h4><p>Spiral Model is a generalization of the waterfall model and is an iterative model.</p>
-<p><img src="/archives/69428dab/image-20200108213218560.png" alt="image-20200108213218560" style="zoom: 33%;"></p>
-<p>Initiating and terminating the spiral:</p>
-<ul>
-<li><p>Initiating the process</p>
-<p>The spiral gets started by a hypothesis that a particular operational mission could be improved by a software effort.</p>
-</li>
-<li><p>Terminating the process</p>
-<p>The spiral process involves a test of this hypothesis: At any time, if the hypothesis fails the test, the spiral is terminated.</p>
-</li>
-</ul>
-<p>Advantages:</p>
-<ul>
-<li>Estimates (budget, schedule) become more and more realistic as work progresses.</li>
-<li>Software engineers can get their hands in and start working on a project earlier. </li>
-<li>Easier to cope with the changes inherent to software development.</li>
-</ul>
-<p>Disadvantages:</p>
-<ul>
-<li>Highly customized limiting re-usability because different for each application.</li>
-<li>Estimates of budget and time are harder to judge at the beginning of the project since the requirements evolve through the process.</li>
-<li>Risk of not meeting initial budget or schedule</li>
-</ul>
-<h4 id="Y-Diagram"><a href="#Y-Diagram" class="headerlink" title="Y-Diagram"></a>Y-Diagram</h4><p>The Y-Diagram depicts(描绘) the different perspectives in the hardware design(VLSI). Mostly, it is used for the development of IC.</p>
-<p><img src="/archives/69428dab/image-20200108214542200.png" alt="image-20200108214542200" style="zoom: 33%;"></p>
-<p><img src="/archives/69428dab/image-20200108214710885.png" alt="image-20200108214710885" style="zoom: 33%;"></p>
-<p><strong>Global transformation</strong>: The general model for the designing process is based on a sequence of transformation steps and level (or view) changes with every step. </p>
-<p><strong>Local transformation</strong>: The design is often optimized or verified on a given level. Since there is no level or view change.</p>
-<p><img src="/archives/69428dab/image-20200108215041493.png" alt="image-20200108215041493" style="zoom: 33%;"></p>
-<h4 id="V-Model"><a href="#V-Model" class="headerlink" title="V-Model"></a>V-Model</h4><p>The V-Model is an internationally recognized development standard for IT systems.</p>
-<p><img src="/archives/69428dab/image-20200109101808579.png" alt="image-20200109101808579" style="zoom: 33%;"></p>
-<h5 id="The-Sub-Models"><a href="#The-Sub-Models" class="headerlink" title="The Sub-Models"></a>The Sub-Models</h5><p>Four sub-models are closely linked to on another and influence each other concerning the exchange of products/results.</p>
-<p>PM: Project Management</p>
-<p>SD: System Development</p>
-<p>QA: Quality Assurance</p>
-<p>CM: Configuration Management</p>
-<p><strong>Disadvantages:</strong></p>
-<ul>
-<li>Does not handle iterations </li>
-<li>Does not easily handle dynamic changes in requirements </li>
-<li>Does not contain risk analysis activities</li>
-</ul>
-<h4 id="Prototyping-Model"><a href="#Prototyping-Model" class="headerlink" title="Prototyping Model"></a>Prototyping Model</h4><p>Naturally, Waterfall and V-Model assume their requirements specification as complete and consistent after their specification phase and are therefore rather strict.</p>
-<p>A prototype demonstrates selected characteristic features of the product in practical use</p>
-<p><img src="/archives/69428dab/image-20200109102605277.png" alt="image-20200109102605277" style="zoom: 33%;"></p>
-<p>Advantages:</p>
-<ul>
-<li>Reduced time and costs for first example </li>
-<li>Speed for first examples Improved and increased user involvement</li>
-</ul>
-<p>Disadvantages:</p>
-<ul>
-<li>Insufficient analysis </li>
-<li>User confusion of prototype and finished system </li>
-<li>Excessive development time of the prototype </li>
-<li>Expense of implementing prototyping</li>
-</ul>
-<h4 id="Agile-Model-敏捷性模型"><a href="#Agile-Model-敏捷性模型" class="headerlink" title="Agile Model(敏捷性模型)"></a><a href="https://www.cnblogs.com/edisonchou/p/5187346.html" rel="external nofollow noopener noreferrer" target="_blank">Agile Model(敏捷性模型)</a></h4><p>Main points:(敏捷开发宣言内容)</p>
-<ul>
-<li>Individuals and interactions(个体与交互) &gt;(胜过)        processes and tools</li>
-<li>Working software                                         &gt;                  comprehensive documentation</li>
-<li>customer collaboration(客户协作)             &gt;                  contract negotiation(合同谈判)</li>
-<li>Responding to change                                 &gt;                  following a plan</li>
-</ul>
-<h5 id="Life-Cycle"><a href="#Life-Cycle" class="headerlink" title="Life Cycle"></a>Life Cycle</h5><p><img src="/archives/69428dab/image-20200109114650771.png" alt="image-20200109114650771" style="zoom: 50%;"></p>
-<h5 id="Scrum-Roles-Scrum-团队成员"><a href="#Scrum-Roles-Scrum-团队成员" class="headerlink" title="Scrum - Roles(Scrum 团队成员)"></a>Scrum - Roles(Scrum 团队成员)</h5><p>Scrum is an agile, lightweight process for managing and controlling software and product development in rapidly changing environments.</p>
-<p>敏捷开发是一种软件开发方法，基于迭代和增量开发，通过自组织，跨团队，沟通协作完成开发工作。</p>
-<ul>
-<li><p>Scrum Master</p>
-<ul>
-<li>Represents management to the project and vice  versa</li>
-<li>Typically filed(提交) by a project manager</li>
-<li>Responsible for enacting scrum values and practices</li>
-<li>Acts as moderator and coach</li>
-<li>Guiding and protecting the team</li>
-</ul>
-</li>
-<li><p>Scrum Team:</p>
-<ul>
-<li>Typically 5-10 people </li>
-<li>Cross-functional (QA, programmers, UI designers etc.) </li>
-<li>Team is self-organizing </li>
-<li>Membership can only change between sprints</li>
-</ul>
-</li>
-<li><p>Product Owner:</p>
-<ul>
-<li>Acts like one voice </li>
-<li>Is responsible for product features and backlog </li>
-<li>Typically a product manager -&gt;  knows what needs to be build and in which order</li>
-</ul>
-</li>
-</ul>
-<h5 id="Sprint-Meeting-Sprint-会议"><a href="#Sprint-Meeting-Sprint-会议" class="headerlink" title="Sprint Meeting(Sprint 会议)"></a>Sprint Meeting(Sprint 会议)</h5><p><img src="/archives/69428dab/image-20200109143954157.png" alt="image-20200109143954157" style="zoom: 50%;"></p>
-<ol>
-<li><p>Daily Scrum Meeting (每日站立会议)</p>
-<ul>
-<li>Is a short (15 min) meeting, which is held dead on time everyday before the Team starts working 会议时长为15分钟，会议应在固定地点和每天的同一时间举行</li>
-<li>Participants: Scrum Master, Scrum Team</li>
-<li>Every Team member should answer on 3 questions<ul>
-<li>What did you do since the last scrum? 昨天你完成了那些工作？</li>
-<li>What are you doing until the next scrum? 今天你打算做什么？</li>
-<li>What is stopping you getting on with the work? 完成你的目标是否存在什么障碍？（Scrum主管需要记下这些障碍）</li>
-</ul>
-</li>
-</ul>
-<p><img src="/archives/69428dab/image-20200109151028770.png" alt="image-20200109151028770" style="zoom: 50%;"></p>
-</li>
-<li><p>Sprint Planning Meeting (Sprint 计划会议)</p>
-<ul>
-<li>select what work is to be done</li>
-<li>prepare the Sprint Backlog(需求) that details the time it will take to do that work, with the entire team</li>
-<li>Identify and communicate how much of the work is likely to be done during the current sprint</li>
-<li>8 hours limited<ul>
-<li>(1st 4 hours) Entire team: dialog for prioritizing the product Backlog</li>
-<li>(2nd 4 hours) Development team: hashing out a plan for the sprint, resulting in the sprint backlog</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Sprint Review Meeting (评审会议)</p>
-<ul>
-<li>Is held at the end of each Sprint 评审会议在每个迭代结束后举行，在会议上团队演示此次迭代中完成了那些工作，一般会有相关的DEMO演示。</li>
-<li>Business functionality which was created during the Sprint is demonstrated to the Product Owner Informal, should not distract team of doing its work</li>
-</ul>
-</li>
-<li><p>Pre-Project/Kickoff Meeting</p>
-<ul>
-<li>A special form of Sprint Planning Meeting</li>
-<li>Meeting before the begin of the project</li>
-</ul>
-</li>
-</ol>
-<h5 id="User-Stories-用户故事"><a href="#User-Stories-用户故事" class="headerlink" title="User Stories (用户故事)"></a>User Stories (用户故事)</h5><p>A short description (some sentences) of what the user of the system does or needs to do as part of his job function. <strong>‘who’, ‘what’, ‘why’</strong> .</p>
-<p>Most common approach in agile development is to create user stories and to split them afterwards into tasks</p>
-<h5 id="Themes-Epics-User-Stories-Tasks"><a href="#Themes-Epics-User-Stories-Tasks" class="headerlink" title="Themes, Epics, User Stories, Tasks"></a>Themes, Epics, User Stories, Tasks</h5><p>Sometimes the User Story is too big for being delivered in a sprint. To solve this, you have to use the Epic concept.</p>
-<ul>
-<li>Epic<ul>
-<li>Very big user story (too big for one single sprint) </li>
-<li>Split into several sub-stories </li>
-<li>Kept together by a common topic </li>
-<li>One big feature of a product, which can also impact other products</li>
-</ul>
-</li>
-<li>Theme <ul>
-<li>Top of everything </li>
-<li>Major release in terms of a project </li>
-<li>One of the cornerstones of the project itself </li>
-<li>Drive the strategy and express a direction</li>
-</ul>
-</li>
-</ul>
-<p><img src="/archives/69428dab/image-20200109161044105.png" alt="image-20200109161044105" style="zoom:50%;"></p>
-<h5 id="Scrum-Artifacts-文档"><a href="#Scrum-Artifacts-文档" class="headerlink" title="Scrum Artifacts (文档)"></a>Scrum Artifacts (文档)</h5><ul>
-<li>Product Backlog<ul>
-<li>Requirements for a system, expressed as a prioritized list of backlog Items (Spreadsheet) 整个系统的需求文档，有优先级的描述(电子表格) / Is not exact粗略</li>
-<li>Is managed and owned by a Product Owner</li>
-<li>can be changed and re-prioritized before each PM</li>
-</ul>
-</li>
-</ul>
-<p><img src="/archives/69428dab/image-20200109154039415.png" alt="image-20200109154039415" style="zoom:50%;"></p>
-<ul>
-<li><p>Estimation of Product Backlog Items(产品订单的估算)</p>
-<ul>
-<li>Establishes team’s velocity</li>
-<li>Determining units of complexity(story points, work days/hours)</li>
-<li>Methods of estimation</li>
-</ul>
-</li>
-<li><p>Sprint Backlog</p>
-<ul>
-<li>Sprint Backlog is a <strong>subset</strong> of Product Backlog Items, which defines the work for a Sprint<ul>
-<li>Is created ONLY by Team members </li>
-<li>Each Item has it’s own status </li>
-<li>Should be updated every day</li>
-</ul>
-</li>
-<li>Sprint Backlog<ul>
-<li>No more then 300 tasks in the list </li>
-<li>If a task requires more than 16 hours, it should be broken down </li>
-<li>Team can add or subtract items from the list. </li>
-<li>Product Owner is not allowed to do it. </li>
-<li>It’s a FORECAST! It’s a good warning monitor</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Burn Down Charts(燃尽图)</p>
-<p>A burn down chart is a graphical representation of work left to do versus time 显示当前冲刺中未完成的任务数目</p>
-<p><img src="/archives/69428dab/image-20200109154837513.png" alt="image-20200109154837513" style="zoom: 50%;"></p>
-</li>
-</ul>
-<h5 id="Scrum-Board"><a href="#Scrum-Board" class="headerlink" title="Scrum Board"></a>Scrum Board</h5><p><img src="/archives/69428dab/image-20200109155042572.png" alt="image-20200109155042572" style="zoom:50%;"></p>
+<h5 id="Scrum-Board"><a href="#Scrum-Board" class="headerlink" title="Scrum Board"></a>Scrum Board</h5><p><img src="/archives/69428dab/image-20200109155042572.png" style="zoom:50%;"></p>
 <p>Advantages:</p>
 <ul>
 <li>Completely developed and tested features in short iterations </li>
