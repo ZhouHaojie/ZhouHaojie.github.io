@@ -3,7 +3,13 @@
   <entry>
     <title>WissProg-C++(1)</title>
     <url>/archives/33e92a8c.html</url>
-    <content><![CDATA[<h3 id="Ein-und-Ausgabe"><a href="#Ein-und-Ausgabe" class="headerlink" title="Ein- und Ausgabe"></a>Ein- und Ausgabe</h3><h4 id="Standardkanal"><a href="#Standardkanal" class="headerlink" title="Standardkanal"></a>Standardkanal</h4><ul>
+    <content><![CDATA[<p>title: WissProg-C++(1)<br>categories:</p>
+<ul>
+<li>WissProg</li>
+<li>C++<br>tags:</li>
+<li>C++<br>abbrlink: 33e92a8c<br>mathjax: true<br>date: 2020-01-17 13:22:54<br>top:</li>
+</ul>
+<h3 id="Ein-und-Ausgabe"><a href="#Ein-und-Ausgabe" class="headerlink" title="Ein- und Ausgabe"></a>Ein- und Ausgabe</h3><h4 id="Standardkanal"><a href="#Standardkanal" class="headerlink" title="Standardkanal"></a>Standardkanal</h4><ul>
 <li><p><code>#include&lt;iostream&gt;</code></p>
 <p>cin, cout, cerr(- Standardfehlerausgabe), clog(- Standardfehlerausgabe gepuffert)</p>
 </li>
@@ -63,7 +69,7 @@
 <li><p>static: Speicherstelle bleibt während des gesamten Programmlaufs 内存位置</p>
 <p>static变量放在全局数据区，它始终驻留在全局数据区，直到程序运行结束。</p>
 <p>对于一个完整的程序,内存中的分布情况:</p>
-<p><img src="/archives/33e92a8c/image-20200117132030778.png" style="zoom:50%;" align="left"></p>
+<p><img src="/archives/33e92a8c/image-20200117132030778.png" style="zoom:50%;"></p>
 <p>一般程序的由new产生的动态数据存放在堆区，函数内部的自动变量存放在栈区,全局变量和static变量放在全局数据区</p>
 </li>
 </ul>
@@ -74,7 +80,7 @@
 <li>Mantisse(尾数)：Kommazahl 小数点后的数字(p)</li>
 <li>Exponent zu einer gegebenen Basis 基数 (r) 指数位</li>
 </ul>
-<p><img src="/archives/33e92a8c/image-20200117084126776.png" style="zoom: 33%;" align="left"></p>
+<p><img src="/archives/33e92a8c/image-20200117084126776.png" style="zoom: 33%;"></p>
 </li>
 <li><p>32 Bit Gleitkommazahl nach IEEE 754 Standard(正规化)</p>
 <p><img src="/archives/33e92a8c/image-20200117084802005.png" style="zoom:50%;"></p>
@@ -159,13 +165,6 @@ z=(-1)^s*1.f*2^e</script><p><strong>Mantisse Normalform:</strong> $m=1.f_0f_1f_2
 <p><code>vec.tranpose()</code>: 转置, <code>vec.conjugate()</code>: 共轭, <code>vec.adjoint()</code>: 伴随</p>
 <p><code>vec.dot(vec)</code>: 点乘, 得到标量, <code>vec.cross(vec)</code>: 叉乘</p>
 ]]></content>
-      <categories>
-        <category>WissProg</category>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
   </entry>
   <entry>
     <title>Lifecycle Models-Creativity techniques</title>
