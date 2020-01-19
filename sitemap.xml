@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://grenze.cn/top/index.html</loc>
+    
+    <lastmod>2020-01-19T13:08:25.422Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://grenze.cn/archives/ac74f14e.html</loc>
     
     <lastmod>2020-01-19T12:45:42.300Z</lastmod>
@@ -145,13 +152,6 @@
     <loc>http://grenze.cn/archives/17506.html</loc>
     
     <lastmod>2019-12-08T00:28:34.552Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://grenze.cn/top/index.html</loc>
-    
-    <lastmod>2019-12-08T00:12:57.242Z</lastmod>
     
   </url>
   
