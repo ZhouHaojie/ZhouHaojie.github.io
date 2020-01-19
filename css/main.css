@@ -1255,7 +1255,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff7349;
+  background: #0f9de7;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2943,7 +2943,7 @@ a {
   border-bottom: none;
 }
 blockquote {
-  font-family: 'EB Garamond', 'STKaiti', 'KaiTi', 'SimKai', 'Noto Serif SC', sans-serif;
+  font-family: 'Noto Serif SC', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .posts-expand .post-tags {
   margin: 0;
