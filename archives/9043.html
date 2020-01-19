@@ -47,13 +47,13 @@
   };
 </script>
 
-  <meta name="description" content="I2C(Inter－Integrated Circuit)总线是80年代PHILIPS公司开发的两线式串行总线，如今已经成为芯片间低速串行通信的事实标准，被广泛使用在消费、控制类电子设备场合。这里的两个关键词两线和低速：两线意味着结构简单，低速意味着好实现，做电路的都知道速度越慢电路实现起来就越容易，而且协议方式也很优雅。">
+  <meta name="description" content="I2C(Inter－Integrated Circuit)总线是80年代PHILIPS公司开发的两线式串行总线，如今已经成为芯片间低速串行通信的事实标准，被广泛使用在消费、控制类电子设备场合。这里的两个关键词两线和低速：">
 <meta name="keywords" content="Communication Sysems and Protocols">
 <meta property="og:type" content="article">
 <meta property="og:title" content="I2C总线协议">
 <meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9043.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
-<meta property="og:description" content="I2C(Inter－Integrated Circuit)总线是80年代PHILIPS公司开发的两线式串行总线，如今已经成为芯片间低速串行通信的事实标准，被广泛使用在消费、控制类电子设备场合。这里的两个关键词两线和低速：两线意味着结构简单，低速意味着好实现，做电路的都知道速度越慢电路实现起来就越容易，而且协议方式也很优雅。">
+<meta property="og:description" content="I2C(Inter－Integrated Circuit)总线是80年代PHILIPS公司开发的两线式串行总线，如今已经成为芯片间低速串行通信的事实标准，被广泛使用在消费、控制类电子设备场合。这里的两个关键词两线和低速：">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d273e357921699929.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d2757b486c0227768.png">
@@ -65,7 +65,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d275c6ddcf4948696.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d275e937c01943449.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;12&#x2F;5d275eeab223391701.png">
-<meta property="og:updated_time" content="2019-12-08T14:08:21.039Z">
+<meta property="og:updated_time" content="2020-01-19T12:38:22.789Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d273e357921699929.png">
 
@@ -278,7 +278,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-08 15:08:21" itemprop="dateModified" datetime="2019-12-08T15:08:21+01:00">2019-12-08</time>
+                <time title="修改时间：2020-01-19 13:38:22" itemprop="dateModified" datetime="2020-01-19T13:38:22+01:00">2020-01-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -330,7 +330,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>I2C(Inter－Integrated Circuit)总线是80年代PHILIPS公司开发的两线式串行总线，如今已经成为芯片间低速串行通信的事实标准，被广泛使用在消费、控制类电子设备场合。这里的两个关键词<strong>两线</strong>和<strong>低速</strong>：<br>两线意味着结构简单，低速意味着好实现，做电路的都知道速度越慢电路实现起来就越容易，而且协议方式也很优雅。<br><a id="more"></a></p>
+        <p>I2C(Inter－Integrated Circuit)总线是80年代PHILIPS公司开发的两线式串行总线，如今已经成为芯片间低速串行通信的事实标准，被广泛使用在消费、控制类电子设备场合。这里的两个关键词<strong>两线</strong>和<strong>低速</strong>：<br></p>
+<a id="more"></a>
+<p>两线意味着结构简单，低速意味着好实现，做电路的都知道速度越慢电路实现起来就越容易，而且协议方式也很优雅。</p>
 <p></p><h3 id="I2C总线的系统结构"><a href="#I2C总线的系统结构" class="headerlink" title="I2C总线的系统结构"></a>I2C总线的系统结构</h3><p><img src="https://i.loli.net/2019/07/11/5d273e357921699929.png" alt="20190711154834.png"></p><p></p>
 <p></p><h3 id="I2C总线接口的内部结构"><a href="#I2C总线接口的内部结构" class="headerlink" title="I2C总线接口的内部结构"></a>I2C总线接口的内部结构</h3><p>I2C总线使用的是<strong>开漏结构</strong>，这样它可以进行数据的双向传输。下图是一个SDA/SCL线的基本结构:</p><p></p>
 <p><ul></ul></p>

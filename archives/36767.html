@@ -47,18 +47,18 @@
   };
 </script>
 
-  <meta name="description" content="FIFO 功能FIFO指先入先出（First-In, First-Out), 先写入FIFO的数据会先读出来，类似流水线操作，先流入的会先流出来。FIFO是一类寄存器或存储器堆栈，它必须有两个不同的指针，分别只想读数据和写数据。FIFO的一种应用是作为芯片里两个不同时钟域之间的缓存，突发的读写操作被FIFO缓解了，这样数据在两个时钟域上都能以令人满意的速率传递，而不需要在每个时钟节拍上等待另一个">
+  <meta name="description" content="FIFO 功能FIFO指先入先出（First-In, First-Out), 先写入FIFO的数据会先读出来，类似流水线操作，先流入的会先流出来。">
 <meta name="keywords" content="Verilog HDL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Register-Memory-FIFO">
 <meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;36767.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
-<meta property="og:description" content="FIFO 功能FIFO指先入先出（First-In, First-Out), 先写入FIFO的数据会先读出来，类似流水线操作，先流入的会先流出来。FIFO是一类寄存器或存储器堆栈，它必须有两个不同的指针，分别只想读数据和写数据。FIFO的一种应用是作为芯片里两个不同时钟域之间的缓存，突发的读写操作被FIFO缓解了，这样数据在两个时钟域上都能以令人满意的速率传递，而不需要在每个时钟节拍上等待另一个">
+<meta property="og:description" content="FIFO 功能FIFO指先入先出（First-In, First-Out), 先写入FIFO的数据会先读出来，类似流水线操作，先流入的会先流出来。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d26eaa3ce64a86137.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d26ed255ed3e98215.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;10&#x2F;5d25ed09e5eb456361.png">
-<meta property="og:updated_time" content="2019-12-07T23:49:25.315Z">
+<meta property="og:updated_time" content="2020-01-19T12:39:56.466Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;07&#x2F;11&#x2F;5d26eaa3ce64a86137.png">
 
@@ -271,7 +271,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-08 00:49:25" itemprop="dateModified" datetime="2019-12-08T00:49:25+01:00">2019-12-08</time>
+                <time title="修改时间：2020-01-19 13:39:56" itemprop="dateModified" datetime="2020-01-19T13:39:56+01:00">2020-01-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -323,17 +323,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p> </p><h3 id="FIFO-功能"><a href="#FIFO-功能" class="headerlink" title="FIFO 功能"></a>FIFO 功能</h3><p>FIFO指先入先出（First-In, First-Out), 先写入FIFO的数据会先读出来，类似流水线操作，先流入的会先流出来。<br>FIFO是一类寄存器或存储器堆栈，它必须有两个不同的指针，分别只想读数据和写数据。FIFO的一种应用是作为芯片里两个不同时钟域之间的缓存，突发的读写操作被FIFO缓解了，这样数据在两个时钟域上都能以令人满意的速率传递，而不需要在每个时钟节拍上等待另一个时钟。FIFO的其他应用是在RS-422或以太网串行链路上，这两种链路通常都需要在不同的时钟域之间进行通信。</p><br> <a id="more"></a><p></p>
+        <p> </p><h3 id="FIFO-功能"><a href="#FIFO-功能" class="headerlink" title="FIFO 功能"></a>FIFO 功能</h3><p>FIFO指先入先出（First-In, First-Out), 先写入FIFO的数据会先读出来，类似流水线操作，先流入的会先流出来。 <a id="more"></a><br>FIFO是一类寄存器或存储器堆栈，它必须有两个不同的指针，分别只想读数据和写数据。FIFO的一种应用是作为芯片里两个不同时钟域之间的缓存，突发的读写操作被FIFO缓解了，这样数据在两个时钟域上都能以令人满意的速率传递，而不需要在每个时钟节拍上等待另一个时钟。FIFO的其他应用是在RS-422或以太网串行链路上，这两种链路通常都需要在不同的时钟域之间进行通信。</p><p></p>
 <p></p><h3 id="FIFO-操作的细节"><a href="#FIFO-操作的细节" class="headerlink" title="FIFO 操作的细节"></a>FIFO 操作的细节</h3><ul><p></p>
 <p><li>第一种情况（empty1）<br>如图1所示，W指针能向上移动，但是R指针在j位置读取数据后，不能移动到j+1位置上，因为那个位置上的数据是无效的。<br><img src="https://i.loli.net/2019/07/11/5d26eaa3ce64a86137.png" alt="图1 Empty1"></li></p>
 <p><li>第二种情况(almost empty1)<br>在第一种情况下，假设写入了一个写数据，FIFO不再为空，这个数据将会被写入寄存器j+1，W移动并指向下一个空寄存器j+2。现在我们可以读取j+1位置的数据了，R指向j+1，如图2。<br><img src="https://i.loli.net/2019/07/11/5d26ed255ed3e98215.png" alt="20190711100233.png"></li><br>&lt;/ul&gt;</p>
 <p></p><p>这是Design Digitaler Schaltkreise 的一个实验，主要是利用register memory 实现FIFO，相对来说是一个比较简单的设计。</p><p></p>
 <p></p><h3 id="Specification（设计要求）"><a href="#Specification（设计要求）" class="headerlink" title="Specification（设计要求）"></a>Specification（设计要求）</h3><p>For the first variant, we will use a register memory</p><p></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> [WIDTH-<span class="number">1</span>:<span class="number">0</span>] memory [DEPTH:<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
-
+<p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> [WIDTH-<span class="number">1</span>:<span class="number">0</span>] memory [DEPTH:<span class="number">0</span>];</span><br></pre></td></tr></table></figure></p>
 <p></p><p>And access it like an array:</p><p></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// write</span></span><br><span class="line">memory[address] &lt;= VALUE;</span><br><span class="line"></span><br><span class="line"><span class="comment">// read</span></span><br><span class="line">value &lt;= memory[address]</span><br></pre></td></tr></table></figure>
-
+<p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// write</span></span><br><span class="line">memory[address] &lt;= VALUE;</span><br><span class="line"></span><br><span class="line"><span class="comment">// read</span></span><br><span class="line">value &lt;= memory[address]</span><br></pre></td></tr></table></figure></p>
 <p></p><p>The design should be driven by the following interface:<br><img src="https://i.loli.net/2019/07/10/5d25ed09e5eb456361.png" alt="20190710154949.png"></p><p></p>
 <ul>
 <li>Single clock and reset</li>

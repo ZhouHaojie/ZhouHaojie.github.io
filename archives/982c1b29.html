@@ -47,17 +47,17 @@
   };
 </script>
 
-  <meta name="description" content="Penalty Function Methods(惩罚函数)基本思想根据约束条件的特点，构造 Penalty Function, 将其加入到目标函数中，将约束函数的求解转换为一系列无约束问题的求解。“惩罚”是指在求解过程中，那些违反约束的迭代点会得到很大的目标函数值。">
+  <meta name="description" content="Penalty Function Methods(惩罚函数)基本思想">
 <meta name="keywords" content="Optimization of Dynamic Systems">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Penalty Function Methods">
 <meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;982c1b29.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
-<meta property="og:description" content="Penalty Function Methods(惩罚函数)基本思想根据约束条件的特点，构造 Penalty Function, 将其加入到目标函数中，将约束函数的求解转换为一系列无约束问题的求解。“惩罚”是指在求解过程中，那些违反约束的迭代点会得到很大的目标函数值。">
+<meta property="og:description" content="Penalty Function Methods(惩罚函数)基本思想">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;982c1b29&#x2F;image-20191225162602025.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;982c1b29&#x2F;image-20191225164636301.png">
-<meta property="og:updated_time" content="2020-01-09T16:17:03.973Z">
+<meta property="og:updated_time" content="2020-01-19T12:37:13.528Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;982c1b29&#x2F;image-20191225162602025.png">
 
@@ -270,7 +270,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-09 17:17:03" itemprop="dateModified" datetime="2020-01-09T17:17:03+01:00">2020-01-09</time>
+                <time title="修改时间：2020-01-19 13:37:13" itemprop="dateModified" datetime="2020-01-19T13:37:13+01:00">2020-01-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -322,8 +322,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="Penalty-Function-Methods-惩罚函数"><a href="#Penalty-Function-Methods-惩罚函数" class="headerlink" title="Penalty Function Methods(惩罚函数)"></a>Penalty Function Methods(惩罚函数)</h3><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>根据约束条件的特点，构造 Penalty Function, 将其加入到目标函数中，将约束函数的求解转换为一系列无约束问题的求解。“惩罚”是指在求解过程中，那些违反约束的迭代点会得到很大的目标函数值。</p>
-<a id="more"></a>
+        <h3 id="Penalty-Function-Methods-惩罚函数"><a href="#Penalty-Function-Methods-惩罚函数" class="headerlink" title="Penalty Function Methods(惩罚函数)"></a>Penalty Function Methods(惩罚函数)</h3><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><a id="more"></a>
+<p>根据约束条件的特点，构造 Penalty Function, 将其加入到目标函数中，将约束函数的求解转换为一系列无约束问题的求解。“惩罚”是指在求解过程中，那些违反约束的迭代点会得到很大的目标函数值。</p>
 <h3 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h3><p>Original Problem</p>
 <p>$\begin{aligned} \min _{\underline{\theta}}\{J(\underline{\theta})\} &amp; \text { s.t. } c_{i}=0, \quad i \in \mathcal{E} \quad等式约束 \\ &amp; c_{i} \geq 0, \quad i \in \mathcal{J} \quad 不等式约束 \end{aligned}$  </p>
 <p>将上述问题转化为非约束问题:</p>
