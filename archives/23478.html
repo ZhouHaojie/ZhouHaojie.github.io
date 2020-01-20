@@ -47,16 +47,16 @@
   };
 </script>
 
-  <meta name="description" content="Introduction计数器 在数字电路设计 和 计算机程序设计 中都应用非常广泛，其功能顾名思义，就是用来计数。这里只讨论数字电路设计中的计数器。通常，将包含触发器 flip-flop 的电路（即使含有组合电路部分）认为是时序电路。时序电路通常不以电路命名，而是以功能进行分类，分别是 寄存器 和 计数器。计数器 counter 从本质上来说也是寄存器，不过它是在预先设定好的状态序列中转移，尽管">
+  <meta name="description" content="Introduction计数器 在数字电路设计 和 计算机程序设计 中都应用非常广泛，其功能顾名思义，就是用来计数。这里只讨论数字电路设计中的计数器。">
 <meta name="keywords" content="Verilog HDL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计数器设计小结">
 <meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;23478.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
-<meta property="og:description" content="Introduction计数器 在数字电路设计 和 计算机程序设计 中都应用非常广泛，其功能顾名思义，就是用来计数。这里只讨论数字电路设计中的计数器。通常，将包含触发器 flip-flop 的电路（即使含有组合电路部分）认为是时序电路。时序电路通常不以电路命名，而是以功能进行分类，分别是 寄存器 和 计数器。计数器 counter 从本质上来说也是寄存器，不过它是在预先设定好的状态序列中转移，尽管">
+<meta property="og:description" content="Introduction计数器 在数字电路设计 和 计算机程序设计 中都应用非常广泛，其功能顾名思义，就是用来计数。这里只讨论数字电路设计中的计数器。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;06&#x2F;18&#x2F;5d08ee6d449ed32491.png">
-<meta property="og:updated_time" content="2019-12-07T23:49:13.920Z">
+<meta property="og:updated_time" content="2020-01-20T17:50:26.633Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;06&#x2F;18&#x2F;5d08ee6d449ed32491.png">
 
@@ -264,7 +264,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-08 00:49:13" itemprop="dateModified" datetime="2019-12-08T00:49:13+01:00">2019-12-08</time>
+                <time title="修改时间：2020-01-20 18:50:26" itemprop="dateModified" datetime="2020-01-20T18:50:26+01:00">2020-01-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -316,7 +316,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>计数器 在数字电路设计 和 计算机程序设计 中都应用非常广泛，其功能顾名思义，就是用来计数。这里只讨论数字电路设计中的计数器。<br>通常，将包含触发器 flip-flop 的电路（即使含有组合电路部分）认为是时序电路。时序电路通常不以电路命名，而是以功能进行分类，分别是 寄存器 和 计数器。<br>计数器 counter 从本质上来说也是寄存器，不过它是在预先设定好的状态序列中转移，尽管计数器是寄存器的一种特殊形式，通常还是以不同的名称来加以区分<br><a id="more"></a></p>
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>计数器 在数字电路设计 和 计算机程序设计 中都应用非常广泛，其功能顾名思义，就是用来计数。这里只讨论数字电路设计中的计数器。</p>
+<a id="more"></a>
+<p>通常，将包含触发器 flip-flop 的电路（即使含有组合电路部分）认为是时序电路。时序电路通常不以电路命名，而是以功能进行分类，分别是 寄存器 和 计数器。<br>计数器 counter 从本质上来说也是寄存器，不过它是在预先设定好的状态序列中转移，尽管计数器是寄存器的一种特殊形式，通常还是以不同的名称来加以区分</p>
 <h2 id="Type"><a href="#Type" class="headerlink" title="Type"></a>Type</h2><p>按照不同的标准来划分，计数器可以有不同的划分方法：</p>
 <ol>
 <li>触发方式<br>同步 / 异步 计数器</li>
