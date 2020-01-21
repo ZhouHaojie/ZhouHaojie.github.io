@@ -1,6 +1,345 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>WissPro-gawk</title>
+    <url>/archives/77274168.html</url>
+    <content><![CDATA[<p>awk ist die gnu Variante des Unix tool awk<br><code>awk</code>会根据空格和制表符，将每一行分成若干字段，依次用<code>$1</code>、<code>$2</code>、<code>$3</code>代表第一个字段、第二个字段、第三个字段等等。</p>
+<a id="more"></a>
+<h4 id="Variable"><a href="#Variable" class="headerlink" title="Variable"></a>Variable</h4><p>Summe der 5ten Spalten:</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">awk <span class="string">'&#123;print x+=$5,$0&#125;'</span> filename <span class="regexp">//</span><span class="variable">$0</span>:当前行</span></pre></td></tr></table></figure>
+<p>Rechnen: Zwischenspeichern</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">awk <span class="string">'&#123;d=($2-($1-4));s=($2+$1);print d/sqrt(s),d*d/s &#125;'</span> filename</span></pre></td></tr></table></figure>
+<p>Spalteninformation aus Datei:</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">awk <span class="string">'&#123;imp=$1; print $imp &#125;'</span> filename</span></pre></td></tr></table></figure>
+<p>vordefinierte Variablen:</p>
+<ul>
+<li><p><strong>NF</strong>: Anzahl der Felder in der aktuellen Zeile 表示当前行有多少个字段</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">echo <span class="string">'this is a test'</span> | awk <span class="string">'&#123;print $NF&#125;'</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">test</span></pre></td></tr></table></figure>
+</li>
+<li><p><strong>NR</strong>: gibt Nummer der Zeile an; nach jedem Einlesen wird Zähler +1 erhöht 当前处理的是第几行</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">awk <span class="string">'&#123;print NR,$0 &#125;'</span> filename</span></pre></td></tr></table></figure>
+</li>
+<li><p><strong>FS</strong>: Feldtrennungszeichen 字段分隔符，默认是空格和制表符</p>
+</li>
+</ul>
+<p>Eigene Zeichen definieren, um Felder zu trennen: Option -F Zeichen(指定分隔符)</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">awk -F <span class="string">':'</span> <span class="string">'&#123; print $1 &#125;'</span> demo.txt <span class="regexp">//</span>指定分隔符为:</span></pre></td></tr></table></figure>
+<p>Wertzuweisung zu einem Feld: z.B. zum Löschen der 10 ten Spalte</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">awk <span class="string">'&#123;$10=""; print &#125;'</span> filename</span></pre></td></tr></table></figure>
+<p>for Schleifen:</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">awk <span class="string">'&#123;for(i=1;i&lt;=NF;i++) print $i &#125;'</span> filename</span></pre></td></tr></table></figure>
+<h4 id="Bedingtes-Ausfuhren"><a href="#Bedingtes-Ausfuhren" class="headerlink" title="Bedingtes Ausführen"></a>Bedingtes Ausführen</h4><p>beim Vergleich von Textausdrücken:</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">awk <span class="string">'$1=="foo"&#123;print $2&#125;'</span> filename</span></pre></td></tr></table></figure>
+<p>Zeile nach „Muster“ durchsuchen und bei Erfolge ausgeben 字符串匹配</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">awk <span class="string">'$3 ~ /bar/&#123;print $1,$3&#125;'</span> filename</span></pre></td></tr></table></figure>
+<p>匹配第三个字段中有bar的行，<code>~</code> 表示模式开始，<code>/ /</code>中是模式</p>
+<h4 id="BEGIN-END-Konstruktion"><a href="#BEGIN-END-Konstruktion" class="headerlink" title="BEGIN{} END{} Konstruktion"></a>BEGIN{} END{} Konstruktion</h4><p>BEGIN{}: 执行前的语句</p>
+<p>END{}: 执行后的语句</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">awk <span class="string">'BEGIN&#123;print"Anfang:"&#125; $1=="foo"&#123;print"fi"&#125; END&#123;print"Ende erreicht"&#125;'</span> filename</span></pre></td></tr></table></figure>
+<h4 id="Funktionen"><a href="#Funktionen" class="headerlink" title="Funktionen"></a>Funktionen</h4><p>function NameFunction( ){ }</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> max(v1,v2)&#123; </span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(v1&gt;v2) return v1; <span class="keyword">else</span> return v2; </span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<blockquote>
+<p>tolower()：字符转为小写。<br>toupper()：字符转为大写<br>length()：返回字符串长度。<br>substr()：返回子字符串。<br>sqrt()：平方根。<br>rand()：随机数</p>
+</blockquote>
+<h4 id="1d-Feld-一维数组"><a href="#1d-Feld-一维数组" class="headerlink" title="1d Feld(一维数组)"></a>1d Feld(一维数组)</h4><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/awk -f</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#123;<span class="keyword">for</span>(i=<span class="number">1</span>;i &lt;=NF;i++) </span></pre></td></tr><tr><td class="code"><pre><span class="line">	freq[<span class="variable">$i</span>]++ &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">END</span>&#123;<span class="keyword">for</span>(word <span class="keyword">in</span> freq) </span></pre></td></tr><tr><td class="code"><pre><span class="line">		print word, freq[word]&#125;</span></pre></td></tr></table></figure>
+<h4 id="Script-Datei"><a href="#Script-Datei" class="headerlink" title="Script Datei"></a>Script Datei</h4><p>Aufruf des Script</p>
+<p>test.awk</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span>&#123;print<span class="string">"fee"</span>&#125; </span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="variable">$1</span>==<span class="string">"foo"</span>&#123;print<span class="string">"fi"</span>&#125; </span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">END</span>&#123;print<span class="string">"fo fum"</span>&#125;</span></pre></td></tr></table></figure>
+<p><code>awk -f test.awk filename</code> </p>
+<p>已经包含了调用的命令：</p>
+<p>test2.awk</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/awk -f </span></span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">BEGIN</span>&#123;print<span class="string">"fee"</span>&#125; </span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="variable">$1</span>==<span class="string">"foo"</span>&#123;print<span class="string">"fi"</span>&#125; </span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">END</span>&#123;print<span class="string">"fo fum"</span>&#125;</span></pre></td></tr></table></figure>
+<p><code>/test.awk filename</code> </p>
+]]></content>
+      <categories>
+        <category>WissPro</category>
+        <category>gawk</category>
+      </categories>
+      <tags>
+        <tag>gawk</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WissPro-Numerik</title>
+    <url>/archives/c42a9800.html</url>
+    <content><![CDATA[<h4 id="Rundungsfehler-舍入误差"><a href="#Rundungsfehler-舍入误差" class="headerlink" title="Rundungsfehler(舍入误差)"></a>Rundungsfehler(舍入误差)</h4><p>Wie bestimme ich die Gleichheit zweier Zahlen?</p>
+<ul>
+<li><p>int: Vergleichsoperator “==” funktioniert wie erwartet</p>
+</li>
+<li><p>double,float 不能用 “==”</p>
+<a id="more"></a>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">double</span> x;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">size_t</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    x=<span class="keyword">double</span>(i)*<span class="number">0.15227364672</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">auto</span> erg = (<span class="built_in">pow</span>(x<span class="number">-1.</span>,<span class="number">2</span>) == (<span class="built_in">pow</span>(x,<span class="number">2</span>)<span class="number">-2.</span>*x+<span class="number">1.</span>));</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">if</span>(erg)</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">"Wahl fuer "</span>&lt;&lt;x&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"(x-1)^2: "</span>&lt;&lt;erg&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<blockquote>
+<p>2Wahl fuer 0.304547<br>(x-1)^2: 1<br>3Wahl fuer 0.456821<br>(x-1)^2: 1<br>(x-1)^2: 0<br>(x-1)^2: 0<br>(x-1)^2: 0<br>(x-1)^2: 0<br>(x-1)^2: 0<br>(x-1)^2: 0</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="Finite-Differenzen"><a href="#Finite-Differenzen" class="headerlink" title="Finite Differenzen"></a>Finite Differenzen</h4><p><strong>Finite Differenzen</strong>: Unterteilung des Intervalls [0,L] in M Teilstücke der Breite h=L/M<br>Differenzialgleichung wird diskretisiert:<br>dazu benötigte Ableitungen durch Differenzenquotienten ausdrücken</p>
+<p>1ste Ableitung: $\frac{d f(x)}{d x}=\frac{f(x+h)-f(x)}{h}$<br>2te   Ableitung: $\frac{d^{2} f(x)}{d x^{2}}=\frac{f(x+h)-2 f(x)+f(x-h)}{h^{2}}$</p>
+<p>Aus Theorie: je kleiner „h“, desto <strong>genauer</strong> wird die Näherung</p>
+<p>Ableitungen können prinzipiell auf verschiedene Arten definiert werden:</p>
+<ul>
+<li>Forward: $\frac{d f(x)}{d x}=\frac{f(x+h)-f(x)}{h}$</li>
+<li>Backward: $\frac{d f(x)}{d x}=\frac{f(x)-f(x-h)}{h}$</li>
+<li>Average: $\frac{d f(x)}{d x}=\frac{f(x+h)-f(x-h)}{2 h}$</li>
+</ul>
+<p><strong>Beispiel: Metallischer Stab im Temperaturgradienten</strong></p>
+<p><img src="/archives/c42a9800/image-20200121132451727.png" style="zoom:50%;"></p>
+<p><img src="/archives/c42a9800/image-20200121132531465.png" style="zoom:50%;"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">// globaler Objekte</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">100</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> dx = <span class="number">0.1</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> jmax = <span class="number">200</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span>&#123; <span class="built_in">text</span> ,graph, datei &#125; ausgabe;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data</span>&#123;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">double</span> k, T0, TM, Te;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">double</span> a[M];</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">()</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">( <span class="keyword">double</span>* <span class="keyword">const</span> T, <span class="keyword">const</span> data&amp; d)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">relax</span><span class="params">( <span class="keyword">double</span>* <span class="keyword">const</span> T, <span class="keyword">const</span> data&amp; d)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">showresult</span><span class="params">(ausgabe mode, <span class="keyword">double</span> <span class="keyword">const</span> *<span class="keyword">const</span> T)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">( <span class="keyword">double</span> * <span class="keyword">const</span> T, <span class="keyword">const</span> data&amp; d)</span></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> m = <span class="number">0</span>; m&lt;= M;m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		T[m]= d.T0 * <span class="keyword">double</span>(M- m)/<span class="keyword">double</span>(M) + d.TM * <span class="keyword">double</span>(m)/<span class="keyword">double</span>(M);</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">relax</span><span class="params">( <span class="keyword">double</span> * <span class="keyword">const</span> T, <span class="keyword">const</span> data&amp; d)</span></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">const</span> <span class="keyword">double</span> kdx2 = d.k / dx / dx;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> m = <span class="number">1</span>; m&lt; M; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		T[m] = (kdx2 * (T[m+<span class="number">1</span>] +T[m<span class="number">-1</span>]) + d.a[m] * d.Te) / (d.a[m]+ <span class="number">2</span> * kdx2);</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">// Methode der Struktur "data":</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> data::<span class="built_in">read</span>()&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"enter k:"</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cin</span> &gt;&gt; k;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"enter Te:"</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cin</span> &gt;&gt; Te;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"enter T0:"</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cin</span> &gt;&gt; T0;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"enter TM:"</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cin</span> &gt;&gt; TM;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> m = <span class="number">0</span>; m&lt; M ; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		a[m] = <span class="keyword">double</span>(m)*<span class="keyword">double</span>(m)/(M<span class="number">-1.</span>)/(M<span class="number">-1.</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="function">ofstream <span class="title">ADat</span><span class="params">(<span class="string">"a.dat"</span>)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">for</span>( <span class="keyword">int</span> m = <span class="number">0</span>; m &lt; M; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		ADat&lt;&lt; <span class="keyword">double</span>(m)&lt;&lt; <span class="string">" "</span>&lt;&lt; a[m]&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> m = <span class="number">0</span>; m&lt; M; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		a[m] = <span class="keyword">double</span>(m)*<span class="keyword">double</span>(m)/(M<span class="number">-1.</span>)/(M<span class="number">-1.</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	ADat.<span class="built_in">close</span>();</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">showresult</span><span class="params">(<span class="keyword">const</span> ausgabe mode, <span class="keyword">double</span> <span class="keyword">const</span> *<span class="keyword">const</span> T)</span> </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">switch</span> (mode) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">case</span> graph:</span></pre></td></tr><tr><td class="code"><pre><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"no graphics"</span> &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">case</span> <span class="built_in">text</span>:</span></pre></td></tr><tr><td class="code"><pre><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> m = <span class="number">0</span>; m &lt;= M; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">			<span class="built_in">cout</span> &lt;&lt; T[m] &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		<span class="keyword">break</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">case</span> datei:</span></pre></td></tr><tr><td class="code"><pre><span class="line">		<span class="function">ofstream <span class="title">Datei</span><span class="params">(<span class="string">"test.dat"</span>, ios_base::app)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> m = <span class="number">0</span>; m &lt;= M; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">			Datei &lt;&lt; <span class="keyword">double</span>(m) &lt;&lt; <span class="string">" "</span> &lt;&lt; T[m] &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		Datei.<span class="built_in">close</span>();</span></pre></td></tr><tr><td class="code"><pre><span class="line">		<span class="keyword">break</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">double</span> T[M + <span class="number">1</span>]; <span class="comment">// Feld Variable</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">	data d;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	d.<span class="built_in">read</span>();</span></pre></td></tr><tr><td class="code"><pre><span class="line">	init(T, d); <span class="comment">// feste Anzahl an Iterationsschritten: jmax</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j= <span class="number">0</span>; j&lt; jmax; j++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		relax(T, d);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	showresult(<span class="built_in">text</span>, T); <span class="comment">//Ausgabe: text showresult(datei, T); // Ausgabe in Datei return 0;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p><img src="/archives/c42a9800/image-20200121134204152.png" style="zoom:50%;"></p>
+<h4 id="Lineare-Gleichungssysteme"><a href="#Lineare-Gleichungssysteme" class="headerlink" title="Lineare Gleichungssysteme"></a>Lineare Gleichungssysteme</h4><ul>
+<li><p>Lineare Gleichungssysteme müssen bei vielen numerischen Methoden gelöst werden</p>
+<ul>
+<li>Finite Differenzen (vorheriges Beispiel) </li>
+<li>Finite Elemente Methode</li>
+<li>Optimierungsprobleme: Anpassen von Funktionen an Datenpunkte</li>
+<li>….</li>
+</ul>
+</li>
+<li><p>Die Lösungsverfahren können in zwei Gruppen eingeteilt werden</p>
+<ul>
+<li><strong>direkte Verfahren</strong>: Lösung des Systems durch „Auflösen“ der Gleichungen</li>
+<li><strong>Iterative Verfahren</strong>: ausgehend von einer Startlösung wird eine Lösungsvorschrift angewandt, um sich schrittweise der wahren Lösung anzunähern</li>
+</ul>
+</li>
+</ul>
+<p><strong>Jacobi-Verfahren:</strong></p>
+<ul>
+<li><p>Iterationsvorschrift nutzt x – Vektor des k-ten Iterationsschrittes</p>
+</li>
+<li><p>Speicherbedarf somit größer als beim Gauss-Seidel Verfahren</p>
+<script type="math/tex; mode=display">
+x_{i}^{(k+1)}=\frac{b_{i}-\sum_{j \neq i} a_{i j} x_{j}^{(k)}}{a_{i j}}</script></li>
+</ul>
+<p><strong>Gauss-Seidel：</strong></p>
+<ul>
+<li><p>Iterationsvorschrift nutzt sofort die „neuen“ Werte des Lösungsvektors x aus dem (k+1) Iterationsschritt</p>
+</li>
+<li><p>Speicherbedarf: es wird kein weiterer temporärer Vektor benötigt</p>
+<script type="math/tex; mode=display">
+x_{i}^{(k+1)}=\frac{b_{i}-\sum_{j<i} a_{i j} x_{j}^{(k+1)}-\sum_{j>i} a_{i j} x_{j}^{(k)}}{a_{i i}}</script></li>
+</ul>
+<h4 id="tridiagonales-Gleichungssystem"><a href="#tridiagonales-Gleichungssystem" class="headerlink" title="tridiagonales Gleichungssystem"></a>tridiagonales Gleichungssystem</h4><p>LU Zerlegung: <strong>A = LU</strong></p>
+<p><img src="/archives/c42a9800/image-20200121141305709.png" style="zoom:50%;"></p>
+<p><strong>Algorithmus</strong></p>
+<ul>
+<li><p>Zerlegung der Matrix: dazu Vektor l,m und r bestimmen</p>
+<p>$r_{i}=b_{i} \quad \forall i$<br>$m_{1}=a_{1}$<br>für $i=1,2, \ldots, n-1$<br>$<br>\begin{aligned}<br>\quad &amp;l_{i} =c_{i} / m_{i} \\<br>\quad &amp;m_{i+1} =a_{i+1}-l_{i} \times b_{i}<br>\end{aligned}<br>$</p>
+</li>
+<li><p>AX=b, LUA=b in zwei Schritten lösen</p>
+<ul>
+<li><p>Ly=d</p>
+<p>$y_{1}=d_{1}$<br>$\begin{aligned} \text {für} \quad &amp; i=2, \quad 3, \ldots, n \\ &amp; y_{i}=d_{i}-l_{i-1} \times y_{i-1} \end{aligned}$</p>
+</li>
+<li><p>Lösen von Ux=y durch Rückwärts einsetzen</p>
+<p>$x_{n}=y_{n} / m_{n}$<br>$\begin{aligned} \text {für}\quad &amp; i=n-1, n-2, \ldots, 2,1 \\ &amp; x_{i}=\left(y_{i}-b_{i} \times x_{i+1}\right) / m_{i} \end{aligned}$</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Rechenaufwand</strong>: O(n)</p>
+]]></content>
+      <categories>
+        <category>WissPro</category>
+        <category>Numerik</category>
+      </categories>
+      <tags>
+        <tag>Numerik</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WissPro-C++(3)</title>
+    <url>/archives/c6bd2a86.html</url>
+    <content><![CDATA[<p>Namensraum: namespace<br><strong>Aufgabe:</strong></p>
+<ul>
+<li>logische Programmeinheiten zusammenfassen<a id="more"></a></li>
+<li>Namenskonflikte von Funktionsname/Variablen vermeiden<ul>
+<li>z.B. Standardnamensraum: std</li>
+</ul>
+</li>
+</ul>
+<p><strong>Beispiel:</strong><br>Eigener Namensraum mit lokaler Variablen i und Funktion mache_etwas</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">namespace</span> mein_namensraum &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">int</span> i &#123; <span class="number">10</span> &#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">mache_etwas</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *<span class="keyword">const</span> <span class="built_in">text</span>)</span> </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Ausgabe: "</span> &lt;&lt; <span class="built_in">text</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; i &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125; <span class="comment">// Ende des eigenen Namensraums </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">//char* definiert Zeichenkette(字符串)</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    mein_namensraum::mache_etwas(<span class="string">"Im Hauptprogramm:"</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">for</span>(<span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;argc;i++) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        mein_namensraum::i = i;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		mein_namensraum::mache_etwas(argv[i]); </span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p><code>argc</code>是命令行总的参数个数 ,  <code>argv[]</code>是<code>argc</code>个参数</p>
+<p>比如你输入<br>./a.out  ein paar Augumente<br> 则<br> argc  =  3</p>
+<p> argv[0]  = “ein”<br> argv[1]  =  “paar”<br> argv[2]  =  “Argument”</p>
+<h4 id="Hilfreiches-zur-Verwendung-von-C-Bibliotheken"><a href="#Hilfreiches-zur-Verwendung-von-C-Bibliotheken" class="headerlink" title="Hilfreiches zur Verwendung von C Bibliotheken"></a>Hilfreiches zur Verwendung von C Bibliotheken</h4><p>Wie verwendet man „C“ Bibliotheken bzw. Funktionen in C++?</p>
+<ul>
+<li><p>Bibliotheksaufruf gekapselt 封装</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"string.h"</span> </span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+</li>
+<li><p>für viele C Bibliotheken existieren C++ Aufrufe (sind somit Teil des std Namensraum)</p>
+<ul>
+<li>math.h-&gt; cmath</li>
+<li>stdio.h -&gt; cstdio </li>
+</ul>
+</li>
+</ul>
+<h4 id="assert"><a href="#assert" class="headerlink" title="assert"></a>assert</h4><p>Bibliothek:<code>&lt;cassert&gt;</code><br>Verwendung:</p>
+<ul>
+<li>Programmfehler finden: Bedingungen an Variablen</li>
+<li>wenn Macro „NDEBUG“ beim Übersetzen definiert, wird kein Code erzeugt!</li>
+</ul>
+<p><img src="/archives/c6bd2a86/image-20200121143330070.png" style="zoom:50%;"></p>
+]]></content>
+      <categories>
+        <category>WissPro</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WissPro-Makefile</title>
+    <url>/archives/b4635aee.html</url>
+    <content><![CDATA[<p>Aufgabe des Makefile:</p>
+<ul>
+<li>Erstellen des ausführenden Programms</li>
+<li>Löschen nicht mehr benötigter Dateien<a id="more"></a>
+</li>
+</ul>
+<h4 id="Projektverzeichnis"><a href="#Projektverzeichnis" class="headerlink" title="Projektverzeichnis:"></a>Projektverzeichnis:</h4><ul>
+<li>Quellcode besteht aus mehreren Dateien<ul>
+<li>Hauptprogramm</li>
+<li>beliebige Anzahl an Quellcodedateien</li>
+<li>Zu jeder Quellcodedatei-Headerdatei</li>
+</ul>
+</li>
+<li>Übersetzungsvorschriften und Abhängigkeit zwischen Dateien werden im Makefile festgelegt</li>
+</ul>
+<h4 id="Beispiel-fur-Nutzung-von-Makefile"><a href="#Beispiel-fur-Nutzung-von-Makefile" class="headerlink" title="Beispiel für Nutzung von Makefile"></a>Beispiel für Nutzung von Makefile</h4><p><img src="/archives/b4635aee/image-20200120204920529.png" style="zoom:50%;"></p>
+<p><strong>Übersetzungen von Programmen:</strong> </p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line">g++ -o programm addiere.cxx hauptprogramm.cxx</span></pre></td></tr></table></figure>
+<p><strong>Der Prozess kann in Teilschritte zerlegt werden:</strong></p>
+<ul>
+<li><p>Erzeugen eines Objektcodes (*.o) Datei für jede Datei (*.cxx)</p>
+<p><code>g++ -c addiere.cxx</code></p>
+<p><code>g++ -c hauptprogramm.cxx</code> </p>
+</li>
+<li><p>Zusammenführen der *.o Dateien zu einem ausführbare Programm: Linken</p>
+<p><code>g++ -o programm hauptprogramm.o addiere.o</code> </p>
+</li>
+</ul>
+<p><strong>Makefile: Beispiel für drei Dateien</strong></p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line">PROG=programm </span></pre></td></tr><tr><td class="code"><pre><span class="line">CFLAGS=-O2 </span></pre></td></tr><tr><td class="code"><pre><span class="line">LDFLAGS=<span class="variable">$(CFLAGS)</span> </span></pre></td></tr><tr><td class="code"><pre><span class="line">CC=g++</span></pre></td></tr><tr><td class="code"><pre><span class="line">SRCS= hauptprogramm.cxx addiere.cxx <span class="comment">#SRCS: Name der Quellcodedateien mit Endung *.cxx</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">OBJ= $(SRCS:.cxx=.o) <span class="comment">#把SRCS当成字符串，将字符串中的.cxx换为.o，再赋值给OBJS</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="section">all: <span class="variable">$(SRCS)</span> <span class="variable">$(PROG)</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="variable">$(PROG)</span>: <span class="variable">$(OBJ)</span> </span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="variable">$(CC)</span> <span class="variable">$(LDFLAGS)</span> <span class="variable">$(OBJ)</span> -o <span class="variable">$@</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">#Regel um aus Dateien mit .cxx Endung eine Objektdatei (mit .o Endung) zu erstellen</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="section">%.o:%.cxx </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -c <span class="variable">$&lt;</span> </span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="section">clean:</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">rm -rf *.o <span class="variable">$(PROG)</span> </span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">## Abhaengigkeiten / dependencies</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="section">hauptprogramm.o: hauptprogramm.cxx addiere.h  </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="section">addiere.o: addiere.cxx addiere.h # *.o: abhängige Dateien: Quelldatei und Header</span></span></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>WissenPro</category>
+        <category>Makefile</category>
+      </categories>
+      <tags>
+        <tag>Makefile</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WissPro-C++(2)</title>
+    <url>/archives/3f9dbd27.html</url>
+    <content><![CDATA[<h3 id="Dynamische-Variablendeklarationen-Zeiger-vs-Felder"><a href="#Dynamische-Variablendeklarationen-Zeiger-vs-Felder" class="headerlink" title="Dynamische Variablendeklarationen: Zeiger vs Felder"></a>Dynamische Variablendeklarationen: Zeiger vs Felder</h3><p>C/C++ erlaubt einen flexiblen Umgang mit dem Speicher während der Ausführung des Programms. Dazu werden Zeiger verwendet, welche einen direkten Zugriff (访问) auf dem Speicher ermöglichen.<br><a id="more"></a></p>
+<p><strong>Vorteil</strong> </p>
+<ul>
+<li>Flexibilität: erst zu Laufzeit wird die Dimensionierung von dynamischen Feldern festgelegt 动态内存分配</li>
+<li>Komplexe Datenstrukturen können leichter verwirklicht werden: Listen, Bäume… 用于表示和实现各种复杂的数据结构</li>
+</ul>
+<p><strong>Nachteil</strong></p>
+<ul>
+<li>Fehlersuche erschwert</li>
+<li>Laufzeitnachteile</li>
+</ul>
+<p><strong>Objekte</strong>: Eine Variable, Konstante in einem Programm ist ein Objekt. Jedes Objekte hat einen gewissen Speicherbedarf.</p>
+<h4 id="Zeiger-und-Aderessen-const"><a href="#Zeiger-und-Aderessen-const" class="headerlink" title="Zeiger und Aderessen: const"></a>Zeiger und Aderessen: const</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 从右往左读, 遇到p就替换成“p is a ”遇到*就替换成“point to”</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> *ip;  <span class="comment">// ip is a pointer to int const, ip是一个指针，指向int,const, 不能通过*p改变指针所指向的内容</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *ip; <span class="comment">// 同上</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> * <span class="keyword">const</span> ip; <span class="comment">// ip是一个常量指针，指向int, 初始化后不能再指向其它内容</span></span></pre></td></tr></table></figure>
+<h4 id="Felder-数组"><a href="#Felder-数组" class="headerlink" title="Felder(数组)"></a>Felder(数组)</h4><p><strong>Speicherdarstellung</strong></p>
+<ul>
+<li><p>Eindimensionales Felder</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> tab[<span class="number">20</span>]; <span class="comment">// Felder mit 20 Elementen</span></span></pre></td></tr></table></figure>
+<p><code>tab[i]</code> ist äquivalent zu <code>*(tab+i)</code>, wobei von Ausgangsspeicherstelle <code>tab</code> um i Positionen erhöht wird.</p>
+<p><code>tab</code> Datentyp: Zeiger auf int</p>
+<p><img src="/archives/3f9dbd27/image-20200118155617210.png" style="zoom:50%;"></p>
+</li>
+<li><p>Mehrdimensionale Felder</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> mat[<span class="number">3</span>][<span class="number">4</span>]; <span class="comment">// Zweidimensionales Feld: zusammenhangender Speicher</span></span></pre></td></tr></table></figure>
+<p><code>mat[i][j]</code> ist äquivalent zu <code>*(mat[i]+j) = *(*(mat+i)+j)</code> </p>
+<p><code>mat[i]</code> ist Zeiger auf i-te Zeile</p>
+<p><code>mat</code> Datentyp: Zeiger auf Zeiger von Typ int</p>
+<p><img src="/archives/3f9dbd27/image-20200118161722717.png" style="zoom:50%;"></p>
+</li>
+</ul>
+<h4 id="Grose-eines-Objekte-sizeof"><a href="#Grose-eines-Objekte-sizeof" class="headerlink" title="Größe eines Objekte: sizeof()"></a>Größe eines Objekte: sizeof()</h4><p><code>std::size_t sizeof (Argument)</code> gibt ein Konstante vom Datentyp <code>std::size_t</code> zurück: Anzahl der Bytes</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">double</span> vec[<span class="number">10</span>];</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(<span class="keyword">double</span>) &lt;&lt; <span class="string">" Byte"</span> &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(vec) &lt;&lt; <span class="string">" Byte"</span> &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(vec)/<span class="keyword">sizeof</span>(<span class="keyword">double</span>) &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// Anzahl der Element</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h4 id="Rechner-Speicherorganisation"><a href="#Rechner-Speicherorganisation" class="headerlink" title="Rechner: Speicherorganisation"></a>Rechner: Speicherorganisation</h4><p>automatisch Objekte werden auf dem Stack (Stapel) angelegt ; globale Objekte (Nutzer verwaltet) werden auf dem Heap angelegt. </p>
+<ul>
+<li><strong>Stack:</strong><ul>
+<li>Last In First Out</li>
+<li><strong>Lokale Variablen</strong> in Funktionen werden automatisch verwaltet: angelegt und gelöst</li>
+<li>Variablen auf dem Stack existieren nur solange man in der aufrufenden Funktion ist(Ausnahme Variablen mit static Attribut)</li>
+<li>Stack: hat eine <strong>Größenbeschränkung</strong> (die man einstellen kann)</li>
+</ul>
+</li>
+<li><strong>Heap:</strong><ul>
+<li>Region im Speicher des Rechners, in welchem nicht automatisch angelegte Objekte hinterlegt werden, also sobald Sie in C++ <code>new</code> und <code>delete</code> Operatoren verwenden</li>
+<li>keine Größenbeschränkung</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/3f9dbd27/image-20200118164815244.png" style="zoom:50%;"></p>
+<h4 id="Dynamische-Variablendeklaration-new-delete"><a href="#Dynamische-Variablendeklaration-new-delete" class="headerlink" title="Dynamische Variablendeklaration: new, delete"></a>Dynamische Variablendeklaration: new, delete</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = <span class="keyword">new</span> <span class="keyword">int</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *ll = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span></pre></td></tr></table></figure>
+<ul>
+<li>Felder, die mit <code>new []</code> angelegt(创建) wurden, müssen mit dem <code>delete []</code> Operator gelöscht werden, da sonst nur das erste Element des Feldes gelöscht wird und der Rest den Speicher weiterhin belegt, ohne dass darauf zugegriffen werden kann!!! <strong>memory leak</strong> 否则只有该字段的第一个元素将被删除，其余的内存仍将被使用而无法访问！ 内存泄漏</li>
+<li>Nach Anwendung von delete ist Zeiger undefiniert! (dangling pointer) 使用delete后，指针未定义！ （悬空指针）</li>
+</ul>
+<h4 id="Dynamische-Feld-2d"><a href="#Dynamische-Feld-2d" class="headerlink" title="Dynamische Feld 2d"></a>Dynamische Feld 2d</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">size_t</span> nx, ny;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="built_in">cin</span> &lt;&lt; nx &lt;&lt; ny;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">// 1.pro Zeile separat angelegter Speicher</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> **feld2d = <span class="keyword">new</span> <span class="keyword">int</span> *[nx]; <span class="comment">// 创建一个有nx个元素的一维指针数组，feld[0]~feld[nx-1]为int指针类型</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nx; i++)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    feld2d[i] = <span class="keyword">new</span> <span class="keyword">int</span>[ny]; <span class="comment">//这里是将feld2d作为一个指向指针的指针，指针数组的每个元素分配一个数组</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nx; i++)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;ny; j++)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    	feld2d[i][j]=i*ny+j; <span class="comment">//初始化数组元素</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">// 2.zusammenhängender Speicher</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> **feld2d = <span class="keyword">new</span> <span class="keyword">int</span> *[nx];</span></pre></td></tr><tr><td class="code"><pre><span class="line">feld2d[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[nx*ny];</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">size_t</span> i=<span class="number">1</span>; i&lt;nx; i++)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    feld2d[i] = feld2d[<span class="number">0</span>]+i*ny;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<ol>
+<li><p>Variante für zweidimensionales Feld mit <strong>nicht zusammenhängender</strong> Speicherstruktur</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Loeschen des Feldes</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nx; i++)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">delete</span>[] feld2d[i]; <span class="comment">//先销毁指针数组每个元素指向的数组</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">delete</span>[] feld2d; <span class="comment">//然后再销毁这个指针数组</span></span></pre></td></tr></table></figure>
+<p><img src="/archives/3f9dbd27/image-20200118213932196.png" style="zoom:50%;"></p>
+</li>
+<li><p>zweidimensionales Feld mit zusammenhängendem Speicher(连续内存空间)</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Loeschen</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">delete</span>[] feld2d[<span class="number">0</span>];</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">delete</span>[] feld2d;</span></pre></td></tr></table></figure>
+<p><img src="/archives/3f9dbd27/image-20200118220855016.png" style="zoom:50%;"></p>
+<p>Im nebenstehenden Quellcode wurde darauf geachtet, dass der Speicherbereich des Feldes zusammenhängend ist: dies kann Geschwindigkeitsvorteile bringen.</p>
+</li>
+</ol>
+<h4 id="Funktionszeiger-函数指针"><a href="#Funktionszeiger-函数指针" class="headerlink" title="Funktionszeiger(函数指针)"></a>Funktionszeiger(函数指针)</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">float</span>(*Funktionszeiger)(<span class="keyword">float</span>);</span></pre></td></tr></table></figure>
+<ul>
+<li>Argument: ein Objekt vom Datentyp <code>float</code></li>
+<li>Rückgabe: ein Objekte vom Datentyp <code>float</code></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">test</span><span class="params">(<span class="keyword">float</span> x)</span></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">return</span> x*<span class="number">2.f</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">return</span> x;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">float</span>(*fptr1)(<span class="keyword">float</span>); <span class="comment">// 函数指针，返回值和参数类型为float</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    fptr = test; <span class="comment">// 函数指针指向test函数</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt; fptr(<span class="number">7.</span>) &lt;&lt; <span class="built_in">endl</span>; <span class="comment">//通过fptr调用test(7.)</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">int</span>(*fptr2)(<span class="keyword">int</span>) = foo;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    fptr2(<span class="number">5</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="code"><pre><span class="line">    fptr2 = test; <span class="comment">// 错误，参数类型，返回值类型不匹配</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h4 id="const-und-constexpr"><a href="#const-und-constexpr" class="headerlink" title="const und constexpr"></a>const und constexpr</h4><ul>
+<li><p>const: wird nachfolgend nicht verändert</p>
+</li>
+<li><p>constexpr: wird zur Zeit des Übersetzens ausgerechnet</p>
+<p> 对于修饰Object来说，const并未区分出编译期常量和运行期常量（指变量不能被修改），constexpr限定在了编译期常量，在编译期可以被计算出来。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> dmv = <span class="number">17</span>; <span class="comment">// dmc is a named constant</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> var = <span class="number">17</span>; <span class="comment">// var is not a constant</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">double</span> a1 = <span class="number">1.4</span>*square(dmv); <span class="comment">// ok,dmv is a constant expression</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">double</span> a2 = <span class="number">1.4</span>*square(var); <span class="comment">// error, var is not a constant expression</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> a2 = <span class="number">1.4</span>*square(var); <span class="comment">// ok, may be evaluated at run time</span></span></pre></td></tr></table></figure>
+<ul>
+<li>Function muss constexpr Attribut haben<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">double</span> <span class="title">square</span><span class="params">(<span class="keyword">double</span> x)</span></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    rerurn x*x;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+constexpr修饰的函数，简单的来说，如果其传入的参数可以在编译时期计算出来，那么这个函数就会产生编译时期的值。但是，传入的参数如果不能在编译时期计算出来，那么constexpr修饰的函数就和普通函数一样了。不过，我们不必因此而写两个版本，所以如果函数体适用于constexpr函数的条件，可以尽量加上constexpr。而检测constexpr函数是否产生编译时期值的方法很简单，就是利用std::array需要编译期常值才能编译通过的小技巧。这样的话，即可检测你所写的函数是否真的产生编译期常值。</li>
+</ul>
+<h4 id="c-11-Fortschrittliches-Speichermanagment"><a href="#c-11-Fortschrittliches-Speichermanagment" class="headerlink" title="c++11-Fortschrittliches Speichermanagment"></a>c++11-Fortschrittliches Speichermanagment</h4><p>C++中采用new和delete来创建（申请）和释放（销毁）内存，但是因为释放内存时机把握不当、忘记释放内存等原因，很难准确及时地管理内存。<br>因此，C++标准库推出了<strong>智能指针</strong>机制来更好的管理内存，智能指针能自动释放所指向的对象。</p>
+<p><code>include&lt;memory&gt;</code></p>
+<p>Neue Praktische Zeigertypen in Bibliothek \<memory>(智能指针)</memory></p>
+<ul>
+<li><p>shared_ptr : verwaltet Zeiger; Möglichkeit das Objekt mit anderen shared_ptr zu teilen </p>
+<p>允许多个指针指向同一个对象，当进行拷贝或者赋值操作时，每个shared_ptr都有一个关联的计数器，通常称其为引用计数。</p>
+<p>我们每次拷贝一个shared_ptr都会使这个引用计数递增（当局部的shared_ptr离开作用域时，计数器就会递减），当引用计数为0（指向对象的最后一个shared_ptr被销毁）时，shared_ptr会销毁这个对象（通过shared_ptr的析构函）</p>
+<p><img src="/archives/3f9dbd27/image-20200120201107813.png" style="zoom:50%;"></p>
+<p><strong>创建shared_ptr</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p1(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">20</span>)); <span class="comment">// 使用new，只能直接初始化</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p1 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">20</span>); <span class="comment">//错误</span></span></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>WissPro</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Lifecycle Models-Testing Methods</title>
     <url>/archives/75f66702.html</url>
     <content><![CDATA[<h3 id="Teat-as-part-of-the-Life-Cycle-Model"><a href="#Teat-as-part-of-the-Life-Cycle-Model" class="headerlink" title="Teat as part of the Life Cycle Model"></a>Teat as part of the Life Cycle Model</h3><p><img src="/archives/75f66702/image-20200117155923576.png" style="zoom: 33%;"></p>

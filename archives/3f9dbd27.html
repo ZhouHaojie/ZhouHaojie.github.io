@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Dynamische Variablendeklarationen: Zeiger vs FelderC&#x2F;C++ erlaubt einen flexiblen Umgang mit dem Speicher während der Ausführung des Programms. Dazu werden Zeiger verwendet, welche einen direkten Zugri">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WissPro-C++(2)">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;3f9dbd27.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="Dynamische Variablendeklarationen: Zeiger vs FelderC&#x2F;C++ erlaubt einen flexiblen Umgang mit dem Speicher während der Ausführung des Programms. Dazu werden Zeiger verwendet, welche einen direkten Zugri">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;3f9dbd27&#x2F;image-20200118155617210.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;3f9dbd27&#x2F;image-20200118161722717.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;3f9dbd27&#x2F;image-20200118164815244.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;3f9dbd27&#x2F;image-20200118213932196.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;3f9dbd27&#x2F;image-20200118220855016.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;3f9dbd27&#x2F;image-20200120201107813.png">
+<meta property="og:updated_time" content="2020-01-21T14:40:55.217Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;3f9dbd27&#x2F;image-20200118155617210.png">
+
+<link rel="canonical" href="http://grenze.cn/archives/3f9dbd27.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>WissPro-C++(2) | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">22</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/3f9dbd27.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WissPro-C++(2)
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-18 15:06:58" itemprop="dateCreated datePublished" datetime="2020-01-18T15:06:58+01:00">2020-01-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-21 15:40:55" itemprop="dateModified" datetime="2020-01-21T15:40:55+01:00">2020-01-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WissPro/" itemprop="url" rel="index">
+                    <span itemprop="name">WissPro</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WissPro/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Dynamische-Variablendeklarationen-Zeiger-vs-Felder"><a href="#Dynamische-Variablendeklarationen-Zeiger-vs-Felder" class="headerlink" title="Dynamische Variablendeklarationen: Zeiger vs Felder"></a>Dynamische Variablendeklarationen: Zeiger vs Felder</h3><p>C/C++ erlaubt einen flexiblen Umgang mit dem Speicher während der Ausführung des Programms. Dazu werden Zeiger verwendet, welche einen direkten Zugriff (访问) auf dem Speicher ermöglichen.<br><a id="more"></a></p>
+<p><strong>Vorteil</strong> </p>
+<ul>
+<li>Flexibilität: erst zu Laufzeit wird die Dimensionierung von dynamischen Feldern festgelegt 动态内存分配</li>
+<li>Komplexe Datenstrukturen können leichter verwirklicht werden: Listen, Bäume… 用于表示和实现各种复杂的数据结构</li>
+</ul>
+<p><strong>Nachteil</strong></p>
+<ul>
+<li>Fehlersuche erschwert</li>
+<li>Laufzeitnachteile</li>
+</ul>
+<p><strong>Objekte</strong>: Eine Variable, Konstante in einem Programm ist ein Objekt. Jedes Objekte hat einen gewissen Speicherbedarf.</p>
+<h4 id="Zeiger-und-Aderessen-const"><a href="#Zeiger-und-Aderessen-const" class="headerlink" title="Zeiger und Aderessen: const"></a>Zeiger und Aderessen: const</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从右往左读, 遇到p就替换成“p is a ”遇到*就替换成“point to”</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> *ip;  <span class="comment">// ip is a pointer to int const, ip是一个指针，指向int,const, 不能通过*p改变指针所指向的内容</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *ip; <span class="comment">// 同上</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> * <span class="keyword">const</span> ip; <span class="comment">// ip是一个常量指针，指向int, 初始化后不能再指向其它内容</span></span></pre></td></tr></table></figure>
+<h4 id="Felder-数组"><a href="#Felder-数组" class="headerlink" title="Felder(数组)"></a>Felder(数组)</h4><p><strong>Speicherdarstellung</strong></p>
+<ul>
+<li><p>Eindimensionales Felder</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> tab[<span class="number">20</span>]; <span class="comment">// Felder mit 20 Elementen</span></span></pre></td></tr></table></figure>
+<p><code>tab[i]</code> ist äquivalent zu <code>*(tab+i)</code>, wobei von Ausgangsspeicherstelle <code>tab</code> um i Positionen erhöht wird.</p>
+<p><code>tab</code> Datentyp: Zeiger auf int</p>
+<p><img src="/archives/3f9dbd27/image-20200118155617210.png" style="zoom:50%;"></p>
+</li>
+<li><p>Mehrdimensionale Felder</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> mat[<span class="number">3</span>][<span class="number">4</span>]; <span class="comment">// Zweidimensionales Feld: zusammenhangender Speicher</span></span></pre></td></tr></table></figure>
+<p><code>mat[i][j]</code> ist äquivalent zu <code>*(mat[i]+j) = *(*(mat+i)+j)</code> </p>
+<p><code>mat[i]</code> ist Zeiger auf i-te Zeile</p>
+<p><code>mat</code> Datentyp: Zeiger auf Zeiger von Typ int</p>
+<p><img src="/archives/3f9dbd27/image-20200118161722717.png" style="zoom:50%;"></p>
+</li>
+</ul>
+<h4 id="Grose-eines-Objekte-sizeof"><a href="#Grose-eines-Objekte-sizeof" class="headerlink" title="Größe eines Objekte: sizeof()"></a>Größe eines Objekte: sizeof()</h4><p><code>std::size_t sizeof (Argument)</code> gibt ein Konstante vom Datentyp <code>std::size_t</code> zurück: Anzahl der Bytes</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">double</span> vec[<span class="number">10</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(<span class="keyword">double</span>) &lt;&lt; <span class="string">" Byte"</span> &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(vec) &lt;&lt; <span class="string">" Byte"</span> &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(vec)/<span class="keyword">sizeof</span>(<span class="keyword">double</span>) &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// Anzahl der Element</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h4 id="Rechner-Speicherorganisation"><a href="#Rechner-Speicherorganisation" class="headerlink" title="Rechner: Speicherorganisation"></a>Rechner: Speicherorganisation</h4><p>automatisch Objekte werden auf dem Stack (Stapel) angelegt ; globale Objekte (Nutzer verwaltet) werden auf dem Heap angelegt. </p>
+<ul>
+<li><strong>Stack:</strong><ul>
+<li>Last In First Out</li>
+<li><strong>Lokale Variablen</strong> in Funktionen werden automatisch verwaltet: angelegt und gelöst</li>
+<li>Variablen auf dem Stack existieren nur solange man in der aufrufenden Funktion ist(Ausnahme Variablen mit static Attribut)</li>
+<li>Stack: hat eine <strong>Größenbeschränkung</strong> (die man einstellen kann)</li>
+</ul>
+</li>
+<li><strong>Heap:</strong><ul>
+<li>Region im Speicher des Rechners, in welchem nicht automatisch angelegte Objekte hinterlegt werden, also sobald Sie in C++ <code>new</code> und <code>delete</code> Operatoren verwenden</li>
+<li>keine Größenbeschränkung</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/3f9dbd27/image-20200118164815244.png" style="zoom:50%;"></p>
+<h4 id="Dynamische-Variablendeklaration-new-delete"><a href="#Dynamische-Variablendeklaration-new-delete" class="headerlink" title="Dynamische Variablendeklaration: new, delete"></a>Dynamische Variablendeklaration: new, delete</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = <span class="keyword">new</span> <span class="keyword">int</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *ll = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span></pre></td></tr></table></figure>
+<ul>
+<li>Felder, die mit <code>new []</code> angelegt(创建) wurden, müssen mit dem <code>delete []</code> Operator gelöscht werden, da sonst nur das erste Element des Feldes gelöscht wird und der Rest den Speicher weiterhin belegt, ohne dass darauf zugegriffen werden kann!!! <strong>memory leak</strong> 否则只有该字段的第一个元素将被删除，其余的内存仍将被使用而无法访问！ 内存泄漏</li>
+<li>Nach Anwendung von delete ist Zeiger undefiniert! (dangling pointer) 使用delete后，指针未定义！ （悬空指针）</li>
+</ul>
+<h4 id="Dynamische-Feld-2d"><a href="#Dynamische-Feld-2d" class="headerlink" title="Dynamische Feld 2d"></a>Dynamische Feld 2d</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">size_t</span> nx, ny;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">cin</span> &lt;&lt; nx &lt;&lt; ny;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.pro Zeile separat angelegter Speicher</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> **feld2d = <span class="keyword">new</span> <span class="keyword">int</span> *[nx]; <span class="comment">// 创建一个有nx个元素的一维指针数组，feld[0]~feld[nx-1]为int指针类型</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nx; i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    feld2d[i] = <span class="keyword">new</span> <span class="keyword">int</span>[ny]; <span class="comment">//这里是将feld2d作为一个指向指针的指针，指针数组的每个元素分配一个数组</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nx; i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;ny; j++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    	feld2d[i][j]=i*ny+j; <span class="comment">//初始化数组元素</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2.zusammenhängender Speicher</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> **feld2d = <span class="keyword">new</span> <span class="keyword">int</span> *[nx];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">feld2d[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[nx*ny];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">size_t</span> i=<span class="number">1</span>; i&lt;nx; i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    feld2d[i] = feld2d[<span class="number">0</span>]+i*ny;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<ol>
+<li><p>Variante für zweidimensionales Feld mit <strong>nicht zusammenhängender</strong> Speicherstruktur</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Loeschen des Feldes</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nx; i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">delete</span>[] feld2d[i]; <span class="comment">//先销毁指针数组每个元素指向的数组</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span>[] feld2d; <span class="comment">//然后再销毁这个指针数组</span></span></pre></td></tr></table></figure>
+<p><img src="/archives/3f9dbd27/image-20200118213932196.png" style="zoom:50%;"></p>
+</li>
+<li><p>zweidimensionales Feld mit zusammenhängendem Speicher(连续内存空间)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Loeschen</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span>[] feld2d[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span>[] feld2d;</span></pre></td></tr></table></figure>
+<p><img src="/archives/3f9dbd27/image-20200118220855016.png" style="zoom:50%;"></p>
+<p>Im nebenstehenden Quellcode wurde darauf geachtet, dass der Speicherbereich des Feldes zusammenhängend ist: dies kann Geschwindigkeitsvorteile bringen.</p>
+</li>
+</ol>
+<h4 id="Funktionszeiger-函数指针"><a href="#Funktionszeiger-函数指针" class="headerlink" title="Funktionszeiger(函数指针)"></a>Funktionszeiger(函数指针)</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span>(*Funktionszeiger)(<span class="keyword">float</span>);</span></pre></td></tr></table></figure>
+<ul>
+<li>Argument: ein Objekt vom Datentyp <code>float</code></li>
+<li>Rückgabe: ein Objekte vom Datentyp <code>float</code></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">test</span><span class="params">(<span class="keyword">float</span> x)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">return</span> x*<span class="number">2.f</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> x;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">float</span>(*fptr1)(<span class="keyword">float</span>); <span class="comment">// 函数指针，返回值和参数类型为float</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    fptr = test; <span class="comment">// 函数指针指向test函数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt; fptr(<span class="number">7.</span>) &lt;&lt; <span class="built_in">endl</span>; <span class="comment">//通过fptr调用test(7.)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span>(*fptr2)(<span class="keyword">int</span>) = foo;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    fptr2(<span class="number">5</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    fptr2 = test; <span class="comment">// 错误，参数类型，返回值类型不匹配</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h4 id="const-und-constexpr"><a href="#const-und-constexpr" class="headerlink" title="const und constexpr"></a>const und constexpr</h4><ul>
+<li><p>const: wird nachfolgend nicht verändert</p>
+</li>
+<li><p>constexpr: wird zur Zeit des Übersetzens ausgerechnet</p>
+<p> 对于修饰Object来说，const并未区分出编译期常量和运行期常量（指变量不能被修改），constexpr限定在了编译期常量，在编译期可以被计算出来。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> dmv = <span class="number">17</span>; <span class="comment">// dmc is a named constant</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> var = <span class="number">17</span>; <span class="comment">// var is not a constant</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">double</span> a1 = <span class="number">1.4</span>*square(dmv); <span class="comment">// ok,dmv is a constant expression</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">double</span> a2 = <span class="number">1.4</span>*square(var); <span class="comment">// error, var is not a constant expression</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> a2 = <span class="number">1.4</span>*square(var); <span class="comment">// ok, may be evaluated at run time</span></span></pre></td></tr></table></figure>
+<ul>
+<li>Function muss constexpr Attribut haben<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">double</span> <span class="title">square</span><span class="params">(<span class="keyword">double</span> x)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    rerurn x*x;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+constexpr修饰的函数，简单的来说，如果其传入的参数可以在编译时期计算出来，那么这个函数就会产生编译时期的值。但是，传入的参数如果不能在编译时期计算出来，那么constexpr修饰的函数就和普通函数一样了。不过，我们不必因此而写两个版本，所以如果函数体适用于constexpr函数的条件，可以尽量加上constexpr。而检测constexpr函数是否产生编译时期值的方法很简单，就是利用std::array需要编译期常值才能编译通过的小技巧。这样的话，即可检测你所写的函数是否真的产生编译期常值。</li>
+</ul>
+<h4 id="c-11-Fortschrittliches-Speichermanagment"><a href="#c-11-Fortschrittliches-Speichermanagment" class="headerlink" title="c++11-Fortschrittliches Speichermanagment"></a>c++11-Fortschrittliches Speichermanagment</h4><p>C++中采用new和delete来创建（申请）和释放（销毁）内存，但是因为释放内存时机把握不当、忘记释放内存等原因，很难准确及时地管理内存。<br>因此，C++标准库推出了<strong>智能指针</strong>机制来更好的管理内存，智能指针能自动释放所指向的对象。</p>
+<p><code>include&lt;memory&gt;</code></p>
+<p>Neue Praktische Zeigertypen in Bibliothek \<memory>(智能指针)</memory></p>
+<ul>
+<li><p>shared_ptr : verwaltet Zeiger; Möglichkeit das Objekt mit anderen shared_ptr zu teilen </p>
+<p>允许多个指针指向同一个对象，当进行拷贝或者赋值操作时，每个shared_ptr都有一个关联的计数器，通常称其为引用计数。</p>
+<p>我们每次拷贝一个shared_ptr都会使这个引用计数递增（当局部的shared_ptr离开作用域时，计数器就会递减），当引用计数为0（指向对象的最后一个shared_ptr被销毁）时，shared_ptr会销毁这个对象（通过shared_ptr的析构函）</p>
+<p><img src="/archives/3f9dbd27/image-20200120201107813.png" style="zoom:50%;"></p>
+<p><strong>创建shared_ptr</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p1(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">20</span>)); <span class="comment">// 使用new，只能直接初始化</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p1 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">20</span>); <span class="comment">//错误</span></span></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\c6bd2a86.html" rel="bookmark">WissPro-C++(3)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\33e92a8c.html" rel="bookmark">WissProg-C++(1)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\e70dd349.html" rel="bookmark">结构化绑定声明</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\73ac48ad.html" rel="bookmark">C++11智能指针</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\37649.html" rel="bookmark">const和constexpr的区别C++</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/3f9dbd27.html" title="WissPro-C++(2)">http://grenze.cn/archives/3f9dbd27.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/75f66702.html" rel="prev" title="Lifecycle Models-Testing Methods">
+      <i class="fa fa-chevron-left"></i> Lifecycle Models-Testing Methods
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/b4635aee.html" rel="next" title="WissPro-Makefile">
+      WissPro-Makefile <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dynamische-Variablendeklarationen-Zeiger-vs-Felder"><span class="nav-number">1.</span> <span class="nav-text">Dynamische Variablendeklarationen: Zeiger vs Felder</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Zeiger-und-Aderessen-const"><span class="nav-number">1.1.</span> <span class="nav-text">Zeiger und Aderessen: const</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Felder-数组"><span class="nav-number">1.2.</span> <span class="nav-text">Felder(数组)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Grose-eines-Objekte-sizeof"><span class="nav-number">1.3.</span> <span class="nav-text">Größe eines Objekte: sizeof()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rechner-Speicherorganisation"><span class="nav-number">1.4.</span> <span class="nav-text">Rechner: Speicherorganisation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dynamische-Variablendeklaration-new-delete"><span class="nav-number">1.5.</span> <span class="nav-text">Dynamische Variablendeklaration: new, delete</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dynamische-Feld-2d"><span class="nav-number">1.6.</span> <span class="nav-text">Dynamische Feld 2d</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Funktionszeiger-函数指针"><span class="nav-number">1.7.</span> <span class="nav-text">Funktionszeiger(函数指针)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#const-und-constexpr"><span class="nav-number">1.8.</span> <span class="nav-text">const und constexpr</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-11-Fortschrittliches-Speichermanagment"><span class="nav-number">1.9.</span> <span class="nav-text">c++11-Fortschrittliches Speichermanagment</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/archives/77274168.html" title="WissPro-gawk" target="_blank">WissPro-gawk</a>
+          </li>
+        
+          <li>
+            <a href="/archives/c42a9800.html" title="WissPro-Numerik" target="_blank">WissPro-Numerik</a>
+          </li>
+        
+          <li>
+            <a href="/archives/c6bd2a86.html" title="WissPro-C++(3)" target="_blank">WissPro-C++(3)</a>
+          </li>
+        
+          <li>
+            <a href="/archives/b4635aee.html" title="WissPro-Makefile" target="_blank">WissPro-Makefile</a>
+          </li>
+        
+          <li>
+            <a href="/archives/3f9dbd27.html" title="WissPro-C++(2)" target="_blank">WissPro-C++(2)</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">91k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:23</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: 'df771f18f0a0ec758c0a190c3e997f6f',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
