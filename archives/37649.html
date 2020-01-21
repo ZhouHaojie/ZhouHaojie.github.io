@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="ZhouHaojie的博客">
 <meta property="og:description" content="const: wird nachfolgend nicht verändert  constexpr: wird zur Zeit des Üersetzens ausgerechnet">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-20T17:49:21.624Z">
+<meta property="og:updated_time" content="2020-01-20T18:46:25.334Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://grenze.cn/archives/37649.html">
@@ -262,7 +262,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-20 18:49:21" itemprop="dateModified" datetime="2020-01-20T18:49:21+01:00">2020-01-20</time>
+                <time title="修改时间：2020-01-20 19:46:25" itemprop="dateModified" datetime="2020-01-20T19:46:25+01:00">2020-01-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -320,10 +320,7 @@
 <li><p>constexpr: wird zur Zeit des Üersetzens ausgerechnet</p>
 <a id="more"></a>
 <p>对于修饰Object来说，const并未区分出编译期常量和运行期常量（指变量不能被修改），constexpr限定在了编译期常量，在编译期可以被计算出来。</p>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> dmv = <span class="number">17</span>; <span class="comment">// dmc is a named constant</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> var = <span class="number">17</span>; <span class="comment">// var is not a constant</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">double</span> a1 = <span class="number">1.4</span>*square(dmv); <span class="comment">// ok,dmv is a constant expression</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">double</span> a2 = <span class="number">1.4</span>*square(var); <span class="comment">// error, var is not a constant expression</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> a2 = <span class="number">1.4</span>*square(var); <span class="comment">// ok, may be evaluated at run time</span></span></pre></td></tr></table></figure>
-<ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> dmv = <span class="number">17</span>; <span class="comment">// dmc is a named constant</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> var = <span class="number">17</span>; <span class="comment">// var is not a constant</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">double</span> a1 = <span class="number">1.4</span>*square(dmv); <span class="comment">// ok,dmv is a constant expression</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">double</span> a2 = <span class="number">1.4</span>*square(var); <span class="comment">// error, var is not a constant expression</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> a2 = <span class="number">1.4</span>*square(var); <span class="comment">// ok, may be evaluated at run time</span></span></pre></td></tr></table></figure></li>
 <li>Function muss constexpr Attribut haben<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">double</span> <span class="title">square</span><span class="params">(<span class="keyword">double</span> x)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    rerurn x*x;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 constexpr修饰的函数，简单的来说，如果其传入的参数可以在编译时期计算出来，那么这个函数就会产生编译时期的值。但是，传入的参数如果不能在编译时期计算出来，那么constexpr修饰的函数就和普通函数一样了。不过，我们不必因此而写两个版本，所以如果函数体适用于constexpr函数的条件，可以尽量加上constexpr。而检测constexpr函数是否产生编译时期值的方法很简单，就是利用std::array需要编译期常值才能编译通过的小技巧。这样的话，即可检测你所写的函数是否真的产生编译期常值。</li>
 </ul>

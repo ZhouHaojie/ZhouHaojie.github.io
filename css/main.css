@@ -1255,7 +1255,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #5085ff;
+  background: #ecbb39;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3040,7 +3040,6 @@ span.exturl {
 .post-body>p:first-child::first-letter {
   float: left;
 /* height: 32px;*/
-  margin-top: 14px;
   margin-right: 6px;
   color: #555;
   font-size: 42px;
