@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="A model is an abstract representation of some system that is easier to understand in a given context than the actual system.">
+<meta name="keywords" content="Modeling of Data and Function">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modeling of Data and Function">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="A model is an abstract representation of some system that is easier to understand in a given context than the actual system.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208143121143.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208141844812.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208141925616.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208142302730.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208143014529.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208153249938.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208160656774.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208161456692.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208161636590.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208161737189.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208162650227.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208164425204.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208165245166.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208165321962.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208173516265.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208173723440.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208175050958.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200209144316330.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200209145415626.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200209145445682.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200209150237312.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200209184722865.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200209184935857.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200209160640256.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200209161341700.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200209170938118.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200209171704504.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200209171338665.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200209153156978.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200209153459613.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200209153554682.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200209155012805.png">
+<meta property="og:updated_time" content="2020-02-09T18:24:42.037Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;9384a912&#x2F;image-20200208143121143.png">
+
+<link rel="canonical" href="http://grenze.cn/archives/9384a912.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Modeling of Data and Function | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">24</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">24</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">51</span></a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/9384a912.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Modeling of Data and Function
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-08 13:46:51" itemprop="dateCreated datePublished" datetime="2020-02-08T13:46:51+01:00">2020-02-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-09 19:24:42" itemprop="dateModified" datetime="2020-02-09T19:24:42+01:00">2020-02-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Systems-and-Software-Engineering/" itemprop="url" rel="index">
+                    <span itemprop="name">Systems and Software Engineering</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Systems-and-Software-Engineering/Modeling-of-Data-and-Function/" itemprop="url" rel="index">
+                    <span itemprop="name">Modeling of Data and Function</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>A model is an <u>abstract representation</u> of some system that is <u>easier to understand</u> in a given context than the actual system.<a id="more"></a></p>
+<h3 id="Introduction-to-Modeling"><a href="#Introduction-to-Modeling" class="headerlink" title="Introduction to Modeling"></a>Introduction to Modeling</h3><h4 id="Physical-Models"><a href="#Physical-Models" class="headerlink" title="Physical Models"></a><strong>Physical Models</strong></h4><ul>
+<li>A physical objekt that mimics some properties of a real system</li>
+<li>Through prototyping process<ul>
+<li>Protyping is the process of quickly putting together a working model in order to test various aspects of a design, illustrate ideas or features and gather early user feedback.</li>
+</ul>
+</li>
+</ul>
+<h4 id="Mathematical-Models"><a href="#Mathematical-Models" class="headerlink" title="Mathematical Models"></a><strong>Mathematical Models</strong></h4><blockquote>
+<p>A description of a system where the relationship between variables of the system are expressed in a mathematical form, e.g. <strong>Ohm’s Law</strong> </p>
+</blockquote>
+<ul>
+<li>Deterministic models<br>the input and output variables are not subject to random fluctuations(随机波动), so that the system is at any time entirely defined by <strong>the initial conditions</strong> chosen</li>
+<li>Stochastic models<br>at least one of the input or output variables is probabilistic or involves randomness</li>
+</ul>
+<p><strong>Characteristics of Useful Models</strong></p>
+<p><img src="/archives/9384a912/image-20200208143121143.png" style="zoom: 50%;"></p>
+<h4 id="Model-Based-Design"><a href="#Model-Based-Design" class="headerlink" title="Model Based Design"></a>Model Based Design</h4><p>Models for Executable Specification and Analysis(Simulation)</p>
+<ul>
+<li>Transform data(input, output, intermediate)</li>
+<li>Transformation is called function</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200208141844812.png" style="zoom: 33%;"></p>
+<p>Example:</p>
+<p><img src="/archives/9384a912/image-20200208141925616.png" style="zoom: 33%;"></p>
+<h4 id="Model-based-design-and-testing"><a href="#Model-based-design-and-testing" class="headerlink" title="Model based design and testing"></a>Model based design and testing</h4><p>Problem with requirements specification $\rarr$ model based design</p>
+<ul>
+<li>Use formal methods (models) as early as possible</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200208142302730.png" style="zoom:33%;"></p>
+<h4 id="Modeling-VS-Programming-Languages"><a href="#Modeling-VS-Programming-Languages" class="headerlink" title="Modeling VS Programming Languages"></a>Modeling VS Programming Languages</h4><p><img src="/archives/9384a912/image-20200208143014529.png" style="zoom:33%;"></p>
+<h3 id="Modeling-on-System-Level"><a href="#Modeling-on-System-Level" class="headerlink" title="Modeling on System Level"></a>Modeling on System Level</h3><p><strong>Similution</strong>: A simulation of a system is the operation of a model of the system,  as an imitation(模仿) of the real system.</p>
+<p>Applied to complex systems that are <strong>impossible</strong> to solve <strong>mathematically</strong>.</p>
+<p><strong>Reasons for Simulation</strong>:</p>
+<ul>
+<li>Complexity: Developing comples systems is possible</li>
+<li>Economy</li>
+<li>Time scale of the dynamics of the system is not compatible with that of the observer<br>e.g. It takes millions of years to observe small changes in the development of the universe, whereas changes can be quickly simulated in a computer</li>
+<li>Suppression of disturbances/accuracy</li>
+<li>Accessibility: Nodes in an ECU, for example, can be monitored easily, whereas they are no longer accessible after realization.</li>
+<li>Flexibility: Ability to quickly implement changes</li>
+</ul>
+<p><strong>Goals of simulation</strong></p>
+<ul>
+<li>determine the correct functioning of a dsign with the help of the simulation</li>
+<li>Simulation programs have to recognize, if and where errors occur(<strong>not filled the desired function, delay, tolerance</strong>)</li>
+<li>However, Physical constraints are included seldomly(很少) into the simulation: logic simulation, but voltage and current are not always in expected time and quality</li>
+</ul>
+<p><strong>Some application areas:</strong></p>
+<ul>
+<li>manufacturing systems</li>
+<li>mitary weapons</li>
+<li>communications networks</li>
+</ul>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>When mathematical analysis methods are not avaliable, simulation may be the only investigation tool</li>
+<li>Simulation may provide a simpler solution</li>
+<li>Allow time compression(压缩) or expansion</li>
+<li>Allows comparisons of alternative designs or alternative operating policies</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li>Time consuming</li>
+<li>An invalid model may result with confidence in wrong results.</li>
+</ul>
+<h4 id="Timing-How-do-we-advance-time"><a href="#Timing-How-do-we-advance-time" class="headerlink" title="Timing: How do we advance time?"></a>Timing: How do we advance time?</h4><p>Time handling</p>
+<ul>
+<li>Time-slicing: move forward in equal time intervals(<strong>synchronous</strong>)</li>
+<li>Discrete-event simulation(DES)<ul>
+<li>Time moves from event to event</li>
+<li>periods of inactivity are skipped over by jumping the clock form event time to event time</li>
+</ul>
+</li>
+<li>Continuous simulation<ul>
+<li>refers to a computer model of a physical system</li>
+<li>continuously tracks system response</li>
+<li>according to a set of equations typically involving differential equations</li>
+</ul>
+</li>
+<li>DES is <strong>asynchronous</strong><ul>
+<li>time hop(跳跃)</li>
+<li>Because DES don’t have to simulate every time slice, faster than continuous simulation</li>
+<li>slices are much larger than in continuous simulations</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200208153249938.png" style="zoom:50%;"></p>
+<h4 id="Finite-State-Machines"><a href="#Finite-State-Machines" class="headerlink" title="Finite State Machines"></a>Finite State Machines</h4><p>A FSM is a mathematical model of computation used to design computer preograms, embedded systrms and sequential logic circuits.</p>
+<p>The machine is only one state at a time.</p>
+<p><strong>Mealy machine:</strong> outputs are a function of both inputs and current state<br><strong>Moore machine:</strong> outputs are a function of current state only</p>
+<p><img src="/archives/9384a912/image-20200208160656774.png" style="zoom:50%;"></p>
+<h4 id="Statecharts"><a href="#Statecharts" class="headerlink" title="Statecharts"></a>Statecharts</h4><p>A visual formalism for specifying hierarchical state machines, especially useful for modeling reactive systems (systems which continuously react to internal or external events without terminating)</p>
+<p><strong>Basic design elements</strong></p>
+<p><img src="/archives/9384a912/image-20200208161456692.png" style="zoom: 33%;"></p>
+<p><strong>Labels: Event, Condition, Action</strong></p>
+<p><img src="/archives/9384a912/image-20200208161636590.png" style="zoom: 33%;"></p>
+<p><img src="/archives/9384a912/image-20200208161737189.png" style="zoom: 33%;"></p>
+<p><strong>Transition labels</strong></p>
+<p><img src="/archives/9384a912/image-20200208162650227.png" style="zoom: 50%;"></p>
+<p><strong>Trigger</strong></p>
+<p><img src="/archives/9384a912/image-20200208164425204.png" style="zoom: 50%;"></p>
+<p><strong>Example</strong></p>
+<p><img src="/archives/9384a912/image-20200208165245166.png" style="zoom:50%;"></p>
+<p><img src="/archives/9384a912/image-20200208165321962.png" style="zoom:50%;"></p>
+<p><strong>Stateflow And-State</strong></p>
+<p><img src="/archives/9384a912/image-20200208173516265.png" style="zoom:50%;"></p>
+<p><strong>Execution Order</strong></p>
+<ul>
+<li>Execution Order in state flow is from left to right and top to down, if no order is given</li>
+<li>In And-States, the execution order number gives the point of execution</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200208173723440.png" style="zoom:50%;"></p>
+<p><strong>History state</strong><br>A composite state (复合状态) may contain shallow history and deep history states.</p>
+<ul>
+<li><u>Shallow history state</u> is a reference to the most recently visited state on the same hierarchy level within the composite state.(同级状态)</li>
+<li><u>Deep history state</u> is a reference to the most recently visited simple state within the composite state.(包含子状态)</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200208175050958.png" style="zoom:50%;"></p>
+<p>H is in state D means that enter the most recently visited substate of D (and default in A) state D最后停留的状态为G, Default in A is B</p>
+<h4 id="Petri-nets"><a href="#Petri-nets" class="headerlink" title="Petri-nets"></a>Petri-nets</h4><p>Petri-net = specific directed, bipartite, marked graph. Two sets of nodes are <strong>Places</strong> and <strong>Transitions</strong>.</p>
+<p>w(p,t): the weight of the edge from p to t.</p>
+<p><img src="/archives/9384a912/image-20200209144316330.png" style="zoom:50%;"></p>
+<p><strong>Transition Rules</strong></p>
+<ul>
+<li>A transition is called <strong>enable</strong> if each of its input places p is marked with at least w(p,t) tokens.</li>
+<li>An enabled transition <strong>switches</strong> by removing w(p,t) tokens from each input places p and putting w(t,p) tokens to each output place</li>
+<li>An enabled transition can switch but it does not have to $\rarr $ not deterministic</li>
+</ul>
+<p><strong>Petri net structures</strong></p>
+<p><img src="/archives/9384a912/image-20200209145415626.png" style="zoom:50%;"></p>
+<p><strong>Basic formal definitions</strong></p>
+<p>A Petri net is a quintuple N = (P, T, F, W, M0), where</p>
+<p><img src="/archives/9384a912/image-20200209145445682.png" style="zoom:50%;"></p>
+<p><strong>Example</strong></p>
+<p><img src="/archives/9384a912/image-20200209150237312.png" style="zoom:50%;"></p>
+<p><strong>发生transition的条件</strong>:<br>A transition is called enabled (firable) if each of its input places contains at least one token.某个transition 的所有输入位置中都必须有marking, 并且当输入位置有多根弧线指向这个transition时, 该输入的marking数$\geq$ 弧线数</p>
+<p><strong>Marking 移动规则</strong></p>
+<ul>
+<li>从发生transition t 的所有输入Place 中取出marking, 每个Place取出的标记数等于该位置指向t 的弧线数</li>
+<li>然后将marking送入t的所有输出位置, 送入每个位置的marking等于t指向该位置的弧线数</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200209184722865.png" style="zoom:50%;"></p>
+<p>considering “weights”</p>
+<p><img src="/archives/9384a912/image-20200209184935857.png" style="zoom:50%;"></p>
+<p><strong>Behavioral characteristics</strong></p>
+<ul>
+<li><p><strong>Reachability:</strong> Starting from a given marking, you examine whether a specific new marking could be reached.<br>A marking $M_n$ is called reachable by marking $M_0$, if there is  a sequence</p>
+<p><img src="/archives/9384a912/image-20200209160640256.png" style="zoom:50%;"><br>of such transitions, that each $t_{i+1}$ is $M_i$ enabled and switches from $M_i$ to $M_{i+1}$.</p>
+<ul>
+<li>The set of all markings reachable from M is described as <strong>R(M)</strong></li>
+<li>Problem of reachability:<ul>
+<li>given: initial marking $M_0$, target marking M</li>
+<li>question: Is M reachable from $M_0$, i.e. is $M \in R(M_0)$ ?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Safeness:</strong> In a network with an initial marking you check whether new markings lead to an excess(超过) of a specific capacity of one or more places. A network is called <strong>k-safe</strong>, if capacity k is not being exceeded for all places of a network.</p>
+<p><img src="/archives/9384a912/image-20200209161341700.png" style="zoom:50%;"></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>Liveliness/Deadlock:</strong> A transition t is called alive if it can be made enabled from any reachable marking. A petri net is called alive if all transitions are alive, if for each transition t a marking M’, in which t is enabled, is reachable from the position of each marking $M \in R(M_0)$.</p>
+<p><img src="/archives/9384a912/image-20200209170938118.png" style="zoom:50%;"></p>
+</li>
+<li><p><strong>Conservation:</strong> A Petri net is conservative if the number of tokens in the net is conserved(输入等于输出)</p>
+<p><img src="/archives/9384a912/image-20200209171704504.png" style="zoom:50%;"></p>
+</li>
+<li><p><strong>Reversibility</strong>: A Petri net is called reversible, if for all $M \in R(M_0)$ the initial marking $M_0$  can be reached from the position of M(从M回到$M_0$)<br><strong><u>Remark</u>:</strong> Existence of the reversibility ensures that the system can always <strong>recover the normal behavior</strong> and is important for systems subject to failures.</p>
+<p><img src="/archives/9384a912/image-20200209171338665.png" style="zoom:50%;"></p>
+</li>
+</ul>
+<h4 id="Message-Sequence-charts"><a href="#Message-Sequence-charts" class="headerlink" title="(Message) Sequence charts"></a>(Message) Sequence charts</h4><p>Explicitly indicate exchange of information, one dimension(usually vertical dimension) reflects <strong>time</strong>,  the other reflects distribution in <strong>space</strong>.</p>
+<p><strong>Object Life Spans</strong></p>
+<ul>
+<li>Creation: create message and object life starts at that point.</li>
+<li>Activation: Place on the lifeline where object is activated</li>
+<li>Deletion: Placing an ‘X’ on lifeline and object’s life ends at that point</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200209153156978.png" style="zoom:50%;"></p>
+<p><strong>Object interaction</strong></p>
+<ul>
+<li>Self-call: a message that an Object sends to itself</li>
+<li>Condition: indicates when a message is sent. The message is sent only if the condition is true</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200209153459613.png" style="zoom:50%;"></p>
+<p><strong>MSC textual representation</strong></p>
+<p><img src="/archives/9384a912/image-20200209153554682.png" style="zoom:50%;"></p>
+<p>Pros:</p>
+<ul>
+<li>Appropriate for visualizing schedules, e.g. in transportation</li>
+<li>Standard defined, semantics also defined</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>describes just one case, no timing tolerances</li>
+<li>Only for small communication examples with no more than 1-3 messages synchronously</li>
+</ul>
+<h4 id="Use-Case-Diagram"><a href="#Use-Case-Diagram" class="headerlink" title="Use Case Diagram"></a>Use Case Diagram</h4><p>A Use Case is the specification of a set of actions performed by a system, which yields an observable result that is of value for one or more actors of the system.</p>
+<p><strong>Element:</strong></p>
+<ul>
+<li>Actors: Roles that people can fill when they interact with the system</li>
+<li>Use Case: A use case represents a coherent (一致) unit of functionality provided by a system. It describes a whole class of interactions</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200209155012805.png" style="zoom:50%;"></p>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/9384a912.html" title="Modeling of Data and Function">http://grenze.cn/archives/9384a912.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Modeling-of-Data-and-Function/" rel="tag"><i class="fa fa-tag"></i> Modeling of Data and Function</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/65b38d0a.html" rel="prev" title="WissProg-C++(7)">
+      <i class="fa fa-chevron-left"></i> WissProg-C++(7)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction-to-Modeling"><span class="nav-number">1.</span> <span class="nav-text">Introduction to Modeling</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Physical-Models"><span class="nav-number">1.1.</span> <span class="nav-text">Physical Models</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mathematical-Models"><span class="nav-number">1.2.</span> <span class="nav-text">Mathematical Models</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Model-Based-Design"><span class="nav-number">1.3.</span> <span class="nav-text">Model Based Design</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Model-based-design-and-testing"><span class="nav-number">1.4.</span> <span class="nav-text">Model based design and testing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Modeling-VS-Programming-Languages"><span class="nav-number">1.5.</span> <span class="nav-text">Modeling VS Programming Languages</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Modeling-on-System-Level"><span class="nav-number">2.</span> <span class="nav-text">Modeling on System Level</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Timing-How-do-we-advance-time"><span class="nav-number">2.1.</span> <span class="nav-text">Timing: How do we advance time?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Finite-State-Machines"><span class="nav-number">2.2.</span> <span class="nav-text">Finite State Machines</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Statecharts"><span class="nav-number">2.3.</span> <span class="nav-text">Statecharts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Petri-nets"><span class="nav-number">2.4.</span> <span class="nav-text">Petri-nets</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Message-Sequence-charts"><span class="nav-number">2.5.</span> <span class="nav-text">(Message) Sequence charts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Use-Case-Diagram"><span class="nav-number">2.6.</span> <span class="nav-text">Use Case Diagram</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/archives/9384a912.html" title="Modeling of Data and Function" target="_blank">Modeling of Data and Function</a>
+          </li>
+        
+          <li>
+            <a href="/archives/65b38d0a.html" title="WissProg-C++(7)" target="_blank">WissProg-C++(7)</a>
+          </li>
+        
+          <li>
+            <a href="/archives/7ca8bc4b.html" title="WissProg-C++(6)" target="_blank">WissProg-C++(6)</a>
+          </li>
+        
+          <li>
+            <a href="/archives/53a48da5.html" title="C++-左值右值与移动语义" target="_blank">C++-左值右值与移动语义</a>
+          </li>
+        
+          <li>
+            <a href="/archives/5785ef88.html" title="WissProg-C++(5)" target="_blank">WissProg-C++(5)</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">133k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:01</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: '4edde4326cd0ec77ff276c21e950e72b',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>

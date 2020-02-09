@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Implementation Alternatives (Hardware, Codesign)Codesign Definition and key Concepts Definition:Meeting of system-level objectives by exploiting the best of both worlds -&amp;gt; hardware and software">
+<meta name="keywords" content="HW&#x2F;SW Codesign">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Embedded Systems Software-HW&#x2F;SW Codedesign">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;75036f3b.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="Implementation Alternatives (Hardware, Codesign)Codesign Definition and key Concepts Definition:Meeting of system-level objectives by exploiting the best of both worlds -&amp;gt; hardware and software">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;75036f3b&#x2F;image-20200121213457334.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;75036f3b&#x2F;image-20200121213723647.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;75036f3b&#x2F;image-20200121213811423.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;75036f3b&#x2F;image-20200121213954937.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;75036f3b&#x2F;image-20200122094823419.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;75036f3b&#x2F;image-20200122101241376.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;75036f3b&#x2F;image-20200122103009902.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;75036f3b&#x2F;image-20200122102901726.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;75036f3b&#x2F;image-20200123175642548.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;75036f3b&#x2F;image-20200123175814220.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;75036f3b&#x2F;image-20200123180529567.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;75036f3b&#x2F;image-20200123180811992.png">
+<meta property="og:updated_time" content="2020-01-23T19:16:46.196Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;75036f3b&#x2F;image-20200121213457334.png">
+
+<link rel="canonical" href="http://grenze.cn/archives/75036f3b.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Embedded Systems Software-HW/SW Codedesign | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">24</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">24</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">51</span></a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/75036f3b.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Embedded Systems Software-HW/SW Codedesign
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-21 21:16:51" itemprop="dateCreated datePublished" datetime="2020-01-21T21:16:51+01:00">2020-01-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-23 20:16:46" itemprop="dateModified" datetime="2020-01-23T20:16:46+01:00">2020-01-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Systems-and-Software-Engineering/" itemprop="url" rel="index">
+                    <span itemprop="name">Systems and Software Engineering</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Systems-and-Software-Engineering/HW-SW-Codesign/" itemprop="url" rel="index">
+                    <span itemprop="name">HW/SW Codesign</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Implementation-Alternatives-Hardware-Codesign"><a href="#Implementation-Alternatives-Hardware-Codesign" class="headerlink" title="Implementation Alternatives (Hardware, Codesign)"></a>Implementation Alternatives (Hardware, Codesign)</h3><h4 id="Codesign-Definition-and-key-Concepts"><a href="#Codesign-Definition-and-key-Concepts" class="headerlink" title="Codesign Definition and key Concepts"></a>Codesign Definition and key Concepts</h4><ul>
+<li><p>Definition:<br>Meeting of system-level objectives by exploiting the best of both worlds -&gt; hardware and software<a id="more"></a></p>
+</li>
+<li><p>The importance of codesign in designing hardware/software systems:</p>
+<ul>
+<li>Improves design quality, <strong>design cycle time</strong>, and cost -&gt; Reduces integration and test time</li>
+<li>Takes advantage of advances in tools and technologies (s. above)</li>
+</ul>
+</li>
+<li><p>Key concepts of Codesign </p>
+<ul>
+<li>Concurrent: Hardware and software developed at the same time on parallel paths</li>
+<li>Integrated: Interaction between hardware and software development to produce design meeting performance criteria and functional specs</li>
+</ul>
+</li>
+</ul>
+<h4 id="Components-of-the-Codesign-Problem"><a href="#Components-of-the-Codesign-Problem" class="headerlink" title="Components of the Codesign Problem"></a>Components of the Codesign Problem</h4><ul>
+<li><p>Hardware/Software Partitioning </p>
+<ul>
+<li><p>Architectural assumptions </p>
+<ul>
+<li>type of processor, interface style between hardware and software, etc.</li>
+</ul>
+</li>
+<li><p>Partitioning objectives </p>
+<ul>
+<li>maximize speedup, latency requirements, minimize size, cost, etc.</li>
+</ul>
+</li>
+<li>Partitioning strategies <ul>
+<li>high level partitioning by hand, automated partitioning using various techniques, etc.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Scheduling</p>
+<ul>
+<li>Operation scheduling in hardware </li>
+<li>Instruction scheduling in compilers </li>
+<li>Process scheduling in operating systems</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/75036f3b/image-20200121213457334.png" style="zoom: 33%;"></p>
+<h4 id="Current-Hardware-Software-Design-Process"><a href="#Current-Hardware-Software-Design-Process" class="headerlink" title="Current Hardware/Software Design Process"></a>Current Hardware/Software Design Process</h4><p><img src="/archives/75036f3b/image-20200121213723647.png" style="zoom:50%;"></p>
+<h4 id="Ideal-Hardware-Software-Design-Process"><a href="#Ideal-Hardware-Software-Design-Process" class="headerlink" title="Ideal Hardware/Software Design Process"></a>Ideal Hardware/Software Design Process</h4><p><img src="/archives/75036f3b/image-20200121213811423.png" style="zoom:50%;"></p>
+<h4 id="Partitioning-Example"><a href="#Partitioning-Example" class="headerlink" title="Partitioning Example"></a>Partitioning Example</h4><p><img src="/archives/75036f3b/image-20200121213954937.png" style="zoom:50%;"></p>
+<h3 id="Embedded-Systems-Programming"><a href="#Embedded-Systems-Programming" class="headerlink" title="Embedded Systems Programming"></a>Embedded Systems Programming</h3><h4 id="Software-Development"><a href="#Software-Development" class="headerlink" title="Software Development"></a>Software Development</h4><p><img src="/archives/75036f3b/image-20200122094823419.png" style="zoom:50%;"></p>
+<h4 id="Machine-Language"><a href="#Machine-Language" class="headerlink" title="Machine Language"></a>Machine Language</h4><p>The microcontroller’s CPU reads program code from memory, one instruction at a time, decodes each instruction, and then executes it </p>
+<p>All memory content - both program code and data - is in binary form.</p>
+<p>For humans it is very difficult to understand instructions composed of arbitrary sequences of 1 and 0. Programmers at this low level therefore use interpretable languages instead. Assembly Language(汇编语言)</p>
+<p>Another problem is that machine language implementation is different on each CPU type. Since assembly code is closely mapped to machine code, assembly programmers would need to rewrite their code each time the CPU type is changed.</p>
+<h4 id="The-C-Programming-Language"><a href="#The-C-Programming-Language" class="headerlink" title="The C Programming Language"></a>The C Programming Language</h4><p>It becomes necessary to convert the C code (source code) into machine code (object code). This conversion is carried out by a program called a <strong>compiler</strong>. After compiling these programs into object files, it is necessary to link the objects together into a single machine-language program. This linkage operation is performed by another program, called a <strong>linker</strong>.</p>
+<h4 id="Coding-standards"><a href="#Coding-standards" class="headerlink" title="Coding standards"></a>Coding standards</h4><p>Some simple rules*: </p>
+<p><img src="/archives/75036f3b/image-20200122101241376.png" style="zoom:50%;"></p>
+<h3 id="Timing"><a href="#Timing" class="headerlink" title="Timing"></a>Timing</h3><p><strong>Real-time System</strong></p>
+<p><img src="/archives/75036f3b/image-20200122103009902.png" style="zoom:50%;"></p>
+<ul>
+<li><p>Parameters </p>
+<p><code>tp</code>: time interval between two successive events,  <code>tRmax</code>: maximum response time</p>
+</li>
+<li><p>Response time of a compute process <code>tR = tw + ti + tc + to</code></p>
+</li>
+</ul>
+<blockquote>
+<p><code>tw</code> : waiting time (until task is started) (multitasking)<br><code>ti</code> :time for input data acquisition from sensors<br><code>tc</code> : processing time<br><code>to</code> : time for output data send to actuators</p>
+</blockquote>
+<p><strong>Soft vs. Hard Real-time</strong></p>
+<ul>
+<li><p>Hard Real-time </p>
+<ul>
+<li>If a task is not finished within the predetermined amount of time there can be catastrophic results (e.g. chemical process control, heart pace maker) </li>
+<li>For all possible events the maximum response time must be smaller than the minimum time interval between two succeeding events</li>
+</ul>
+</li>
+<li><p>Soft Real-time</p>
+<ul>
+<li>If a task is not finished within the given time span, usability is reduced (less comfort, e.g. heating control, letter sorting system) </li>
+<li>Average response time is smaller than average time interval between two succeeding events (occasional waiting times due to overload are accepted but must be eliminated in the average)</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/75036f3b/image-20200122102901726.png" style="zoom:50%;"></p>
+<h3 id="Embedded-Operating-Systems"><a href="#Embedded-Operating-Systems" class="headerlink" title="Embedded Operating Systems"></a>Embedded Operating Systems</h3><h4 id="Multitasking-Scheduling-Strategies"><a href="#Multitasking-Scheduling-Strategies" class="headerlink" title="Multitasking: Scheduling Strategies"></a>Multitasking: Scheduling Strategies</h4><p>Timing Parameters of a Real-time System<br>Arrival Time <code>Ai</code>: Time, when a process is created<br>Ready Time <code>Ri</code>: Earliest point in time when the processor can be assigned to a process<br>Start Time <code>Si</code>: Processor starts execution of the process<br>Execution Time <code>Ci</code>: Pure computation time span of the process on the processor<br>Completion Time <code>Fi</code>: Point in time, when the process is terminated<br>Deadline <code>Di</code>: Execution of the process has to be finished at this point in time.</p>
+<p><strong>First Come First Served (FCFS)</strong></p>
+<ul>
+<li><p>Put all requests in a queue </p>
+</li>
+<li><p>Work through them in order of arrival</p>
+<blockquote>
+<p> 3 Tasks, Computation times C1 = 24, C2 = 3, C3 = 30</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="/archives/75036f3b/image-20200123175642548.png" style="zoom:50%;"></p>
+<p><strong>Shortest Job First (SJF)</strong><br>The Shortest Job First - algorithm <strong>minimizes the average response time</strong> when tasks arrive at the same time</p>
+<blockquote>
+<p> 3 Tasks, Computation times C1 = 24, C2 = 3, C3 = 30</p>
+</blockquote>
+<p><img src="/archives/75036f3b/image-20200123175814220.png" style="zoom:50%;"></p>
+<p><strong>Round Robin (RR)</strong></p>
+<ul>
+<li>Every task obtains the processor for a time slice </li>
+<li>Afterwards execution of the next process </li>
+<li>Skipping of tasks, that do not need to be processed (e.g. because of waiting for external events)</li>
+</ul>
+<p><img src="/archives/75036f3b/image-20200123180529567.png" alt="image-20200123180529567" style="zoom:50%;"></p>
+<p>轮询选择的方法是把所有的节点(P1,P2,P3) 看做一个一个的点，并把这些点连起来组成一个圆， 轮询选择就是在这个圆上按顺时针选择一个点。时间最少的任务作为一个time slot</p>
+<p><strong>Time Division Multiple Access (TDMA)</strong></p>
+<ul>
+<li>Every task obtains the processor for a time slice </li>
+<li>A time slice cannot be skipped in order to privilege non finished tasks</li>
+<li>TDMA assigns slots to tasks, possibly causing “dead time”</li>
+</ul>
+<p><img src="/archives/75036f3b/image-20200123180811992.png" style="zoom:50%;"></p>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/75036f3b.html" title="Embedded Systems Software-HW&#x2F;SW Codedesign">http://grenze.cn/archives/75036f3b.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/HW-SW-Codesign/" rel="tag"><i class="fa fa-tag"></i> HW/SW Codesign</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/4e9edec9.html" rel="prev" title="WissProg-C++(4)">
+      <i class="fa fa-chevron-left"></i> WissProg-C++(4)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/5785ef88.html" rel="next" title="WissProg-C++(5)">
+      WissProg-C++(5) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementation-Alternatives-Hardware-Codesign"><span class="nav-number">1.</span> <span class="nav-text">Implementation Alternatives (Hardware, Codesign)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Codesign-Definition-and-key-Concepts"><span class="nav-number">1.1.</span> <span class="nav-text">Codesign Definition and key Concepts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Components-of-the-Codesign-Problem"><span class="nav-number">1.2.</span> <span class="nav-text">Components of the Codesign Problem</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Current-Hardware-Software-Design-Process"><span class="nav-number">1.3.</span> <span class="nav-text">Current Hardware/Software Design Process</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ideal-Hardware-Software-Design-Process"><span class="nav-number">1.4.</span> <span class="nav-text">Ideal Hardware/Software Design Process</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Partitioning-Example"><span class="nav-number">1.5.</span> <span class="nav-text">Partitioning Example</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Embedded-Systems-Programming"><span class="nav-number">2.</span> <span class="nav-text">Embedded Systems Programming</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Software-Development"><span class="nav-number">2.1.</span> <span class="nav-text">Software Development</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Machine-Language"><span class="nav-number">2.2.</span> <span class="nav-text">Machine Language</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#The-C-Programming-Language"><span class="nav-number">2.3.</span> <span class="nav-text">The C Programming Language</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Coding-standards"><span class="nav-number">2.4.</span> <span class="nav-text">Coding standards</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Timing"><span class="nav-number">3.</span> <span class="nav-text">Timing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Embedded-Operating-Systems"><span class="nav-number">4.</span> <span class="nav-text">Embedded Operating Systems</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Multitasking-Scheduling-Strategies"><span class="nav-number">4.1.</span> <span class="nav-text">Multitasking: Scheduling Strategies</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/archives/9384a912.html" title="Modeling of Data and Function" target="_blank">Modeling of Data and Function</a>
+          </li>
+        
+          <li>
+            <a href="/archives/65b38d0a.html" title="WissProg-C++(7)" target="_blank">WissProg-C++(7)</a>
+          </li>
+        
+          <li>
+            <a href="/archives/7ca8bc4b.html" title="WissProg-C++(6)" target="_blank">WissProg-C++(6)</a>
+          </li>
+        
+          <li>
+            <a href="/archives/53a48da5.html" title="C++-左值右值与移动语义" target="_blank">C++-左值右值与移动语义</a>
+          </li>
+        
+          <li>
+            <a href="/archives/5785ef88.html" title="WissProg-C++(5)" target="_blank">WissProg-C++(5)</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">133k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:01</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: '63ca6791ebb269532b877e8f76143e82',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>

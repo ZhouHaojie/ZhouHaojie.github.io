@@ -1,6 +1,402 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Modeling of Data and Function</title>
+    <url>/archives/9384a912.html</url>
+    <content><![CDATA[<p>A model is an <u>abstract representation</u> of some system that is <u>easier to understand</u> in a given context than the actual system.<a id="more"></a></p>
+<h3 id="Introduction-to-Modeling"><a href="#Introduction-to-Modeling" class="headerlink" title="Introduction to Modeling"></a>Introduction to Modeling</h3><h4 id="Physical-Models"><a href="#Physical-Models" class="headerlink" title="Physical Models"></a><strong>Physical Models</strong></h4><ul>
+<li>A physical objekt that mimics some properties of a real system</li>
+<li>Through prototyping process<ul>
+<li>Protyping is the process of quickly putting together a working model in order to test various aspects of a design, illustrate ideas or features and gather early user feedback.</li>
+</ul>
+</li>
+</ul>
+<h4 id="Mathematical-Models"><a href="#Mathematical-Models" class="headerlink" title="Mathematical Models"></a><strong>Mathematical Models</strong></h4><blockquote>
+<p>A description of a system where the relationship between variables of the system are expressed in a mathematical form, e.g. <strong>Ohm’s Law</strong> </p>
+</blockquote>
+<ul>
+<li>Deterministic models<br>the input and output variables are not subject to random fluctuations(随机波动), so that the system is at any time entirely defined by <strong>the initial conditions</strong> chosen</li>
+<li>Stochastic models<br>at least one of the input or output variables is probabilistic or involves randomness</li>
+</ul>
+<p><strong>Characteristics of Useful Models</strong></p>
+<p><img src="/archives/9384a912/image-20200208143121143.png" style="zoom: 50%;"></p>
+<h4 id="Model-Based-Design"><a href="#Model-Based-Design" class="headerlink" title="Model Based Design"></a>Model Based Design</h4><p>Models for Executable Specification and Analysis(Simulation)</p>
+<ul>
+<li>Transform data(input, output, intermediate)</li>
+<li>Transformation is called function</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200208141844812.png" style="zoom: 33%;"></p>
+<p>Example:</p>
+<p><img src="/archives/9384a912/image-20200208141925616.png" style="zoom: 33%;"></p>
+<h4 id="Model-based-design-and-testing"><a href="#Model-based-design-and-testing" class="headerlink" title="Model based design and testing"></a>Model based design and testing</h4><p>Problem with requirements specification $\rarr$ model based design</p>
+<ul>
+<li>Use formal methods (models) as early as possible</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200208142302730.png" style="zoom:33%;"></p>
+<h4 id="Modeling-VS-Programming-Languages"><a href="#Modeling-VS-Programming-Languages" class="headerlink" title="Modeling VS Programming Languages"></a>Modeling VS Programming Languages</h4><p><img src="/archives/9384a912/image-20200208143014529.png" style="zoom:33%;"></p>
+<h3 id="Modeling-on-System-Level"><a href="#Modeling-on-System-Level" class="headerlink" title="Modeling on System Level"></a>Modeling on System Level</h3><p><strong>Similution</strong>: A simulation of a system is the operation of a model of the system,  as an imitation(模仿) of the real system.</p>
+<p>Applied to complex systems that are <strong>impossible</strong> to solve <strong>mathematically</strong>.</p>
+<p><strong>Reasons for Simulation</strong>:</p>
+<ul>
+<li>Complexity: Developing comples systems is possible</li>
+<li>Economy</li>
+<li>Time scale of the dynamics of the system is not compatible with that of the observer<br>e.g. It takes millions of years to observe small changes in the development of the universe, whereas changes can be quickly simulated in a computer</li>
+<li>Suppression of disturbances/accuracy</li>
+<li>Accessibility: Nodes in an ECU, for example, can be monitored easily, whereas they are no longer accessible after realization.</li>
+<li>Flexibility: Ability to quickly implement changes</li>
+</ul>
+<p><strong>Goals of simulation</strong></p>
+<ul>
+<li>determine the correct functioning of a dsign with the help of the simulation</li>
+<li>Simulation programs have to recognize, if and where errors occur(<strong>not filled the desired function, delay, tolerance</strong>)</li>
+<li>However, Physical constraints are included seldomly(很少) into the simulation: logic simulation, but voltage and current are not always in expected time and quality</li>
+</ul>
+<p><strong>Some application areas:</strong></p>
+<ul>
+<li>manufacturing systems</li>
+<li>mitary weapons</li>
+<li>communications networks</li>
+</ul>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>When mathematical analysis methods are not avaliable, simulation may be the only investigation tool</li>
+<li>Simulation may provide a simpler solution</li>
+<li>Allow time compression(压缩) or expansion</li>
+<li>Allows comparisons of alternative designs or alternative operating policies</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li>Time consuming</li>
+<li>An invalid model may result with confidence in wrong results.</li>
+</ul>
+<h4 id="Timing-How-do-we-advance-time"><a href="#Timing-How-do-we-advance-time" class="headerlink" title="Timing: How do we advance time?"></a>Timing: How do we advance time?</h4><p>Time handling</p>
+<ul>
+<li>Time-slicing: move forward in equal time intervals(<strong>synchronous</strong>)</li>
+<li>Discrete-event simulation(DES)<ul>
+<li>Time moves from event to event</li>
+<li>periods of inactivity are skipped over by jumping the clock form event time to event time</li>
+</ul>
+</li>
+<li>Continuous simulation<ul>
+<li>refers to a computer model of a physical system</li>
+<li>continuously tracks system response</li>
+<li>according to a set of equations typically involving differential equations</li>
+</ul>
+</li>
+<li>DES is <strong>asynchronous</strong><ul>
+<li>time hop(跳跃)</li>
+<li>Because DES don’t have to simulate every time slice, faster than continuous simulation</li>
+<li>slices are much larger than in continuous simulations</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200208153249938.png" style="zoom:50%;"></p>
+<h4 id="Finite-State-Machines"><a href="#Finite-State-Machines" class="headerlink" title="Finite State Machines"></a>Finite State Machines</h4><p>A FSM is a mathematical model of computation used to design computer preograms, embedded systrms and sequential logic circuits.</p>
+<p>The machine is only one state at a time.</p>
+<p><strong>Mealy machine:</strong> outputs are a function of both inputs and current state<br><strong>Moore machine:</strong> outputs are a function of current state only</p>
+<p><img src="/archives/9384a912/image-20200208160656774.png" style="zoom:50%;"></p>
+<h4 id="Statecharts"><a href="#Statecharts" class="headerlink" title="Statecharts"></a>Statecharts</h4><p>A visual formalism for specifying hierarchical state machines, especially useful for modeling reactive systems (systems which continuously react to internal or external events without terminating)</p>
+<p><strong>Basic design elements</strong></p>
+<p><img src="/archives/9384a912/image-20200208161456692.png" style="zoom: 33%;"></p>
+<p><strong>Labels: Event, Condition, Action</strong></p>
+<p><img src="/archives/9384a912/image-20200208161636590.png" style="zoom: 33%;"></p>
+<p><img src="/archives/9384a912/image-20200208161737189.png" style="zoom: 33%;"></p>
+<p><strong>Transition labels</strong></p>
+<p><img src="/archives/9384a912/image-20200208162650227.png" style="zoom: 50%;"></p>
+<p><strong>Trigger</strong></p>
+<p><img src="/archives/9384a912/image-20200208164425204.png" style="zoom: 50%;"></p>
+<p><strong>Example</strong></p>
+<p><img src="/archives/9384a912/image-20200208165245166.png" style="zoom:50%;"></p>
+<p><img src="/archives/9384a912/image-20200208165321962.png" style="zoom:50%;"></p>
+<p><strong>Stateflow And-State</strong></p>
+<p><img src="/archives/9384a912/image-20200208173516265.png" style="zoom:50%;"></p>
+<p><strong>Execution Order</strong></p>
+<ul>
+<li>Execution Order in state flow is from left to right and top to down, if no order is given</li>
+<li>In And-States, the execution order number gives the point of execution</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200208173723440.png" style="zoom:50%;"></p>
+<p><strong>History state</strong><br>A composite state (复合状态) may contain shallow history and deep history states.</p>
+<ul>
+<li><u>Shallow history state</u> is a reference to the most recently visited state on the same hierarchy level within the composite state.(同级状态)</li>
+<li><u>Deep history state</u> is a reference to the most recently visited simple state within the composite state.(包含子状态)</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200208175050958.png" style="zoom:50%;"></p>
+<p>H is in state D means that enter the most recently visited substate of D (and default in A) state D最后停留的状态为G, Default in A is B</p>
+<h4 id="Petri-nets"><a href="#Petri-nets" class="headerlink" title="Petri-nets"></a>Petri-nets</h4><p>Petri-net = specific directed, bipartite, marked graph. Two sets of nodes are <strong>Places</strong> and <strong>Transitions</strong>.</p>
+<p>w(p,t): the weight of the edge from p to t.</p>
+<p><img src="/archives/9384a912/image-20200209144316330.png" style="zoom:50%;"></p>
+<p><strong>Transition Rules</strong></p>
+<ul>
+<li>A transition is called <strong>enable</strong> if each of its input places p is marked with at least w(p,t) tokens.</li>
+<li>An enabled transition <strong>switches</strong> by removing w(p,t) tokens from each input places p and putting w(t,p) tokens to each output place</li>
+<li>An enabled transition can switch but it does not have to $\rarr $ not deterministic</li>
+</ul>
+<p><strong>Petri net structures</strong></p>
+<p><img src="/archives/9384a912/image-20200209145415626.png" style="zoom:50%;"></p>
+<p><strong>Basic formal definitions</strong></p>
+<p>A Petri net is a quintuple N = (P, T, F, W, M0), where</p>
+<p><img src="/archives/9384a912/image-20200209145445682.png" style="zoom:50%;"></p>
+<p><strong>Example</strong></p>
+<p><img src="/archives/9384a912/image-20200209150237312.png" style="zoom:50%;"></p>
+<p><strong>发生transition的条件</strong>:<br>A transition is called enabled (firable) if each of its input places contains at least one token.某个transition 的所有输入位置中都必须有marking, 并且当输入位置有多根弧线指向这个transition时, 该输入的marking数$\geq$ 弧线数</p>
+<p><strong>Marking 移动规则</strong></p>
+<ul>
+<li>从发生transition t 的所有输入Place 中取出marking, 每个Place取出的标记数等于该位置指向t 的弧线数</li>
+<li>然后将marking送入t的所有输出位置, 送入每个位置的marking等于t指向该位置的弧线数</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200209184722865.png" style="zoom:50%;"></p>
+<p>considering “weights”</p>
+<p><img src="/archives/9384a912/image-20200209184935857.png" style="zoom:50%;"></p>
+<p><strong>Behavioral characteristics</strong></p>
+<ul>
+<li><p><strong>Reachability:</strong> Starting from a given marking, you examine whether a specific new marking could be reached.<br>A marking $M_n$ is called reachable by marking $M_0$, if there is  a sequence</p>
+<p><img src="/archives/9384a912/image-20200209160640256.png" style="zoom:50%;"><br>of such transitions, that each $t_{i+1}$ is $M_i$ enabled and switches from $M_i$ to $M_{i+1}$.</p>
+<ul>
+<li>The set of all markings reachable from M is described as <strong>R(M)</strong></li>
+<li>Problem of reachability:<ul>
+<li>given: initial marking $M_0$, target marking M</li>
+<li>question: Is M reachable from $M_0$, i.e. is $M \in R(M_0)$ ?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Safeness:</strong> In a network with an initial marking you check whether new markings lead to an excess(超过) of a specific capacity of one or more places. A network is called <strong>k-safe</strong>, if capacity k is not being exceeded for all places of a network.</p>
+<p><img src="/archives/9384a912/image-20200209161341700.png" style="zoom:50%;"></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>Liveliness/Deadlock:</strong> A transition t is called alive if it can be made enabled from any reachable marking. A petri net is called alive if all transitions are alive, if for each transition t a marking M’, in which t is enabled, is reachable from the position of each marking $M \in R(M_0)$.</p>
+<p><img src="/archives/9384a912/image-20200209170938118.png" style="zoom:50%;"></p>
+</li>
+<li><p><strong>Conservation:</strong> A Petri net is conservative if the number of tokens in the net is conserved(输入等于输出)</p>
+<p><img src="/archives/9384a912/image-20200209171704504.png" style="zoom:50%;"></p>
+</li>
+<li><p><strong>Reversibility</strong>: A Petri net is called reversible, if for all $M \in R(M_0)$ the initial marking $M_0$  can be reached from the position of M(从M回到$M_0$)<br><strong><u>Remark</u>:</strong> Existence of the reversibility ensures that the system can always <strong>recover the normal behavior</strong> and is important for systems subject to failures.</p>
+<p><img src="/archives/9384a912/image-20200209171338665.png" style="zoom:50%;"></p>
+</li>
+</ul>
+<h4 id="Message-Sequence-charts"><a href="#Message-Sequence-charts" class="headerlink" title="(Message) Sequence charts"></a>(Message) Sequence charts</h4><p>Explicitly indicate exchange of information, one dimension(usually vertical dimension) reflects <strong>time</strong>,  the other reflects distribution in <strong>space</strong>.</p>
+<p><strong>Object Life Spans</strong></p>
+<ul>
+<li>Creation: create message and object life starts at that point.</li>
+<li>Activation: Place on the lifeline where object is activated</li>
+<li>Deletion: Placing an ‘X’ on lifeline and object’s life ends at that point</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200209153156978.png" style="zoom:50%;"></p>
+<p><strong>Object interaction</strong></p>
+<ul>
+<li>Self-call: a message that an Object sends to itself</li>
+<li>Condition: indicates when a message is sent. The message is sent only if the condition is true</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200209153459613.png" style="zoom:50%;"></p>
+<p><strong>MSC textual representation</strong></p>
+<p><img src="/archives/9384a912/image-20200209153554682.png" style="zoom:50%;"></p>
+<p>Pros:</p>
+<ul>
+<li>Appropriate for visualizing schedules, e.g. in transportation</li>
+<li>Standard defined, semantics also defined</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>describes just one case, no timing tolerances</li>
+<li>Only for small communication examples with no more than 1-3 messages synchronously</li>
+</ul>
+<h4 id="Use-Case-Diagram"><a href="#Use-Case-Diagram" class="headerlink" title="Use Case Diagram"></a>Use Case Diagram</h4><p>A Use Case is the specification of a set of actions performed by a system, which yields an observable result that is of value for one or more actors of the system.</p>
+<p><strong>Element:</strong></p>
+<ul>
+<li>Actors: Roles that people can fill when they interact with the system</li>
+<li>Use Case: A use case represents a coherent (一致) unit of functionality provided by a system. It describes a whole class of interactions</li>
+</ul>
+<p><img src="/archives/9384a912/image-20200209155012805.png" style="zoom:50%;"></p>
+]]></content>
+      <categories>
+        <category>Systems and Software Engineering</category>
+        <category>Modeling of Data and Function</category>
+      </categories>
+      <tags>
+        <tag>Modeling of Data and Function</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WissProg-C++(7)</title>
+    <url>/archives/65b38d0a.html</url>
+    <content><![CDATA[<h4 id="Friend-class"><a href="#Friend-class" class="headerlink" title="Friend class"></a>Friend class</h4><p>（1）若一个类为另一个类的友元，则此类的所有成员都可以访问对方类的私有成员<br>（2）声明：将友元类名在另一各类中使用friend修饰符说明</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>&#123;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">double</span> x, y;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">friend</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span>;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h4 id="sequenzielle-Container-List"><a href="#sequenzielle-Container-List" class="headerlink" title="sequenzielle Container: List\"></a>sequenzielle Container: List\<t></t></h4><p>List是一种可在常数时间内在任何位置执行插入和删除操作的顺序容器。list是双向链表，其迭代器是双向的。与其他顺序容器(array, vector, deque)相比，list容器在任意位置执行插入、提取、和移动元素的操作更高效，但它不能通过在容器中的位置直接获取元素。头文件<code>#include &lt;list&gt;</code></p>
+<p><strong>成员函数</strong><br>(1) 复制控制<br><code>list::list()</code>: 构造函数：构造一个新的list对象，根据参数初始化list容器的内容<br><code>list::~list()</code> : 析构函数：销毁以list对象<br><code>list::operator=</code>: 为容器分配新的内容，代替当前的内容，随之修改其大小</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;list&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">list</span>&lt;<span class="keyword">char</span>&gt; clist; <span class="comment">//声明了list&lt;char&gt;模板类 的一个实例  </span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>(2) Iterator<br><code>list::begin()</code> : 返回一个迭代器，指向list的第一个元素。返回值类型:iterator/const_iterator<br><code>list::end()</code>: 返回一个迭代器，指向list的最后一个元素的下一个位置。返回值类型:iterator/const_iterator<br><code>list::rbegin()</code>:  返回一个反转迭代器，指向list的最后一个元素。返回值类型:reverse_iterator/reverse_const_iterator<br><code>list::rend()</code> : 返回一个反转迭代器，指向list的第一个元素的前一个位置。返回值类型:reverse_iterator/reverse_const_iterator<br><code>list::cbegin()</code>: begin()的const版本。<br><code>push_back()</code>: am Ende einfügen<br><code>push_front()</code>: am Anfang einfügen<br><code>front()</code>: Wert des ersten Element<br><code>back</code>: Wert des letzten Element<br><code>pop_back()</code>: Entferne letztes Element<br><code>pop_front()</code>: Entferne erstes Element</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; li;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ausgabe_anfang_ende</span><span class="params">(<span class="keyword">const</span> <span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; &amp;liste, <span class="keyword">const</span> <span class="built_in">string</span> txt)</span> </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; txt &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; liste.front() &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; liste.back() &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; liste1;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	liste1.push_back(<span class="number">2</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	liste1.push_back(<span class="number">5</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	ausgabe_anfang_ende(liste1, <span class="string">"Ausgabe 1 von Liste1:"</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	liste1.push_front(<span class="number">42</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	ausgabe_anfang_ende(liste1, <span class="string">"Ausgabe 2 von Liste1:"</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">	liste1.pop_back();</span></pre></td></tr><tr><td class="code"><pre><span class="line">	ausgabe_anfang_ende(liste1, <span class="string">"Ausgabe 3 von Liste1:"</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">	li liste2;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	liste2=liste1;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	ausgabe_anfang_ende(liste2, <span class="string">"Ausgabe von Liste2:"</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<blockquote>
+<p>Ausgabe 1 von Liste1:<br>2<br>5<br>Ausgabe 2 von Liste1:<br>42<br>5<br>Ausgabe 3 von Liste1:<br>42<br>2<br>Ausgabe von Liste2:<br>42<br>2</p>
+</blockquote>
+<p><code>reverse()</code>: Umdrehen der Liste<br><code>sort()</code>: sortieren<br><code>remove()</code>: entferne Elemente mit dem Wert 3<br><code>unique()</code>: entfernt gleiche aufeinanderfolgende Einträge<br><code>remove_if(bool Bedingung)</code>: Entfernen aller Elemente für die die Bedingung erfüllt ist(in Bibliothek\<functional>)<br><code>slice(iterator position, list&amp;, iterator start, iterator ende)</code>: überträgt die Element der Liste ab Position start bis Position end an iterator position der aufrufenden Liste ein.</functional></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt; </span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt; </span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt; </span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; li; </span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_liste</span><span class="params">(<span class="keyword">const</span> li &amp; liste, <span class="keyword">const</span> <span class="built_in">string</span> txt)</span></span>&#123; 		<span class="built_in">cout</span>&lt;&lt;<span class="string">"Anzahl der Elemente in "</span>&lt;&lt;txt&lt;&lt;<span class="string">": &lt;&lt;liste.size()&lt;&lt;endl; </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    for(auto ele: liste) </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">        cout&lt;&lt; ele&lt;&lt;"</span> <span class="string">"; cout&lt;&lt;endl;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">&#125;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">bool parity_even(const int i) &#123; </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    return ((i&amp;1)==0) ; // Bitoperation: ist das Bit for die Eins nicht gesetzt -&gt; gerade</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">&#125;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string"></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">int main()&#123; </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    li liste1;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste1.push_back(2); </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">	liste1.push_back(5);         </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste1.push_back(7); </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste1.push_back(7); </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste1.push_back(3); </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste1.push_back(2); </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste1.push_back(1); </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste1.push_back(6); </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste1.push_back(9);          </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste1.push_back(9);</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste1.push_back(11);</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    print_liste(liste1,"</span> Liste1 <span class="string">");</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">//Kopie: </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    li liste2; </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2=liste1; //erstelle Kopie </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2.reverse(); print_liste(liste2, "</span>gedrehte Liste2 <span class="string">");</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">//sortieren: </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2 = liste1; </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2.sort(); // sortieren: Methode der Liste </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    print_liste(liste2, "</span>sortierte Liste <span class="string">");</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">//entferne Elemente mit dem Wert 3: </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2=liste1; </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2.remove(3); </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    print_liste(liste2, "</span>Liste ohne <span class="number">3</span>er Elemente <span class="string">");</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    //entferne hintereinanderstehende Doppeleinträge </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2=liste1; </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2.unique(); </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    print_liste(liste2, "</span>Liste ohne direkte Doppeleinträge <span class="string">");</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">//entferne alle Doppeleinträge in Liste </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2=liste1; </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2.sort(); // dann stehen alle Doppeleinträge hintereinander </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2.unique(); </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    print_liste(liste2, "</span>sortierte Liste ohne Doppeleinträge <span class="string">");</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">//Entferne gerade Zahlen </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2=liste1;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2.remove_if(parity_even); //Argument Funktionszeiger; alternative explizite Darstellung ptr_fun(&amp;parity_even); </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    print_liste(liste2, "</span>sortierte Liste ohne gerade Zahlen <span class="string">");</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">//Entferne gerade Zahlen: Anwendung Lambda Funktion (kommt noch..) </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2=liste1; </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2.remove_if([](int i)-&gt;bool &#123;return ((i&amp;1)==0);&#125; ); // mit einer Lambda Funktion (anonyme Funktion) </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    print_liste(liste2, "</span>sortierte Liste ohne gerade Zahlen <span class="string">");</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">//Füge eine zweite Liste zwischen die 7,7 der ersten Liste </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2 = liste1; </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    li::iterator i=liste2.begin(); //声明一个迭代器 list&lt;int&gt;::iterator i</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    ++i;++i;++i; // gehe drei Elemente vor li liste3;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string"></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste3.push_back(333); </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste3.push_back(334); </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste3.push_back(335);</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string"></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    liste2.splice(i,liste3,liste3.begin(),liste3.end()); </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    print_liste(liste2,"</span>Liste nach einfügen <span class="string">");</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">	cout&lt;&lt;"</span>Anzahl der Elemente in Liste3:<span class="string">"&lt;&lt;liste3.size()&lt;&lt;endl; 	</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">    return 0;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="string">&#125;</span></span></pre></td></tr></table></figure>
+<blockquote>
+<p>Ausgabe:<br>Anzahl der Elemente in Liste1 : 11<br>2 5 7 7 3 2 1 6 9 9 11<br>Anzahl der Elemente in gedrehte Liste2 : 11<br>11 9 9 6 1 2 3 7 7 5 2<br>Anzahl der Elemente in sortierte Liste : 11<br>1 2 2 3 5 6 7 7 9 9 11<br>Anzahl der Elemente in Liste ohne 3er Elemente : 10<br>2 5 7 7 2 1 6 9 9 11<br>Anzahl der Elemente in Liste ohne direkte Doppeleinträge : 9<br>2 5 7 3 2 1 6 9 11<br>Anzahl der Elemente in sortierte Liste ohne Doppeleinträge : 8<br>1 2 3 5 6 7 9 11<br>Anzahl der Elemente in sortierte Liste ohne gerade Zahlen : 8<br>5 7 7 3 1 9 9 11<br>Anzahl der Elemente in sortierte Liste ohne gerade Zahlen : 8<br>5 7 7 3 1 9 9 11<br>Anzahl der Elemente in Liste nach einfügen : 14<br>2 5 7 333 334 335 7 3 2 1 6 9 9 11<br>Anzahl der Elemente in Liste3:0</p>
+</blockquote>
+<h4 id="sequenzielle-Container"><a href="#sequenzielle-Container" class="headerlink" title="sequenzielle Container \"></a>sequenzielle Container \<vector></vector></h4><p><code>std::vector&lt;Datentype&gt;</code></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt; </span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt; </span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vi; </span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="class"><span class="title">void</span> <span class="title">print_vector</span>(<span class="title">const</span> <span class="title">std</span>:</span>:<span class="built_in">vector</span>&lt;T&gt; &amp;v, <span class="keyword">const</span> <span class="built_in">string</span> txt&#123; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"Vektor:"</span>&lt;&lt;txt&lt;&lt;<span class="built_in">endl</span>; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> ele:v) <span class="built_in">cout</span>&lt;&lt;ele&lt;&lt;<span class="string">" "</span>; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1(<span class="number">10</span>); <span class="comment">// Vektor mit 10 Elementen</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="function">vi <span class="title">v2</span><span class="params">(<span class="number">5</span>,<span class="number">1</span>)</span></span>; <span class="comment">// Vektor mit 5 Elementen: Wert 1 initialisiert</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    print_vector(v1,<span class="string">" v1 "</span>); </span></pre></td></tr><tr><td class="code"><pre><span class="line">    print_vector(v2,<span class="string">" v2 "</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    v1.at(<span class="number">2</span>) = <span class="number">10</span>; <span class="comment">//第二个元素赋值为10</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    v1.at(<span class="number">5</span>) = <span class="number">15</span>; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    v1.at(<span class="number">9</span>) = <span class="number">20</span>; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    print_vector(v1,<span class="string">" v1 "</span>); </span></pre></td></tr><tr><td class="code"><pre><span class="line">    v1.resize(<span class="number">11</span>); <span class="comment">//调整容器的长度大小，使其能容纳n个元素。如果n小于容器的当前的size，则删除多出来的元素。否则，添加采用值初始化的元素。</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    print_vector(v1,<span class="string">" v1 "</span>); </span></pre></td></tr><tr><td class="code"><pre><span class="line">    v1.push_back(v2[<span class="number">0</span>]); </span></pre></td></tr><tr><td class="code"><pre><span class="line">    print_vector(v1,<span class="string">" v1 "</span>); </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<blockquote>
+<p>Vektor: v1<br>0 0 0 0 0 0 0 0 0 0<br>Vektor: v2<br>1 1 1 1 1<br>Vektor: v1<br>0 0 10 0 0 15 0 0 0 20<br>Vektor: v1<br>0 0 10 0 0 15 0 0 0 20 0<br>Vektor: v1<br>0 0 10 0 0 15 0 0 0 20 0 1</p>
+</blockquote>
+<p><img src="/archives/65b38d0a/image-20200204091729781.png" style="zoom: 67%;"></p>
+<p><strong>比较 begin/end 和 rbegin/rend 迭代器</strong></p>
+<p><img src="/archives/65b38d0a/image-20200204092502872.png" style="zoom:50%;"><br>假设有一个 vector 容器对象，存储 0-9 这 10 个以升序排列的数字：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::size_type i = <span class="number">0</span>; i != <span class="number">10</span>; ++i)</span></pre></td></tr><tr><td class="code"><pre><span class="line">    vec.push_back(i); <span class="comment">// elements are 0,1,2,...9</span></span></pre></td></tr></table></figure>
+<p>下面的 for 循环将以逆序输出这些元素：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// reverse iterator of vector from back to front</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::reverse_iterator r_iter;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (r_iter = vec.rbegin(); r_iter != vec.rend(); ++r_iter)</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt; *r_iter &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// prints 9,8,7,...0</span></span></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>WissProg</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WissProg-C++(6)</title>
+    <url>/archives/7ca8bc4b.html</url>
+    <content><![CDATA[<h3 id="Klassen-Vererbung"><a href="#Klassen-Vererbung" class="headerlink" title="Klassen: Vererbung"></a>Klassen: Vererbung</h3><p>Ziel des Konzeptes Vererbung ist es, bestehende Klassen zu verwenden und verwandte Klassen / Objekte in einer hierarchischen Struktur zu realisieren.<a id="more"></a></p>
+<ul>
+<li>Basis- und abgeleitete Klasse (基类, 派生类)( Ober- und Unterklasse): ableitende Klasse wird oft als Oberklasse bezeichnet; die abgeleitete Klasse als Unterklasse.</li>
+<li>Mehrfachvererbung: Klasse C wird von B abgeleitet; Klasse B wird von A abgeleitet – C erbt Eigenschaften von B und A</li>
+<li>Polymorphie(多态性): Vielgestaltigkeit – ein Objekt einer abgeleiteten Klasse kann als Objekt der Oberklasse angesprochen werden</li>
+</ul>
+<p><img src="/archives/7ca8bc4b/image-20200127175900680.png" style="zoom:50%;"></p>
+<h4 id="继承与派生的目的"><a href="#继承与派生的目的" class="headerlink" title="继承与派生的目的"></a><strong>继承与派生的目的</strong></h4><ul>
+<li>继承的目的：实现设计与代码的重用。</li>
+<li>派生的目的：当新的问题出现，原有程序无法解决（或不能完全解决）时，需要对原有程序进行改造。</li>
+</ul>
+<h4 id="单继承时派生类的定义"><a href="#单继承时派生类的定义" class="headerlink" title="单继承时派生类的定义"></a><strong>单继承时派生类的定义</strong></h4><ul>
+<li>语法</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 派生类名：继承方式 基类名&#123;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">	成员声明；</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<ul>
+<li>例</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span>:</span> <span class="keyword">public</span> Base&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="code"><pre><span class="line">    Derived ();</span></pre></td></tr><tr><td class="code"><pre><span class="line">    ~Derived ();</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+<h4 id="多继承时派生类的定义"><a href="#多继承时派生类的定义" class="headerlink" title="多继承时派生类的定义"></a><strong>多继承时派生类的定义</strong></h4><ul>
+<li>语法</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 派生类名：继承方式1 基类名1，继承方式2 基类名2，...&#123;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">	成员声明；</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>注意：每一个“继承方式”，只用于限制对紧随其后之基类的继承。</p>
+<ul>
+<li>例</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span>:</span> <span class="keyword">public</span> Base1, <span class="keyword">private</span> Base&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="code"><pre><span class="line">Derived ();</span></pre></td></tr><tr><td class="code"><pre><span class="line">~Derived ();</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+<h4 id="继承方式简介及公有继承"><a href="#继承方式简介及公有继承" class="headerlink" title="继承方式简介及公有继承"></a>继承方式简介及公有继承</h4><p>不同继承方式的影响主要体现在：</p>
+<ul>
+<li>派生类<strong>成员</strong>对基类成员的访问权限</li>
+<li>通过派生类<strong>对象</strong>对基类成员的访问权限</li>
+</ul>
+<p><strong>三种继承方式</strong></p>
+<ul>
+<li>公有继承</li>
+<li>私有继承</li>
+<li>保护继承</li>
+</ul>
+<p><strong>公有继承(public)</strong></p>
+<ul>
+<li>继承的访问控制<ul>
+<li>基类的public和protected成员：访问属性在派生类中保持不变；</li>
+<li>基类的private成员：不可直接访问。</li>
+</ul>
+</li>
+<li>访问权限<ul>
+<li>派生类中的成员函数：可以直接访问基类中的public和protected成员，但不能直接访问基类的private成员；</li>
+<li>通过派生类的对象：只能访问public成员。</li>
+</ul>
+</li>
+</ul>
+<p>例7-1 公有继承举例</p>
+<p>Point.h</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _POINT_H</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _POINT_H</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> &#123;</span>   </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">//基类Point类的定义</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">public</span>:     </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">//公有函数成员</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">initPoint</span><span class="params">(<span class="keyword">float</span> x = <span class="number">0</span>, <span class="keyword">float</span> y = <span class="number">0</span>)</span></span>&#123; </span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="keyword">this</span>-&gt;x = x; </span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="keyword">this</span>-&gt;y = y;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">move</span><span class="params">(<span class="keyword">float</span> offX, <span class="keyword">float</span> offY)</span></span>&#123; </span></pre></td></tr><tr><td class="code"><pre><span class="line">            x += offX; </span></pre></td></tr><tr><td class="code"><pre><span class="line">            y += offY;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="function"><span class="keyword">float</span> <span class="title">getX</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> x; &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="function"><span class="keyword">float</span> <span class="title">getY</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> y; &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">private</span>:        </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">//私有数据成员</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">float</span> x, y;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//_POINT_H</span></span></span></pre></td></tr></table></figure>
+<p>Rectangle.h</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _RECTANGLE_H</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _RECTANGLE_H</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Point.h"</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span>:</span> <span class="keyword">public</span> Point &#123; </span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">//派生类定义部分</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">public</span>: </span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">//新增公有函数成员</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initRectangle</span><span class="params">(<span class="keyword">float</span> x, <span class="keyword">float</span> y, <span class="keyword">float</span> w, <span class="keyword">float</span> h)</span> </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        initPoint(x, y);              <span class="comment">//调用基类公有成员函数</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">this</span>-&gt;w = w;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">this</span>-&gt;h = h;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">float</span> <span class="title">getH</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> h; &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">float</span> <span class="title">getW</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> w; &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">private</span>:    </span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">//新增私有数据成员</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">float</span> w, h;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//_RECTANGLE_H</span></span></span></pre></td></tr></table></figure>
+<p>main.cpp</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> “Rectangle.h”</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    Rectangle <span class="built_in">rect</span>; <span class="comment">//定义Rectangle类的对象</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">//设置矩形的数据</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">rect</span>.initRectangle(<span class="number">2</span>, <span class="number">3</span>, <span class="number">20</span>, <span class="number">10</span>);   </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">rect</span>.<span class="built_in">move</span>(<span class="number">3</span>,<span class="number">2</span>); <span class="comment">//移动矩形位置</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"The data of rect(x,y,w,h): "</span> &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">//输出矩形的特征参数</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">rect</span>.getX() &lt;&lt;<span class="string">", "</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        &lt;&lt; <span class="built_in">rect</span>.getY() &lt;&lt; <span class="string">", "</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        &lt;&lt; <span class="built_in">rect</span>.getW() &lt;&lt; <span class="string">", "</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        &lt;&lt; <span class="built_in">rect</span>.getH() &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>派生类除了拥有基类的成员，还可以定义自己的新成员，以增强类的功能；</p>
+<p>以下是两种典型的使用继承的场景：<br>1) 当你创建的新类与现有的类相似，只是多出若干成员变量或成员函数时，可以使用继承，这样不但会减少代码量，而且新类会拥有基类的所有功能；</p>
+<p>2) 当你需要创建多个类，它们拥有很多相似的成员变量或成员函数时，也可以使用继承；可以将这些类的共同成员提取出来，定义为基类，然后从基类继承，既可以节省代码，也方便后续修改成员；</p>
+<p>下面，我们定义了一个基类 People，然后由此派生出 Student 类：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> &#123;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setname</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span> </span>&#123; m_name = name; &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setage</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123; m_age = age; &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">const</span> <span class="keyword">char</span> *<span class="title">getname</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_name; &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getage</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_age; &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *m_name;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">int</span> m_age;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> :</span> <span class="keyword">public</span> People &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setscore</span><span class="params">(<span class="keyword">float</span> score)</span> </span>&#123; m_score = score; &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">float</span> <span class="title">getscore</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_score; &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">float</span> m_score;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    Student s;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    s.setname(<span class="string">"Otokaze"</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    s.setage(<span class="number">18</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    s.setscore(<span class="number">111</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>本例中，People 是基类，Student 是派生类。Student 类继承了 People 类的成员，同时还新增了自己的成员变量 m_score 和成员函数 setscore()、getscore()；这些继承过来的成员，可以通过子类对象访问，就像自己的一样；</p>
+<p><code>class Student : public People</code><br>class 后面的“Student”是新声明的派生类，冒号后面的“People”是已经存在的基类；在“People”之前有一关键字 public，用来表示是<code>公有继承</code>；</p>
+<p>继承方式包括 <code>public（公有的）</code>、<code>private（私有的）</code>和 <code>protected（受保护的）</code>，此项是可选的，如果不写，那么默认为 <code>private</code>；</p>
+<p><strong>public、protected、private 修饰类的成员</strong><br>类成员的访问权限由高到低依次为 public –&gt; protected –&gt; private，public 成员可以通过对象来访问，private 成员不能通过对象访问；</p>
+<p>现在再来补充一下 protected；protected 成员和 private 成员类似，也不能通过对象访问；但是当存在继承关系时，protected 和 private 就不一样了：基类中的 protected 成员可以在派生类中使用，而基类中的 private 成员不能在派生类中使用；</p>
+<p><strong>public、protected、private 指定继承方式</strong><br>不同的继承方式会影响基类成员在派生类中的访问权限：</p>
+<p><strong>1) public继承方式</strong><br>基类中所有 public 成员在派生类中为 public 属性；<br>基类中所有 protected 成员在派生类中为 protected 属性；<br>基类中所有 private 成员在派生类中不能使用。</p>
+<p><strong>2) protected继承方式</strong><br>基类中的所有 public 成员在派生类中为 protected 属性；<br>基类中的所有 protected 成员在派生类中为 protected 属性；<br>基类中的所有 private 成员在派生类中不能使用。</p>
+<p><strong>3) private继承方式</strong><br>基类中的所有 public 成员在派生类中均为 private 属性；<br>基类中的所有 protected 成员在派生类中均为 private 属性；<br>基类中的所有 private 成员在派生类中不能使用。</p>
+<h3 id="Klassen-Polymorphie"><a href="#Klassen-Polymorphie" class="headerlink" title="Klassen: Polymorphie"></a>Klassen: Polymorphie</h3><p><strong>virtuelle Memberfunktionen</strong></p>
+<p><strong>Basisklasse: virtuelle Memberfunktionen</strong> (diese werden in abgeleiteten Klassen überladen)<br><strong>Ziel</strong>: auch bei Zugriff über eine Referenz oder Zeiger vom Typ der Basisklasse des Objektes soll die Methode der abgeleiteten Klasse verwendet werden (<strong>Polymorphie</strong>).</p>
+<h4 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h4><p><strong>一般虚函数成员</strong></p>
+<ul>
+<li><p>虚函数的声明</p>
+<p>virtual 函数类型 函数名（形参表）;</p>
+</li>
+<li><p>在派生类中可以对基类中的成员函数进行覆盖。</p>
+</li>
+<li><p>虚函数一般不声明为内联函数，因为对虚函数的调用需要动态绑定，而对内联函数的处理是静态的。</p>
+</li>
+</ul>
+<p><strong>virtual 关键字</strong></p>
+<ul>
+<li>派生类可以不显式地用virtual声明虚函数，这时系统就会用以下规则来判断派生类的一个函数成员是不是虚函数：<ul>
+<li>该函数是否与基类的虚函数有相同的名称、参数个数及对应参数类型；</li>
+<li>该函数是否与基类的虚函数有相同的返回值或者满足类型兼容规则的指针、引用型的返回值；</li>
+</ul>
+</li>
+<li>如果从名称、参数及返回值三个方面检查之后，派生类的函数满足上述条件，就会自动确定为虚函数。这时，派生类的虚函数便覆盖了基类的虚函数。</li>
+<li>派生类中的虚函数还会隐藏基类中同名函数的所有其它重载形式。</li>
+<li>一般习惯于在派生类的函数中也使用virtual关键字，以增加程序的可读性。</li>
+<li>virtual 指示编译器不要在编译器做静态绑定(调用哪个函数)，要为运行期做动态绑定(之后)</li>
+</ul>
+<h4 id="通过虚函数实现运行时多态"><a href="#通过虚函数实现运行时多态" class="headerlink" title="通过虚函数实现运行时多态"></a>通过虚函数实现运行时多态</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base1</span> &#123;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> <span class="keyword">const</span></span>;  <span class="comment">//虚函数</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> Base1::<span class="built_in">display</span>() <span class="keyword">const</span> &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Base1::display()"</span> &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125; <span class="comment">//放在外面</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base2</span>:</span>:<span class="keyword">public</span> Base1 &#123; </span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="code"><pre><span class="line">     <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> <span class="keyword">const</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> Base2::<span class="built_in">display</span>() <span class="keyword">const</span> &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Base2::display()"</span> &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span>:</span> <span class="keyword">public</span> Base2 &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="code"><pre><span class="line">     <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> <span class="keyword">const</span></span>; </span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> Derived::<span class="built_in">display</span>() <span class="keyword">const</span> &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Derived::display()"</span> &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(Base1 *ptr)</span> </span>&#123; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    ptr-&gt;<span class="built_in">display</span>(); </span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;    </span></pre></td></tr><tr><td class="code"><pre><span class="line">    Base1 base1;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    Base2 base2;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    Derived derived;    </span></pre></td></tr><tr><td class="code"><pre><span class="line">    fun(&amp;base1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    fun(&amp;base2);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    fun(&amp;derived);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<blockquote>
+<p>Ausgabe:<br>Base1::display()<br>Base2::display()<br>Derived::display()</p>
+</blockquote>
+<h3 id="Abstrakte-Basisklasse-抽象类"><a href="#Abstrakte-Basisklasse-抽象类" class="headerlink" title="Abstrakte Basisklasse 抽象类"></a>Abstrakte Basisklasse 抽象类</h3><h4 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h4><ul>
+<li><p>纯虚函数是一个在基类中声明的虚函数，它在该基类中没有定义具体的操作内容，要求各派生类根据实际需要定义自己的版本，纯虚函数的声明格式为：</p>
+<p>virtual 函数类型 函数名(参数表) = 0;</p>
+</li>
+<li><p>带有纯虚函数的类称为抽象类</p>
+</li>
+</ul>
+<h4 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h4><ul>
+<li><p>带有纯虚函数的类称为抽象类:</p>
+<p>class 类名 { virtual 类型 函数名(参数表)=0; //其他成员…… }</p>
+</li>
+</ul>
+<h4 id="抽象类作用"><a href="#抽象类作用" class="headerlink" title="抽象类作用"></a>抽象类作用</h4><ul>
+<li>抽象类为抽象和设计的目的而声明</li>
+<li>将有关的数据和行为组织在一个继承层次结构中，保证派生类具有要求的行为。</li>
+<li>对于暂时无法实现的函数，可以声明为纯虚函数，留给派生类去实现。</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li>抽象类只能作为基类来使用。</li>
+<li><p>不能定义抽象类的对象。</p>
+</li>
+<li><p>抽象类只能作为基类来使用。</p>
+</li>
+<li>不能定义抽象类的对象。</li>
+</ul>
+<p><img src="/archives/7ca8bc4b/image-20200127201847188.png" style="zoom:50%;"></p>
+]]></content>
+      <categories>
+        <category>WissProg</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C++-左值右值与移动语义</title>
     <url>/archives/53a48da5.html</url>
     <content><![CDATA[<h2 id="左值与右值"><a href="#左值与右值" class="headerlink" title="左值与右值"></a>左值与右值</h2><p>C++ 中，左右值的简化定义:</p>
@@ -161,6 +557,133 @@
       </tags>
   </entry>
   <entry>
+    <title>Embedded Systems Software-HW/SW Codedesign</title>
+    <url>/archives/75036f3b.html</url>
+    <content><![CDATA[<h3 id="Implementation-Alternatives-Hardware-Codesign"><a href="#Implementation-Alternatives-Hardware-Codesign" class="headerlink" title="Implementation Alternatives (Hardware, Codesign)"></a>Implementation Alternatives (Hardware, Codesign)</h3><h4 id="Codesign-Definition-and-key-Concepts"><a href="#Codesign-Definition-and-key-Concepts" class="headerlink" title="Codesign Definition and key Concepts"></a>Codesign Definition and key Concepts</h4><ul>
+<li><p>Definition:<br>Meeting of system-level objectives by exploiting the best of both worlds -&gt; hardware and software<a id="more"></a></p>
+</li>
+<li><p>The importance of codesign in designing hardware/software systems:</p>
+<ul>
+<li>Improves design quality, <strong>design cycle time</strong>, and cost -&gt; Reduces integration and test time</li>
+<li>Takes advantage of advances in tools and technologies (s. above)</li>
+</ul>
+</li>
+<li><p>Key concepts of Codesign </p>
+<ul>
+<li>Concurrent: Hardware and software developed at the same time on parallel paths</li>
+<li>Integrated: Interaction between hardware and software development to produce design meeting performance criteria and functional specs</li>
+</ul>
+</li>
+</ul>
+<h4 id="Components-of-the-Codesign-Problem"><a href="#Components-of-the-Codesign-Problem" class="headerlink" title="Components of the Codesign Problem"></a>Components of the Codesign Problem</h4><ul>
+<li><p>Hardware/Software Partitioning </p>
+<ul>
+<li><p>Architectural assumptions </p>
+<ul>
+<li>type of processor, interface style between hardware and software, etc.</li>
+</ul>
+</li>
+<li><p>Partitioning objectives </p>
+<ul>
+<li>maximize speedup, latency requirements, minimize size, cost, etc.</li>
+</ul>
+</li>
+<li>Partitioning strategies <ul>
+<li>high level partitioning by hand, automated partitioning using various techniques, etc.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Scheduling</p>
+<ul>
+<li>Operation scheduling in hardware </li>
+<li>Instruction scheduling in compilers </li>
+<li>Process scheduling in operating systems</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/75036f3b/image-20200121213457334.png" style="zoom: 33%;"></p>
+<h4 id="Current-Hardware-Software-Design-Process"><a href="#Current-Hardware-Software-Design-Process" class="headerlink" title="Current Hardware/Software Design Process"></a>Current Hardware/Software Design Process</h4><p><img src="/archives/75036f3b/image-20200121213723647.png" style="zoom:50%;"></p>
+<h4 id="Ideal-Hardware-Software-Design-Process"><a href="#Ideal-Hardware-Software-Design-Process" class="headerlink" title="Ideal Hardware/Software Design Process"></a>Ideal Hardware/Software Design Process</h4><p><img src="/archives/75036f3b/image-20200121213811423.png" style="zoom:50%;"></p>
+<h4 id="Partitioning-Example"><a href="#Partitioning-Example" class="headerlink" title="Partitioning Example"></a>Partitioning Example</h4><p><img src="/archives/75036f3b/image-20200121213954937.png" style="zoom:50%;"></p>
+<h3 id="Embedded-Systems-Programming"><a href="#Embedded-Systems-Programming" class="headerlink" title="Embedded Systems Programming"></a>Embedded Systems Programming</h3><h4 id="Software-Development"><a href="#Software-Development" class="headerlink" title="Software Development"></a>Software Development</h4><p><img src="/archives/75036f3b/image-20200122094823419.png" style="zoom:50%;"></p>
+<h4 id="Machine-Language"><a href="#Machine-Language" class="headerlink" title="Machine Language"></a>Machine Language</h4><p>The microcontroller’s CPU reads program code from memory, one instruction at a time, decodes each instruction, and then executes it </p>
+<p>All memory content - both program code and data - is in binary form.</p>
+<p>For humans it is very difficult to understand instructions composed of arbitrary sequences of 1 and 0. Programmers at this low level therefore use interpretable languages instead. Assembly Language(汇编语言)</p>
+<p>Another problem is that machine language implementation is different on each CPU type. Since assembly code is closely mapped to machine code, assembly programmers would need to rewrite their code each time the CPU type is changed.</p>
+<h4 id="The-C-Programming-Language"><a href="#The-C-Programming-Language" class="headerlink" title="The C Programming Language"></a>The C Programming Language</h4><p>It becomes necessary to convert the C code (source code) into machine code (object code). This conversion is carried out by a program called a <strong>compiler</strong>. After compiling these programs into object files, it is necessary to link the objects together into a single machine-language program. This linkage operation is performed by another program, called a <strong>linker</strong>.</p>
+<h4 id="Coding-standards"><a href="#Coding-standards" class="headerlink" title="Coding standards"></a>Coding standards</h4><p>Some simple rules*: </p>
+<p><img src="/archives/75036f3b/image-20200122101241376.png" style="zoom:50%;"></p>
+<h3 id="Timing"><a href="#Timing" class="headerlink" title="Timing"></a>Timing</h3><p><strong>Real-time System</strong></p>
+<p><img src="/archives/75036f3b/image-20200122103009902.png" style="zoom:50%;"></p>
+<ul>
+<li><p>Parameters </p>
+<p><code>tp</code>: time interval between two successive events,  <code>tRmax</code>: maximum response time</p>
+</li>
+<li><p>Response time of a compute process <code>tR = tw + ti + tc + to</code></p>
+</li>
+</ul>
+<blockquote>
+<p><code>tw</code> : waiting time (until task is started) (multitasking)<br><code>ti</code> :time for input data acquisition from sensors<br><code>tc</code> : processing time<br><code>to</code> : time for output data send to actuators</p>
+</blockquote>
+<p><strong>Soft vs. Hard Real-time</strong></p>
+<ul>
+<li><p>Hard Real-time </p>
+<ul>
+<li>If a task is not finished within the predetermined amount of time there can be catastrophic results (e.g. chemical process control, heart pace maker) </li>
+<li>For all possible events the maximum response time must be smaller than the minimum time interval between two succeeding events</li>
+</ul>
+</li>
+<li><p>Soft Real-time</p>
+<ul>
+<li>If a task is not finished within the given time span, usability is reduced (less comfort, e.g. heating control, letter sorting system) </li>
+<li>Average response time is smaller than average time interval between two succeeding events (occasional waiting times due to overload are accepted but must be eliminated in the average)</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/75036f3b/image-20200122102901726.png" style="zoom:50%;"></p>
+<h3 id="Embedded-Operating-Systems"><a href="#Embedded-Operating-Systems" class="headerlink" title="Embedded Operating Systems"></a>Embedded Operating Systems</h3><h4 id="Multitasking-Scheduling-Strategies"><a href="#Multitasking-Scheduling-Strategies" class="headerlink" title="Multitasking: Scheduling Strategies"></a>Multitasking: Scheduling Strategies</h4><p>Timing Parameters of a Real-time System<br>Arrival Time <code>Ai</code>: Time, when a process is created<br>Ready Time <code>Ri</code>: Earliest point in time when the processor can be assigned to a process<br>Start Time <code>Si</code>: Processor starts execution of the process<br>Execution Time <code>Ci</code>: Pure computation time span of the process on the processor<br>Completion Time <code>Fi</code>: Point in time, when the process is terminated<br>Deadline <code>Di</code>: Execution of the process has to be finished at this point in time.</p>
+<p><strong>First Come First Served (FCFS)</strong></p>
+<ul>
+<li><p>Put all requests in a queue </p>
+</li>
+<li><p>Work through them in order of arrival</p>
+<blockquote>
+<p> 3 Tasks, Computation times C1 = 24, C2 = 3, C3 = 30</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="/archives/75036f3b/image-20200123175642548.png" style="zoom:50%;"></p>
+<p><strong>Shortest Job First (SJF)</strong><br>The Shortest Job First - algorithm <strong>minimizes the average response time</strong> when tasks arrive at the same time</p>
+<blockquote>
+<p> 3 Tasks, Computation times C1 = 24, C2 = 3, C3 = 30</p>
+</blockquote>
+<p><img src="/archives/75036f3b/image-20200123175814220.png" style="zoom:50%;"></p>
+<p><strong>Round Robin (RR)</strong></p>
+<ul>
+<li>Every task obtains the processor for a time slice </li>
+<li>Afterwards execution of the next process </li>
+<li>Skipping of tasks, that do not need to be processed (e.g. because of waiting for external events)</li>
+</ul>
+<p><img src="/archives/75036f3b/image-20200123180529567.png" alt="image-20200123180529567" style="zoom:50%;"></p>
+<p>轮询选择的方法是把所有的节点(P1,P2,P3) 看做一个一个的点，并把这些点连起来组成一个圆， 轮询选择就是在这个圆上按顺时针选择一个点。时间最少的任务作为一个time slot</p>
+<p><strong>Time Division Multiple Access (TDMA)</strong></p>
+<ul>
+<li>Every task obtains the processor for a time slice </li>
+<li>A time slice cannot be skipped in order to privilege non finished tasks</li>
+<li>TDMA assigns slots to tasks, possibly causing “dead time”</li>
+</ul>
+<p><img src="/archives/75036f3b/image-20200123180811992.png" style="zoom:50%;"></p>
+]]></content>
+      <categories>
+        <category>Systems and Software Engineering</category>
+        <category>HW/SW Codesign</category>
+      </categories>
+      <tags>
+        <tag>HW/SW Codesign</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>WissProg-C++(4)</title>
     <url>/archives/4e9edec9.html</url>
     <content><![CDATA[<p>Klassen sind ein Grundelement für eine objektorientierte Programmierung.<a id="more"></a></p>
@@ -309,7 +832,7 @@
 <li><p>double,float 不能用 “==”</p>
 <a id="more"></a>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">double</span> x;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">size_t</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    x=<span class="keyword">double</span>(i)*<span class="number">0.15227364672</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">auto</span> erg = (<span class="built_in">pow</span>(x<span class="number">-1.</span>,<span class="number">2</span>) == (<span class="built_in">pow</span>(x,<span class="number">2</span>)<span class="number">-2.</span>*x+<span class="number">1.</span>));</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">if</span>(erg)</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">"Wahl fuer "</span>&lt;&lt;x&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"(x-1)^2: "</span>&lt;&lt;erg&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; 2Wahl fuer 0.304547</span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; (x-1)^2: 1</span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; 3Wahl fuer 0.456821</span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; (x-1)^2: 1</span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; (x-1)^2: 0</span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; (x-1)^2: 0</span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; (x-1)^2: 0</span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; (x-1)^2: 0</span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; (x-1)^2: 0</span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; (x-1)^2: 0</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">#### Finite Differenzen</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">**Finite Differenzen**: Unterteilung des Intervalls [0,L] in M Teilstücke der Breite h&#x3D;L&#x2F;M </span></pre></td></tr><tr><td class="code"><pre><span class="line">Differenzialgleichung wird diskretisiert: </span></pre></td></tr><tr><td class="code"><pre><span class="line">dazu benötigte Ableitungen durch Differenzenquotienten ausdrücken</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">1ste Ableitung: $\frac&#123;d f(x)&#125;&#123;d x&#125;&#x3D;\frac&#123;f(x+h)-f(x)&#125;&#123;h&#125;$</span></pre></td></tr><tr><td class="code"><pre><span class="line">2te   Ableitung: $\frac&#123;d^&#123;2&#125; f(x)&#125;&#123;d x^&#123;2&#125;&#125;&#x3D;\frac&#123;f(x+h)-2 f(x)+f(x-h)&#125;&#123;h^&#123;2&#125;&#125;$</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">Aus Theorie: je kleiner „h“, desto **genauer** wird die Näherung</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">Ableitungen können prinzipiell auf verschiedene Arten definiert werden:</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">- Forward: $\frac&#123;d f(x)&#125;&#123;d x&#125;&#x3D;\frac&#123;f(x+h)-f(x)&#125;&#123;h&#125;$</span></pre></td></tr><tr><td class="code"><pre><span class="line">- Backward: $\frac&#123;d f(x)&#125;&#123;d x&#125;&#x3D;\frac&#123;f(x)-f(x-h)&#125;&#123;h&#125;$</span></pre></td></tr><tr><td class="code"><pre><span class="line">- Average: $\frac&#123;d f(x)&#125;&#123;d x&#125;&#x3D;\frac&#123;f(x+h)-f(x-h)&#125;&#123;2 h&#125;$</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">**Beispiel: Metallischer Stab im Temperaturgradienten**</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&lt;img src&#x3D;&quot;WissPro-Numerik&#x2F;image-20200121132451727.png&quot; style&#x3D;&quot;zoom:50%;&quot; &#x2F;&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&lt;img src&#x3D;&quot;WissPro-Numerik&#x2F;image-20200121132531465.png&quot; style&#x3D;&quot;zoom:50%;&quot; &#x2F;&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">​&#96;&#96;&#96;c++</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;fstream&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;cmath&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">using namespace std;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; globaler Objekte</span></pre></td></tr><tr><td class="code"><pre><span class="line">const int M &#x3D; 100;</span></pre></td></tr><tr><td class="code"><pre><span class="line">const double dx &#x3D; 0.1;</span></pre></td></tr><tr><td class="code"><pre><span class="line">const int jmax &#x3D; 200;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">typedef enum&#123; text ,graph, datei &#125; ausgabe;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">struct data&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	double k, T0, TM, Te;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	double a[M];</span></pre></td></tr><tr><td class="code"><pre><span class="line">	void read();</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line">void init( double* const T, const data&amp; d);</span></pre></td></tr><tr><td class="code"><pre><span class="line">void relax( double* const T, const data&amp; d);</span></pre></td></tr><tr><td class="code"><pre><span class="line">void showresult(ausgabe mode, double const *const T);</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">void init( double * const T, const data&amp; d)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	for(int m &#x3D; 0; m&lt;&#x3D; M;m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		T[m]&#x3D; d.T0 * double(M- m)&#x2F;double(M) + d.TM * double(m)&#x2F;double(M);</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">void relax( double * const T, const data&amp; d)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	const double kdx2 &#x3D; d.k &#x2F; dx &#x2F; dx;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	for(int m &#x3D; 1; m&lt; M; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		T[m] &#x3D; (kdx2 * (T[m+1] +T[m-1]) + d.a[m] * d.Te) &#x2F; (d.a[m]+ 2 * kdx2);</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; Methode der Struktur &quot;data&quot;:</span></pre></td></tr><tr><td class="code"><pre><span class="line">void data::read()&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	cout &lt;&lt; &quot;enter k:&quot;;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	cin &gt;&gt; k;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	cout &lt;&lt; &quot;enter Te:&quot;;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	cin &gt;&gt; Te;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	cout &lt;&lt; &quot;enter T0:&quot;;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	cin &gt;&gt; T0;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	cout &lt;&lt; &quot;enter TM:&quot;;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	cin &gt;&gt; TM;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	for(int m &#x3D; 0; m&lt; M ; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		a[m] &#x3D; double(m)*double(m)&#x2F;(M-1.)&#x2F;(M-1.);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	ofstream ADat(&quot;a.dat&quot;);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	for( int m &#x3D; 0; m &lt; M; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		ADat&lt;&lt; double(m)&lt;&lt; &quot; &quot;&lt;&lt; a[m]&lt;&lt;endl;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">	for(int m &#x3D; 0; m&lt; M; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		a[m] &#x3D; double(m)*double(m)&#x2F;(M-1.)&#x2F;(M-1.);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	ADat.close();</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">void showresult(const ausgabe mode, double const *const T) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	switch (mode) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	case graph:</span></pre></td></tr><tr><td class="code"><pre><span class="line">		cout &lt;&lt; &quot;no graphics&quot; &lt;&lt; endl;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	case text:</span></pre></td></tr><tr><td class="code"><pre><span class="line">		for (int m &#x3D; 0; m &lt;&#x3D; M; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">			cout &lt;&lt; T[m] &lt;&lt; endl;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		break;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	case datei:</span></pre></td></tr><tr><td class="code"><pre><span class="line">		ofstream Datei(&quot;test.dat&quot;, ios_base::app);</span></pre></td></tr><tr><td class="code"><pre><span class="line">		for (int m &#x3D; 0; m &lt;&#x3D; M; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">			Datei &lt;&lt; double(m) &lt;&lt; &quot; &quot; &lt;&lt; T[m] &lt;&lt; endl;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		Datei.close();</span></pre></td></tr><tr><td class="code"><pre><span class="line">		break;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">int main() &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	double T[M + 1]; &#x2F;&#x2F; Feld Variable</span></pre></td></tr><tr><td class="code"><pre><span class="line">	data d;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	d.read();</span></pre></td></tr><tr><td class="code"><pre><span class="line">	init(T, d); &#x2F;&#x2F; feste Anzahl an Iterationsschritten: jmax</span></pre></td></tr><tr><td class="code"><pre><span class="line">	for (int j&#x3D; 0; j&lt; jmax; j++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		relax(T, d);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	showresult(text, T); &#x2F;&#x2F;Ausgabe: text showresult(datei, T); &#x2F;&#x2F; Ausgabe in Datei return 0;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; <span class="number">2</span>Wahl fuer <span class="number">0.304547</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; (x<span class="number">-1</span>)^<span class="number">2</span>: <span class="number">1</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; <span class="number">3</span>Wahl fuer <span class="number">0.456821</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; (x<span class="number">-1</span>)^<span class="number">2</span>: <span class="number">1</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; (x<span class="number">-1</span>)^<span class="number">2</span>: <span class="number">0</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; (x<span class="number">-1</span>)^<span class="number">2</span>: <span class="number">0</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; (x<span class="number">-1</span>)^<span class="number">2</span>: <span class="number">0</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; (x<span class="number">-1</span>)^<span class="number">2</span>: <span class="number">0</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; (x<span class="number">-1</span>)^<span class="number">2</span>: <span class="number">0</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">  &gt; (x<span class="number">-1</span>)^<span class="number">2</span>: <span class="number">0</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">#### Finite Differenzen</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">**Finite Differenzen**: Unterteilung des Intervalls [<span class="number">0</span>,L] in M Teilstücke der Breite h=L/M </span></pre></td></tr><tr><td class="code"><pre><span class="line">Differenzialgleichung wird diskretisiert: </span></pre></td></tr><tr><td class="code"><pre><span class="line">dazu benötigte Ableitungen durch Differenzenquotienten ausdrücken</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="number">1</span>ste Ableitung: $\frac&#123;d f(x)&#125;&#123;d x&#125;=\frac&#123;f(x+h)-f(x)&#125;&#123;h&#125;$</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="number">2</span>te   Ableitung: $\frac&#123;d^&#123;<span class="number">2</span>&#125; f(x)&#125;&#123;d x^&#123;<span class="number">2</span>&#125;&#125;=\frac&#123;f(x+h)<span class="number">-2</span> f(x)+f(x-h)&#125;&#123;h^&#123;<span class="number">2</span>&#125;&#125;$</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">Aus Theorie: je kleiner „h“, desto **genauer** wird die Näherung</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">Ableitungen können prinzipiell auf verschiedene Arten definiert werden:</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">- Forward: $\frac&#123;d f(x)&#125;&#123;d x&#125;=\frac&#123;f(x+h)-f(x)&#125;&#123;h&#125;$</span></pre></td></tr><tr><td class="code"><pre><span class="line">- Backward: $\frac&#123;d f(x)&#125;&#123;d x&#125;=\frac&#123;f(x)-f(x-h)&#125;&#123;h&#125;$</span></pre></td></tr><tr><td class="code"><pre><span class="line">- Average: $\frac&#123;d f(x)&#125;&#123;d x&#125;=\frac&#123;f(x+h)-f(x-h)&#125;&#123;<span class="number">2</span> h&#125;$</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">**Beispiel: Metallischer Stab im Temperaturgradienten**</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&lt;img src=<span class="string">"WissPro-Numerik/image-20200121132451727.png"</span> style=<span class="string">"zoom:50%;"</span> /&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&lt;img src=<span class="string">"WissPro-Numerik/image-20200121132531465.png"</span> style=<span class="string">"zoom:50%;"</span> /&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">​```c++</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;fstream&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;cmath&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">// globaler Objekte</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">100</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> dx = <span class="number">0.1</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> jmax = <span class="number">200</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span>&#123; <span class="built_in">text</span> ,graph, datei &#125; ausgabe;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">data</span>&#123;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">double</span> k, T0, TM, Te;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">double</span> a[M];</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">()</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">( <span class="keyword">double</span>* <span class="keyword">const</span> T, <span class="keyword">const</span> data&amp; d)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">relax</span><span class="params">( <span class="keyword">double</span>* <span class="keyword">const</span> T, <span class="keyword">const</span> data&amp; d)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">showresult</span><span class="params">(ausgabe mode, <span class="keyword">double</span> <span class="keyword">const</span> *<span class="keyword">const</span> T)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">( <span class="keyword">double</span> * <span class="keyword">const</span> T, <span class="keyword">const</span> data&amp; d)</span></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> m = <span class="number">0</span>; m&lt;= M;m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		T[m]= d.T0 * <span class="keyword">double</span>(M- m)/<span class="keyword">double</span>(M) + d.TM * <span class="keyword">double</span>(m)/<span class="keyword">double</span>(M);</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">relax</span><span class="params">( <span class="keyword">double</span> * <span class="keyword">const</span> T, <span class="keyword">const</span> data&amp; d)</span></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">const</span> <span class="keyword">double</span> kdx2 = d.k / dx / dx;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> m = <span class="number">1</span>; m&lt; M; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		T[m] = (kdx2 * (T[m+<span class="number">1</span>] +T[m<span class="number">-1</span>]) + d.a[m] * d.Te) / (d.a[m]+ <span class="number">2</span> * kdx2);</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="comment">// Methode der Struktur "data":</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> data::<span class="built_in">read</span>()&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"enter k:"</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cin</span> &gt;&gt; k;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"enter Te:"</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cin</span> &gt;&gt; Te;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"enter T0:"</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cin</span> &gt;&gt; T0;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"enter TM:"</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="built_in">cin</span> &gt;&gt; TM;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> m = <span class="number">0</span>; m&lt; M ; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		a[m] = <span class="keyword">double</span>(m)*<span class="keyword">double</span>(m)/(M<span class="number">-1.</span>)/(M<span class="number">-1.</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="function">ofstream <span class="title">ADat</span><span class="params">(<span class="string">"a.dat"</span>)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">for</span>( <span class="keyword">int</span> m = <span class="number">0</span>; m &lt; M; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		ADat&lt;&lt; <span class="keyword">double</span>(m)&lt;&lt; <span class="string">" "</span>&lt;&lt; a[m]&lt;&lt;<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> m = <span class="number">0</span>; m&lt; M; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		a[m] = <span class="keyword">double</span>(m)*<span class="keyword">double</span>(m)/(M<span class="number">-1.</span>)/(M<span class="number">-1.</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	ADat.<span class="built_in">close</span>();</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">showresult</span><span class="params">(<span class="keyword">const</span> ausgabe mode, <span class="keyword">double</span> <span class="keyword">const</span> *<span class="keyword">const</span> T)</span> </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">switch</span> (mode) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">case</span> graph:</span></pre></td></tr><tr><td class="code"><pre><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"no graphics"</span> &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">case</span> <span class="built_in">text</span>:</span></pre></td></tr><tr><td class="code"><pre><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> m = <span class="number">0</span>; m &lt;= M; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">			<span class="built_in">cout</span> &lt;&lt; T[m] &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		<span class="keyword">break</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">case</span> datei:</span></pre></td></tr><tr><td class="code"><pre><span class="line">		<span class="function">ofstream <span class="title">Datei</span><span class="params">(<span class="string">"test.dat"</span>, ios_base::app)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> m = <span class="number">0</span>; m &lt;= M; m++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">			Datei &lt;&lt; <span class="keyword">double</span>(m) &lt;&lt; <span class="string">" "</span> &lt;&lt; T[m] &lt;&lt; <span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">		Datei.<span class="built_in">close</span>();</span></pre></td></tr><tr><td class="code"><pre><span class="line">		<span class="keyword">break</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">double</span> T[M + <span class="number">1</span>]; <span class="comment">// Feld Variable</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">	data d;</span></pre></td></tr><tr><td class="code"><pre><span class="line">	d.<span class="built_in">read</span>();</span></pre></td></tr><tr><td class="code"><pre><span class="line">	init(T, d); <span class="comment">// feste Anzahl an Iterationsschritten: jmax</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j= <span class="number">0</span>; j&lt; jmax; j++)</span></pre></td></tr><tr><td class="code"><pre><span class="line">		relax(T, d);</span></pre></td></tr><tr><td class="code"><pre><span class="line">	showresult(<span class="built_in">text</span>, T); <span class="comment">//Ausgabe: text showresult(datei, T); // Ausgabe in Datei return 0;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="/archives/c42a9800/image-20200121134204152.png" style="zoom:50%;"></p>
@@ -364,6 +887,7 @@ x_{i}^{(k+1)}=\frac{b_{i}-\sum_{j<i} a_{i j} x_{j}^{(k+1)}-\sum_{j>i} a_{i j} x_
 </li>
 </ul>
 <p><strong>Rechenaufwand</strong>: O(n)</p>
+<h4 id="LGS-Losungsverfahren-CG-Algorithmus"><a href="#LGS-Losungsverfahren-CG-Algorithmus" class="headerlink" title="LGS Lösungsverfahren: CG-Algorithmus"></a>LGS Lösungsverfahren: CG-Algorithmus</h4><p><img src="/archives/c42a9800/image-20200129201640493.png" style="zoom:50%;"></p>
 ]]></content>
       <categories>
         <category>WissProg</category>
