@@ -665,7 +665,7 @@
 <li>Afterwards execution of the next process </li>
 <li>Skipping of tasks, that do not need to be processed (e.g. because of waiting for external events)</li>
 </ul>
-<p><img src="/archives/75036f3b/image-20200123180529567.png" alt="image-20200123180529567" style="zoom:50%;"></p>
+<p><img src="/archives/75036f3b/image-20200123180529567.png" style="zoom:50%;"></p>
 <p>轮询选择的方法是把所有的节点(P1,P2,P3) 看做一个一个的点，并把这些点连起来组成一个圆， 轮询选择就是在这个圆上按顺时针选择一个点。时间最少的任务作为一个time slot</p>
 <p><strong>Time Division Multiple Access (TDMA)</strong></p>
 <ul>
