@@ -156,17 +156,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">24</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">25</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">24</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">25</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">51</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">52</span></a>
 
   </li>
         <li class="menu-item menu-item-movies">
@@ -225,6 +225,168 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/aedd7a7e.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/archives/aedd7a7e.html" class="post-title-link" itemprop="url">UML-Use Case Diagram</a>
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-10 13:46:51" itemprop="dateCreated datePublished" datetime="2020-02-10T13:46:51+01:00">2020-02-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-11 13:29:54" itemprop="dateModified" datetime="2020-02-11T13:29:54+01:00">2020-02-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Systems-and-Software-Engineering/" itemprop="url" rel="index">
+                    <span itemprop="name">Systems and Software Engineering</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Systems-and-Software-Engineering/UML/" itemprop="url" rel="index">
+                    <span itemprop="name">UML</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>用例图 (Use Case Diagram) 是用来显示一组用例、参与者以及它们之间关系的图。它描述了用户希望如何使用一个系统。通过用例图可以知道谁是系统相关的用户，他们希望系统提供哪些服务，以及他们需要为系统提供什么样的服务。</p>
+<h3 id="用例图能给我们带来什么？"><a href="#用例图能给我们带来什么？" class="headerlink" title="用例图能给我们带来什么？"></a>用例图能给我们带来什么？</h3><ol>
+<li>用来描述要开发的系统的功能需求和系统的使用场景。</li>
+<li>促进开发过程中各个阶段工作的进展。</li>
+<li>用来验证与确认系统需求。</li>
+</ol>
+<p>用例建模是实现系统需求分析的一个很好的方法，通过它可以使得系统分析员和客户之间能够更好地沟通系统的需求。</p>
+<h4 id="参与者-Actor"><a href="#参与者-Actor" class="headerlink" title="参与者 (Actor)"></a>参与者 (Actor)</h4><p>参与者也叫角色，它表示了系统的用户。这里需要注意的是：<strong>这里的用户并不特指人，如果我们开发的是公共 API 项目，那么这个时候，API 的调用者就是我们的用户。</strong></p>
+<p><img src="/archives/aedd7a7e/image-20200211132256517.png" style="zoom:50%;"></p>
+<h4 id="用例-Use-Case"><a href="#用例-Use-Case" class="headerlink" title="用例(Use Case)"></a>用例(Use Case)</h4><p>需求分析是软件开发流程中必不可少的一个环节，其主要目的就是建立待开发系统的模型，而用例则是建立这些的最好方法。</p>
+<p>用例是对一组动作的描述，系统通过执行这些动作将对用例的参与者产生可以看到的结果。用来描述参与者可以感受到的系统服务或者功能。</p>
+<p>在 UML 中，用例通常用一个椭圆形符号来表示：</p>
+<p><img src="/archives/aedd7a7e/image-20200211132343339.png" style="zoom:50%;"></p>
+<p>使用用例进行系统需求分析的特点：</p>
+<ul>
+<li>用例是从系统的使用者角度来描述系统中的信息，即在系统的外部所能看到的系统的功能，<strong>而不考虑系统内部对该功能的具体实现</strong></li>
+<li>用例描述了一下可见需求，对应一个具体的用户目标。使用用例可以用来划分系统与外部实体的界限。</li>
+<li>用例通常由某个参与者来执行。</li>
+<li>用例把执行结果返回给参与者。</li>
+<li>用例在功能上具有完整性。它从参与者接受输入，再将产生的结果输出给参与者。</li>
+</ul>
+<h3 id="用例之间的关系"><a href="#用例之间的关系" class="headerlink" title="用例之间的关系"></a>用例之间的关系</h3><h4 id="包含关系"><a href="#包含关系" class="headerlink" title="包含关系"></a>包含关系</h4><p>包含关系指的是两个用例之间，其中一个用例(基本用例)的行为包含了另外一个用例(包含用例)。</p>
+<p>在 UML 图中，包含关系用带箭头的虚线表示，并且线上标有<code>&lt;&lt;include&gt;&gt;</code>，箭头的方向是从基本用例到包含用例。</p>
+<p><img src="/archives/aedd7a7e/image-20200211132507272.png" style="zoom:50%;"></p>
+<h4 id="扩展关系"><a href="#扩展关系" class="headerlink" title="扩展关系"></a>扩展关系</h4><p>扩展关系是对基本用例的扩展，基本用例是一个完整的用例，即使没有子用例参与，也可以完成一个完整的功能。扩展的基本用例中存在一个扩展点，只有扩展点被激活时，子用例才会被执行。扩展关系是从扩展用例到基本用例的关系，它说明扩展用例如何插入到基本用例中。</p>
+<p>扩展用例的使用场景：</p>
+<ul>
+<li>表明用例的某一部分是可选行为</li>
+<li>表明只在特定条件下才执行的分支</li>
+<li>表明可能有一组行为，其中的一个或多个行为可以在基本用例中的扩展点处插入。所插入的行为和顺序取决于在执行基本用例时与主角进行的交互。</li>
+</ul>
+<p>在 UML 图中，使用带箭头的虚线表示，并且虚线上标有 <code>&lt;&lt;extend&gt;&gt;</code>:</p>
+<p><img src="/archives/aedd7a7e/image-20200211132601282.png" style="zoom:50%;"></p>
+<h4 id="泛化关系"><a href="#泛化关系" class="headerlink" title="泛化关系"></a>泛化关系</h4><p>泛化关系指的是一般(父用例)与特殊(子用例)的关系。当多个用例共同拥有一种类似的结构和行为时，可以将它们的共性抽象为父用例，其他的用例作为泛化关系中的子用例。</p>
+<p><img src="/archives/aedd7a7e/image-20200211132629205.png" style="zoom:50%;"></p>
+<h3 id="用例图建模及应用"><a href="#用例图建模及应用" class="headerlink" title="用例图建模及应用"></a>用例图建模及应用</h3><p>创建用例图模型主要包含3部分内容：</p>
+<ul>
+<li>识别系统中的角色和用例</li>
+<li>区分用例之间的先后次序</li>
+<li>创建用例图模型结构</li>
+</ul>
+<h4 id="识别系统中的角色和用例"><a href="#识别系统中的角色和用例" class="headerlink" title="识别系统中的角色和用例"></a>识别系统中的角色和用例</h4><p>这部分工作通常由系统分析员通过和客户沟通来完成。</p>
+<p>要获取系统的用例，首先要找出系统的角色。</p>
+<p>要获取系统角色可以在与客户沟通时，询问用户一些问题来识别角色。可以参考下列问题：</p>
+<ul>
+<li>谁将使用系统的主要功能？</li>
+<li>是需要系统的支持以完成日常工作？</li>
+<li>谁负责维护、管理系统并保持系统正常运行？</li>
+<li>系统需要与哪些外部系统交互？</li>
+<li>系统需要处理哪些硬件设备？</li>
+<li>谁对系统运行产生的结果比较感兴趣？</li>
+</ul>
+<p>当我们获取到系统角色后，我们可以通过角色来列出它的用例。可以通过回答下列问题来识别用例：</p>
+<ul>
+<li>每个角色执行的操作有什么？</li>
+<li>什么角色将要创建、存储、改变、删除或者读取系统中的信息？</li>
+<li>什么用例会创建、存储、改变、删除或读取这个信息？</li>
+<li>角色需要通知外部系统的突然变化嘛？</li>
+<li>系统需要通知角色正在发生的事情吗？</li>
+<li>什么用例将支持和维护系统？</li>
+</ul>
+<h4 id="区分用例优先次序"><a href="#区分用例优先次序" class="headerlink" title="区分用例优先次序"></a>区分用例优先次序</h4><p>某些用例必须在其他用例完成之前完成，因为它们是相互依赖的。例如在购买商品前，用户必须先登录。</p>
+<h4 id="构建用例图模型"><a href="#构建用例图模型" class="headerlink" title="构建用例图模型"></a>构建用例图模型</h4><p>将已经确定并细化的角色和用例放入用例图。再借助包含、扩展和泛化的关系给出用例之间的结构模型。</p>
+<p>在系统需求分析中需要考虑系统用例图模型需要哪些视图、每个视图包含什么内容，以及视图中成员是否需构成包。</p>
+
+      
+    </div>
+
+    
+    
+    
+      
+
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1178,108 +1340,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/c6bd2a86.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="ZhouHaojie">
-      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhouHaojie的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/archives/c6bd2a86.html" class="post-title-link" itemprop="url">WissProg-C++(3)</a>
-        </h1>
-
-        <div class="post-meta">
-			
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-21 12:19:16 / 修改时间：15:47:25" itemprop="dateCreated datePublished" datetime="2020-01-21T12:19:16+01:00">2020-01-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/WissProg/" itemprop="url" rel="index">
-                    <span itemprop="name">WissProg</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/WissProg/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Namensraum: namespace<br><strong>Aufgabe:</strong></p>
-<ul>
-<li>logische Programmeinheiten zusammenfassen</li></ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/archives/c6bd2a86.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1331,20 +1391,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1373,6 +1433,10 @@
         
         
           <li>
+            <a href="/archives/aedd7a7e.html" title="UML-Use Case Diagram" target="_blank">UML-Use Case Diagram</a>
+          </li>
+        
+          <li>
             <a href="/archives/9384a912.html" title="Modeling of Data and Function" target="_blank">Modeling of Data and Function</a>
           </li>
         
@@ -1386,10 +1450,6 @@
         
           <li>
             <a href="/archives/53a48da5.html" title="C++-左值右值与移动语义" target="_blank">C++-左值右值与移动语义</a>
-          </li>
-        
-          <li>
-            <a href="/archives/5785ef88.html" title="WissProg-C++(5)" target="_blank">WissProg-C++(5)</a>
           </li>
         
       </ul>
@@ -1422,13 +1482,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">133k</span>
+    <span title="站点总字数">134k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:01</span>
+    <span title="站点阅读时长">2:02</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>
