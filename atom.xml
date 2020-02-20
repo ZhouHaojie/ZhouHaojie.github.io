@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://grenze.cn/"/>
-  <updated>2020-02-11T14:58:49.148Z</updated>
+  <updated>2020-02-20T18:17:04.463Z</updated>
   <id>http://grenze.cn/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Kurvenanpassung</title>
+    <link href="http://grenze.cn/archives/4eb14690.html"/>
+    <id>http://grenze.cn/archives/4eb14690.html</id>
+    <published>2020-02-20T18:13:26.000Z</published>
+    <updated>2020-02-20T18:17:04.463Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Messsysteme"><a href="#Messsysteme" class="headerlink" title="Messsysteme"></a>Messsysteme</h2><p>Allgemein: Messkette</p><p><img src="/archives/4eb14690/image-20200218174651585.png" style="zoom: 33%;"></p><p><a id="more"></a>Systemtheorie</p><p><img src="/archives/4eb14690/image-20200218174732982.png" style="zoom: 33%;"></p><h2 id="Messfehler"><a href="#Messfehler" class="headerlink" title="Messfehler"></a>Messfehler</h2><p>Definition:<br>Absolute Fehler: $F=y_{anzeige}-y_{wahr}=y_a-y_w$<br>Relativer Fehler: $F_r= \frac{F}{y_w}=\frac{y_a-y_w}{y_w}$</p><p><strong>Fehlerursachen:</strong></p><ul><li><strong>Systematische Fehler:</strong> <strong>Ursache</strong> des Fehlers und Art der Einwirkung <strong>bekannt</strong>. <strong>Kompensation</strong> prinzipiell <strong>möglich</strong></li><li><strong>Zufällige Fehler:</strong> nicht reproduzierbar, <strong>Ursache unbekannt</strong></li></ul><h2 id="Kurvenanpassung"><a href="#Kurvenanpassung" class="headerlink" title="Kurvenanpassung"></a>Kurvenanpassung</h2><p>Modellbildung des Systems $\rarr$ analytische Messkennlinie</p><p><strong>Ansätze</strong></p><ol><li>Interpolation: Die Kennlinie soll durch <strong>alle</strong> n Messpunkte gehen (Kleines n)</li><li>Approximation: Die Summe der Fehlerquadrate soll minimiert werden. Die Kennlinie geht nicht durch alle Messpunkte (Große n)</li></ol><p><img src="/archives/4eb14690/image-20200218184618776.png" style="zoom: 33%;"></p><h3 id="Approximation"><a href="#Approximation" class="headerlink" title="Approximation"></a>Approximation</h3><p>Kurve nähert Messwertepaare an</p><p><strong>Ziel:</strong> Darstellung der Kennlinie als endliche Reihe analytischer Funktion $\varphi_i(u)$ </p><p><img src="/archives/4eb14690/image-20200218185443332.png" style="zoom:50%;"></p><p>Berechnen Koeffizienten $a_i$ bei Verwendung einer <strong>orthonormalen Basis</strong>: </p><p><img src="/archives/4eb14690/image-20200218190044347.png" style="zoom:50%;"></p><p><img src="/archives/4eb14690/image-20200218185817616.png" style="zoom:50%;"></p><p>Vorteil: </p><ul><li>Mittelwertfreie <strong>Fehler</strong> werden <strong>unterdrückt</strong> </li><li><strong>Beliebige</strong> Basisfunktionen verwendbar (solange linear unabhängig voneinander) </li><li><strong>Modellordnung unabhängig</strong> von Stützstellenanzahl</li></ul><h4 id="Least-Squares-Schatzer"><a href="#Least-Squares-Schatzer" class="headerlink" title="Least-Squares-Schätzer"></a>Least-Squares-Schätzer</h4><p>Zur Bestimmung der Koeffizienten $a_i$ wird bei <strong>nicht orthogonalen</strong> Basisfunktionen $\varphi_i(u)$ der <strong>Least-Squares-Schätzer </strong> verwendet</p><p>Haben: n Messwertepaare $(u_i, y_i)$</p><ul><li>Aufstellen des Signalmodells</li></ul><p><img src="/archives/4eb14690/image-20200219124945263.png" style="zoom: 50%;"></p><ul><li><p>Aufstellen des Approximationsansatzes</p><p><img src="/archives/4eb14690/image-20200219125044637.png" style="zoom: 33%;"></p></li></ul><p>Minimierung des Gütemaßes</p><p><img src="/archives/4eb14690/image-20200218192625735.png" style="zoom:50%;"></p><p><img src="/archives/4eb14690/image-20200218192700099.png" style="zoom:50%;"></p><p>a: Moore-Penrose-Pseudoinverse</p><p><strong>LS-Schätzer bei nichtlinearem Signalmodell</strong></p><p>Was tun, wenn Signalmodell nicht linear ist?</p><p>Bsp. $\hat{y}(u)=A \cdot \mathrm{e}^{\alpha u}, \quad A, \alpha \quad \text { unbekannt }$ </p><p>$\rarr$ oft lassen sich die Messdaten so manipulieren so manipulieren, dass das Modell linear wird.</p><p>Hier: logarithmieren</p><p><img src="/archives/4eb14690/image-20200219133300117.png" style="zoom:50%;"></p><h3 id="Interpolation"><a href="#Interpolation" class="headerlink" title="Interpolation"></a>Interpolation</h3><p>Kurve geht exakt durch Wertepaare</p><ul><li>Lagrange-/Newton (globale Polynome)</li><li>Spline-Interpolation</li><li>Kennfeld-Interpolation mehrdimensionale Erweiterung</li></ul><p>Vorteile:</p><ul><li>Kein direktes Signalmodell erforderlich </li><li>Interpolierte Funktion geht durch Wertepaare</li></ul><p>Nachteile:</p><ul><li>Bei Globalen Polynomansätzen steigt Modellordnung mit der Anzahl der Wertepaare $\rarr$ Überschwinger </li></ul><p><strong>Globale Polynomansätze</strong></p><ul><li><p>Standard</p><p>$y(u)=\sum_{i=0}^{N-1} a_{i} u^{i}$ (oft rechenintensiv计算量大)</p></li><li><p>Lagrange-Verfahren</p><p>$y(u)=\sum_{i=0}^{N-1} \hat{a}_{i} l_{i}(u) \quad \text { mit } l_{i}(u): \text { Lagrangepolynome }$</p></li><li><p>Newton-Verfahren</p><p>$y(u)=\sum_{i=0}^{N-1} \tilde{a}_{i} n_{i}(u)\quad \text{ mit } n_{i}(u):\text {Newtonpolynome}$</p></li></ul><h4 id="Newton-Interpolation"><a href="#Newton-Interpolation" class="headerlink" title="Newton-Interpolation"></a>Newton-Interpolation</h4><p>Warum Newton-Interpolation?</p><ul><li><strong>geringere Komplexität</strong> der Basispolynome</li><li>leichtere Erweiterbarkeit beim Hinzufügen von Stützstellen</li></ul><p>Ansatz:</p><p><img src="/archives/4eb14690/image-20200219154557093.png" style="zoom:50%;"></p><p><strong>1. Bei äquidistanten Stützstellen</strong></p><p>Zur einfachen Berechnung der Koeffizienten $a_i$ werden <strong>Differenzen </strong> eingeführt</p><p><strong>Differenzenschema:</strong></p><p><img src="/archives/4eb14690/image-20200219155051455.png" style="zoom:50%;"></p><p><strong>Newton Interpolationsformel für äquidistante Stützstellen</strong></p><p><img src="/archives/4eb14690/image-20200219155428818.png" style="zoom:50%;"></p><p><strong>2. Bei nicht-äquidistantem Stützstellenabstand</strong> </p><p><img src="/archives/4eb14690/image-20200219160648184.png" style="zoom: 33%;"></p><h4 id="Lagrange-Interpolation"><a href="#Lagrange-Interpolation" class="headerlink" title="Lagrange-Interpolation"></a>Lagrange-Interpolation</h4><p>In der Praxis arbeitet man bevorzugt mit Langrange-Interpolation</p><p><strong>Grund:</strong> Keine Berechnung der Koeffizienten erforderlich</p><p>Ansatz: <img src="/archives/4eb14690/image-20200219161759340.png" alt="image-20200219161759340" style="zoom:50%;"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Messsysteme&quot;&gt;&lt;a href=&quot;#Messsysteme&quot; class=&quot;headerlink&quot; title=&quot;Messsysteme&quot;&gt;&lt;/a&gt;Messsysteme&lt;/h2&gt;&lt;p&gt;Allgemein: Messkette&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/archives/4eb14690/image-20200218174651585.png&quot; style=&quot;zoom: 33%;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Messtechnik" scheme="http://grenze.cn/categories/Messtechnik/"/>
+    
+      <category term="Kurvenanpassung" scheme="http://grenze.cn/categories/Messtechnik/Kurvenanpassung/"/>
+    
+    
+      <category term="approximation" scheme="http://grenze.cn/tags/approximation/"/>
+    
+      <category term="Interpolation" scheme="http://grenze.cn/tags/Interpolation/"/>
+    
+  </entry>
   
   <entry>
     <title>UML-Use Case Diagram</title>
@@ -516,31 +545,6 @@
     
     
       <category term="Lifecycle Models" scheme="http://grenze.cn/tags/Lifecycle-Models/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Penalty Function Methods</title>
-    <link href="http://grenze.cn/archives/982c1b29.html"/>
-    <id>http://grenze.cn/archives/982c1b29.html</id>
-    <published>2019-12-25T14:40:03.000Z</published>
-    <updated>2020-01-21T14:49:38.326Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Penalty-Function-Methods-惩罚函数"><a href="#Penalty-Function-Methods-惩罚函数" class="headerlink" title="Penalty Function Methods(惩罚函数)"></a>Penalty Function Methods(惩罚函数)</h3><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>根据约束条件的特点，构造 Penalty Function, 将其加入到目标函数中，将约束函数的求解转换为一系列无约束问题的求解。“惩罚”是指在求解过程中，那些违反约束的迭代点会得到很大的目标函数值。<a id="more"></a></p><h3 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h3><p>Original Problem</p><p>$\begin{aligned} \min _{\underline{\theta}}\{J(\underline{\theta})\} &amp; \text { s.t. } c_{i}=0, \quad i \in \mathcal{E} \quad等式约束 \\ &amp; c_{i} \geq 0, \quad i \in \mathcal{J} \quad 不等式约束 \end{aligned}$  </p><p>将上述问题转化为非约束问题:</p><p>$\begin{aligned} \min _{\underline{\theta}}\{\tilde{J}\}=\min _{\underline{\theta}}\left\{J+\frac{\mu}{2} \sum_{i \in \mathcal{E}} c_{i}(\underline{\theta})^{2}+\frac{\mu}{2} \sum_{i \in \mathcal{J}}\left(\max \left\{0,-c_{i}(\underline{\theta})\right\}\right)^{2}\right\}\end{aligned}$ </p><h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><p><img src="/archives/982c1b29/image-20191225162602025.png" alt="image-20191225162602025" style="zoom: 50%;"></p><h3 id="惩罚因子-mu-的选取"><a href="#惩罚因子-mu-的选取" class="headerlink" title="惩罚因子 $\mu$ 的选取"></a>惩罚因子 $\mu$ 的选取</h3><p>一开始取一个小的$\mu_0$ ，求解$min\{\tilde{J}\}$的解是否符合精度要求，若不，则放大$\mu_0$成$\mu_1$ ，重复这一过程，直到得到符合要求的近似解。</p><h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>Contour plots of $J=\theta_1 +\theta_2$ with $c: \theta_1^2+\theta_2^2-2=0$ for diffirent $\mu$ </p><p><img src="/archives/982c1b29/image-20191225164636301.png" alt="image-20191225164636301" style="zoom:50%;"></p><p>可以看出随着$\mu$的增大，得到的点越靠近精确解</p><h3 id="Remark"><a href="#Remark" class="headerlink" title="Remark"></a>Remark</h3><ol><li>If each iterate 𝑘𝑘 yields a global minimizer of the approximated problem, then the limit of the algorithm yields the global solution of the constrained problem.</li><li>The Hessian may be ill conditioned and hence the solution may converge poorly. $\mu$越大，计算量越大，甚至有的无法求解</li><li>The solution may move away from the feasible region when the penalty parameter is not large enough</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;Penalty-Function-Methods-惩罚函数&quot;&gt;&lt;a href=&quot;#Penalty-Function-Methods-惩罚函数&quot; class=&quot;headerlink&quot; title=&quot;Penalty Function Methods(惩罚函数)&quot;&gt;&lt;/a&gt;Penalty Function Methods(惩罚函数)&lt;/h3&gt;&lt;h3 id=&quot;基本思想&quot;&gt;&lt;a href=&quot;#基本思想&quot; class=&quot;headerlink&quot; title=&quot;基本思想&quot;&gt;&lt;/a&gt;基本思想&lt;/h3&gt;&lt;p&gt;根据约束条件的特点，构造 Penalty Function, 将其加入到目标函数中，将约束函数的求解转换为一系列无约束问题的求解。“惩罚”是指在求解过程中，那些违反约束的迭代点会得到很大的目标函数值。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Optimization of Dynamic Systems" scheme="http://grenze.cn/categories/Optimization-of-Dynamic-Systems/"/>
-    
-      <category term="constrained Parameter Optimization" scheme="http://grenze.cn/categories/Optimization-of-Dynamic-Systems/constrained-Parameter-Optimization/"/>
-    
-    
-      <category term="Optimization of Dynamic Systems" scheme="http://grenze.cn/tags/Optimization-of-Dynamic-Systems/"/>
     
   </entry>
   
