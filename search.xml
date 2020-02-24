@@ -1,6 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Stationäres Verhalten</title>
+    <url>/archives/12c26097.html</url>
+    <content><![CDATA[<h3 id="Stationare-Messkennlinie-und-Fehler"><a href="#Stationare-Messkennlinie-und-Fehler" class="headerlink" title="Stationäre Messkennlinie und Fehler"></a>Stationäre Messkennlinie und Fehler</h3><p>Stationäres Verhalten: <strong>Einschwingvorgänge abgeklungen</strong><a id="more"></a><br>z.B. Messsystem durch <strong>Kennlinie</strong> $y(u)$ beschreibbar</p>
+<p><img src="/archives/12c26097/image-20200220192635149.png" style="zoom:50%;"></p>
+<h4 id="Ideale-und-reale-Messkennlinie"><a href="#Ideale-und-reale-Messkennlinie" class="headerlink" title="Ideale und reale Messkennlinie"></a>Ideale und reale Messkennlinie</h4><p>Kennlinie beschreibt funktionalen Zusammenhang zwischen den Messwerten $\mu$ und den Anzeigewerten $y(u)$ im stationären Zustand</p>
+<p><strong>Empfindlichkeit $S(u)$</strong>: Steigung  der Kennlinie $y(u)$</p>
+<p><img src="/archives/12c26097/image-20200220203535919.png" style="zoom:50%;"></p>
+<p>Reale Kennlinie $y(u)$ i.Allg. <strong>nichtlinear</strong></p>
+<p><strong>Ideale Kennlinie: lineare</strong> Kennlinie $y_i(u)$, ihre Empfindlichkeit ist konstant:</p>
+<p><img src="/archives/12c26097/image-20200220203750835.png" style="zoom:50%;"></p>
+<p>$\Rightarrow y_{\mathrm{i}}(u)=S_{\mathrm{i}} \cdot\left(u-u_{\mathrm{a}}\right)+y_{\mathrm{a}}$ </p>
+<p><img src="/archives/12c26097/image-20200220204041089.png" style="zoom:50%;"></p>
+<h4 id="Abgleich-der-Messkennlinie"><a href="#Abgleich-der-Messkennlinie" class="headerlink" title="Abgleich der Messkennlinie"></a>Abgleich der Messkennlinie</h4><p>Definition: Abgleich (Justierung)<br>Unter Abgleich versteht man einen Eingriff in das Messsystem, um  den Messbereich auf den vorgesehenen Bereich des Ausgangssignals oder der Anzeige abzubilden 将测量值变得可见，映射到显视器上如通过电压值</p>
+<p>Beispiel: </p>
+<p><img src="/archives/12c26097/image-20200222155623467.png" style="zoom:50%;"></p>
+<p><strong>Zwei Möglichkeiten für den Abgleich:</strong></p>
+<p>(a) Additive Verschiebung $\rightarrow$ Parallelverschiebung (平移)<br>(b) Multiplikative Drehung $\rightarrow$ Anpassung der Steigung (调整斜率)</p>
+<p><img src="/archives/12c26097/image-20200222160214537.png" style="zoom:50%;"></p>
+<p><strong>Zwei Verfahren:</strong></p>
+<ul>
+<li><p><strong>Fixpunktjustierung:</strong> Der Fehler am Messanfang und Messende ist null.(实际用到的多)</p>
+</li>
+<li><p><strong>Toleranzbandjustierung:</strong> Eine Additive Verschiebung. Damit wird der <strong>maximale Fehler im Messbereich</strong> auf die Hälfte reduziert.</p>
+<p>$y_{Tol}(u)=y(u)\underline+ \frac{F_{A,max}}{2}$ 绝对误差减小二分之一 </p>
+</li>
+</ul>
+<p><img src="/archives/12c26097/image-20200222161404224.png" style="zoom:50%;"></p>
+<p><strong>Nullpunktfehler:</strong> beschreibt die Differenz zwischen der Kennlinie am Anfang des Messbereiches und dem gewünschten Anfangspunkt $y_a$: $e(\mathbf{z})=f\left(u_{\mathbf{a}}, \mathbf{z}\right)-y_{\mathbf{a}}$ </p>
+<p>Unter Normalbedingungen $(z=z_0)$ ist er bei Fixpunktjustierung gleich null: $e\left(\mathbf{z}_{0}\right)=f\left(u_{\mathrm{a}}, \mathbf{z}_{0}\right)-y_{\mathrm{a}}=0$</p>
+<h4 id="Kennlinienfehler-bei-realer-Kennlinie"><a href="#Kennlinienfehler-bei-realer-Kennlinie" class="headerlink" title="Kennlinienfehler bei realer Kennlinie"></a>Kennlinienfehler bei realer Kennlinie</h4><ul>
+<li><strong>relative KL-Fehler</strong></li>
+</ul>
+<script type="math/tex; mode=display">
+F_{\mathrm{r}}=\frac{\left(u_{\mathrm{i}}-u_{\mathrm{a}}\right)-\left(u-u_{\mathrm{a}}\right)}{u-u_{\mathrm{a}}}=\frac{u_{\mathrm{i}}-u}{u-u_{\mathrm{a}}}</script><ul>
+<li><strong>Mit der idealen Kennlinie</strong><script type="math/tex; mode=display">
+\begin{aligned}
+y-y_{\mathrm{i}} &=S_{\mathrm{i}} \cdot\left(u_{\mathrm{i}}-u\right) \\
+y_{\mathrm{i}}-y_{\mathrm{a}} &=S_{\mathrm{i}} \cdot\left(u-u_{\mathrm{a}}\right)
+\end{aligned}</script>$\Longrightarrow$ <img src="/archives/12c26097/image-20200222163341589.png" style="zoom:50%;"></li>
+</ul>
+<p><img src="/archives/12c26097/image-20200222163633540.png" style="zoom:50%;"></p>
+<p>Gängige Bezugswerte für den relativen Kennlinienfehler sind(相对误差的常见参考值):</p>
+<p><img src="/archives/12c26097/image-20200222163729333.png" style="zoom:50%;"></p>
+<h4 id="Abschatzung-des-Kennlinienfehlers"><a href="#Abschatzung-des-Kennlinienfehlers" class="headerlink" title="Abschätzung des Kennlinienfehlers"></a>Abschätzung des Kennlinienfehlers</h4><p>Die <strong>mittlere Empfindlichkeit</strong> $\bar{S}$ folgt durch Rechteckintegration:</p>
+<p><img src="/archives/12c26097/image-20200222171031938.png" style="zoom:50%;"></p>
+<p><img src="/archives/12c26097/image-20200222171057996.png" style="zoom:50%;"></p>
+<p>Für das Messende $u=u_e$ stimmt die mittlere Empfindlichkeit mit der idealen überein: $\bar{S}\left(u_{\mathrm{e}}, u_{\mathrm{a}}\right)=S_{\mathrm{i}}$</p>
+<p>Für den <strong>relativen Kennlinienfehler</strong> erhält man:</p>
+<p><img src="/archives/12c26097/image-20200222171641996.png" style="zoom:50%;"></p>
+<p>在点$u_a$泰勒展开:</p>
+<p><img src="/archives/12c26097/image-20200222171940961.png" style="zoom:50%;"></p>
+<p>$\Longrightarrow$ <img src="/archives/12c26097/image-20200222172121952.png" style="zoom:50%;"></p>
+<p>Die mittlere Empfindlichkeit: <img src="/archives/12c26097/image-20200222172220317.png" style="zoom:50%;"></p>
+<p>Der relative KL-Fehler: $F_{\mathrm{r}}=\frac{\bar{S}\left(u, u_{\mathrm{a}}\right)-S_{\mathrm{i}}}{S_{\mathrm{i}}}$</p>
+<p><img src="/archives/12c26097/image-20200222172456459.png" style="zoom:50%;"></p>
+<h3 id="Linearisierung-der-Kennlinie"><a href="#Linearisierung-der-Kennlinie" class="headerlink" title="Linearisierung der Kennlinie"></a>Linearisierung der Kennlinie</h3><p>Ziel: Reale Kennlinie der idealen Kennlinie annähern, um Kennlinienfehler zu verringern und für eine möglichst konstante Empfindlichkeit zu sorgen 将实际特性曲线逼近理想特性曲线，以减少特性曲线误差并确保灵敏度尽可能恒定</p>
+<h4 id="Herabsetzen-des-Messbereiches"><a href="#Herabsetzen-des-Messbereiches" class="headerlink" title="Herabsetzen des Messbereiches"></a>Herabsetzen des Messbereiches</h4><p>Ziel: <strong>nichtlineares Glied</strong> durch 2 weitere <strong>lineare</strong> Glieder in Serie linearisieren</p>
+<p>Signalflussplan der Anordnung:</p>
+<p><img src="/archives/12c26097/image-20200222184323534.png" style="zoom:50%;"></p>
+<blockquote>
+<p>$S_0 \ll 1, S_1\gg 1$</p>
+</blockquote>
+<p>Einzelkennlinien: <img src="/archives/12c26097/image-20200222184752100.png" alt="image-20200222184752100" style="zoom:50%;"></p>
+<p>Gesamtkennlinie: <img src="/archives/12c26097/image-20200222184553816.png" style="zoom:50%;"></p>
+<p>Wegen $S_0 \ll 1$ </p>
+<p><img src="/archives/12c26097/image-20200222185954044.png" style="zoom:50%;"></p>
+<p>$\Longrightarrow$ <img src="/archives/12c26097/image-20200222190040113.png" style="zoom:50%;"></p>
+<h4 id="Reihenschaltung-zweier-nichtlinearer-Glieder"><a href="#Reihenschaltung-zweier-nichtlinearer-Glieder" class="headerlink" title="Reihenschaltung zweier nichtlinearer Glieder"></a>Reihenschaltung zweier nichtlinearer Glieder</h4><p>将两个非线性的原件串联，会得到一个线性的结果</p>
+<p><img src="/archives/12c26097/image-20200222190930738.png" style="zoom:50%;"></p>
+<p>Kennlinien:   $u_{2}=f_{1}\left(u_{1}\right) \quad y=f_{2}\left(u_{2}\right)$ </p>
+<p>Empfindlichkeiten:   $\frac{\partial u_{2}}{\partial u_{1}}=\frac{\partial f_{1}\left(u_{1}\right)}{\partial u_{1}}=S_{1}\left(u_{1}\right) \quad \frac{\partial y}{\partial u_{2}}=\frac{\partial f_{2}\left(u_{2}\right)}{\partial u_{2}}=S_{2}\left(u_{2}\right)$ </p>
+<p>$\Longrightarrow$ <img src="/archives/12c26097/image-20200222192839697.png" style="zoom:50%;"></p>
+<p>对于一个线性的特征曲线，必须满足<img src="/archives/12c26097/image-20200222193000984.png" style="zoom:50%;"></p>
+<p>一阶导数 <img src="/archives/12c26097/image-20200222193046155.png" style="zoom:50%;"></p>
+<p>$\Longrightarrow$ $S_{2}^{\prime}=-\frac{S_{2}}{S_{1}^{2}} S_{1}^{\prime}$</p>
+<h4 id="Wahl-des-gunstigsten-Messbereichs"><a href="#Wahl-des-gunstigsten-Messbereichs" class="headerlink" title="Wahl des günstigsten Messbereichs"></a>Wahl des günstigsten Messbereichs</h4><p>Bei Kennlinien mit einem großen Bereich der Eingangsgröße wird für den Messbereich ein möglichst <strong>linearer Teil</strong> (konstante Empfindlichkeit) <strong>mit hoher Empfindlichkeit</strong> S ausgewählt. 在输入变量范围较大的特性曲线情况下，选择线性度高（灵敏度恒定）的部分作为测量范围。</p>
+<p><img src="/archives/12c26097/image-20200222220504305.png" style="zoom:50%;"></p>
+<p>Analytische Berechnung des günstigsten Messbereichs:</p>
+<p>Gütemaß: <img src="/archives/12c26097/image-20200223135955304.png" style="zoom:50%;"></p>
+<script type="math/tex; mode=display">\bar{S}=\frac{1}{d} \int_{u_{\mathrm{a}}}^{u_{\mathrm{a}}+d} S(u) \mathrm{d} u</script><p>$\Longrightarrow$</p>
+<p><img src="/archives/12c26097/image-20200223140418336.png" style="zoom:50%;"></p>
+<p>$\Longrightarrow$ </p>
+<p><img src="/archives/12c26097/image-20200223140722866.png" style="zoom:50%;"></p>
+<p>==<strong>如何选择？</strong>==</p>
+<ol>
+<li><p>判断是否含有拐点，即二阶导等于零的点，并且其三阶不为零</p>
+</li>
+<li><p><strong>Kriterium 1: Arbeitsbereich um  einen Wendepunkt</strong></p>
+<p><img src="/archives/12c26097/image-20200223135517445.png" style="zoom:50%;"></p>
+</li>
+</ol>
+<p><img src="/archives/12c26097/image-20200223135553525.png" style="zoom:50%;"></p>
+<ol>
+<li><p><strong>Kriterium 2: Arbeitsbereich ohne Wendepunkt</strong></p>
+<p><img src="/archives/12c26097/image-20200223135657145.png" style="zoom:50%;"></p>
+</li>
+</ol>
+<p><img src="/archives/12c26097/image-20200223135717886.png" style="zoom:50%;"></p>
+<h4 id="Differenzmethode"><a href="#Differenzmethode" class="headerlink" title="Differenzmethode"></a>Differenzmethode</h4><p>Verknüpfung gleichartiger Teilsysteme mit linearisierendem Effekt und Empfindlichkeitssteigerung ($u_0$ ist ein Arbeitspunkt)</p>
+<p><img src="/archives/12c26097/image-20200223193403735.png" style="zoom:50%;"></p>
+<p><img src="/archives/12c26097/image-20200223193451278.png" style="zoom:50%;"></p>
+<script type="math/tex; mode=display">
+y_D=y(u_0+\Delta u)-y(u_0-\Delta u)</script><p>分别泰勒展开(Taylorreihenentwicklung um $u_0$):</p>
+<p><img src="/archives/12c26097/image-20200223193918354.png" style="zoom: 33%;"></p>
+<p>Durch Differenzbildung</p>
+<p><img src="/archives/12c26097/image-20200223193946297.png" style="zoom: 33%;"></p>
+<ul>
+<li>Empfindlichkeit verdoppelt</li>
+<li>Alle gerade Funktionen werden unterdrückt , z.B. systematische, superponierende Fehler (所有偶函数被抑制, 偶函数是非线性的)</li>
+</ul>
+<p><strong>Relative Fehler</strong>: <img src="/archives/12c26097/image-20200223195805177.png" style="zoom:50%;"></p>
+<p>Im Arbeitspunkt ist der Kennlinienfehler null</p>
+<h4 id="Gegenkopplung-P47"><a href="#Gegenkopplung-P47" class="headerlink" title="Gegenkopplung(P47)"></a>Gegenkopplung(P47)</h4><h3 id="KL-Fehler-bei-Abweichung-von-Normalbedingungen"><a href="#KL-Fehler-bei-Abweichung-von-Normalbedingungen" class="headerlink" title="KL-Fehler bei Abweichung von Normalbedingungen"></a>KL-Fehler bei Abweichung von Normalbedingungen</h3><p>Betrieb nicht unter Normalbedingungen (veränderte Temperatur, Luftfeuchte…) führt zu Kennlinienänderungen</p>
+<p><img src="/archives/12c26097/image-20200223202630119.png" style="zoom:50%;"></p>
+<h4 id="Superponierende-Storgrosen"><a href="#Superponierende-Storgrosen" class="headerlink" title="Superponierende Störgrößen"></a>Superponierende Störgrößen</h4><p>Unabhängig von $u$ , verschiebt Kennlinien um von $z$ abhängigen Offset (Empfindlichkeit bleibt unverändert)</p>
+<p>Beispiel: linearer Zusammenhang: $F_{\mathrm{sup}}(z)=a \cdot\left(z-z_{0}\right)=a \cdot \Delta z$ </p>
+<p><img src="/archives/12c26097/image-20200223205351752.png" style="zoom:50%;"></p>
+<p><strong>Eliminierung superponierender Störgrößen: Differenzmethode (消除)</strong></p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&y_{1} \approx y\left(u_{0}\right)+S\left(u_{0}\right) \Delta u+z_{1}\\
+&y_{2} \approx y\left(u_{0}\right)-S\left(u_{0}\right) \Delta u+z_{2}
+\end{aligned}</script><p>mit $z_1$ und $z_2$ : superponierende Störgrößen</p>
+<p>$\Longrightarrow$ <img src="/archives/12c26097/image-20200223205836239.png" style="zoom:50%;"></p>
+<p>Der superponierende KL-Fehler der Anordnung ist: <img src="/archives/12c26097/image-20200223205905159.png" style="zoom:50%;"></p>
+<h4 id="Deformierende-Storgrosen"><a href="#Deformierende-Storgrosen" class="headerlink" title="Deformierende Störgrößen"></a>Deformierende Störgrößen</h4><p>Zusätzlich abhängig von $u$ , Empfindlichkeit ändert</p>
+<p>Beispiel: lineare Abhängigkeit von $u$ und $z$: $F_{\mathrm{def}}(u, z)=b \cdot\left(z-z_{0}\right)\left(u-u_{0}\right)=b \cdot \Delta z \Delta u$ </p>
+<p><img src="/archives/12c26097/image-20200223211027572.png" style="zoom:50%;"></p>
+<p><strong>Eliminierung bei Gegenkopplung (通过负反馈来消除)</strong></p>
+<p> <img src="/archives/12c26097/image-20200224152524572.png" style="zoom:50%;"></p>
+<script type="math/tex; mode=display">
+y=u \cdot \frac{S_{\mathrm{i}} V}{1+K^{\prime} \cdot S_{\mathrm{i}} V}</script><p>Die Empfindlichkeit $S_i$ des Messgliedes ohne Rückführung ändere sich im Messbereich aufgrund einer deformierenden Störgröße $z_k$:</p>
+<p><img src="/archives/12c26097/image-20200224153346354.png" style="zoom:50%;"></p>
+<p><img src="/archives/12c26097/image-20200224153417464.png" style="zoom:50%;"></p>
+<p>Taylor-Reihe um $S_{i0}$ : </p>
+<p><img src="/archives/12c26097/image-20200224153535911.png" style="zoom:50%;"></p>
+<p>Relativer Fehler des gegengekoppelten Systems:</p>
+<p><img src="/archives/12c26097/image-20200224153737986.png" style="zoom:50%;"></p>
+<p>Beim <strong>nicht</strong> gegengekoppelten Messsystem lautet der relative Fehler:</p>
+<p><img src="/archives/12c26097/image-20200224153837261.png" style="zoom:50%;"></p>
+<p><img src="/archives/12c26097/image-20200224153904810.png" alt="image-20200224153904810" style="zoom:50%;"></p>
+]]></content>
+      <categories>
+        <category>Messtechnik</category>
+        <category>Stationäres Verhalten</category>
+      </categories>
+      <tags>
+        <tag>KL-Fehler</tag>
+        <tag>Linearsierung</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Kurvenanpassung</title>
     <url>/archives/4eb14690.html</url>
     <content><![CDATA[<h2 id="Messsysteme"><a href="#Messsysteme" class="headerlink" title="Messsysteme"></a>Messsysteme</h2><p>Allgemein: Messkette</p>
