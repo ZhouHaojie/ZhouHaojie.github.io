@@ -3,27 +3,27 @@
   <entry>
     <title>Zufällige Messfehler</title>
     <url>/archives/dee8f53d.html</url>
-    <content><![CDATA[<h3 id="Grundlagen-der-Wahrscheinlichkeitstheorie"><a href="#Grundlagen-der-Wahrscheinlichkeitstheorie" class="headerlink" title="Grundlagen der Wahrscheinlichkeitstheorie"></a>Grundlagen der Wahrscheinlichkeitstheorie</h3><p><strong>Wahrscheinlichkeitsverteilung<a id="more"></a>:</strong> $F_{\mathrm{x}}(x)=P(\mathrm{x} \leq x)$</p>
-<p><strong>Wahrscheinlichkeitsdichte: </strong> $f_{\mathrm{x}}(x)=\frac{\mathrm{d} F_{\mathrm{x}}(x)}{\mathrm{d} x}$</p>
+    <content><![CDATA[<h3 id="Grundlagen-der-Wahrscheinlichkeitstheorie"><a href="#Grundlagen-der-Wahrscheinlichkeitstheorie" class="headerlink" title="Grundlagen der Wahrscheinlichkeitstheorie"></a>Grundlagen der Wahrscheinlichkeitstheorie</h3><p><strong>1. Wahrscheinlichkeitsverteilung<a id="more"></a>:</strong> $F_{\mathrm{x}}(x)=P(\mathrm{x} \leq x)$</p>
+<p><strong>2. Wahrscheinlichkeitsdichte: </strong> $f_{\mathrm{x}}(x)=\frac{\mathrm{d} F_{\mathrm{x}}(x)}{\mathrm{d} x}$</p>
 <ul>
 <li>$f_{\mathrm{X}}(x) \geq 0$</li>
 <li>$\int_{-\infty}^{\infty} f_{\mathrm{x}}(x) \mathrm{d} x=1$</li>
 <li>$\int_{a}^{b} f_{\mathrm{x}}(x) \mathrm{d} x=P(a \leq \mathrm{x} \leq b)$</li>
 </ul>
-<p><strong>Wahrscheinlichkeitsdichten mehrerer Zufallsvariablen: </strong></p>
+<p><strong>3. Wahrscheinlichkeitsdichten mehrerer Zufallsvariablen: </strong></p>
 <p>$f_{\mathrm{x}}(x)=\int_{-\infty}^{\infty} f_{\mathrm{xy}}(x, y) \mathrm{d} y$</p>
 <p>$f_{\mathrm{y}}(y)=\int_{-\infty}^{\infty} f_{\mathrm{xy}}(x, y) \mathrm{d} x$ </p>
-<p><strong>Statistische Unabhängigkeit: </strong> </p>
+<p><strong>4. Statistische Unabhängigkeit: </strong> </p>
 <p>$x$ und $y$  statistisch unabhängig $\Longleftrightarrow$  $f_{xy}(x,y)=f_x(x)\cdot f_y(y)$ </p>
-<p><strong>Erwartungswert-Operator:</strong> $\mathrm{E}\{g(\mathrm{x})\}=\int_{-\infty}^{\infty} g(x) f_{\mathrm{x}}(x) d x$  </p>
-<p><strong>Linearität des Erwartungswert-Operators: </strong> $\mathrm{E}\{a \cdot g(\mathrm{x})+b\}=a \cdot \mathrm{E}\{g(\mathrm{x})\}+b$ </p>
-<p><strong>m-tes Moment(矩):</strong> </p>
+<p><strong>5. Erwartungswert-Operator:</strong> $\mathrm{E}\{g(\mathrm{x})\}=\int_{-\infty}^{\infty} g(x) f_{\mathrm{x}}(x) d x$  </p>
+<p><strong>6. Linearität des Erwartungswert-Operators: </strong> $\mathrm{E}\{a \cdot g(\mathrm{x})+b\}=a \cdot \mathrm{E}\{g(\mathrm{x})\}+b$ </p>
+<p><strong>7. m-tes Moment(矩):</strong> </p>
 <p>$\mu_{\mathbf{x}, m}=\mathrm{E}\left\{\mathrm{x}^{m}\right\}=\int_{-\infty}^{\infty} x^{m} f_{\mathrm{x}}(x) d x$ </p>
-<p><strong>m-tes zentrales Moment: </strong> $\mathrm{E}\left\{(\mathrm{x}-\mathrm{E}\{\mathrm{x}\})^{m}\right\}=\int_{-\infty}^{\infty}(x-\mathrm{E}\{\mathrm{x}\})^{m} f_{\mathrm{x}}(x) d x$ <img src="/archives/dee8f53d/image-20200225175746167.png" style="zoom:50%;"></p>
-<p><strong>Kovarianz(协方差) zweier Zufallsgrößen: </strong>  </p>
+<p><strong>8. m-tes zentrales Moment: </strong> $\mathrm{E}\left\{(\mathrm{x}-\mathrm{E}\{\mathrm{x}\})^{m}\right\}=\int_{-\infty}^{\infty}(x-\mathrm{E}\{\mathrm{x}\})^{m} f_{\mathrm{x}}(x) d x$ <img src="/archives/dee8f53d/image-20200225175746167.png" style="zoom:50%;"></p>
+<p><strong>9. Kovarianz(协方差) zweier Zufallsgrößen: </strong>  </p>
 <p>$C_{\mathrm{xy}}=\mathrm{E}\left\{\left(\mathrm{x}-\mu_{\mathrm{x}}\right) \cdot\left(\mathrm{y}-\mu_{\mathrm{y}}\right)\right\}$ </p>
-<p><strong>Korrelationskoeffizient zweier Zufallsgrößen: </strong> $\rho_{\mathrm{xy}}=\frac{C_{\mathrm{xy}}}{\sigma_{\mathrm{x}} \sigma_{\mathrm{y}}}$ </p>
-<p><strong>Unkorreliertheit</strong> bedeutet: $\mathrm{E}\{\mathrm{x} \cdot \mathrm{y}\}=\mathrm{E}\{\mathrm{x}\} \cdot \mathrm{E}\{\mathrm{y}\} \Longleftrightarrow C_{\mathrm{xy}}=0 \Longleftrightarrow \rho_{\mathrm{xy}}=0$ </p>
+<p><strong>10. Korrelationskoeffizient zweier Zufallsgrößen: </strong> $\rho_{\mathrm{xy}}=\frac{C_{\mathrm{xy}}}{\sigma_{\mathrm{x}} \sigma_{\mathrm{y}}}$ </p>
+<p><strong>11. Unkorreliertheit</strong> bedeutet: $\mathrm{E}\{\mathrm{x} \cdot \mathrm{y}\}=\mathrm{E}\{\mathrm{x}\} \cdot \mathrm{E}\{\mathrm{y}\} \Longleftrightarrow C_{\mathrm{xy}}=0 \Longleftrightarrow \rho_{\mathrm{xy}}=0$ </p>
 <h3 id="Stichproben"><a href="#Stichproben" class="headerlink" title="Stichproben"></a>Stichproben</h3><p><strong>1.Stichprobenmittelwert: </strong> <img src="/archives/dee8f53d/image-20200225182007110.png" style="zoom:50%;"></p>
 <p><strong>Erwartungstreue(无偏估计): </strong> $\mathrm{E}\{\hat{\mathrm{x}}\}=\mu_{\mathrm{x}}$ 估计量的数学期望等于被估计参数的真实值, 在多次重复下，它们的平均数接近所估计的参数真值</p>
 <p><img src="/archives/dee8f53d/image-20200225182510932.png" style="zoom:50%;"></p>
