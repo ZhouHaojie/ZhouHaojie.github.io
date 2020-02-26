@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Grundlagen der WahrscheinlichkeitstheorieWahrscheinlichkeitsverteilung">
+<meta name="keywords" content="Normalsverteilung,T-Verteilung,Statische Testverfahren">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zufällige Messfehler">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="Grundlagen der WahrscheinlichkeitstheorieWahrscheinlichkeitsverteilung">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225175746167.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225182007110.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225182510932.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225183321936.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225183944985.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225192212060.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225192611403.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225194259532.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225194323338.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225202238671.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225202438515.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225203512663.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225203534440.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225204319029.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;pic3.zhimg.com&#x2F;v2-d1ea513111770a867ad2f3e49eaea20a_r.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225211220299.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225211843120.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225211954615.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225212016340.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225212909282.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225214555541.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225215339036.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225215722685.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225215753098.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225221451155.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225221552708.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225221619906.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225221903498.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225221926117.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226130349193.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226130424108.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225222315464.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226125637881.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226125847651.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226125919622.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226131151034.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226131857285.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226132159794.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226132840742.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226150935442.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226151323502.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226152102018.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226153210697.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226153403742.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226153425386.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226153620481.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226153747836.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226165924476.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226171431252.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226171606548.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226164900472.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226164944608.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226165003759.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226175232418.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226165105052.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200226175348899.png">
+<meta property="og:updated_time" content="2020-02-26T17:03:47.842Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;dee8f53d&#x2F;image-20200225175746167.png">
+
+<link rel="canonical" href="http://grenze.cn/archives/dee8f53d.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Zufällige Messfehler | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">55</span></a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/dee8f53d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Zufällige Messfehler
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-26 18:00:27 / 修改时间：18:03:47" itemprop="dateCreated datePublished" datetime="2020-02-26T18:00:27+01:00">2020-02-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Messtechnik/" itemprop="url" rel="index">
+                    <span itemprop="name">Messtechnik</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Messtechnik/Zufallige-Messfehler/" itemprop="url" rel="index">
+                    <span itemprop="name">Zufällige Messfehler</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Grundlagen-der-Wahrscheinlichkeitstheorie"><a href="#Grundlagen-der-Wahrscheinlichkeitstheorie" class="headerlink" title="Grundlagen der Wahrscheinlichkeitstheorie"></a>Grundlagen der Wahrscheinlichkeitstheorie</h3><p><strong>Wahrscheinlichkeitsverteilung<a id="more"></a>:</strong> $F_{\mathrm{x}}(x)=P(\mathrm{x} \leq x)$</p>
+<p><strong>Wahrscheinlichkeitsdichte: </strong> $f_{\mathrm{x}}(x)=\frac{\mathrm{d} F_{\mathrm{x}}(x)}{\mathrm{d} x}$</p>
+<ul>
+<li>$f_{\mathrm{X}}(x) \geq 0$</li>
+<li>$\int_{-\infty}^{\infty} f_{\mathrm{x}}(x) \mathrm{d} x=1$</li>
+<li>$\int_{a}^{b} f_{\mathrm{x}}(x) \mathrm{d} x=P(a \leq \mathrm{x} \leq b)$</li>
+</ul>
+<p><strong>Wahrscheinlichkeitsdichten mehrerer Zufallsvariablen: </strong></p>
+<p>$f_{\mathrm{x}}(x)=\int_{-\infty}^{\infty} f_{\mathrm{xy}}(x, y) \mathrm{d} y$</p>
+<p>$f_{\mathrm{y}}(y)=\int_{-\infty}^{\infty} f_{\mathrm{xy}}(x, y) \mathrm{d} x$ </p>
+<p><strong>Statistische Unabhängigkeit: </strong> </p>
+<p>$x$ und $y$  statistisch unabhängig $\Longleftrightarrow$  $f_{xy}(x,y)=f_x(x)\cdot f_y(y)$ </p>
+<p><strong>Erwartungswert-Operator:</strong> $\mathrm{E}\{g(\mathrm{x})\}=\int_{-\infty}^{\infty} g(x) f_{\mathrm{x}}(x) d x$  </p>
+<p><strong>Linearität des Erwartungswert-Operators: </strong> $\mathrm{E}\{a \cdot g(\mathrm{x})+b\}=a \cdot \mathrm{E}\{g(\mathrm{x})\}+b$ </p>
+<p><strong>m-tes Moment(矩):</strong> </p>
+<p>$\mu_{\mathbf{x}, m}=\mathrm{E}\left\{\mathrm{x}^{m}\right\}=\int_{-\infty}^{\infty} x^{m} f_{\mathrm{x}}(x) d x$ </p>
+<p><strong>m-tes zentrales Moment: </strong> $\mathrm{E}\left\{(\mathrm{x}-\mathrm{E}\{\mathrm{x}\})^{m}\right\}=\int_{-\infty}^{\infty}(x-\mathrm{E}\{\mathrm{x}\})^{m} f_{\mathrm{x}}(x) d x$ <img src="/archives/dee8f53d/image-20200225175746167.png" style="zoom:50%;"></p>
+<p><strong>Kovarianz(协方差) zweier Zufallsgrößen: </strong>  </p>
+<p>$C_{\mathrm{xy}}=\mathrm{E}\left\{\left(\mathrm{x}-\mu_{\mathrm{x}}\right) \cdot\left(\mathrm{y}-\mu_{\mathrm{y}}\right)\right\}$ </p>
+<p><strong>Korrelationskoeffizient zweier Zufallsgrößen: </strong> $\rho_{\mathrm{xy}}=\frac{C_{\mathrm{xy}}}{\sigma_{\mathrm{x}} \sigma_{\mathrm{y}}}$ </p>
+<p><strong>Unkorreliertheit</strong> bedeutet: $\mathrm{E}\{\mathrm{x} \cdot \mathrm{y}\}=\mathrm{E}\{\mathrm{x}\} \cdot \mathrm{E}\{\mathrm{y}\} \Longleftrightarrow C_{\mathrm{xy}}=0 \Longleftrightarrow \rho_{\mathrm{xy}}=0$ </p>
+<h3 id="Stichproben"><a href="#Stichproben" class="headerlink" title="Stichproben"></a>Stichproben</h3><p><strong>1.Stichprobenmittelwert: </strong> <img src="/archives/dee8f53d/image-20200225182007110.png" style="zoom:50%;"></p>
+<p><strong>Erwartungstreue(无偏估计): </strong> $\mathrm{E}\{\hat{\mathrm{x}}\}=\mu_{\mathrm{x}}$ 估计量的数学期望等于被估计参数的真实值, 在多次重复下，它们的平均数接近所估计的参数真值</p>
+<p><img src="/archives/dee8f53d/image-20200225182510932.png" style="zoom:50%;"></p>
+<p><strong>Konsistenz(一致性):</strong> $\lim _{n \rightarrow \infty} \hat{\mathrm{x}}_{n}=x_{\mathrm{w}} \quad \Leftrightarrow \quad \lim _{n \rightarrow \infty} \sigma_{\hat{\mathrm{x}}}=0$样本数目越大，估计量就越来越接近总体参数的真实值</p>
+<p>Erwartungswert und Varianz, falls $\mathrm{x}_i$ unabhängig: $\mathrm{E}\{\hat{\mathrm{x}}\}=\mathrm{E}\{\mathrm{x}\}=\mu_{\mathrm{x}} \quad, \quad \sigma_{\hat{\mathrm{x}}}^{2}=\frac{\sigma_{\mathrm{x}}^{2}}{N}$ </p>
+<p><strong>2.Stichprobenvarianz: </strong> <img src="/archives/dee8f53d/image-20200225183321936.png" style="zoom:50%;"></p>
+<p><img src="/archives/dee8f53d/image-20200225183944985.png" style="zoom:50%;"></p>
+<p>Erwartungswert,falls $\mathrm{x}_i$ unabhängig: $\mathrm{E}\left\{\mathrm{s}_{\mathrm{x}}^{2}\right\}=\sigma_{\mathrm{x}}^{2}$ </p>
+<p><strong>3.Gesetz der großen Zahlen(大数定理)</strong></p>
+<script type="math/tex; mode=display">
+P\left\{\left|\mathrm{x}-\mu_{\mathrm{x}}\right| \geq \varepsilon\right\}=\int_{-\infty}^{\mu_{\mathrm{x}}-\varepsilon} f_{\mathrm{x}}(x) \mathrm{d} x+\int_{\mu_{\mathrm{x}}+\varepsilon}^{\infty} f_{\mathrm{x}}(x) \mathrm{d} x</script><p>Mit $\left|x-\mu_{\mathrm{x}}\right| \geq \varepsilon \quad \Leftrightarrow \quad \frac{\left(x-\mu_{\mathrm{x}}\right)^{2}}{\varepsilon^{2}} \geq 1$ erhält man die Abschätzung:</p>
+<p><img src="/archives/dee8f53d/image-20200225192212060.png" style="zoom:50%;"></p>
+<p><strong>Tschebyscheff’sche Ungleichung(切比雪夫不等式)</strong> <img src="/archives/dee8f53d/image-20200225192611403.png" style="zoom:50%;"><br>随机变量X与期望的距离 $u_x$ 大于某个数的概率是不大的，就是 $X $ 在 $u_x$ 一定相对较小范围内波动。</p>
+<p><strong>4.Mittelung zur Störungsunterdrückung</strong><br><strong>Lineare Kennlinie</strong> </p>
+<p>Gestörte Messgröße $u$ wird durch ein <strong>lineares</strong> System transformiert: <img src="/archives/dee8f53d/image-20200225194259532.png" style="zoom:50%;"><img src="/archives/dee8f53d/image-20200225194323338.png" style="zoom:50%;"></p>
+<p>Mittelwert: $\mu_{\mathrm{y}}=\mathrm{E}\{\mathrm{y}\}=\mathrm{E}\left\{S_{\mathrm{i}}(u+\mathrm{e})\right\}=S_{\mathrm{i}}\left(u+\mu_{\mathrm{e}}\right)$ </p>
+<ul>
+<li><p><strong>Mittelwertfreie</strong> Störung: <img src="/archives/dee8f53d/image-20200225202238671.png" style="zoom:50%;"></p>
+</li>
+<li><p>Störung mit <strong>endlichem Mittelwert:</strong> $\mu_{\mathrm{e}} \neq 0$ </p>
+<p>Kompensation durch Subtraktion des systematischen Fehlers $S_i \mu_e$ am Ausgang: <img src="/archives/dee8f53d/image-20200225202438515.png" style="zoom:50%;"></p>
+</li>
+</ul>
+<p>Bei linearen Kennlinien werden <strong>additive mittelwertfreie Störungen</strong> durch Mittelung unterdrückt!</p>
+<p><strong>Nichtlineare Kennlinie</strong></p>
+<p>Gekrümmte Kennlinie der Empfindlichkeit $S(u)$ wird um den Arbeitspunkt $u_{0}$ herum in eine Taylor-Reihe $\Delta \mathrm{y}$ entwickelt: </p>
+<p><img src="/archives/dee8f53d/image-20200225203512663.png" style="zoom:50%;"></p>
+<p><img src="/archives/dee8f53d/image-20200225203534440.png" style="zoom:50%;"></p>
+<p>Erwartungswert $\mu_{\Delta y}$ der Ausgangsgröße (Annahme: $\mathrm{E}\{\mathrm{e}\}=0$ ):</p>
+<p><img src="/archives/dee8f53d/image-20200225204319029.png" style="zoom:50%;"></p>
+<h3 id="Normalverteilte-Zufallsvariable"><a href="#Normalverteilte-Zufallsvariable" class="headerlink" title="Normalverteilte Zufallsvariable"></a>Normalverteilte Zufallsvariable</h3><p>Normalverteilung: $f_{\mathrm{x}}(x)=\frac{1}{\sqrt{2 \pi} \sigma_{\mathrm{x}}} \mathrm{e}^{-\frac{\left(x-\mu_{x}\right)^{2}}{2 \sigma_{x}^{2}}}$ </p>
+<h4 id="Zentraler-Grenzwertsatz"><a href="#Zentraler-Grenzwertsatz" class="headerlink" title="Zentraler Grenzwertsatz"></a>Zentraler Grenzwertsatz</h4><p>无论是什么分布的数据，当我们从中抽取相互独立的随机样本，且采集的样本足够多时，样本均值的分布将收敛于正态分布: $f_{\mathrm{x}}(x)=\frac{1}{\sqrt{2 \pi} \sigma_{\mathrm{x}}} \mathrm{e}^{-\frac{\left(x-\mu_{x}\right)^{2}}{2 \sigma_{x}^{2}}}$ </p>
+<script type="math/tex; mode=display">
+\mu_{\mathrm{x}}=\sum_{n=1}^{N} \mathrm{E}\left\{\mathrm{x}_{n}\right\} \quad \sigma_{\mathrm{x}}^{2}=\sum_{n=1}^{N} \sigma_{\mathrm{x}_{n}}^{2}</script><p> <img src="https://pic3.zhimg.com/v2-d1ea513111770a867ad2f3e49eaea20a_r.jpg" style="zoom:50%;"></p>
+<h4 id="chi-2-Verteilung"><a href="#chi-2-Verteilung" class="headerlink" title="$\chi^2$-Verteilung"></a>$\chi^2$-Verteilung</h4><p>若n个相互独立的随机变量$z_i$，均服从标准正态分布$\mathcal{N}(0,1)$（也称独立同分布于标准正态分布），则这n个服从标准正态分布的随机变量的平方和$\mathrm{y}_{n}=\mathrm{z}_{1}^{2}+\mathrm{z}_{2}^{2}+\cdots+\mathrm{z}_{n}^{2}$ 构成一新的随机变量满足卡方分布</p>
+<p><img src="/archives/dee8f53d/image-20200225211220299.png" style="zoom:50%;"></p>
+<p>$n: \quad$ Zahl der Freiheitsgrade自由度<br>$\Gamma(x):$ Gammafunktion: $\Gamma(0.5)=\sqrt{\pi}, \Gamma(1)=1, \Gamma(x+1)=x \cdot \Gamma(x)$</p>
+<p>当自由度n很大时，$\chi ^2$分布近似为正态分布</p>
+<p><img src="/archives/dee8f53d/image-20200225211843120.png" style="zoom: 33%;"></p>
+<p><strong>Mittelwert: </strong> <img src="/archives/dee8f53d/image-20200225211954615.png" style="zoom:50%;"></p>
+<p><strong>Varianz: </strong> <img src="/archives/dee8f53d/image-20200225212016340.png" style="zoom:50%;"></p>
+<p>Durch Variablentransformation lässt sich die $\chi^{2}$ -Verteilung bei <strong>allgemeiner Normalverteilung</strong> $\mathcal{N}\left(\mu_{\mathrm{x}}, \sigma_{\mathrm{x}}^{2}\right)$ angeben:</p>
+<p><img src="/archives/dee8f53d/image-20200225212909282.png" style="zoom:50%;"></p>
+<p>$\Longrightarrow$ <img src="/archives/dee8f53d/image-20200225214555541.png" style="zoom:50%;"> </p>
+<p>Die <strong>Stichprobenvarianz</strong> mit $n$ Stichprobenwerten ist $x^{2}$ -verteilt mit $(n-1)$ Freiheitsgraden</p>
+<h4 id="Student’sche-t-Verteilung"><a href="#Student’sche-t-Verteilung" class="headerlink" title="Student’sche t-Verteilung"></a>Student’sche t-Verteilung</h4><p>给定随机变量$x,y$,$X$是标准正态分布$\mathcal{N}(0,1)$ , $y$ 是 $\chi ^2$ 分布 mit $n$ 个自由度, 存在随机变量$t$ 满足 <strong>t-Verteilung</strong> mit n Freiheitsgraden: </p>
+<p><img src="/archives/dee8f53d/image-20200225215339036.png" style="zoom:50%;"></p>
+<p>随着$n$的增加, t-Verteilung 会趋向于 $\mathcal{N}(0,1)$-Verteilung</p>
+<p><strong>Anwendung der t-Verteilung: Signifikanztest für Stichprobenmittelwert</strong></p>
+<p>Stichprobenmittelwert $\hat{\mathbf{x}}:$ normalverteilt<br>Stichprobenvarianz $\mathrm{s}_{\mathrm{x}}^{2}: \quad \chi^{2}$ -verteilt<br>$\Longrightarrow$ Verhältnis<img src="/archives/dee8f53d/image-20200225215722685.png" style="zoom:50%;"> ist t-verteilt</p>
+<p><img src="/archives/dee8f53d/image-20200225215753098.png" style="zoom: 33%;"></p>
+<h3 id="Statische-Testverfahren"><a href="#Statische-Testverfahren" class="headerlink" title="Statische Testverfahren"></a>Statische Testverfahren</h3><h4 id="Konfidenzintervall-und-statistische-Sicherheit-置信区间和统计确定性"><a href="#Konfidenzintervall-und-statistische-Sicherheit-置信区间和统计确定性" class="headerlink" title="Konfidenzintervall und statistische Sicherheit(置信区间和统计确定性)"></a>Konfidenzintervall und statistische Sicherheit(置信区间和统计确定性)</h4><p><strong>Konfidenzintervall:</strong> Intervall $\left[\mu_{x}-x_{\alpha}, \mu_{x}+x_{\alpha}\right],$ welches den zu schätzenden Parameter mit einer bestimmten Wahrscheinlichkeit enthält</p>
+<p><strong>Irrtumswahrscheinlichkeit: </strong> <img src="/archives/dee8f53d/image-20200225221451155.png" style="zoom:50%;"></p>
+<p><strong>Statistische Sicherheit:</strong> <img src="/archives/dee8f53d/image-20200225221552708.png" style="zoom:50%;"></p>
+<p><img src="/archives/dee8f53d/image-20200225221619906.png" style="zoom:50%;"></p>
+<p>在实际应用中，通常使用<strong>正态分布</strong></p>
+<p>$\rightarrow$ <strong>Konfidenzintervall</strong> in Vielfachen $c$ der Standardabweichung ausgedrückt:</p>
+<p><img src="/archives/dee8f53d/image-20200225221903498.png" style="zoom:50%;"></p>
+<p><img src="/archives/dee8f53d/image-20200225221926117.png" style="zoom:50%;"></p>
+<p>Die Standardabweichung des Stichprobenmittelwertes: $\sigma_{\hat{\mathbf{x}}}=\frac{\sigma_{\mathbf{x}}}{\sqrt{n}}$ </p>
+<p>$\Longrightarrow$ <img src="/archives/dee8f53d/image-20200226130349193.png" alt="image-20200226130349193" style="zoom:50%;"></p>
+<p><strong>Messunsicherheit: </strong> <img src="/archives/dee8f53d/image-20200226130424108.png" style="zoom:50%;"></p>
+<p><strong>statistische Sicherheit bei Normalverteilung:</strong></p>
+<p><img src="/archives/dee8f53d/image-20200225222315464.png" style="zoom: 50%;"></p>
+<p>Die Transformation $z=\frac{x-\mu_{x}}{\sigma_{x}}$ führt auf eine Standardnormalverteilung:</p>
+<p><img src="/archives/dee8f53d/image-20200226125637881.png" style="zoom:50%;"></p>
+<p><strong>Gauß’schen Fehlerfunktion: </strong> $\operatorname{erf}(c)=\frac{2}{\sqrt{\pi}} \int_{0}^{c} \mathrm{e}^{-x^{2}} \mathrm{d} x$ </p>
+<p><img src="/archives/dee8f53d/image-20200226125847651.png" style="zoom:50%;"></p>
+<p><img src="/archives/dee8f53d/image-20200226125919622.png" style="zoom: 33%;"></p>
+<p>在实际应用中，$\sigma_x$ 是不知道的，因此我们使用 empirische Standabweichung $s_x$ 作为估计值</p>
+<p>Die Transformation: <img src="/archives/dee8f53d/image-20200226131151034.png" style="zoom:50%;"> T-Verteilung mit $n-1$ Freiheitsgraden</p>
+<p>Die statistische Sicherheit <strong>aus einer Stichprobe:</strong></p>
+<p><img src="/archives/dee8f53d/image-20200226131857285.png" style="zoom:50%;"></p>
+<p><img src="/archives/dee8f53d/image-20200226132159794.png" style="zoom: 33%;"></p>
+<p><strong>Praktische Ermittlung des Konfidenzintervalls aus einer Stichprobe:</strong></p>
+<ol>
+<li>Wahl einer statistischen Sicherheit $P\{|\mathrm{t}| \leq c\}$</li>
+<li>Ablesen des Wertes $c$ mit der statistischen Sicherheit und dem Stichprobenumfang $n$</li>
+<li>Berechnung der Standardabweichung der Stichprobe:<script type="math/tex; mode=display">
+\mathbf{s}_{\mathbf{x}}=\sqrt{\frac{1}{n-1} \sum_{i=1}^{n}\left(\mathbf{x}_{i}-\hat{\mathbf{x}}\right)^{2}}</script></li>
+<li>Mit der Messunsicherheit des Stichprobenmittelwertes<script type="math/tex; mode=display">
+u_{\hat{\mathbf{x}}}=c \cdot \frac{\mathbf{s}_{\mathbf{x}}}{\sqrt{n}}</script>ergibt sich das <strong>Vertrauensintervall</strong> zu:</li>
+</ol>
+<p><img src="/archives/dee8f53d/image-20200226132840742.png" style="zoom:50%;"></p>
+<h4 id="Hypothesen-und-Testverfahren-假设检验"><a href="#Hypothesen-und-Testverfahren-假设检验" class="headerlink" title="Hypothesen und Testverfahren(假设检验)"></a>Hypothesen und Testverfahren(假设检验)</h4><p><strong>Nullhypothese</strong> $H0$ (零假设): 一般是一个正命题，你要做的就是找到一个反例去否定它。而原假设的反面，叫做<strong>Alternativhypothese</strong> $H1$ (备择假设): 一般用来表示，如果拒绝了原假设，也就证明了备择假设是正确的。</p>
+<p><img src="/archives/dee8f53d/image-20200226150935442.png" style="zoom:50%;"></p>
+<p><strong>Signifikanzniveau $\alpha$</strong> : Irrtumswahrscheinlichkeit, die man bereit ist zu akzeptieren, falls das Testverfahren eine Ablehnung einer tatsächlich zutreffenden Nullhypothese $H_{0}$ ergibt</p>
+<p>$\rightarrow$ Wahl eines <strong>kleinen</strong> Signifikanzniveaus: <img src="/archives/dee8f53d/image-20200226151323502.png" style="zoom:50%;"></p>
+<p><em>α</em>风险代表生产者的风险，<em>β</em>风险代表使用者的风险。在产品出厂时通常要做终检，<em>α</em>风险的含义就是将合格的产品检验为不合格的产品，要么返修、要么报废，总之生产者要承担损失；<em>β</em>风险是把不合格的产品当成合格的产品流到使用者手上，给使用者带来损失。</p>
+<p><img src="/archives/dee8f53d/image-20200226152102018.png" style="zoom: 33%;"></p>
+<h4 id="Signifikanztest-fur-den-Stichprobenmittelwert"><a href="#Signifikanztest-fur-den-Stichprobenmittelwert" class="headerlink" title="Signifikanztest für den Stichprobenmittelwert"></a>Signifikanztest für den Stichprobenmittelwert</h4><p><strong>Frage:</strong> Gehört eine Stichprobe zu einer vorgegebenen normalverteilten Grundgesamtheit? 是否属于正态分布</p>
+<p><strong>Vorgehensweise</strong></p>
+<ol>
+<li><p>Voraussetzungen prüfen:</p>
+<ul>
+<li>Unabhängigkeit der Messwerte</li>
+<li>Normalverteilung der Grundgesamtheit mit Erwartungswert $\mu_{0}$</li>
+</ul>
+</li>
+<li><p>Ermitteln des Mittelwertes $\hat{\mathbf{x}}$ und ggf. der Standardabweichung $\mathrm{s}_{\mathrm{x}}$ der Stichprobe</p>
+</li>
+<li><p>Aufstellen der Nullhypothese:</p>
+<p><img src="/archives/dee8f53d/image-20200226153210697.png" style="zoom:50%;"></p>
+</li>
+<li><p>Festlegen der <strong>Prüfgröße</strong> $c$ :</p>
+<ul>
+<li>Varianz $\sigma_{x}^{2}$ bekannt $\rightarrow$ Normalverteilung: <img src="/archives/dee8f53d/image-20200226153403742.png" style="zoom:50%;"></li>
+<li>Varianz $\sigma_{\mathrm{x}}^{2}$  unbekannt $\rightarrow$ t-Verteilung: <img src="/archives/dee8f53d/image-20200226153425386.png" alt="image-20200226153425386" style="zoom:50%;"></li>
+</ul>
+</li>
+<li><p>Festlegen des Signifikanzniveaus $\alpha$ $\rightarrow$ statische Sicherheit: <img src="/archives/dee8f53d/image-20200226153620481.png" style="zoom:50%;"></p>
+</li>
+<li><p>Bestimmen der Wahrscheinlichkeit $P(c)$ der Prüfgröße:<br>Aus einer Tabelle wird der Wert für $P(c)$ bzw. $P_{n}(c)$ entnommen</p>
+</li>
+<li><p>Testentscheidung:</p>
+<p><img src="/archives/dee8f53d/image-20200226153747836.png" style="zoom:50%;"></p>
+</li>
+</ol>
+<h4 id="chi-2-Anpassunsgtest"><a href="#chi-2-Anpassunsgtest" class="headerlink" title="$\chi ^2 -Anpassunsgtest$"></a>$\chi ^2 -Anpassunsgtest$</h4><p><strong>Anpassungstest: </strong> Test, ob eine Stichprobe einer Grundgesamtheit mit einer vorgegebenen Wahrscheinlichkeitsdichte $f_x(x)$ entstammt</p>
+<ul>
+<li><p>Teilen des Wertebereichs von $\mathbf{x}$ in $k$ <strong>disjunkte Intervalle(Klassen)</strong></p>
+</li>
+<li><p>Theoretische Wahrscheinlichkeit dafür, dass $\mathbf{x}$ in die Klasse $\Delta_i$ fällt:</p>
+</li>
+</ul>
+<script type="math/tex; mode=display">
+p_{i}=\int_{\Delta_{i}} f_{\mathrm{x}}(x) \mathrm{d} x \quad \sum_{i=1}^{k} p_{i}=1</script><ul>
+<li>Die <strong>Binomialverteilung:</strong> <img src="/archives/dee8f53d/image-20200226165924476.png" style="zoom:50%;"></li>
+</ul>
+<p>Die <strong>Binomialverteilung</strong> geht für $n \rightarrow \infty$ in eine <strong>Normalverteilung</strong> mit Erwartungswert $\mathrm{E}\left\{\mathrm{n}_{i}\right\}=n p_{i}$ $;$ die Wahrscheinlichkeit für  $n_{i}$ Elemente lässt sich wie folgt annähern:</p>
+<p><img src="/archives/dee8f53d/image-20200226171431252.png" style="zoom:50%;"></p>
+<p><img src="/archives/dee8f53d/image-20200226171606548.png" style="zoom:50%;"></p>
+<p><strong>Vorgehensweise</strong></p>
+<p>Vorgehensweise</p>
+<ol>
+<li><p>Voraussetzungen prüfen:</p>
+<ul>
+<li>Unabhängigkeit der Messwerte</li>
+<li>Möglichst großer Stichprobenumfang</li>
+</ul>
+</li>
+<li><p>Histogramm erstellen:</p>
+<ul>
+<li>Histogramm mit $k$ Klassen erstellen</li>
+<li>$n_{i} \geq 1$ bei Randklassen ist erfüllt</li>
+<li>$n_{i} \geq 5$ bei sonstigen Klassen ist erfüllt.</li>
+</ul>
+</li>
+<li><p>Nullhypothese: <img src="/archives/dee8f53d/image-20200226164900472.png" style="zoom:50%;">猜测满足什么分布，如 $H_{0}: f_{\mathbf{x}}(x)=\mathcal{N}\left(\mu=\hat{x}, \sigma^{2}=s_{\mathbf{x}}^{2}\right)$ </p>
+</li>
+<li><p>Signifikanzniveaus $\alpha \rightarrow$ statistische Sicherheit: <img src="/archives/dee8f53d/image-20200226164944608.png" style="zoom:50%;"></p>
+</li>
+<li><p>Berechnen der Prüfgröße: <img src="/archives/dee8f53d/image-20200226165003759.png" style="zoom:50%;"> 先计算出 $p_i$ , 建立表格，如:</p>
+<p><img src="/archives/dee8f53d/image-20200226175232418.png" style="zoom:50%;"> </p>
+</li>
+<li><p>Bestimmung der Freiheitsgrade:</p>
+<p><img src="/archives/dee8f53d/image-20200226165105052.png" style="zoom:50%;"></p>
+<p>Werden z. B. bei einer Normalverteilung der Erwartungswert und die Varianz geschätzt, so verringert sich $m$ zusätzlich um zwei: $m=k-1-2$</p>
+</li>
+<li><p>Bestimmung des Grenzwertes $\chi_{\alpha}^{2}$ der Prüfgröße: 查表</p>
+<p><img src="/archives/dee8f53d/image-20200226175348899.png" style="zoom:50%;"></p>
+<script type="math/tex; mode=display">
+P_m\left(\chi^{2} \leq \chi_{\alpha}^{2}\right)=1-\alpha \quad \rightarrow \quad \chi_{\alpha}^{2}</script></li>
+<li>Testentscheidung:</li>
+</ol>
+<ul>
+<li>Annahme der Nullhypothese: $\quad \chi^{2} \leq \chi_{\alpha}^{2}$</li>
+<li>Ablehnung der Nullhypothese: $\quad \chi^{2}&gt;\chi_{\alpha}^{2}$</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/dee8f53d.html" title="Zufällige Messfehler">http://grenze.cn/archives/dee8f53d.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Normalsverteilung/" rel="tag"><i class="fa fa-tag"></i> Normalsverteilung</a>
+              <a href="/tags/T-Verteilung/" rel="tag"><i class="fa fa-tag"></i> T-Verteilung</a>
+              <a href="/tags/Statische-Testverfahren/" rel="tag"><i class="fa fa-tag"></i> Statische Testverfahren</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/4eb14690.html" rel="prev" title="Kurvenanpassung">
+      <i class="fa fa-chevron-left"></i> Kurvenanpassung
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Grundlagen-der-Wahrscheinlichkeitstheorie"><span class="nav-number">1.</span> <span class="nav-text">Grundlagen der Wahrscheinlichkeitstheorie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stichproben"><span class="nav-number">2.</span> <span class="nav-text">Stichproben</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Normalverteilte-Zufallsvariable"><span class="nav-number">3.</span> <span class="nav-text">Normalverteilte Zufallsvariable</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Zentraler-Grenzwertsatz"><span class="nav-number">3.1.</span> <span class="nav-text">Zentraler Grenzwertsatz</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chi-2-Verteilung"><span class="nav-number">3.2.</span> <span class="nav-text">$\chi^2$-Verteilung</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Student’sche-t-Verteilung"><span class="nav-number">3.3.</span> <span class="nav-text">Student’sche t-Verteilung</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Statische-Testverfahren"><span class="nav-number">4.</span> <span class="nav-text">Statische Testverfahren</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Konfidenzintervall-und-statistische-Sicherheit-置信区间和统计确定性"><span class="nav-number">4.1.</span> <span class="nav-text">Konfidenzintervall und statistische Sicherheit(置信区间和统计确定性)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hypothesen-und-Testverfahren-假设检验"><span class="nav-number">4.2.</span> <span class="nav-text">Hypothesen und Testverfahren(假设检验)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Signifikanztest-fur-den-Stichprobenmittelwert"><span class="nav-number">4.3.</span> <span class="nav-text">Signifikanztest für den Stichprobenmittelwert</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chi-2-Anpassunsgtest"><span class="nav-number">4.4.</span> <span class="nav-text">$\chi ^2 -Anpassunsgtest$</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/archives/dee8f53d.html" title="Zufällige Messfehler" target="_blank">Zufällige Messfehler</a>
+          </li>
+        
+          <li>
+            <a href="/archives/4eb14690.html" title="Kurvenanpassung" target="_blank">Kurvenanpassung</a>
+          </li>
+        
+          <li>
+            <a href="/archives/12c26097.html" title="Stationäres Verhalten" target="_blank">Stationäres Verhalten</a>
+          </li>
+        
+          <li>
+            <a href="/archives/aedd7a7e.html" title="UML-Use Case Diagram" target="_blank">UML-Use Case Diagram</a>
+          </li>
+        
+          <li>
+            <a href="/archives/9384a912.html" title="Modeling of Data and Function" target="_blank">Modeling of Data and Function</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">153k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:19</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: '4a17dfd22729051c17e9d5a9c428bcb5',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
