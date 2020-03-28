@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="引言什么是机器学习？ Tom Mitchell provides a modern definition: “A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at task">
+<meta name="keywords" content="梯度下降法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Week 1">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;7dbb66b9.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="引言什么是机器学习？ Tom Mitchell provides a modern definition: “A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at task">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;7dbb66b9&#x2F;image-20200327160131621.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;7dbb66b9&#x2F;image-20200327160750468.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;7dbb66b9&#x2F;image-20200327162636277.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;7dbb66b9&#x2F;image-20200327162815106.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;7dbb66b9&#x2F;image-20200327162933940.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;7dbb66b9&#x2F;image-20200327191640631.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;7dbb66b9&#x2F;image-20200327193221274.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;7dbb66b9&#x2F;image-20200328150954330.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;7dbb66b9&#x2F;image-20200328153119385.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;7dbb66b9&#x2F;image-20200328153214499.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;7dbb66b9&#x2F;image-20200328151731309.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;7dbb66b9&#x2F;image-20200328152431506.png">
+<meta property="og:updated_time" content="2020-03-28T19:22:02.424Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;7dbb66b9&#x2F;image-20200327160131621.png">
+
+<link rel="canonical" href="http://grenze.cn/archives/7dbb66b9.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Week 1 | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">34</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">31</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">57</span></a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/7dbb66b9.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Week 1
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-26 20:00:27" itemprop="dateCreated datePublished" datetime="2020-02-26T20:00:27+01:00">2020-02-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-28 20:22:02" itemprop="dateModified" datetime="2020-03-28T20:22:02+01:00">2020-03-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><h3 id="什么是机器学习？"><a href="#什么是机器学习？" class="headerlink" title="什么是机器学习？"></a>什么是机器学习？</h3><ul>
+<li>Tom Mitchell provides a modern definition: “A computer program is said to learn from <strong>experience E</strong> with respect to some class of <strong>tasks T</strong> and <strong>performance measure P</strong>, if its performance at tasks in T, as measured by P, improves with experience E.”<a id="more"></a></li>
+<li>Example:<br>过滤垃圾邮件，电子邮件系统会根据用户对电子邮件的标记(是/不是垃圾邮件)不断学习，从而提升过滤垃圾邮件的准确率，定义中的三个字母分别代表：<ul>
+<li>T: 过滤垃圾邮件</li>
+<li>P: 电子邮件系统过滤垃圾邮件的准确率</li>
+<li>E: 用户对电子邮件的标记</li>
+</ul>
+</li>
+</ul>
+<p>目前，机器学习的算法主要分为<strong>监督学习</strong>和<strong>无监督学习</strong>两种。</p>
+<h3 id="监督学习-Supervised-Learning"><a href="#监督学习-Supervised-Learning" class="headerlink" title="监督学习(Supervised Learning)"></a>监督学习(Supervised Learning)</h3><blockquote>
+<p>In supervised learning, we are given a data set and already know what our correct output should look like, having the idea that there is a relationship between the input and the output.</p>
+</blockquote>
+<p>监督学习: 教计算机如何去完成预测任务（有反馈），预先给一定数据量的输入<strong>和对应的结果</strong>即训练集，建模拟合，最后让计算机预测未知数据的结果</p>
+<p>监督学习被分为“<strong>回归(regression)</strong>”和<strong>“分类(classification)”</strong>两类</p>
+<ul>
+<li><p><strong>回归(regression)</strong>: 预测一系列的连续值</p>
+<p>Example: 房屋价格预测<br>提供面积，价格数据关系，根据这些数据来预测任意面积的房屋价格。因为价格关于面积的函数是连续的，所以这是一个回归问题。<br><img src="/archives/7dbb66b9/image-20200327160131621.png" style="zoom:50%;"></p>
+<p>线性模型与实际数据的拟合度不是特别好。如果采用二次函数进行拟合，拟合度更高。因此，回归问题的模型选取是十分重要的。</p>
+</li>
+<li><p><strong>分类(classification)</strong>: 预测一系列的离散值，即根据数据预测对象属于哪个分类</p>
+<p>Example: 癌症肿瘤，判断良性，恶性<br>提供一些乳腺癌关于（肿瘤尺寸，良性/恶性）的真实数据，现在要根据某一肿瘤的尺寸，来判断是否是良性的。在这个例子里，输出是Yes or Not, 是一个分类问题。<img src="/archives/7dbb66b9/image-20200327160750468.png" style="zoom:50%;"></p>
+</li>
+</ul>
+<h3 id="无监督学习-Unsupervised-Learning"><a href="#无监督学习-Unsupervised-Learning" class="headerlink" title="无监督学习(Unsupervised Learning)"></a>无监督学习(Unsupervised Learning)</h3><blockquote>
+<p>Unsupervised learning allows us to approach problems with little or no idea what our results should look like. We can derive structure from data where we don’t necessarily know the effect of the variables.</p>
+</blockquote>
+<p>监督学习，使我们能够处理那些对结果了解甚少、甚至根本不了解的问题。我们可以在不知道变量的具体影响的情况下，从数据中提取出结构 (structure)</p>
+<p>计算机可能会把特定的数据集归为几个不同的簇，故叫做<strong>聚类算法(clustering)</strong></p>
+<p><strong>Example 1:新闻聚合</strong><br>在例如谷歌新闻这样的网站中，每天后台都会收集成千上万的新闻，然后将这些新闻分组成一个个的新闻专题，这样一个又一个聚类，就是应用了无监督学习的结果。<br>  <img src="/archives/7dbb66b9/image-20200327162636277.png" style="zoom:50%;"></p>
+<p><strong>Example 2: 基因测定</strong><br>在这个例子中，你得到了一系列的个体，用不同颜色标记了它们特定基因序列的拥有程度。现在通过聚类算法，你能把这些个体归入不同的类里。<br><img src="/archives/7dbb66b9/image-20200327162815106.png" style="zoom:50%;"></p>
+<p><strong>Example 3: 鸡尾酒问题</strong><br>在鸡尾酒会上，大家说话声音彼此重叠，几乎很难分辨出面前的人说了什么。我们很难对于这个问题进行数据标注，而这里的通过机器学习的无监督学习算法，就可以将说话者的声音同背景音乐分离出来<br><img src="/archives/7dbb66b9/image-20200327162933940.png" style="zoom:50%;"></p>
+<h3 id="编程语言建议"><a href="#编程语言建议" class="headerlink" title="编程语言建议"></a>编程语言建议</h3><p>看起来，鸡尾酒会问题算法的实现不是一个简单的事情。但是在Octave编程环境（免费的开源软件）下，问题可以用一行代码解决： <code>[W,s,v] = svd((repmat(sum(x.*x,1),size(x,1),1).*x)*x&#39;);</code></p>
+<p>在机器学习刚开始时，<strong>推荐使用 Octave 类的工程计算编程软件</strong>，因为在 C++ 或 Java 等编程语言中，编写对应的代码需要用到复杂的库以及要写大量的冗余代码，比较耗费时间，建议可以在学习过后再考虑使用其他语言来构建系统。 另外，在做<strong>原型搭建</strong>的时候也应该先考虑使用类似于 Octave 这种便于计算的编程软件，当其已经可以工作后，才将模型移植到其他的高级编程语言中。</p>
+<h2 id="模型和代价函数-Model-and-cost-function"><a href="#模型和代价函数-Model-and-cost-function" class="headerlink" title="模型和代价函数(Model and cost function)"></a>模型和代价函数(Model and cost function)</h2><h3 id="模型描述-Model-Represent"><a href="#模型描述-Model-Represent" class="headerlink" title="模型描述(Model Represent)"></a>模型描述(Model Represent)</h3><p>首先，我们定义三个变量：</p>
+<ul>
+<li>$m$=用于训练的样本数</li>
+<li>$x^i$=第i个训练样本“输入”变量/特征量</li>
+<li>$y^i$=第i个训练样本“输出”变量/特征量</li>
+</ul>
+<p>以及一个函数：</p>
+<script type="math/tex; mode=display">
+h_{\theta}=\theta_{0}+\theta_{1} x</script><p><img src="/archives/7dbb66b9/image-20200327191640631.png" style="zoom:50%;"></p>
+<p>其中$h$称为<strong>假设(hypothesis)</strong> 。假设函数根据输入，给出预测结果输出,即是一个 的映射。</p>
+<h3 id="代价函数-cost-function"><a href="#代价函数-cost-function" class="headerlink" title="代价函数(cost function)"></a>代价函数(cost function)</h3><blockquote>
+<p>一般而言，我们通过调整θ，使得所有训练集数据与其拟合数据的差的平方和更小，即认为得到了拟合度更好的函数。</p>
+</blockquote>
+<p>我们的目的在于求解最接近实际结果的 $h$ 方程，该问题可以表达为求解</p>
+<script type="math/tex; mode=display">
+J\left(\theta_{0}, \theta_{1}\right)=\frac{1}{2 m} \sum_{i=1}^{m}\left(h_{\theta}\left(x^{(i)}\right)-y^{(i)}\right)^{2}</script><p>注意，其中的$\frac{1}{2m}$取$2m$而非$m$当系数是为了后面梯度下降算法里，求导后消掉2</p>
+<p>讨论到这里，我们的问题就转化成了<strong>求解 $minimize J\left(\theta_{0}, \theta_{1}\right)$ </strong>。对于我们研究的单变量线性回归而言，$J$函数关于$θ$的等高线图像大致如下：</p>
+<p><img src="/archives/7dbb66b9/image-20200327193221274.png" style="zoom:50%;"></p>
+<p>当我们找到了这些同心椭圆的中心点时，就找到了J函数的最小值，此时拟合度更好。</p>
+<h2 id="梯度下降-Gradient-Descent"><a href="#梯度下降-Gradient-Descent" class="headerlink" title="梯度下降(Gradient Descent)"></a>梯度下降(Gradient Descent)</h2><p>在特征量很大的情况下，即便是借用计算机来生成图像，人工的方法也很难读出  $J$ 的最小值，并且大多数情况无法进行可视化，故引入<strong>梯度下降(Gradient Descent)方法，让计算机自动找出最小化代价函数时对应的 $\theta$ 值。</strong></p>
+<p><strong>思想:</strong></p>
+<ul>
+<li>从某一对 $\theta_0,\theta1$ 出发</li>
+<li>不断尝试改变 $\theta_0,\theta1$ ，使得$J(\theta_0,\theta1)$ 减小，<strong>逐步逼近</strong>最小值</li>
+<li>改变的策略：每一次改变的方向，取当前位置梯度下降的方向</li>
+<li>由于下降的情况只考虑当前参数组合周围的情况，只能确定<strong>局部最小值</strong></li>
+</ul>
+<p>下图根据不同的起始点，产生了两个不同的局部最小值</p>
+<p><img src="/archives/7dbb66b9/image-20200328150954330.png" style="zoom:50%;"></p>
+<p><strong>线性回归中的梯度下降:</strong></p>
+<p>线性回归模型</p>
+<ul>
+<li>$h_{\theta}(x)=\theta_{0}+\theta_{1} x$ </li>
+<li>$J\left(\theta_{0}, \theta_{1}\right)=\frac{1}{2 m} \sum_{i=1}^{m}\left(h_{\theta}\left(x^{(i)}\right)-y^{(i)}\right)^{2}<br>$ </li>
+</ul>
+<p>梯度下降算法</p>
+<p>repeat until convergence:{</p>
+<p>$\theta_{j}:=\theta_{j}-\alpha \frac{\partial}{\partial \theta_{j}} J\left(\theta_{0}, \theta_{1}\right)$</p>
+<p>}</p>
+<blockquote>
+<p>$\begin{aligned}<br>&amp;\alpha: \text { 学习速率(learning rate) }, \alpha&gt;0\\<br>&amp;\frac{\partial}{\partial \theta_{j}} J\left(\theta_{0}, \theta_{1}\right): J\left(\theta_{0}, \theta_{1}\right)\text{的偏导}<br>\end{aligned}$ </p>
+</blockquote>
+<p>学习速率决定了参数值变化的速率即”<strong>走多少距离</strong>“，而偏导这部分决定了下降的方向即”<strong>下一步往哪里</strong>“走。</p>
+<ul>
+<li>学习速率过小：收敛的太慢，需要更多次的迭代<br><img src="/archives/7dbb66b9/image-20200328153119385.png" style="zoom:50%;"></li>
+<li>学习速率过大：可能越过最低点，甚至导致无法收敛<br><img src="/archives/7dbb66b9/image-20200328153214499.png" style="zoom:50%;"></li>
+</ul>
+<p>直接将线性回归模型公式代入梯度下降公式可得出公式</p>
+<p><img src="/archives/7dbb66b9/image-20200328151731309.png" style="zoom:50%;"></p>
+<p>由于线性回归函数呈现<strong>碗状</strong>，且<strong>只有一个</strong>全局的最优值，所以函数<strong>一定总会</strong>收敛到全局最小值（学习速率不可过大）。同时，函数 $J$ 被称为<strong>凸二次函数</strong>，而线性回归函数求解最小值问题属于<strong>凸函数优化问题</strong>。</p>
+<p><img src="/archives/7dbb66b9/image-20200328152431506.png" style="zoom:50%;"></p>
+<p>使用循环求解，代码较为冗余，后面会讲到如何使用<strong>向量化(Vectorization)</strong>来简化代码并优化计算，使梯度下降运行的更快更好。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/7dbb66b9.html" title="Week 1">http://grenze.cn/archives/7dbb66b9.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> 梯度下降法</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/dee8f53d.html" rel="prev" title="Zufällige Messfehler">
+      <i class="fa fa-chevron-left"></i> Zufällige Messfehler
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/45595c6.html" rel="next" title="剑桥大学出版社资源免费开放">
+      剑桥大学出版社资源免费开放 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是机器学习？"><span class="nav-number">1.1.</span> <span class="nav-text">什么是机器学习？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#监督学习-Supervised-Learning"><span class="nav-number">1.2.</span> <span class="nav-text">监督学习(Supervised Learning)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无监督学习-Unsupervised-Learning"><span class="nav-number">1.3.</span> <span class="nav-text">无监督学习(Unsupervised Learning)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程语言建议"><span class="nav-number">1.4.</span> <span class="nav-text">编程语言建议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型和代价函数-Model-and-cost-function"><span class="nav-number">2.</span> <span class="nav-text">模型和代价函数(Model and cost function)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型描述-Model-Represent"><span class="nav-number">2.1.</span> <span class="nav-text">模型描述(Model Represent)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代价函数-cost-function"><span class="nav-number">2.2.</span> <span class="nav-text">代价函数(cost function)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度下降-Gradient-Descent"><span class="nav-number">3.</span> <span class="nav-text">梯度下降(Gradient Descent)</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/archives/45595c6.html" title="剑桥大学出版社资源免费开放" target="_blank">剑桥大学出版社资源免费开放</a>
+          </li>
+        
+          <li>
+            <a href="/archives/7dbb66b9.html" title="Week 1" target="_blank">Week 1</a>
+          </li>
+        
+          <li>
+            <a href="/archives/dee8f53d.html" title="Zufällige Messfehler" target="_blank">Zufällige Messfehler</a>
+          </li>
+        
+          <li>
+            <a href="/archives/4eb14690.html" title="Kurvenanpassung" target="_blank">Kurvenanpassung</a>
+          </li>
+        
+          <li>
+            <a href="/archives/12c26097.html" title="Stationäres Verhalten" target="_blank">Stationäres Verhalten</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">160k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:25</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: '587d70c9c22fd15c678ef7d414986fc4',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
