@@ -1255,7 +1255,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #d717ff;
+  background: #f1e561;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2900,6 +2900,7 @@ body {
   background-attachment: fixed;
   background-size: cover;
   background-position: 50% 50%;
+  line-height: 1.6;
 }
 .content-wrap {
   opacity: 1;
@@ -2943,7 +2944,7 @@ a {
   border-bottom: none;
 }
 blockquote {
-  font-family: 'Noto Serif SC', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'EB Garamond', 'STKaiti', 'KaiTi', 'SimKai', 'Noto Serif SC', sans-serif;
 }
 .posts-expand .post-tags {
   margin: 0;
@@ -3033,9 +3034,6 @@ span.exturl {
   color: #5073b8;
   border-bottom: none;
   text-decoration: none;
-}
-.post-body p {
-  margin: 0 0 2px 0;
 }
 .post-body>p:first-child::first-letter {
   float: left;
