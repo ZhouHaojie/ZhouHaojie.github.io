@@ -111,7 +111,7 @@ J\left(\theta_{0}, \theta_{1}\right)=\frac{1}{2 m} \sum_{i=1}^{m}\left(h_{\theta
         <category>Machine Learning</category>
       </categories>
       <tags>
-        <tag>梯度下降法</tag>
+        <tag>单线性回归梯度下降法</tag>
       </tags>
   </entry>
   <entry>
