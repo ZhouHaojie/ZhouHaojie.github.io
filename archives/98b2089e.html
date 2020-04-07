@@ -47,15 +47,15 @@
   };
 </script>
 
-  <meta name="description" content="1. 简介Valgrind 是一套类似于 gprof 的动态检测的工具集，由于使用方便，不需修改目标程序源码，输出清晰图文并茂等优势，常被用作后台(特别是linux后台)服务内存泄漏检测、性能打点、竞态检测等。">
+  <meta name="description" content="简介Valgrind 是一套类似于 gprof 的动态检测的工具集，由于使用方便，不需修改目标程序源码，输出清晰图文并茂等优势，常被用作后台(特别是linux后台)服务内存泄漏检测、性能打点、竞态检测等。">
 <meta name="keywords" content="C++,valgrind">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Valgrind-内存泄漏check">
 <meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;98b2089e.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
-<meta property="og:description" content="1. 简介Valgrind 是一套类似于 gprof 的动态检测的工具集，由于使用方便，不需修改目标程序源码，输出清晰图文并茂等优势，常被用作后台(特别是linux后台)服务内存泄漏检测、性能打点、竞态检测等。">
+<meta property="og:description" content="简介Valgrind 是一套类似于 gprof 的动态检测的工具集，由于使用方便，不需修改目标程序源码，输出清晰图文并茂等优势，常被用作后台(特别是linux后台)服务内存泄漏检测、性能打点、竞态检测等。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-04-07T13:11:02.316Z">
+<meta property="og:updated_time" content="2020-04-07T19:03:49.024Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://grenze.cn/archives/98b2089e.html">
@@ -158,7 +158,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">38</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">39</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -168,7 +168,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">61</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">62</span></a>
 
   </li>
         <li class="menu-item menu-item-movies">
@@ -262,7 +262,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-07 15:11:02" itemprop="dateModified" datetime="2020-04-07T15:11:02+02:00">2020-04-07</time>
+                <time title="修改时间：2020-04-07 21:03:49" itemprop="dateModified" datetime="2020-04-07T21:03:49+02:00">2020-04-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -308,8 +308,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h3><p>Valgrind 是一套类似于 gprof 的动态检测的工具集，由于使用方便，不需修改目标程序源码，输出清晰图文并茂等优势，常被用作后台(特别是linux后台)服务内存泄漏检测、性能打点、竞态检测等。<a id="more"></a></p>
-<h3 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h3><ul>
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Valgrind 是一套类似于 gprof 的动态检测的工具集，由于使用方便，不需修改目标程序源码，输出清晰图文并茂等优势，常被用作后台(特别是linux后台)服务内存泄漏检测、性能打点、竞态检测等。<a id="more"></a></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
 <li><p>官方网站 <a href="http://valgrind.org/downloads/current.html" rel="external nofollow noopener noreferrer" target="_blank">http://valgrind.org/downloads/current.html</a> 下载最新安装包，如 valgrind 3.15.0 (tar.bz2) 解压</p>
 </li>
 <li><p>常规源码编译安装:  <code>./configure</code>, <code>make</code>, <code>sudo make install</code></p>
@@ -317,7 +317,7 @@
 <li><p>安装完成后, <code>valgrind --version</code> 输出版本号</p>
 </li>
 </ul>
-<h3 id="3-使用"><a href="#3-使用" class="headerlink" title="3. 使用"></a>3. 使用</h3><p>检测这样一段代码是否有内存泄漏：</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>检测这样一段代码是否有内存泄漏：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> *pInt = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">// delete [] pInt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 <ol>
 <li>start Valgrind with the following command</li>
@@ -348,16 +348,16 @@
       <div class="popular-posts-title"><a href="\archives\c6bd2a86.html" rel="bookmark">WissProg-C++(3)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\archives\65b38d0a.html" rel="bookmark">WissProg-C++(7)</a></div>
+      <div class="popular-posts-title"><a href="\archives\d301efc5.html" rel="bookmark">C++中的RAII机制</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\7ca8bc4b.html" rel="bookmark">WissProg-C++(6)</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\archives\53a48da5.html" rel="bookmark">C++-左值右值与移动语义</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\archives\5785ef88.html" rel="bookmark">WissProg-C++(5)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\archives\4e9edec9.html" rel="bookmark">WissProg-C++(4)</a></div>
     </li>
   </ul>
 
@@ -417,10 +417,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/archives/4dec6071.html" rel="prev" title="C++ istringstream">
-      <i class="fa fa-chevron-left"></i> C++ istringstream
+    <a href="/archives/9a00868c.html" rel="prev" title="Udacity免费开放纳米学位一个月">
+      <i class="fa fa-chevron-left"></i> Udacity免费开放纳米学位一个月
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/archives/4dec6071.html" rel="next" title="C++ istringstream">
+      C++ istringstream <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -459,7 +462,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-简介"><span class="nav-number">1.</span> <span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装"><span class="nav-number">2.</span> <span class="nav-text">2. 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-使用"><span class="nav-number">3.</span> <span class="nav-text">3. 使用</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">3.</span> <span class="nav-text">使用</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -476,7 +479,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-count">62</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -489,7 +492,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -523,11 +526,15 @@
         
         
           <li>
-            <a href="/archives/98b2089e.html" title="Valgrind-内存泄漏check" target="_blank">Valgrind-内存泄漏check</a>
+            <a href="/archives/d301efc5.html" title="C++中的RAII机制" target="_blank">C++中的RAII机制</a>
           </li>
         
           <li>
             <a href="/archives/4dec6071.html" title="C++ istringstream" target="_blank">C++ istringstream</a>
+          </li>
+        
+          <li>
+            <a href="/archives/98b2089e.html" title="Valgrind-内存泄漏check" target="_blank">Valgrind-内存泄漏check</a>
           </li>
         
           <li>
@@ -536,10 +543,6 @@
         
           <li>
             <a href="/archives/e4b23703.html" title="Week 2" target="_blank">Week 2</a>
-          </li>
-        
-          <li>
-            <a href="/archives/45595c6.html" title="剑桥大学出版社资源免费开放" target="_blank">剑桥大学出版社资源免费开放</a>
           </li>
         
       </ul>
@@ -572,13 +575,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">165k</span>
+    <span title="站点总字数">167k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:30</span>
+    <span title="站点阅读时长">2:32</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>

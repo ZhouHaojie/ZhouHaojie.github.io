@@ -47,18 +47,18 @@
   };
 </script>
 
-  <meta name="description" content="1. What is “structured binding declaration”? (什么是结构化绑定声明) It’s a declaration statement, which means some identifiers are declared and initialized (结构化绑定声明是一个声明语句，意味着声明了一些标识符并对标识符做了初始化)。在C++17中引入">
-<meta name="keywords" content="C++">
+  <meta name="description" content="什么是RAII?RAII是Resource Acquisition Is Initialization的简称，是C++语言的一种管理资源、避免泄漏的用法。利用的就是C++构造的对象最终会被销毁的原则。RAII的做法是使用一个对象，在其构造时获取对应的资源，在对象生命期内控制对资源的访问，使之始终保持有效，最后在对象析构的时候，释放构造时获取的资源。">
+<meta name="keywords" content="C++,RAII">
 <meta property="og:type" content="article">
-<meta property="og:title" content="结构化绑定声明">
-<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e70dd349.html">
+<meta property="og:title" content="C++中的RAII机制">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;d301efc5.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
-<meta property="og:description" content="1. What is “structured binding declaration”? (什么是结构化绑定声明) It’s a declaration statement, which means some identifiers are declared and initialized (结构化绑定声明是一个声明语句，意味着声明了一些标识符并对标识符做了初始化)。在C++17中引入">
+<meta property="og:description" content="什么是RAII?RAII是Resource Acquisition Is Initialization的简称，是C++语言的一种管理资源、避免泄漏的用法。利用的就是C++构造的对象最终会被销毁的原则。RAII的做法是使用一个对象，在其构造时获取对应的资源，在对象生命期内控制对资源的访问，使之始终保持有效，最后在对象析构的时候，释放构造时获取的资源。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-20T17:48:26.110Z">
+<meta property="og:updated_time" content="2020-04-07T19:40:51.614Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://grenze.cn/archives/e70dd349.html">
+<link rel="canonical" href="http://grenze.cn/archives/d301efc5.html">
 
 
 <script id="page-configurations">
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title>结构化绑定声明 | ZhouHaojie的博客</title>
+  <title>C++中的RAII机制 | ZhouHaojie的博客</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
     <script pjax>
@@ -231,7 +231,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/e70dd349.html">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/d301efc5.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -244,7 +244,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          结构化绑定声明
+          C++中的RAII机制
         </h1>
 
         <div class="post-meta">
@@ -254,29 +254,17 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-12-15 18:21:45" itemprop="dateCreated datePublished" datetime="2019-12-15T18:21:45+01:00">2019-12-15</time>
+              <time title="创建时间：2020-04-07 16:33:21 / 修改时间：21:40:51" itemprop="dateCreated datePublished" datetime="2020-04-07T16:33:21+02:00">2020-04-07</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-20 18:48:26" itemprop="dateModified" datetime="2020-01-20T18:48:26+01:00">2020-01-20</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/WissProg/" itemprop="url" rel="index">
-                    <span itemprop="name">WissProg</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/WissProg/C/" itemprop="url" rel="index">
+                  <a href="/categories/C/" itemprop="url" rel="index">
                     <span itemprop="name">C++</span>
                   </a>
                 </span>
@@ -295,14 +283,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
+              <span>1.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -314,25 +302,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="1-What-is-“structured-binding-declaration”-什么是结构化绑定声明"><a href="#1-What-is-“structured-binding-declaration”-什么是结构化绑定声明" class="headerlink" title="1. What is “structured binding declaration”? (什么是结构化绑定声明)"></a>1. What is “structured binding declaration”? (什么是结构化绑定声明)</h4><ul>
-<li>It’s a declaration statement, which means some identifiers are declared and initialized (结构化绑定声明是一个声明语句，意味着声明了一些标识符并对标识符做了初始化)。在C++17中引入</li>
-</ul>
-<a id="more"></a>
+        <h3 id="什么是RAII"><a href="#什么是RAII" class="headerlink" title="什么是RAII?"></a>什么是RAII?</h3><p>RAII是Resource Acquisition Is Initialization的简称，是C++语言的一种管理资源、避免泄漏的用法。利用的就是C++构造的对象最终会被销毁的原则。RAII的做法是使用一个对象，在其构造时获取对应的资源，在对象生命期内控制对资源的访问，使之始终保持有效，最后在对象析构的时候，释放构造时获取的资源。<a id="more"></a></p>
+<h3 id="为什么使用RAII"><a href="#为什么使用RAII" class="headerlink" title="为什么使用RAII?"></a>为什么使用RAII?</h3><p>我们在编程使用资源时一般经历三个步骤</p>
 <ul>
-<li>Binds the specified names to subobjects or elements of the initializer. (将指定的一些名字绑定到初始化器的子对象或者元素上)</li>
+<li>申请资源 </li>
+<li>使用资源 </li>
+<li>释放资源</li>
 </ul>
-<h4 id="2-用于原生数组的结构化绑定声明"><a href="#2-用于原生数组的结构化绑定声明" class="headerlink" title="2. 用于原生数组的结构化绑定声明"></a>2. 用于原生数组的结构化绑定声明</h4><p>若初始化表达式为数组类型，则标识符列表中的名字绑定到数组元素</p>
-<p>1) 标识符数量必须等于数组元素数量<br>2) 标识符类型与数组元素类型一致</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">int</span> priArr [] &#123;<span class="number">42</span>, <span class="number">21</span>, <span class="number">7</span>&#125;;<span class="comment">// ai/bi/ci 的基本类型都是int，只是cv标识或引用标识不同</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">auto</span> [a1, a2, a3] = priArr; <span class="comment">// a1 是 priArr[0] 的拷贝，a2, a3类推</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">const</span> <span class="keyword">auto</span> [b1, b2, b3] (priArr); <span class="comment">// b1 是 priArr[0] 的只读拷贝，b2, b3类推</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">auto</span> &amp;[c1, c2, c3] &#123;priArr&#125;; <span class="comment">// c1 是 priArr[0] 的引用，c2, c3类推</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  c3 = <span class="number">14</span>;                     <span class="comment">// priArr[2]的值变为14</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<h4 id="3-用于std-array的结构化绑定声明"><a href="#3-用于std-array的结构化绑定声明" class="headerlink" title="3. 用于std::array的结构化绑定声明"></a>3. 用于std::array的结构化绑定声明</h4><p>若初始化表达式为数组类型，则标识符列表中的名字绑定到数组元素</p>
-<p>1) 标识符数量必须等于std::array数组中的元素数量</p>
-<p>2) 标识符类型与std::array中的数组元素类型一致</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;array&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">std</span>::<span class="built_in">array</span> stdArr = &#123;<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">std</span>::<span class="built_in">array</span> &lt;<span class="keyword">int</span>,3&gt; = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">auto</span> [d1, d2, d3] &#123;stdArr&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<h4 id="4-用于对象数据成员的结构化绑定声明"><a href="#4-用于对象数据成员的结构化绑定声明" class="headerlink" title="4. 用于对象数据成员的结构化绑定声明"></a>4. 用于对象数据成员的结构化绑定声明</h4><p>Structured Binding Declaration for Data Members(用于数据成员的结构化绑定声明)<br>若初始化表达式为类/结构体类型，则标识符列表中的名字绑定到类/结构体的非静态数据成员上</p>
-<p>1) 数据成员必须为公有成员<br>2) 标识符数量必须等于数据成员的数量<br>3) 标识符类型与数据成员类型一致</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> &#123;</span>  <span class="comment">// 可以改用 struct C，然后去掉下面的public属性说明</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">int</span> i &#123; <span class="number">420</span> &#125;; <span class="comment">// 就地初始化</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">char</span> ca[ <span class="number">3</span> ] &#123; <span class="string">'O'</span>, <span class="string">'K'</span>, <span class="string">'!'</span> &#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  C c;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">auto</span> [a1, a2] &#123;c&#125;; <span class="comment">// a1是int类型，a2是char[]类型</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"c.i:"</span> &lt;&lt; a1 &lt;&lt; <span class="string">" c.ca:"</span> &lt;&lt; b2 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<p>More Examples:<br>auto后跟&amp;，则标识符是数据成员的引用<br>auto前可放置const，表明标识符是只读的</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  C c; <span class="comment">// c.i: 420;  c.ca: 'O','K','!'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">auto</span> [a1, a2] &#123;c&#125;; <span class="comment">// a1是c.i的拷贝，a2是char[]类型</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">auto</span>&amp; [b1, b2] &#123;c&#125;; <span class="comment">// b1是int&amp;类型，是c.i的引用，</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// b2是char(&amp;)[3]类型(数组的引用)，是c.ca的引用</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  a1 = <span class="number">100</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"c.i:"</span> &lt;&lt; c.i &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// 输出420，改a1不影响c.i</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  b1 = <span class="number">200</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"c.i:"</span> &lt;&lt; c.i &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// 输出200，通过b1修改了c.i</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>但是资源的释放往往是我们经常忘记的一个环节，所以程序界就想如何在程序员中让资源自动销毁呢？c++之父给出了解决问题的方案: RAII，它充分的利用了C++语言局部对象自动销毁的特性来控制资源的生命周期。</p>
+<p>如果资源不释放的话会造成资源泄露</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> *p = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">delete</span>[] p;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    p = <span class="literal">nullptr</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>当程序很复杂时我们需要为所有 new 分配的内存delete, 会变得很臃肿，而且程序的可理解性和可维护性明显降低。</p>
+<h3 id="如何使用RAII？"><a href="#如何使用RAII？" class="headerlink" title="如何使用RAII？"></a>如何使用RAII？</h3><p>由于系统的资源无法自动释放，但是c++ 中的class 具有自动调用析构函数的功能。因此，我们可以把资源的释放封装在class的析构函数中，这样，当定义的局部变量的生命结束时，它的析构函数就会自动的被调用，我们就不需要释放资源的操作。</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyInt</span>&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> *_p; <span class="comment">// pointer to heap data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    MyInt(<span class="keyword">int</span> *p = <span class="literal">NULL</span>) &#123; _p = p; &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    ~MyInt() &#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"resource "</span> &lt;&lt; *_p &lt;&lt; <span class="string">" deallocated"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">delete</span> _p; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> &amp;<span class="keyword">operator</span>*() &#123; <span class="keyword">return</span> *_p; &#125; <span class="comment">// overload dereferencing operator</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">double</span> den[] = &#123;<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>, <span class="number">5.0</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// allocate the resource on the stack</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="function">MyInt <span class="title">en</span><span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>(i))</span></span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// use the resource</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; *en &lt;&lt; <span class="string">"/"</span> &lt;&lt; den[i] &lt;&lt; <span class="string">" = "</span> &lt;&lt; *en / den[i] &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<ul>
+<li><code>new int(i)</code> 在 heap 上创建了内存，并初始化为 i，返回的时这个内存的地址</li>
+<li><code>MyInt en(...)</code> 调用 <code>MyInt</code> 构造函数，<code>en</code>这个对象是在stack上，所以每个循环都会被自动释放</li>
+<li>heap 内存每次循环过后也会被释放，应为调用了析构函数</li>
+</ul>
+<p>输出结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">0&#x2F;1 &#x3D; 0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">resource 0 deallocated</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">1&#x2F;2 &#x3D; 0.5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">resource 1 deallocated</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">2&#x2F;3 &#x3D; 0.666667</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">resource 2 deallocated</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">3&#x2F;4 &#x3D; 0.75</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">resource 3 deallocated</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">4&#x2F;5 &#x3D; 0.8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">resource 4 deallocated</span></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -342,19 +334,19 @@
   <div class="popular-posts-header">相关文章推荐</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\archives\4e9edec9.html" rel="bookmark">WissProg-C++(4)</a></div>
+      <div class="popular-posts-title"><a href="\archives\c6bd2a86.html" rel="bookmark">WissProg-C++(3)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\archives\d301efc5.html" rel="bookmark">C++中的RAII机制</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\archives\65b38d0a.html" rel="bookmark">WissProg-C++(7)</a></div>
+      <div class="popular-posts-title"><a href="\archives\98b2089e.html" rel="bookmark">Valgrind-内存泄漏check</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\archives\7ca8bc4b.html" rel="bookmark">WissProg-C++(6)</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\archives\53a48da5.html" rel="bookmark">C++-左值右值与移动语义</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\5785ef88.html" rel="bookmark">WissProg-C++(5)</a></div>
     </li>
   </ul>
 
@@ -387,7 +379,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="/http:/grenze.cn/archives/e70dd349.html" title="结构化绑定声明">http://grenze.cn/archives/e70dd349.html</a>
+    <a href="/http:/grenze.cn/archives/d301efc5.html" title="C++中的RAII机制">http://grenze.cn/archives/d301efc5.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -400,6 +392,7 @@
           
           <div class="post-tags">
               <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+              <a href="/tags/RAII/" rel="tag"><i class="fa fa-tag"></i> RAII</a>
           </div>
 
         
@@ -413,13 +406,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/archives/73ac48ad.html" rel="prev" title="C++11智能指针">
-      <i class="fa fa-chevron-left"></i> C++11智能指针
+    <a href="/archives/4dec6071.html" rel="prev" title="C++ istringstream">
+      <i class="fa fa-chevron-left"></i> C++ istringstream
     </a></div>
-      <div class="post-nav-item">
-    <a href="/archives/982c1b29.html" rel="next" title="Penalty Function Methods">
-      Penalty Function Methods <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -458,7 +448,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-What-is-“structured-binding-declaration”-什么是结构化绑定声明"><span class="nav-number">1.</span> <span class="nav-text">1. What is “structured binding declaration”? (什么是结构化绑定声明)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-用于原生数组的结构化绑定声明"><span class="nav-number">2.</span> <span class="nav-text">2. 用于原生数组的结构化绑定声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-用于std-array的结构化绑定声明"><span class="nav-number">3.</span> <span class="nav-text">3. 用于std::array的结构化绑定声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-用于对象数据成员的结构化绑定声明"><span class="nav-number">4.</span> <span class="nav-text">4. 用于对象数据成员的结构化绑定声明</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是RAII"><span class="nav-number">1.</span> <span class="nav-text">什么是RAII?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么使用RAII"><span class="nav-number">2.</span> <span class="nav-text">为什么使用RAII?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何使用RAII？"><span class="nav-number">3.</span> <span class="nav-text">如何使用RAII？</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -772,7 +762,7 @@ if (document.querySelectorAll('div.pdf').length) {
       repo: 'Comment',
       owner: 'ZhouHaojie',
       admin: ['ZhouHaojie'],
-      id: 'ae67ebc4e78c8987fc6bc79dc24ad8a1',
+      id: '6f7f82ef6623335e85b1861b2e0298ca',
         language: '',
       distractionFreeMode: 'true'
     });
