@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>The Rule of Five</title>
+    <url>/archives/625ed7a4.html</url>
+    <content><![CDATA[<p><strong>The Rule of Five</strong> 在资源管理中尤其重要，由于资源和性能原因，需要避免不必要的复制。 此外，所有STL容器类（例如<code>std :: vector</code>）都使用了五规则，并且使用move语义来提高效率。<a id="more"></a></p>
+<ol>
+<li>The <strong>destructor</strong>: Responsible for freeing the resource once the object it belongs to goes out of scope.</li>
+<li>The <strong>assignment operator</strong>: The default assignment operation performs a member-wise shallow copy, which does not copy the content behind the resource handle. If a deep copy is needed, it has be implemented by the programmer.</li>
+<li>The <strong>copy constructor</strong>: As with the assignment operator, the default copy constructor performs a shallow copy of the data members. If something else is needed, the programmer has to implement it accordingly.</li>
+<li>The <strong>move constructor</strong>: Because copying objects can be an expensive operation which involves creating, copying and destroying temporary objects, rvalue references are used to bind to an rvalue. Using this mechanism, the move constructor transfers the ownership of a resource from a (temporary) rvalue object to a permanent lvalue object.</li>
+<li>The <strong>move assignment operator</strong>: With this operator, ownership of a resource can be transferred from one object to another. The internal behavior is very similar to the move constructor.</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyMovableClass</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="class">&#123;</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">int</span> _size;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">int</span> *_data;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="code"><pre><span class="line">    MyMovableClass(<span class="keyword">size_t</span> <span class="built_in">size</span>) <span class="comment">// constructor</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        _size = <span class="built_in">size</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        _data = <span class="keyword">new</span> <span class="keyword">int</span>[_size];</span></pre></td></tr><tr><td class="code"><pre><span class="line">        std::cout &lt;&lt; "CREATING instance of MyMovableClass at " &lt;&lt; this &lt;&lt; " allocated with size = " &lt;&lt; _size*sizeof(int)  &lt;&lt; " bytes" &lt;&lt; std::endl;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    ~MyMovableClass() <span class="comment">// 1 : destructor</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"DELETING instance of MyMovableClass at "</span> &lt;&lt; <span class="keyword">this</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">delete</span>[] _data;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="code"><pre><span class="line">    MyMovableClass(<span class="keyword">const</span> MyMovableClass &amp;source) <span class="comment">// 2 : copy constructor</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        _size = source._size;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        _data = <span class="keyword">new</span> <span class="keyword">int</span>[_size];</span></pre></td></tr><tr><td class="code"><pre><span class="line">        *_data = *source._data;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"COPYING content of instance "</span> &lt;&lt; &amp;source &lt;&lt; <span class="string">" to instance "</span> &lt;&lt; <span class="keyword">this</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="code"><pre><span class="line">    MyMovableClass &amp;<span class="keyword">operator</span>=(<span class="keyword">const</span> MyMovableClass &amp;source) <span class="comment">// 3 : copy assignment operator</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"ASSIGNING content of instance "</span> &lt;&lt; &amp;source &lt;&lt; <span class="string">" to instance "</span> &lt;&lt; <span class="keyword">this</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == &amp;source)</span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="keyword">return</span> *<span class="keyword">this</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">delete</span>[] _data;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        _data = <span class="keyword">new</span> <span class="keyword">int</span>[source._size];</span></pre></td></tr><tr><td class="code"><pre><span class="line">        *_data = *source._data;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        _size = source._size;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="code"><pre><span class="line">    MyMovableClass(MyMovableClass &amp;&amp;source)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"MOVING (c’tor) instance "</span> &lt;&lt; &amp;source &lt;&lt; <span class="string">" to instance "</span> &lt;&lt; <span class="keyword">this</span> &lt;&lt; <span class="string">"\n"</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        _size = source._size;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        _data = source._data;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        source._data = <span class="literal">nullptr</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        source._size = <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="code"><pre><span class="line">    MyMovableClass &amp;<span class="keyword">operator</span>=(MyMovableClass &amp;&amp;source)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"MOVING (assign) instance "</span> &lt;&lt; &amp;source &lt;&lt; <span class="string">" to instance "</span> &lt;&lt; <span class="keyword">this</span> &lt;&lt; <span class="string">"\n"</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span> == &amp;source)</span></pre></td></tr><tr><td class="code"><pre><span class="line">            <span class="keyword">return</span> *<span class="keyword">this</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">delete</span>[] _data;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="code"><pre><span class="line">        _data = source._data;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        _size = source._size;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">        source._data = <span class="literal">nullptr</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        source._size = <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="function">MyMovableClass <span class="title">obj1</span><span class="params">(<span class="number">100</span>)</span></span>; <span class="comment">// constructor</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    obj1 = MyMovableClass(<span class="number">200</span>); <span class="comment">// move assignment operator</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    MyMovableClass obj2 = MyMovableClass(<span class="number">300</span>); <span class="comment">// move constructor </span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>WissProg</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>移动构造函数</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C++中的RAII机制</title>
     <url>/archives/d301efc5.html</url>
     <content><![CDATA[<h3 id="什么是RAII"><a href="#什么是RAII" class="headerlink" title="什么是RAII?"></a>什么是RAII?</h3><p>RAII是Resource Acquisition Is Initialization的简称，是C++语言的一种管理资源、避免泄漏的用法。利用的就是C++构造的对象最终会被销毁的原则。RAII的做法是使用一个对象，在其构造时获取对应的资源，在对象生命期内控制对资源的访问，使之始终保持有效，最后在对象析构的时候，释放构造时获取的资源。<a id="more"></a></p>
@@ -609,143 +631,6 @@ P_m\left(\chi^{2} \leq \chi_{\alpha}^{2}\right)=1-\alpha \quad \rightarrow \quad
       </tags>
   </entry>
   <entry>
-    <title>Kurvenanpassung</title>
-    <url>/archives/4eb14690.html</url>
-    <content><![CDATA[<h2 id="Messsysteme"><a href="#Messsysteme" class="headerlink" title="Messsysteme"></a>Messsysteme</h2><p>Allgemein: Messkette</p>
-<p><img src="/archives/4eb14690/image-20200218174651585.png" style="zoom: 33%;"></p>
-<p><a id="more"></a>Systemtheorie</p>
-<p><img src="/archives/4eb14690/image-20200218174732982.png" style="zoom: 33%;"></p>
-<h2 id="Messfehler"><a href="#Messfehler" class="headerlink" title="Messfehler"></a>Messfehler</h2><p>Definition:<br>Absolute Fehler: $F=y_{anzeige}-y_{wahr}=y_a-y_w$<br>Relativer Fehler: $F_r= \frac{F}{y_w}=\frac{y_a-y_w}{y_w}$</p>
-<p><strong>Fehlerursachen:</strong></p>
-<ul>
-<li><strong>Systematische Fehler:</strong> <strong>Ursache</strong> des Fehlers und Art der Einwirkung <strong>bekannt</strong>. <strong>Kompensation</strong> prinzipiell <strong>möglich</strong></li>
-<li><strong>Zufällige Fehler:</strong> nicht reproduzierbar, <strong>Ursache unbekannt</strong></li>
-</ul>
-<h2 id="Kurvenanpassung"><a href="#Kurvenanpassung" class="headerlink" title="Kurvenanpassung"></a>Kurvenanpassung</h2><p>Modellbildung des Systems $\rightarrow$ analytische Messkennlinie</p>
-<p><strong>Ansätze</strong></p>
-<ol>
-<li>Interpolation: Die Kennlinie soll durch <strong>alle</strong> n Messpunkte gehen (Kleines n)</li>
-<li>Approximation: Die Summe der Fehlerquadrate soll minimiert werden. Die Kennlinie geht nicht durch alle Messpunkte (Große n)</li>
-</ol>
-<p><img src="/archives/4eb14690/image-20200218184618776.png" style="zoom: 33%;"></p>
-<h3 id="Approximation"><a href="#Approximation" class="headerlink" title="Approximation"></a>Approximation</h3><p>Kurve nähert Messwertepaare an</p>
-<p><strong>Ziel:</strong> Darstellung der Kennlinie als endliche Reihe analytischer Funktion $\varphi_i(u)$ </p>
-<p><img src="/archives/4eb14690/image-20200218185443332.png" style="zoom:50%;"></p>
-<p>Berechnen Koeffizienten $a_i$ bei Verwendung einer <strong>orthonormalen Basis</strong>: </p>
-<p><img src="/archives/4eb14690/image-20200218190044347.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200218185817616.png" style="zoom:50%;"></p>
-<p>Vorteil: </p>
-<ul>
-<li>Mittelwertfreie <strong>Fehler</strong> werden <strong>unterdrückt</strong> </li>
-<li><strong>Beliebige</strong> Basisfunktionen verwendbar (solange linear unabhängig voneinander) </li>
-<li><strong>Modellordnung unabhängig</strong> von Stützstellenanzahl</li>
-</ul>
-<h4 id="Least-Squares-Schatzer"><a href="#Least-Squares-Schatzer" class="headerlink" title="Least-Squares-Schätzer"></a>Least-Squares-Schätzer</h4><p>Zur Bestimmung der Koeffizienten $a_i$ wird bei <strong>nicht orthogonalen</strong> Basisfunktionen $\varphi_i(u)$ der <strong>Least-Squares-Schätzer </strong> verwendet</p>
-<p>Haben: n Messwertepaare $(u_i, y_i)$</p>
-<ul>
-<li>Aufstellen des Signalmodells</li>
-</ul>
-<p><img src="/archives/4eb14690/image-20200219124945263.png" style="zoom: 50%;"></p>
-<ul>
-<li><p>Aufstellen des Approximationsansatzes</p>
-<p><img src="/archives/4eb14690/image-20200219125044637.png" style="zoom: 33%;"></p>
-</li>
-</ul>
-<p>Minimierung des Gütemaßes</p>
-<p><img src="/archives/4eb14690/image-20200218192625735.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200218192700099.png" style="zoom:50%;"></p>
-<p>a: Moore-Penrose-Pseudoinverse</p>
-<p><strong>LS-Schätzer bei nichtlinearem Signalmodell</strong></p>
-<p>Was tun, wenn Signalmodell nicht linear ist?</p>
-<p>Bsp. $\hat{y}(u)=A \cdot \mathrm{e}^{\alpha u}, \quad A, \alpha \quad \text { unbekannt }$ </p>
-<p>$\rightarrow$ oft lassen sich die Messdaten so manipulieren so manipulieren, dass das Modell linear wird.</p>
-<p>Hier: logarithmieren</p>
-<p><img src="/archives/4eb14690/image-20200219133300117.png" style="zoom:50%;"></p>
-<h3 id="Interpolation"><a href="#Interpolation" class="headerlink" title="Interpolation"></a>Interpolation</h3><p>Kurve geht exakt durch Wertepaare</p>
-<ul>
-<li>Lagrange-/Newton (globale Polynome)</li>
-<li>Spline-Interpolation</li>
-<li>Kennfeld-Interpolation mehrdimensionale Erweiterung</li>
-</ul>
-<p>Vorteile:</p>
-<ul>
-<li>Kein direktes Signalmodell erforderlich </li>
-<li>Interpolierte Funktion geht durch Wertepaare</li>
-</ul>
-<p>Nachteile:</p>
-<ul>
-<li>Bei Globalen Polynomansätzen steigt Modellordnung mit der Anzahl der Wertepaare $\rightarrow$ Überschwinger </li>
-</ul>
-<p><strong>Globale Polynomansätze</strong></p>
-<ul>
-<li><p>Standard</p>
-<p>$y(u)=\sum_{i=0}^{N-1} a_{i} u^{i}$ (oft rechenintensiv计算量大)</p>
-</li>
-<li><p>Lagrange-Verfahren</p>
-<p>$y(u)=\sum_{i=0}^{N-1} \hat{a}_{i} l_{i}(u) \quad \text { mit } l_{i}(u): \text { Lagrangepolynome }$</p>
-</li>
-<li><p>Newton-Verfahren</p>
-<p>$y(u)=\sum_{i=0}^{N-1} \tilde{a}_{i} n_{i}(u)\quad \text{ mit } n_{i}(u):\text {Newtonpolynome}$</p>
-</li>
-</ul>
-<h4 id="Newton-Interpolation"><a href="#Newton-Interpolation" class="headerlink" title="Newton-Interpolation"></a>Newton-Interpolation</h4><p>Warum Newton-Interpolation?</p>
-<ul>
-<li><strong>geringere Komplexität</strong> der Basispolynome</li>
-<li>leichtere Erweiterbarkeit beim Hinzufügen von Stützstellen</li>
-</ul>
-<p>Ansatz:</p>
-<p><img src="/archives/4eb14690/image-20200219154557093.png" style="zoom:50%;"></p>
-<p><strong>1. Bei äquidistanten Stützstellen</strong></p>
-<p>Zur einfachen Berechnung der Koeffizienten $a_i$ werden <strong>Differenzen </strong> eingeführt</p>
-<p><strong>Differenzenschema:</strong></p>
-<p><img src="/archives/4eb14690/image-20200219155051455.png" style="zoom:50%;"></p>
-<p><strong>Newton Interpolationsformel für äquidistante Stützstellen</strong></p>
-<p><img src="/archives/4eb14690/image-20200219155428818.png" style="zoom:50%;"></p>
-<p><strong>2. Bei nicht-äquidistantem Stützstellenabstand</strong> </p>
-<p><img src="/archives/4eb14690/image-20200219160648184.png" style="zoom: 33%;"></p>
-<h4 id="Lagrange-Interpolation"><a href="#Lagrange-Interpolation" class="headerlink" title="Lagrange-Interpolation"></a>Lagrange-Interpolation</h4><p>In der Praxis arbeitet man bevorzugt mit Langrange-Interpolation</p>
-<p><strong>Grund:</strong> Keine Berechnung der Koeffizienten erforderlich</p>
-<p>Ansatz: <img src="/archives/4eb14690/image-20200219161759340.png" style="zoom:50%;"></p>
-<p>Lagrange-Polynome:</p>
-<p><img src="/archives/4eb14690/image-20200220200754178.png" style="zoom:50%;"></p>
-<p>Eigenschaft: <img src="/archives/4eb14690/image-20200220200849193.png" style="zoom:50%;"></p>
-<p>$\Longrightarrow$Die Stützstellen eines Lagrange-Polynoms werden exakt interpoliert:</p>
-<p><img src="/archives/4eb14690/image-20200220200608006.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200220200643554.png" style="zoom:50%;"></p>
-<h4 id="Spline-Interpolation"><a href="#Spline-Interpolation" class="headerlink" title="Spline-Interpolation"></a>Spline-Interpolation</h4><p>Eigenschaften der Spline-Interpolierenden:</p>
-<p><img src="/archives/4eb14690/image-20200220201145859.png" style="zoom:50%;"></p>
-<p>$s_i(u_i)=y_i$ ; 二阶导相等$s_i^{‘’}(u_{i+1})=s^{‘’}_{i+1}(u_{i+1})$ ; 边界条件, 两个端点二阶导等于零</p>
-<p><strong>Kubische Spline-Interpolation</strong></p>
-<p><img src="/archives/4eb14690/image-20200220201722869.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200220201755791.png" style="zoom:50%;"></p>
-<p>Berechnung der Parameter:</p>
-<p><img src="/archives/4eb14690/image-20200220201834813.png" style="zoom:50%;"></p>
-<p>Haben bereit:  $y_i$ , noch brauchen: $y_i^{‘’}$ </p>
-<p>Nach Stetigkeit der 1. Ableitung an den Stützstellen:</p>
-<p><img src="/archives/4eb14690/image-20200220202318019.png" alt="image-20200220202318019" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200220202404995.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200220202447762.png" style="zoom:50%;"><br>Randbedingung: $y_{0}^{\prime \prime}=0=y_{n-1}^{\prime \prime}$</p>
-<p><img src="/archives/4eb14690/image-20200220202545618.png" style="zoom:50%;"></p>
-<h3 id="Kennfeldinterpolation"><a href="#Kennfeldinterpolation" class="headerlink" title="Kennfeldinterpolation"></a>Kennfeldinterpolation</h3><p>Die Kennfeldinterpolation ist eine 2D-Interpolation. Es werden die Werte y zwischen de äquidistanten Stützstellen $(u_i,z_i)$ interpoliert.</p>
-<p>Standard Interpolation: $\hat{y}(u)=\sum_{i=0}^{n-1} a_{i} u^{i}$</p>
-<p>Auf zwei  Dimensionen erweitert:</p>
-<script type="math/tex; mode=display">
-\hat{y}(u, z)=\sum_{i=0}^{n-1} \sum_{j=0}^{m-1} a_{i j} u^{i} z^{j}</script><p><strong>Bei Polynomen 1.Grade</strong>, y 在点$(u_i,z_i)$ 泰勒展开：</p>
-<p><img src="/archives/4eb14690/image-20200220203036550.png" style="zoom:50%;"></p>
-<p><strong>Bilinearen Interpolation:</strong><br>Durch <strong>Approximation </strong>der Ableitungen mittels Differenzenquotienten folgt:</p>
-<p><img src="/archives/4eb14690/image-20200220203204882.png" style="zoom:50%;"></p>
-<p>BSP.<img src="/archives/4eb14690/image-20200220203255851.png" style="zoom:50%;"></p>
-]]></content>
-      <categories>
-        <category>Messtechnik</category>
-        <category>Kurvenanpassung</category>
-      </categories>
-      <tags>
-        <tag>approximation</tag>
-        <tag>Interpolation</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Stationäres Verhalten</title>
     <url>/archives/12c26097.html</url>
     <content><![CDATA[<h3 id="Stationare-Messkennlinie-und-Fehler"><a href="#Stationare-Messkennlinie-und-Fehler" class="headerlink" title="Stationäre Messkennlinie und Fehler"></a>Stationäre Messkennlinie und Fehler</h3><p>Stationäres Verhalten: <strong>Einschwingvorgänge abgeklungen</strong><a id="more"></a><br>z.B. Messsystem durch <strong>Kennlinie</strong> $y(u)$ beschreibbar</p>
@@ -895,6 +780,143 @@ y=u \cdot \frac{S_{\mathrm{i}} V}{1+K^{\prime} \cdot S_{\mathrm{i}} V}</script><
       <tags>
         <tag>KL-Fehler</tag>
         <tag>Linearsierung</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Kurvenanpassung</title>
+    <url>/archives/4eb14690.html</url>
+    <content><![CDATA[<h2 id="Messsysteme"><a href="#Messsysteme" class="headerlink" title="Messsysteme"></a>Messsysteme</h2><p>Allgemein: Messkette</p>
+<p><img src="/archives/4eb14690/image-20200218174651585.png" style="zoom: 33%;"></p>
+<p><a id="more"></a>Systemtheorie</p>
+<p><img src="/archives/4eb14690/image-20200218174732982.png" style="zoom: 33%;"></p>
+<h2 id="Messfehler"><a href="#Messfehler" class="headerlink" title="Messfehler"></a>Messfehler</h2><p>Definition:<br>Absolute Fehler: $F=y_{anzeige}-y_{wahr}=y_a-y_w$<br>Relativer Fehler: $F_r= \frac{F}{y_w}=\frac{y_a-y_w}{y_w}$</p>
+<p><strong>Fehlerursachen:</strong></p>
+<ul>
+<li><strong>Systematische Fehler:</strong> <strong>Ursache</strong> des Fehlers und Art der Einwirkung <strong>bekannt</strong>. <strong>Kompensation</strong> prinzipiell <strong>möglich</strong></li>
+<li><strong>Zufällige Fehler:</strong> nicht reproduzierbar, <strong>Ursache unbekannt</strong></li>
+</ul>
+<h2 id="Kurvenanpassung"><a href="#Kurvenanpassung" class="headerlink" title="Kurvenanpassung"></a>Kurvenanpassung</h2><p>Modellbildung des Systems $\rightarrow$ analytische Messkennlinie</p>
+<p><strong>Ansätze</strong></p>
+<ol>
+<li>Interpolation: Die Kennlinie soll durch <strong>alle</strong> n Messpunkte gehen (Kleines n)</li>
+<li>Approximation: Die Summe der Fehlerquadrate soll minimiert werden. Die Kennlinie geht nicht durch alle Messpunkte (Große n)</li>
+</ol>
+<p><img src="/archives/4eb14690/image-20200218184618776.png" style="zoom: 33%;"></p>
+<h3 id="Approximation"><a href="#Approximation" class="headerlink" title="Approximation"></a>Approximation</h3><p>Kurve nähert Messwertepaare an</p>
+<p><strong>Ziel:</strong> Darstellung der Kennlinie als endliche Reihe analytischer Funktion $\varphi_i(u)$ </p>
+<p><img src="/archives/4eb14690/image-20200218185443332.png" style="zoom:50%;"></p>
+<p>Berechnen Koeffizienten $a_i$ bei Verwendung einer <strong>orthonormalen Basis</strong>: </p>
+<p><img src="/archives/4eb14690/image-20200218190044347.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200218185817616.png" style="zoom:50%;"></p>
+<p>Vorteil: </p>
+<ul>
+<li>Mittelwertfreie <strong>Fehler</strong> werden <strong>unterdrückt</strong> </li>
+<li><strong>Beliebige</strong> Basisfunktionen verwendbar (solange linear unabhängig voneinander) </li>
+<li><strong>Modellordnung unabhängig</strong> von Stützstellenanzahl</li>
+</ul>
+<h4 id="Least-Squares-Schatzer"><a href="#Least-Squares-Schatzer" class="headerlink" title="Least-Squares-Schätzer"></a>Least-Squares-Schätzer</h4><p>Zur Bestimmung der Koeffizienten $a_i$ wird bei <strong>nicht orthogonalen</strong> Basisfunktionen $\varphi_i(u)$ der <strong>Least-Squares-Schätzer </strong> verwendet</p>
+<p>Haben: n Messwertepaare $(u_i, y_i)$</p>
+<ul>
+<li>Aufstellen des Signalmodells</li>
+</ul>
+<p><img src="/archives/4eb14690/image-20200219124945263.png" style="zoom: 50%;"></p>
+<ul>
+<li><p>Aufstellen des Approximationsansatzes</p>
+<p><img src="/archives/4eb14690/image-20200219125044637.png" style="zoom: 33%;"></p>
+</li>
+</ul>
+<p>Minimierung des Gütemaßes</p>
+<p><img src="/archives/4eb14690/image-20200218192625735.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200218192700099.png" style="zoom:50%;"></p>
+<p>a: Moore-Penrose-Pseudoinverse</p>
+<p><strong>LS-Schätzer bei nichtlinearem Signalmodell</strong></p>
+<p>Was tun, wenn Signalmodell nicht linear ist?</p>
+<p>Bsp. $\hat{y}(u)=A \cdot \mathrm{e}^{\alpha u}, \quad A, \alpha \quad \text { unbekannt }$ </p>
+<p>$\rightarrow$ oft lassen sich die Messdaten so manipulieren so manipulieren, dass das Modell linear wird.</p>
+<p>Hier: logarithmieren</p>
+<p><img src="/archives/4eb14690/image-20200219133300117.png" style="zoom:50%;"></p>
+<h3 id="Interpolation"><a href="#Interpolation" class="headerlink" title="Interpolation"></a>Interpolation</h3><p>Kurve geht exakt durch Wertepaare</p>
+<ul>
+<li>Lagrange-/Newton (globale Polynome)</li>
+<li>Spline-Interpolation</li>
+<li>Kennfeld-Interpolation mehrdimensionale Erweiterung</li>
+</ul>
+<p>Vorteile:</p>
+<ul>
+<li>Kein direktes Signalmodell erforderlich </li>
+<li>Interpolierte Funktion geht durch Wertepaare</li>
+</ul>
+<p>Nachteile:</p>
+<ul>
+<li>Bei Globalen Polynomansätzen steigt Modellordnung mit der Anzahl der Wertepaare $\rightarrow$ Überschwinger </li>
+</ul>
+<p><strong>Globale Polynomansätze</strong></p>
+<ul>
+<li><p>Standard</p>
+<p>$y(u)=\sum_{i=0}^{N-1} a_{i} u^{i}$ (oft rechenintensiv计算量大)</p>
+</li>
+<li><p>Lagrange-Verfahren</p>
+<p>$y(u)=\sum_{i=0}^{N-1} \hat{a}_{i} l_{i}(u) \quad \text { mit } l_{i}(u): \text { Lagrangepolynome }$</p>
+</li>
+<li><p>Newton-Verfahren</p>
+<p>$y(u)=\sum_{i=0}^{N-1} \tilde{a}_{i} n_{i}(u)\quad \text{ mit } n_{i}(u):\text {Newtonpolynome}$</p>
+</li>
+</ul>
+<h4 id="Newton-Interpolation"><a href="#Newton-Interpolation" class="headerlink" title="Newton-Interpolation"></a>Newton-Interpolation</h4><p>Warum Newton-Interpolation?</p>
+<ul>
+<li><strong>geringere Komplexität</strong> der Basispolynome</li>
+<li>leichtere Erweiterbarkeit beim Hinzufügen von Stützstellen</li>
+</ul>
+<p>Ansatz:</p>
+<p><img src="/archives/4eb14690/image-20200219154557093.png" style="zoom:50%;"></p>
+<p><strong>1. Bei äquidistanten Stützstellen</strong></p>
+<p>Zur einfachen Berechnung der Koeffizienten $a_i$ werden <strong>Differenzen </strong> eingeführt</p>
+<p><strong>Differenzenschema:</strong></p>
+<p><img src="/archives/4eb14690/image-20200219155051455.png" style="zoom:50%;"></p>
+<p><strong>Newton Interpolationsformel für äquidistante Stützstellen</strong></p>
+<p><img src="/archives/4eb14690/image-20200219155428818.png" style="zoom:50%;"></p>
+<p><strong>2. Bei nicht-äquidistantem Stützstellenabstand</strong> </p>
+<p><img src="/archives/4eb14690/image-20200219160648184.png" style="zoom: 33%;"></p>
+<h4 id="Lagrange-Interpolation"><a href="#Lagrange-Interpolation" class="headerlink" title="Lagrange-Interpolation"></a>Lagrange-Interpolation</h4><p>In der Praxis arbeitet man bevorzugt mit Langrange-Interpolation</p>
+<p><strong>Grund:</strong> Keine Berechnung der Koeffizienten erforderlich</p>
+<p>Ansatz: <img src="/archives/4eb14690/image-20200219161759340.png" style="zoom:50%;"></p>
+<p>Lagrange-Polynome:</p>
+<p><img src="/archives/4eb14690/image-20200220200754178.png" style="zoom:50%;"></p>
+<p>Eigenschaft: <img src="/archives/4eb14690/image-20200220200849193.png" style="zoom:50%;"></p>
+<p>$\Longrightarrow$Die Stützstellen eines Lagrange-Polynoms werden exakt interpoliert:</p>
+<p><img src="/archives/4eb14690/image-20200220200608006.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200220200643554.png" style="zoom:50%;"></p>
+<h4 id="Spline-Interpolation"><a href="#Spline-Interpolation" class="headerlink" title="Spline-Interpolation"></a>Spline-Interpolation</h4><p>Eigenschaften der Spline-Interpolierenden:</p>
+<p><img src="/archives/4eb14690/image-20200220201145859.png" style="zoom:50%;"></p>
+<p>$s_i(u_i)=y_i$ ; 二阶导相等$s_i^{‘’}(u_{i+1})=s^{‘’}_{i+1}(u_{i+1})$ ; 边界条件, 两个端点二阶导等于零</p>
+<p><strong>Kubische Spline-Interpolation</strong></p>
+<p><img src="/archives/4eb14690/image-20200220201722869.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200220201755791.png" style="zoom:50%;"></p>
+<p>Berechnung der Parameter:</p>
+<p><img src="/archives/4eb14690/image-20200220201834813.png" style="zoom:50%;"></p>
+<p>Haben bereit:  $y_i$ , noch brauchen: $y_i^{‘’}$ </p>
+<p>Nach Stetigkeit der 1. Ableitung an den Stützstellen:</p>
+<p><img src="/archives/4eb14690/image-20200220202318019.png" alt="image-20200220202318019" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200220202404995.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200220202447762.png" style="zoom:50%;"><br>Randbedingung: $y_{0}^{\prime \prime}=0=y_{n-1}^{\prime \prime}$</p>
+<p><img src="/archives/4eb14690/image-20200220202545618.png" style="zoom:50%;"></p>
+<h3 id="Kennfeldinterpolation"><a href="#Kennfeldinterpolation" class="headerlink" title="Kennfeldinterpolation"></a>Kennfeldinterpolation</h3><p>Die Kennfeldinterpolation ist eine 2D-Interpolation. Es werden die Werte y zwischen de äquidistanten Stützstellen $(u_i,z_i)$ interpoliert.</p>
+<p>Standard Interpolation: $\hat{y}(u)=\sum_{i=0}^{n-1} a_{i} u^{i}$</p>
+<p>Auf zwei  Dimensionen erweitert:</p>
+<script type="math/tex; mode=display">
+\hat{y}(u, z)=\sum_{i=0}^{n-1} \sum_{j=0}^{m-1} a_{i j} u^{i} z^{j}</script><p><strong>Bei Polynomen 1.Grade</strong>, y 在点$(u_i,z_i)$ 泰勒展开：</p>
+<p><img src="/archives/4eb14690/image-20200220203036550.png" style="zoom:50%;"></p>
+<p><strong>Bilinearen Interpolation:</strong><br>Durch <strong>Approximation </strong>der Ableitungen mittels Differenzenquotienten folgt:</p>
+<p><img src="/archives/4eb14690/image-20200220203204882.png" style="zoom:50%;"></p>
+<p>BSP.<img src="/archives/4eb14690/image-20200220203255851.png" style="zoom:50%;"></p>
+]]></content>
+      <categories>
+        <category>Messtechnik</category>
+        <category>Kurvenanpassung</category>
+      </categories>
+      <tags>
+        <tag>approximation</tag>
+        <tag>Interpolation</tag>
       </tags>
   </entry>
   <entry>

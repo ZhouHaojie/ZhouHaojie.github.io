@@ -47,18 +47,18 @@
   };
 </script>
 
-  <meta name="description" content="绑定域名首先介绍一下绑定域名的过程1.ping github pages 的IP地址">
-<meta name="keywords" content="错误调试">
+  <meta name="description" content="The Rule of Five 在资源管理中尤其重要，由于资源和性能原因，需要避免不必要的复制。 此外，所有STL容器类（例如std :: vector）都使用了五规则，并且使用move语义来提高效率。">
+<meta name="keywords" content="C++,移动构造函数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="搭建Hexo-Github Pages博客遇到的一些问题">
-<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;42797.html">
+<meta property="og:title" content="The Rule of Five">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;625ed7a4.html">
 <meta property="og:site_name" content="ZhouHaojie的博客">
-<meta property="og:description" content="绑定域名首先介绍一下绑定域名的过程1.ping github pages 的IP地址">
+<meta property="og:description" content="The Rule of Five 在资源管理中尤其重要，由于资源和性能原因，需要避免不必要的复制。 此外，所有STL容器类（例如std :: vector）都使用了五规则，并且使用move语义来提高效率。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-12T18:26:18.159Z">
+<meta property="og:updated_time" content="2020-04-08T22:59:35.410Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://grenze.cn/archives/42797.html">
+<link rel="canonical" href="http://grenze.cn/archives/625ed7a4.html">
 
 
 <script id="page-configurations">
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title>搭建Hexo-Github Pages博客遇到的一些问题 | ZhouHaojie的博客</title>
+  <title>The Rule of Five | ZhouHaojie的博客</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
     <script pjax>
@@ -231,7 +231,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/42797.html">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/625ed7a4.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -244,7 +244,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          搭建Hexo-Github Pages博客遇到的一些问题
+          The Rule of Five
         </h1>
 
         <div class="post-meta">
@@ -255,14 +255,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-12-01 16:22:47" itemprop="dateCreated datePublished" datetime="2018-12-01T16:22:47+01:00">2018-12-01</time>
+              <time title="创建时间：2020-04-08 16:46:13" itemprop="dateCreated datePublished" datetime="2020-04-08T16:46:13+02:00">2020-04-08</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-12 19:26:18" itemprop="dateModified" datetime="2019-12-12T19:26:18+01:00">2019-12-12</time>
+                <time title="修改时间：2020-04-09 00:59:35" itemprop="dateModified" datetime="2020-04-09T00:59:35+02:00">2020-04-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -270,14 +270,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">工具使用</span>
+                  <a href="/categories/WissProg/" itemprop="url" rel="index">
+                    <span itemprop="name">WissProg</span>
                   </a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
+                  <a href="/categories/WissProg/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
                   </a>
                 </span>
             </span>
@@ -295,14 +295,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>748</span>
+              <span>2.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -314,11 +314,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h3><p>首先介绍一下绑定域名的过程<br>1.ping github pages 的IP地址<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ping zhouhaojie.github.io</span></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">C:\Users\zhj19&gt;ping zhouhaojie.github.io</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">正在 Ping sni.github.map.fastly.net [185.199.109.153] 具有 32 字节的数据:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">来自 185.199.109.153 的回复: 字节&#x3D;32 时间&#x3D;235ms TTL&#x3D;54</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">来自 185.199.109.153 的回复: 字节&#x3D;32 时间&#x3D;239ms TTL&#x3D;54</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">来自 185.199.109.153 的回复: 字节&#x3D;32 时间&#x3D;257ms TTL&#x3D;54</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">来自 185.199.109.153 的回复: 字节&#x3D;32 时间&#x3D;236ms TTL&#x3D;54</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">185.199.109.153 的 Ping 统计信息:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    数据包: 已发送 &#x3D; 4，已接收 &#x3D; 4，丢失 &#x3D; 0 (0% 丢失)，</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">往返行程的估计时间(以毫秒为单位):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    最短 &#x3D; 235ms，最长 &#x3D; 257ms，平均 &#x3D; 241ms</span></pre></td></tr></table></figure>
-<p>2.把获取的IP绑定到域名上<br>腾讯云进入控制台，点击云解析<br>记录类型：A 主机记录：www 解析线路：默认 记录值：185.199.109.153<br>记录类型：A 主机记录：@ 解析线路：默认 记录值：185.199.109.153<br>3.在zhouhaojie.github.io的根目录下添加CNAME<br>内容为域名：grenze.cn</p>
-<h3 id="出错"><a href="#出错" class="headerlink" title="出错"></a>出错</h3><p>CNAME文件在每次hexo g -d后就会消失，需要重新创建</p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>将需要上传到GitHub的内容放到source文件夹中，如CNAME</p>
+        <p><strong>The Rule of Five</strong> 在资源管理中尤其重要，由于资源和性能原因，需要避免不必要的复制。 此外，所有STL容器类（例如<code>std :: vector</code>）都使用了五规则，并且使用move语义来提高效率。<a id="more"></a></p>
+<ol>
+<li>The <strong>destructor</strong>: Responsible for freeing the resource once the object it belongs to goes out of scope.</li>
+<li>The <strong>assignment operator</strong>: The default assignment operation performs a member-wise shallow copy, which does not copy the content behind the resource handle. If a deep copy is needed, it has be implemented by the programmer.</li>
+<li>The <strong>copy constructor</strong>: As with the assignment operator, the default copy constructor performs a shallow copy of the data members. If something else is needed, the programmer has to implement it accordingly.</li>
+<li>The <strong>move constructor</strong>: Because copying objects can be an expensive operation which involves creating, copying and destroying temporary objects, rvalue references are used to bind to an rvalue. Using this mechanism, the move constructor transfers the ownership of a resource from a (temporary) rvalue object to a permanent lvalue object.</li>
+<li>The <strong>move assignment operator</strong>: With this operator, ownership of a resource can be transferred from one object to another. The internal behavior is very similar to the move constructor.</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyMovableClass</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="class">&#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> _size;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> *_data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    MyMovableClass(<span class="keyword">size_t</span> <span class="built_in">size</span>) <span class="comment">// constructor</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        _size = <span class="built_in">size</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        _data = <span class="keyword">new</span> <span class="keyword">int</span>[_size];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        std::cout &lt;&lt; "CREATING instance of MyMovableClass at " &lt;&lt; this &lt;&lt; " allocated with size = " &lt;&lt; _size*sizeof(int)  &lt;&lt; " bytes" &lt;&lt; std::endl;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    ~MyMovableClass() <span class="comment">// 1 : destructor</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"DELETING instance of MyMovableClass at "</span> &lt;&lt; <span class="keyword">this</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">delete</span>[] _data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    MyMovableClass(<span class="keyword">const</span> MyMovableClass &amp;source) <span class="comment">// 2 : copy constructor</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        _size = source._size;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        _data = <span class="keyword">new</span> <span class="keyword">int</span>[_size];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        *_data = *source._data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"COPYING content of instance "</span> &lt;&lt; &amp;source &lt;&lt; <span class="string">" to instance "</span> &lt;&lt; <span class="keyword">this</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    MyMovableClass &amp;<span class="keyword">operator</span>=(<span class="keyword">const</span> MyMovableClass &amp;source) <span class="comment">// 3 : copy assignment operator</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"ASSIGNING content of instance "</span> &lt;&lt; &amp;source &lt;&lt; <span class="string">" to instance "</span> &lt;&lt; <span class="keyword">this</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == &amp;source)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> *<span class="keyword">this</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">delete</span>[] _data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">        _data = <span class="keyword">new</span> <span class="keyword">int</span>[source._size];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">        *_data = *source._data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">        _size = source._size;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">    MyMovableClass(MyMovableClass &amp;&amp;source)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"MOVING (c’tor) instance "</span> &lt;&lt; &amp;source &lt;&lt; <span class="string">" to instance "</span> &lt;&lt; <span class="keyword">this</span> &lt;&lt; <span class="string">"\n"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">        _size = source._size;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">        _data = source._data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">        source._data = <span class="literal">nullptr</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">        source._size = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">    MyMovableClass &amp;<span class="keyword">operator</span>=(MyMovableClass &amp;&amp;source)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"MOVING (assign) instance "</span> &lt;&lt; &amp;source &lt;&lt; <span class="string">" to instance "</span> &lt;&lt; <span class="keyword">this</span> &lt;&lt; <span class="string">"\n"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span> == &amp;source)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> *<span class="keyword">this</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">delete</span>[] _data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">        _data = source._data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">        _size = source._size;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">        source._data = <span class="literal">nullptr</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">        source._size = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">    <span class="function">MyMovableClass <span class="title">obj1</span><span class="params">(<span class="number">100</span>)</span></span>; <span class="comment">// constructor</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line">    obj1 = MyMovableClass(<span class="number">200</span>); <span class="comment">// move assignment operator</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">73</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">74</span></pre></td><td class="code"><pre><span class="line">    MyMovableClass obj2 = MyMovableClass(<span class="number">300</span>); <span class="comment">// move constructor </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">75</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">76</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">77</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 
     </div>
 
@@ -326,6 +330,24 @@
     
     
       
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\4e9edec9.html" rel="bookmark">WissProg-C++(4)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\d301efc5.html" rel="bookmark">C++中的RAII机制</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\65b38d0a.html" rel="bookmark">WissProg-C++(7)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\7ca8bc4b.html" rel="bookmark">WissProg-C++(6)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\53a48da5.html" rel="bookmark">C++-左值右值与移动语义</a></div>
+    </li>
+  </ul>
 
         <div class="reward-container">
   <div></div>
@@ -356,7 +378,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="/http:/grenze.cn/archives/42797.html" title="搭建Hexo-Github Pages博客遇到的一些问题">http://grenze.cn/archives/42797.html</a>
+    <a href="/http:/grenze.cn/archives/625ed7a4.html" title="The Rule of Five">http://grenze.cn/archives/625ed7a4.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -368,7 +390,8 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E9%94%99%E8%AF%AF%E8%B0%83%E8%AF%95/" rel="tag"><i class="fa fa-tag"></i> 错误调试</a>
+              <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+              <a href="/tags/%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" rel="tag"><i class="fa fa-tag"></i> 移动构造函数</a>
           </div>
 
         
@@ -382,13 +405,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/archives/16107.html" rel="prev" title="Hello World">
-      <i class="fa fa-chevron-left"></i> Hello World
+    <a href="/archives/d301efc5.html" rel="prev" title="C++中的RAII机制">
+      <i class="fa fa-chevron-left"></i> C++中的RAII机制
     </a></div>
-      <div class="post-nav-item">
-    <a href="/archives/12996.html" rel="next" title="加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA）">
-      加法器的优化——超前进位加法器（Carry-Lookahead Adder，CLA） <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -427,7 +447,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定域名"><span class="nav-number">1.</span> <span class="nav-text">绑定域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#出错"><span class="nav-number">2.</span> <span class="nav-text">出错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决"><span class="nav-number">3.</span> <span class="nav-text">解决</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -741,7 +760,7 @@ if (document.querySelectorAll('div.pdf').length) {
       repo: 'Comment',
       owner: 'ZhouHaojie',
       admin: ['ZhouHaojie'],
-      id: '9d7f8edb0029f98ee72c59351c931607',
+      id: 'bcb5cf00ef7c0a4e0789b66936a6448d',
         language: '',
       distractionFreeMode: 'true'
     });
