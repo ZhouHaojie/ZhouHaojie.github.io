@@ -59,24 +59,6 @@
       </tags>
   </entry>
   <entry>
-    <title>C++ istringstream</title>
-    <url>/archives/4dec6071.html</url>
-    <content><![CDATA[<p><code>istringstream</code> 对象只支持 <code>&gt;&gt;</code> 操作符， 会付给它的字符串进行空格识别，把该字符串中以空格隔开的内容分别提取出来，被提取的内容可以赋值给 <code>string</code> 等类型输出<a id="more"></a></p>
-<p>对象中存放的流可以使用函数 <code>.str(&quot;&quot;)</code> 进行清空</p>
-<p>下面通过一个例子理解这个流程：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">string</span> str = <span class="string">"hello world"</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">string</span> str1, str2;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">std</span>::<span class="function"><span class="built_in">istringstream</span> <span class="title">stream</span><span class="params">(str1)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    stream &gt;&gt; str1 &gt;&gt; str2;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt;  str1 &lt;&lt; <span class="string">"\n"</span> &lt;&lt; str2; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">//输出 hello</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">//    world  </span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<p>还可以配合 <code>getline()</code> 函数</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="function">ifstream <span class="title">stream</span><span class="params">(test.txt)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(stream.is_open())&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">while</span>(stream.getline(stream,<span class="built_in">line</span>))&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="function"><span class="built_in">istringstream</span> <span class="title">linestream</span><span class="params">(<span class="built_in">line</span>)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="comment">// std::replace(line.begin(), line.end(), '=', ' '); 若分隔符不是空格，可以通过以上函数替换</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        linestream &gt;&gt; key &gt;&gt; value;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>WissProg</category>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>C++, istringstream</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Valgrind-内存泄漏check</title>
     <url>/archives/98b2089e.html</url>
     <content><![CDATA[<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Valgrind 是一套类似于 gprof 的动态检测的工具集，由于使用方便，不需修改目标程序源码，输出清晰图文并茂等优势，常被用作后台(特别是linux后台)服务内存泄漏检测、性能打点、竞态检测等。<a id="more"></a></p>
@@ -114,6 +96,24 @@
       <tags>
         <tag>C++</tag>
         <tag>valgrind</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++ istringstream</title>
+    <url>/archives/4dec6071.html</url>
+    <content><![CDATA[<p><code>istringstream</code> 对象只支持 <code>&gt;&gt;</code> 操作符， 会付给它的字符串进行空格识别，把该字符串中以空格隔开的内容分别提取出来，被提取的内容可以赋值给 <code>string</code> 等类型输出<a id="more"></a></p>
+<p>对象中存放的流可以使用函数 <code>.str(&quot;&quot;)</code> 进行清空</p>
+<p>下面通过一个例子理解这个流程：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">string</span> str = <span class="string">"hello world"</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">string</span> str1, str2;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">std</span>::<span class="function"><span class="built_in">istringstream</span> <span class="title">stream</span><span class="params">(str1)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    stream &gt;&gt; str1 &gt;&gt; str2;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt;  str1 &lt;&lt; <span class="string">"\n"</span> &lt;&lt; str2; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">//输出 hello</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">//    world  </span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>还可以配合 <code>getline()</code> 函数</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="function">ifstream <span class="title">stream</span><span class="params">(test.txt)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(stream.is_open())&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">while</span>(stream.getline(stream,<span class="built_in">line</span>))&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="function"><span class="built_in">istringstream</span> <span class="title">linestream</span><span class="params">(<span class="built_in">line</span>)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="comment">// std::replace(line.begin(), line.end(), '=', ' '); 若分隔符不是空格，可以通过以上函数替换</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        linestream &gt;&gt; key &gt;&gt; value;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>WissProg</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++, istringstream</tag>
       </tags>
   </entry>
   <entry>
