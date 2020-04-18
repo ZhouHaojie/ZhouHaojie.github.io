@@ -1,6 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>c++11多线程编程(二)——理解线程类的构造函数</title>
+    <url>/archives/1589467c.html</url>
+    <content><![CDATA[<h2 id="构造函数的参数"><a href="#构造函数的参数" class="headerlink" title="构造函数的参数"></a>构造函数的参数</h2><p><code>std::thread</code>类的构造函数是使用<strong>可变参数模板</strong>实现的，也就是说，可以传递任意个参数，第一个参数是线程的入口<strong>函数</strong>，而后面的若干个参数是该函数的<strong>参数</strong>。<a id="more"></a></p>
+<p>第一参数的类型并不是<code>c</code>语言中的函数指针（<code>c</code>语言传递函数都是使用函数指针），在<code>c++11</code>中，增加了<strong>可调用对象(Callable Objects)</strong>的概念，总的来说，可调用对象可以是以下几种情况：</p>
+<ul>
+<li>函数指针</li>
+<li>重载了<code>operator()</code>运算符的类对象，即仿函数</li>
+<li><code>lambda</code>表达式（匿名函数）</li>
+<li><code>std::function</code></li>
+</ul>
+<h4 id="函数指针示例"><a href="#函数指针示例" class="headerlink" title="函数指针示例"></a>函数指针示例</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 普通函数 无参</span></pre></td></tr><tr><td class="code"><pre><span class="line">void function_1() &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 普通函数 1个参数</span></pre></td></tr><tr><td class="code"><pre><span class="line">void function_2(int i) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 普通函数 2个参数</span></pre></td></tr><tr><td class="code"><pre><span class="line">void function_3(int i, std::string m) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">std::thread t1(function_1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::thread t2(function_2, 1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::thread t3(function_3, 1, &quot;hello&quot;);</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">t1.join();</span></pre></td></tr><tr><td class="code"><pre><span class="line">t2.join();</span></pre></td></tr><tr><td class="code"><pre><span class="line">t3.join();</span></pre></td></tr></table></figure>
+<p>实验的时候还发现一个问题，如果将重载的函数作为线程的入口函数，会发生编译错误！编译器搞不清楚是哪个函数，如下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 普通函数 无参</span></pre></td></tr><tr><td class="code"><pre><span class="line">void function_1() &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 普通函数 1个参数</span></pre></td></tr><tr><td class="code"><pre><span class="line">void function_1(int i) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::thread t1(function_1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">t1.join();</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 编译错误</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;*</span></pre></td></tr><tr><td class="code"><pre><span class="line">C:\Users\Administrator\Documents\untitled\main.cpp:39: </span></pre></td></tr><tr><td class="code"><pre><span class="line">error: no matching function for call to &#39;std::thread::thread(&lt;unresolved overloaded function type&gt;)&#39;</span></pre></td></tr><tr><td class="code"><pre><span class="line">     std::thread t1(function_1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">                              ^</span></pre></td></tr><tr><td class="code"><pre><span class="line">*&#x2F;</span></pre></td></tr></table></figure>
+<h4 id="仿函数"><a href="#仿函数" class="headerlink" title="仿函数"></a>仿函数</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 仿函数</span></pre></td></tr><tr><td class="code"><pre><span class="line">class Fctor &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">public:</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#x2F;&#x2F; 具有一个参数</span></pre></td></tr><tr><td class="code"><pre><span class="line">    void operator() () &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line">Fctor f;</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::thread t1(f);  </span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; std::thread t2(Fctor()); &#x2F;&#x2F; 编译错误 </span></pre></td></tr><tr><td class="code"><pre><span class="line">std::thread t3((Fctor())); &#x2F;&#x2F; ok</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::thread t4&#123;Fctor()&#125;; &#x2F;&#x2F; ok</span></pre></td></tr></table></figure>
+<p>一个仿函数类生成的对象，使用起来就像一个函数一样，比如上面的对象<code>f</code>，当使用<code>f()</code>时就调用<code>operator()</code>运算符。所以也可以让它成为线程类的第一个参数，如果这个仿函数有参数，同样的可以写在线程类的后几个参数上。</p>
+<p>而<code>t2</code>之所以编译错误，是因为编译器并没有将<code>Fctor()</code>解释为一个临时对象，而是将其解释为一个函数声明，编译器认为你声明了一个函数，这个函数不接受参数，同时返回一个<code>Factor</code>对象。解决办法就是在<code>Factor()</code>外包一层小括号<code>()</code>，或者在调用<code>std::thread</code>的构造函数时使用<code>{}</code>，这是<code>c++11</code>中的新的同意初始化语法。</p>
+<p>但是，如果重载的<code>operator()</code>运算符有参数，就不会发生上面的错误。</p>
+<h4 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">std::thread t1([]()&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::cout &lt;&lt; &quot;hello&quot; &lt;&lt; std::endl;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">std::thread t2([](std::string m)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::cout &lt;&lt; &quot;hello &quot; &lt;&lt; m &lt;&lt; std::endl;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;, &quot;world&quot;);</span></pre></td></tr></table></figure>
+<h4 id="std-function"><a href="#std-function" class="headerlink" title="std::function"></a>std::function</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class A&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">public:</span></pre></td></tr><tr><td class="code"><pre><span class="line">    void func1()&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    void func2(int i)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    void func3(int i, int j)&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">A a;</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::function&lt;void(void)&gt; f1 &#x3D; std::bind(&amp;A::func1, &amp;a);</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::function&lt;void(void)&gt; f2 &#x3D; std::bind(&amp;A::func2, &amp;a, 1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::function&lt;void(int)&gt; f3 &#x3D; std::bind(&amp;A::func2, &amp;a, std::placeholders::_1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::function&lt;void(int)&gt; f4 &#x3D; std::bind(&amp;A::func3, &amp;a, 1, std::placeholders::_1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::function&lt;void(int, int)&gt; f5 &#x3D; std::bind(&amp;A::func3, &amp;a, std::placeholders::_1, std::placeholders::_2);</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">std::thread t1(f1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::thread t2(f2);</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::thread t3(f3, 1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::thread t4(f4, 1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::thread t5(f5, 1, 2);</span></pre></td></tr></table></figure>
+<h2 id="传值还是引用"><a href="#传值还是引用" class="headerlink" title="传值还是引用"></a>传值还是引用</h2><p>先提出一个问题：如果线程入口函数的的参数是引用类型，在线程内部修改该变量，主线程的变量会改变吗？</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;thread&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;string&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 仿函数</span></pre></td></tr><tr><td class="code"><pre><span class="line">class Fctor &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">public:</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#x2F;&#x2F; 具有一个参数 是引用</span></pre></td></tr><tr><td class="code"><pre><span class="line">    void operator() (std::string&amp; msg) &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        msg &#x3D; &quot;wolrd&quot;;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">int main() &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    Fctor f;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::string m &#x3D; &quot;hello&quot;;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::thread t1(f, m);</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    t1.join();</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::cout &lt;&lt; m &lt;&lt; std::endl;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    return 0;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; vs下： 最终是：&quot;hello&quot;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; g++编译器： 编译报错</span></pre></td></tr></table></figure>
+<p>事实上，该代码使用<code>g++</code>编译会报错，而使用<code>vs2015</code>并不会报错，但是子线程并没有成功改变外面的变量<code>m</code>。</p>
+<p>我是这么认为的：<code>std::thread</code>类，内部也有若干个变量，当使用构造函数创建对象的时候，是将参数先赋值给这些变量，所以这些变量只是个副本，然后在线程启动并调用线程入口函数时，传递的参数只是这些副本，所以内部怎么操作都是改变副本，而不影响外面的变量。<code>g++</code>可能是比较严格，这种写法可能会导致程序发生严重的错误，索性禁止了。</p>
+<p>而如果可以想真正传引用，可以在调用线程类构造函数的时候，用<code>std::ref()</code>包装一下。如下面修改后的代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">std::thread t1(f, std::ref(m));</span></pre></td></tr></table></figure>
+<p>然后<code>vs</code>和<code>g++</code>都可以成功编译，而且子线程可以修改外部变量的值。</p>
+<p>当然这样并不好，多个线程同时修改同一个变量，会发生数据竞争。</p>
+<p>同理，构造函数的第一个参数是可调用对象，默认情况下其实传递的还是一个副本。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;thread&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;string&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">class A &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">public:</span></pre></td></tr><tr><td class="code"><pre><span class="line">    void f(int x, char c) &#123;&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    int g(double x) &#123;return 0;&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    int operator()(int N) &#123;return 0;&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">void foo(int x) &#123;&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">int main() &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    A a;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::thread t1(a, 6); &#x2F;&#x2F; 1. 调用的是 copy_of_a()</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::thread t2(std::ref(a), 6); &#x2F;&#x2F; 2. a()</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::thread t3(A(), 6); &#x2F;&#x2F; 3. 调用的是 临时对象 temp_a()</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::thread t4(&amp;A::f, a, 8, &#39;w&#39;); &#x2F;&#x2F; 4. 调用的是 copy_of_a.f()</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::thread t5(&amp;A::f, &amp;a, 8, &#39;w&#39;); &#x2F;&#x2F;5.  调用的是 a.f()</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::thread t6(std::move(a), 6); &#x2F;&#x2F; 6. 调用的是 a.f(), a不能够再被使用了</span></pre></td></tr><tr><td class="code"><pre><span class="line">    t1.join();</span></pre></td></tr><tr><td class="code"><pre><span class="line">    t2.join();</span></pre></td></tr><tr><td class="code"><pre><span class="line">    t3.join();</span></pre></td></tr><tr><td class="code"><pre><span class="line">    t4.join();</span></pre></td></tr><tr><td class="code"><pre><span class="line">    t5.join();</span></pre></td></tr><tr><td class="code"><pre><span class="line">    t6.join();</span></pre></td></tr><tr><td class="code"><pre><span class="line">    return 0;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>对于线程<code>t1</code>来说，内部调用的线程函数其实是一个副本，所以如果在函数内部修改了类成员，并不会影响到外面的对象。只有传递引用的时候才会修改。所以在这个时候就必须想清楚，到底是传值还是传引用！</p>
+<h2 id="线程对象只能移动不可复制"><a href="#线程对象只能移动不可复制" class="headerlink" title="线程对象只能移动不可复制"></a>线程对象只能移动不可复制</h2><p>线程对象之间是不能复制的，只能移动，移动的意思是，将线程的所有权在<code>std::thread</code>实例间进行转移。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void some_function();</span></pre></td></tr><tr><td class="code"><pre><span class="line">void some_other_function();</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::thread t1(some_function);</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; std::thread t2 &#x3D; t1; &#x2F;&#x2F; 编译错误</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::thread t2 &#x3D; std::move(t1); &#x2F;&#x2F;只能移动 t1内部已经没有线程了</span></pre></td></tr><tr><td class="code"><pre><span class="line">t1 &#x3D; std::thread(some_other_function); &#x2F;&#x2F; 临时对象赋值 默认就是移动操作</span></pre></td></tr><tr><td class="code"><pre><span class="line">std::thread t3;</span></pre></td></tr><tr><td class="code"><pre><span class="line">t3 &#x3D; std::move(t2); &#x2F;&#x2F; t2内部已经没有线程了</span></pre></td></tr><tr><td class="code"><pre><span class="line">t1 &#x3D; std::move(t3); &#x2F;&#x2F; 程序将会终止，因为t1内部已经有一个线程在管理了</span></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>WissProg</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>多线程编程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>c++11多线程编程(一)——初识</title>
+    <url>/archives/17bd249c.html</url>
+    <content><![CDATA[<h2 id="什么是并发"><a href="#什么是并发" class="headerlink" title="什么是并发"></a>什么是并发</h2><p>并发在生活中随处可见，边走路边说话，边听歌边写代码。计算机术语中的”并发”，指的是在单个系统里同时执行多个独立的活动，而不是顺序的一个接一个的执行。<a id="more"></a>对于单核CPU来说，在某个时刻只可能处理一个任务，但它却不是完全执行完一个任务再执行一个下一任务，而是一直在任务间切换，每个任务完成一点就去执行下一个任务，看起来就像任务在并行发生，虽然不是严格的同时执行多个任务，但是我们仍然称之为<strong>并发(concurrency)</strong>。真正的并发是在在多核CPU上，能够真正的同时执行多个任务，称为<strong>硬件并发(hardware concurrency)</strong>。</p>
+<p>并发并非没有代价，在单核CPU并发执行两个任务需要付出上下文切换的时间代价。如下图：</p>
+<p><img src="/archives/17bd249c/image-20200418131032161.png" style="zoom: 33%;"></p>
+<p>假设A和B两个任务都被分成10个大小相等的块，单核CPU交替的执行两个任务，每次执行其中一块，其花费的时间并不是先完成A任务再玩成B任务所花费时间的两倍，而是要更多。这是因为系统从一个任务切换到另一个任务需要执行一次<strong>上下文切换</strong>，这是需要时间的(图中的灰色块)。上下文切换需要操作系统为当前运行的任务保存CPU的状态和指令指针，算出要切换到哪个任务，并为要切换的任务重新加载处理器状态。然后将新任务的指令和数据载入到缓存中。</p>
+<h2 id="并发的方式"><a href="#并发的方式" class="headerlink" title="并发的方式"></a>并发的方式</h2><h3 id="多进程并发"><a href="#多进程并发" class="headerlink" title="多进程并发"></a>多进程并发</h3><p>将应用程序分为多个独立的、单线程的进程，他们可以同时运行。进程内部实现原理比较复杂，这里就不多说了。</p>
+<p><img src="/archives/17bd249c/image-20200418131218436.png" style="zoom: 33%;"></p>
+<p>这些独立的进程可以通过常规的<a href="https://blog.csdn.net/qq_36132127/article/details/81129690" rel="external nofollow noopener noreferrer" target="_blank">进程间通信机制</a>进行通信，如管道、信号、消息队列、共享内存、存储映射I/O、信号量、套接字等。</p>
+<p>缺点：</p>
+<ul>
+<li>进程间通信较为复杂，速度相对线程间的通信更慢。</li>
+<li>启动进程的开销比线程大，使用的系统资源也更多。</li>
+</ul>
+<p>优点：</p>
+<ul>
+<li>进程间通信的机制相对于线程更加安全。</li>
+<li>能够很容易的将一台机器上的多进程程序部署在不同的机器上（如果通信机制选取的是套接字的话）。</li>
+</ul>
+<h3 id="多线程并发"><a href="#多线程并发" class="headerlink" title="多线程并发"></a>多线程并发</h3><p>线程很像轻量级的进程，但是一个进程中的所有线程都共享相同的地址空间，线程间的大部分数据都可以共享。线程间的通信一般都通过共享内存来实现。</p>
+<p><img src="/archives/17bd249c/image-20200418131734764.png" style="zoom:33%;"></p>
+<p>优点：</p>
+<ul>
+<li>由于可以共享数据，多线程间的通信开销比进程小的多。</li>
+<li>线程启动的比进程快，占用的资源更少。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>共享数据太过于灵活，为了维护正确的共享，代码写起来比较复杂。</li>
+<li>无法部署在分布式系统上。</li>
+</ul>
+<h2 id="为什么使用并发"><a href="#为什么使用并发" class="headerlink" title="为什么使用并发"></a>为什么使用并发</h2><p>主要原因有两个：任务拆分和提高性能。</p>
+<h3 id="任务拆分"><a href="#任务拆分" class="headerlink" title="任务拆分"></a>任务拆分</h3><p>在编写软件的时候，将相关的代码放在一起，将无关的代码分开，这是一个好主意，这样能够让程序更加容易理解和测试。将程序划分成不同的任务，每个线程执行一个任务或者多个任务，可以将整个程序的逻辑变得更加简单。</p>
+<h3 id="提高性能"><a href="#提高性能" class="headerlink" title="提高性能"></a>提高性能</h3><p>在两种情况下，并发能够提高性能。</p>
+<ol>
+<li><strong>任务并行(task parallelism)</strong>：将一个单个任务分成若干个部分各自并行运行，从而降低运行时间。虽然听起来很简单，但其实是一个相当复杂的过程，设想假如各个部分之间存在很多以来，一个部分的执行需要使用到另一个任务的执行结果，这个时候并不能很好的并行完成。</li>
+<li><strong>数据并行(data parallelism)</strong>：每个线程在不同的数据部分上执行相同的操作。</li>
+</ol>
+<h2 id="多线程库简介"><a href="#多线程库简介" class="headerlink" title="多线程库简介"></a>多线程库简介</h2><p><code>C++98</code>标准中并没有线程库的存在，而在<code>C++11</code>中终于提供了多线程的标准库，提供了管理线程、保护共享数据、线程间同步操作、原子操作等类。</p>
+<p>多线程库对应的头文件是<code>#include</code>，类名为<code>std::thread</code>。</p>
+<p>一个简单的串行程序如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;thread&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">void function_1() &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::cout &lt;&lt; &quot;I&#39;m function_1()&quot; &lt;&lt; std::endl;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">int main() &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    function_1();</span></pre></td></tr><tr><td class="code"><pre><span class="line">    return 0;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>这是一个典型的单线程的单进程程序，任何程序都是一个进程，<code>main()</code>函数就是其中的主线程，单个线程都是顺序执行。</p>
+<p>将上面的程序改造成多线程程序其实很简单，让<code>function_1()</code>函数在另外的线程中执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;thread&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">void function_1() &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::cout &lt;&lt; &quot;I&#39;m function_1()&quot; &lt;&lt; std::endl;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">int main() &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::thread t1(function_1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#x2F;&#x2F; do other things</span></pre></td></tr><tr><td class="code"><pre><span class="line">    t1.join();</span></pre></td></tr><tr><td class="code"><pre><span class="line">    return 0;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>分析：</p>
+<ol>
+<li>首先，构建一个<code>std::thread</code>对象<code>t1</code>，构造的时候传递了一个参数，这个参数是一个函数，这个函数就是这个线程的<strong>入口函数</strong>，函数执行完了，整个线程也就执行完了。</li>
+<li>线程创建成功后，就会<strong>立即启动</strong>，并没有一个类似<code>start</code>的函数来显式的启动线程。</li>
+<li>一旦线程开始运行， 就需要显式的决定是要等待它完成(join)，或者分离它让它自行运行(detach)。注意：只需要在<code>std::thread</code>对象<strong>被销毁之前</strong>做出这个决定。这个例子中，对象<code>t1</code>是栈上变量，在<code>main</code>函数执行结束后就会被销毁，所以需要在<code>main</code>函数结束之前做决定。</li>
+<li>这个例子中选择了使用<code>t1.join()</code>，主线程会一直阻塞着，直到子线程完成，<code>join()</code>函数的另一个任务是回收该线程中使用的资源。</li>
+</ol>
+<p><strong>线程对象和对象内部管理的线程的生命周期并不一样</strong>，如果线程执行的快，可能内部的线程已经结束了，但是线程对象还活着，也有可能线程对象已经被析构了，内部的线程还在运行。</p>
+<p>假设<code>t1</code>线程是一个执行的很慢的线程，主线程并不想等待子线程结束就想结束整个任务，直接删掉<code>t1.join()</code>是不行的，程序会被终止（析构<code>t1</code>的时候会调用<code>std::terminate</code>，程序会打印<code>terminate called without an active exception</code>）。</p>
+<p>与之对应，我们可以调用<code>t1.detach()</code>，从而将<code>t1</code>线程放在后台运行，所有权和控制权被转交给<code>C++</code>运行时库，以确保与线程相关联的资源在线程退出后能被正确的回收。参考<code>UNIX</code>的<strong>守护进程(daemon process)</strong>的概念，这种被分离的线程被称为<strong>守护线程(daemon threads)</strong>。线程被分离之后，即使该线程对象被析构了，线程还是能够在后台运行，只是由于对象被析构了，主线程不能够通过对象名与这个线程进行通信。例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line">#include &lt;thread&gt;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">void function_1() &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#x2F;&#x2F;延时500ms 为了保证test()运行结束之后才打印</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::this_thread::sleep_for(std::chrono::milliseconds(500)); </span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::cout &lt;&lt; &quot;I&#39;m function_1()&quot; &lt;&lt; std::endl;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">void test() &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::thread t1(function_1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    t1.detach();</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#x2F;&#x2F; t1.join();</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::cout &lt;&lt; &quot;test() finished&quot; &lt;&lt; std::endl;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">int main() &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    test();</span></pre></td></tr><tr><td class="code"><pre><span class="line">    &#x2F;&#x2F;让主线程晚于子线程结束</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::this_thread::sleep_for(std::chrono::milliseconds(1000)); &#x2F;&#x2F;延时1s</span></pre></td></tr><tr><td class="code"><pre><span class="line">    return 0;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 使用 t1.detach()时</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; test() finished</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; I&#39;m function_1()</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 使用 t1.join()时</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; I&#39;m function_1()</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; test() finished</span></pre></td></tr></table></figure>
+<p>分析：</p>
+<ol>
+<li>由于线程入口函数内部有个<code>500ms</code>的延时，所以在还没有打印的时候，<code>test()</code>已经执行完成了，<code>t1</code>已经被析构了，但是它负责的那个线程还是能够运行，这就是<code>detach()</code>的作用。</li>
+<li>如果去掉<code>main</code>函数中的<code>1s</code>延时，会发现<strong>什么都没有打印</strong>，因为主线程执行的太快，整个程序已经结束了，那个后台线程被<code>C++</code>运行时库回收了。</li>
+<li>如果将<code>t1.detach()</code>换成<code>t1.join()</code>，<code>test</code>函数会在<code>t1</code>线程执行结束之后，才会执行结束。</li>
+</ol>
+<p>一旦一个线程被分离了，就不能够再被<code>join</code>了。如果非要调用，程序就会崩溃，可以使用<code>joinable()</code>函数判断一个线程对象能否调用<code>join()</code>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void test() &#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    std::thread t1(function_1);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    t1.detach();</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    if(t1.joinable())</span></pre></td></tr><tr><td class="code"><pre><span class="line">        t1.join();</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">    assert(!t1.joinable());</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>WissProg</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>多线程编程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>The Rule of Five</title>
     <url>/archives/625ed7a4.html</url>
     <content><![CDATA[<p><strong>The Rule of Five</strong> 在资源管理中尤其重要，由于资源和性能原因，需要避免不必要的复制。 此外，所有STL容器类（例如<code>std :: vector</code>）都使用了五规则，并且使用move语义来提高效率。<a id="more"></a></p>
@@ -59,6 +174,24 @@
       </tags>
   </entry>
   <entry>
+    <title>C++ istringstream</title>
+    <url>/archives/4dec6071.html</url>
+    <content><![CDATA[<p><code>istringstream</code> 对象只支持 <code>&gt;&gt;</code> 操作符， 会付给它的字符串进行空格识别，把该字符串中以空格隔开的内容分别提取出来，被提取的内容可以赋值给 <code>string</code> 等类型输出<a id="more"></a></p>
+<p>对象中存放的流可以使用函数 <code>.str(&quot;&quot;)</code> 进行清空</p>
+<p>下面通过一个例子理解这个流程：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">string</span> str = <span class="string">"hello world"</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">string</span> str1, str2;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">std</span>::<span class="function"><span class="built_in">istringstream</span> <span class="title">stream</span><span class="params">(str1)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    stream &gt;&gt; str1 &gt;&gt; str2;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt;  str1 &lt;&lt; <span class="string">"\n"</span> &lt;&lt; str2; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">//输出 hello</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">//    world  </span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>还可以配合 <code>getline()</code> 函数</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="function">ifstream <span class="title">stream</span><span class="params">(test.txt)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(stream.is_open())&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">while</span>(stream.getline(stream,<span class="built_in">line</span>))&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="function"><span class="built_in">istringstream</span> <span class="title">linestream</span><span class="params">(<span class="built_in">line</span>)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="comment">// std::replace(line.begin(), line.end(), '=', ' '); 若分隔符不是空格，可以通过以上函数替换</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        linestream &gt;&gt; key &gt;&gt; value;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>WissProg</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++, istringstream</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Valgrind-内存泄漏check</title>
     <url>/archives/98b2089e.html</url>
     <content><![CDATA[<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Valgrind 是一套类似于 gprof 的动态检测的工具集，由于使用方便，不需修改目标程序源码，输出清晰图文并茂等优势，常被用作后台(特别是linux后台)服务内存泄漏检测、性能打点、竞态检测等。<a id="more"></a></p>
@@ -96,24 +229,6 @@
       <tags>
         <tag>C++</tag>
         <tag>valgrind</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++ istringstream</title>
-    <url>/archives/4dec6071.html</url>
-    <content><![CDATA[<p><code>istringstream</code> 对象只支持 <code>&gt;&gt;</code> 操作符， 会付给它的字符串进行空格识别，把该字符串中以空格隔开的内容分别提取出来，被提取的内容可以赋值给 <code>string</code> 等类型输出<a id="more"></a></p>
-<p>对象中存放的流可以使用函数 <code>.str(&quot;&quot;)</code> 进行清空</p>
-<p>下面通过一个例子理解这个流程：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">string</span> str = <span class="string">"hello world"</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">string</span> str1, str2;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">std</span>::<span class="function"><span class="built_in">istringstream</span> <span class="title">stream</span><span class="params">(str1)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    stream &gt;&gt; str1 &gt;&gt; str2;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">cout</span> &lt;&lt;  str1 &lt;&lt; <span class="string">"\n"</span> &lt;&lt; str2; </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">//输出 hello</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">//    world  </span></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<p>还可以配合 <code>getline()</code> 函数</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="function">ifstream <span class="title">stream</span><span class="params">(test.txt)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(stream.is_open())&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="keyword">while</span>(stream.getline(stream,<span class="built_in">line</span>))&#123;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="built_in">std</span>::<span class="function"><span class="built_in">istringstream</span> <span class="title">linestream</span><span class="params">(<span class="built_in">line</span>)</span></span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">        <span class="comment">// std::replace(line.begin(), line.end(), '=', ' '); 若分隔符不是空格，可以通过以上函数替换</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">        linestream &gt;&gt; key &gt;&gt; value;</span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>WissProg</category>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>C++, istringstream</tag>
       </tags>
   </entry>
   <entry>
@@ -632,6 +747,143 @@ P_m\left(\chi^{2} \leq \chi_{\alpha}^{2}\right)=1-\alpha \quad \rightarrow \quad
       </tags>
   </entry>
   <entry>
+    <title>Kurvenanpassung</title>
+    <url>/archives/4eb14690.html</url>
+    <content><![CDATA[<h2 id="Messsysteme"><a href="#Messsysteme" class="headerlink" title="Messsysteme"></a>Messsysteme</h2><p>Allgemein: Messkette</p>
+<p><img src="/archives/4eb14690/image-20200218174651585.png" style="zoom: 33%;"></p>
+<p><a id="more"></a>Systemtheorie</p>
+<p><img src="/archives/4eb14690/image-20200218174732982.png" style="zoom: 33%;"></p>
+<h2 id="Messfehler"><a href="#Messfehler" class="headerlink" title="Messfehler"></a>Messfehler</h2><p>Definition:<br>Absolute Fehler: $F=y_{anzeige}-y_{wahr}=y_a-y_w$<br>Relativer Fehler: $F_r= \frac{F}{y_w}=\frac{y_a-y_w}{y_w}$</p>
+<p><strong>Fehlerursachen:</strong></p>
+<ul>
+<li><strong>Systematische Fehler:</strong> <strong>Ursache</strong> des Fehlers und Art der Einwirkung <strong>bekannt</strong>. <strong>Kompensation</strong> prinzipiell <strong>möglich</strong></li>
+<li><strong>Zufällige Fehler:</strong> nicht reproduzierbar, <strong>Ursache unbekannt</strong></li>
+</ul>
+<h2 id="Kurvenanpassung"><a href="#Kurvenanpassung" class="headerlink" title="Kurvenanpassung"></a>Kurvenanpassung</h2><p>Modellbildung des Systems $\rightarrow$ analytische Messkennlinie</p>
+<p><strong>Ansätze</strong></p>
+<ol>
+<li>Interpolation: Die Kennlinie soll durch <strong>alle</strong> n Messpunkte gehen (Kleines n)</li>
+<li>Approximation: Die Summe der Fehlerquadrate soll minimiert werden. Die Kennlinie geht nicht durch alle Messpunkte (Große n)</li>
+</ol>
+<p><img src="/archives/4eb14690/image-20200218184618776.png" style="zoom: 33%;"></p>
+<h3 id="Approximation"><a href="#Approximation" class="headerlink" title="Approximation"></a>Approximation</h3><p>Kurve nähert Messwertepaare an</p>
+<p><strong>Ziel:</strong> Darstellung der Kennlinie als endliche Reihe analytischer Funktion $\varphi_i(u)$ </p>
+<p><img src="/archives/4eb14690/image-20200218185443332.png" style="zoom:50%;"></p>
+<p>Berechnen Koeffizienten $a_i$ bei Verwendung einer <strong>orthonormalen Basis</strong>: </p>
+<p><img src="/archives/4eb14690/image-20200218190044347.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200218185817616.png" style="zoom:50%;"></p>
+<p>Vorteil: </p>
+<ul>
+<li>Mittelwertfreie <strong>Fehler</strong> werden <strong>unterdrückt</strong> </li>
+<li><strong>Beliebige</strong> Basisfunktionen verwendbar (solange linear unabhängig voneinander) </li>
+<li><strong>Modellordnung unabhängig</strong> von Stützstellenanzahl</li>
+</ul>
+<h4 id="Least-Squares-Schatzer"><a href="#Least-Squares-Schatzer" class="headerlink" title="Least-Squares-Schätzer"></a>Least-Squares-Schätzer</h4><p>Zur Bestimmung der Koeffizienten $a_i$ wird bei <strong>nicht orthogonalen</strong> Basisfunktionen $\varphi_i(u)$ der <strong>Least-Squares-Schätzer </strong> verwendet</p>
+<p>Haben: n Messwertepaare $(u_i, y_i)$</p>
+<ul>
+<li>Aufstellen des Signalmodells</li>
+</ul>
+<p><img src="/archives/4eb14690/image-20200219124945263.png" style="zoom: 50%;"></p>
+<ul>
+<li><p>Aufstellen des Approximationsansatzes</p>
+<p><img src="/archives/4eb14690/image-20200219125044637.png" style="zoom: 33%;"></p>
+</li>
+</ul>
+<p>Minimierung des Gütemaßes</p>
+<p><img src="/archives/4eb14690/image-20200218192625735.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200218192700099.png" style="zoom:50%;"></p>
+<p>a: Moore-Penrose-Pseudoinverse</p>
+<p><strong>LS-Schätzer bei nichtlinearem Signalmodell</strong></p>
+<p>Was tun, wenn Signalmodell nicht linear ist?</p>
+<p>Bsp. $\hat{y}(u)=A \cdot \mathrm{e}^{\alpha u}, \quad A, \alpha \quad \text { unbekannt }$ </p>
+<p>$\rightarrow$ oft lassen sich die Messdaten so manipulieren so manipulieren, dass das Modell linear wird.</p>
+<p>Hier: logarithmieren</p>
+<p><img src="/archives/4eb14690/image-20200219133300117.png" style="zoom:50%;"></p>
+<h3 id="Interpolation"><a href="#Interpolation" class="headerlink" title="Interpolation"></a>Interpolation</h3><p>Kurve geht exakt durch Wertepaare</p>
+<ul>
+<li>Lagrange-/Newton (globale Polynome)</li>
+<li>Spline-Interpolation</li>
+<li>Kennfeld-Interpolation mehrdimensionale Erweiterung</li>
+</ul>
+<p>Vorteile:</p>
+<ul>
+<li>Kein direktes Signalmodell erforderlich </li>
+<li>Interpolierte Funktion geht durch Wertepaare</li>
+</ul>
+<p>Nachteile:</p>
+<ul>
+<li>Bei Globalen Polynomansätzen steigt Modellordnung mit der Anzahl der Wertepaare $\rightarrow$ Überschwinger </li>
+</ul>
+<p><strong>Globale Polynomansätze</strong></p>
+<ul>
+<li><p>Standard</p>
+<p>$y(u)=\sum_{i=0}^{N-1} a_{i} u^{i}$ (oft rechenintensiv计算量大)</p>
+</li>
+<li><p>Lagrange-Verfahren</p>
+<p>$y(u)=\sum_{i=0}^{N-1} \hat{a}_{i} l_{i}(u) \quad \text { mit } l_{i}(u): \text { Lagrangepolynome }$</p>
+</li>
+<li><p>Newton-Verfahren</p>
+<p>$y(u)=\sum_{i=0}^{N-1} \tilde{a}_{i} n_{i}(u)\quad \text{ mit } n_{i}(u):\text {Newtonpolynome}$</p>
+</li>
+</ul>
+<h4 id="Newton-Interpolation"><a href="#Newton-Interpolation" class="headerlink" title="Newton-Interpolation"></a>Newton-Interpolation</h4><p>Warum Newton-Interpolation?</p>
+<ul>
+<li><strong>geringere Komplexität</strong> der Basispolynome</li>
+<li>leichtere Erweiterbarkeit beim Hinzufügen von Stützstellen</li>
+</ul>
+<p>Ansatz:</p>
+<p><img src="/archives/4eb14690/image-20200219154557093.png" style="zoom:50%;"></p>
+<p><strong>1. Bei äquidistanten Stützstellen</strong></p>
+<p>Zur einfachen Berechnung der Koeffizienten $a_i$ werden <strong>Differenzen </strong> eingeführt</p>
+<p><strong>Differenzenschema:</strong></p>
+<p><img src="/archives/4eb14690/image-20200219155051455.png" style="zoom:50%;"></p>
+<p><strong>Newton Interpolationsformel für äquidistante Stützstellen</strong></p>
+<p><img src="/archives/4eb14690/image-20200219155428818.png" style="zoom:50%;"></p>
+<p><strong>2. Bei nicht-äquidistantem Stützstellenabstand</strong> </p>
+<p><img src="/archives/4eb14690/image-20200219160648184.png" style="zoom: 33%;"></p>
+<h4 id="Lagrange-Interpolation"><a href="#Lagrange-Interpolation" class="headerlink" title="Lagrange-Interpolation"></a>Lagrange-Interpolation</h4><p>In der Praxis arbeitet man bevorzugt mit Langrange-Interpolation</p>
+<p><strong>Grund:</strong> Keine Berechnung der Koeffizienten erforderlich</p>
+<p>Ansatz: <img src="/archives/4eb14690/image-20200219161759340.png" style="zoom:50%;"></p>
+<p>Lagrange-Polynome:</p>
+<p><img src="/archives/4eb14690/image-20200220200754178.png" style="zoom:50%;"></p>
+<p>Eigenschaft: <img src="/archives/4eb14690/image-20200220200849193.png" style="zoom:50%;"></p>
+<p>$\Longrightarrow$Die Stützstellen eines Lagrange-Polynoms werden exakt interpoliert:</p>
+<p><img src="/archives/4eb14690/image-20200220200608006.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200220200643554.png" style="zoom:50%;"></p>
+<h4 id="Spline-Interpolation"><a href="#Spline-Interpolation" class="headerlink" title="Spline-Interpolation"></a>Spline-Interpolation</h4><p>Eigenschaften der Spline-Interpolierenden:</p>
+<p><img src="/archives/4eb14690/image-20200220201145859.png" style="zoom:50%;"></p>
+<p>$s_i(u_i)=y_i$ ; 二阶导相等$s_i^{‘’}(u_{i+1})=s^{‘’}_{i+1}(u_{i+1})$ ; 边界条件, 两个端点二阶导等于零</p>
+<p><strong>Kubische Spline-Interpolation</strong></p>
+<p><img src="/archives/4eb14690/image-20200220201722869.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200220201755791.png" style="zoom:50%;"></p>
+<p>Berechnung der Parameter:</p>
+<p><img src="/archives/4eb14690/image-20200220201834813.png" style="zoom:50%;"></p>
+<p>Haben bereit:  $y_i$ , noch brauchen: $y_i^{‘’}$ </p>
+<p>Nach Stetigkeit der 1. Ableitung an den Stützstellen:</p>
+<p><img src="/archives/4eb14690/image-20200220202318019.png" alt="image-20200220202318019" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200220202404995.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200220202447762.png" style="zoom:50%;"><br>Randbedingung: $y_{0}^{\prime \prime}=0=y_{n-1}^{\prime \prime}$</p>
+<p><img src="/archives/4eb14690/image-20200220202545618.png" style="zoom:50%;"></p>
+<h3 id="Kennfeldinterpolation"><a href="#Kennfeldinterpolation" class="headerlink" title="Kennfeldinterpolation"></a>Kennfeldinterpolation</h3><p>Die Kennfeldinterpolation ist eine 2D-Interpolation. Es werden die Werte y zwischen de äquidistanten Stützstellen $(u_i,z_i)$ interpoliert.</p>
+<p>Standard Interpolation: $\hat{y}(u)=\sum_{i=0}^{n-1} a_{i} u^{i}$</p>
+<p>Auf zwei  Dimensionen erweitert:</p>
+<script type="math/tex; mode=display">
+\hat{y}(u, z)=\sum_{i=0}^{n-1} \sum_{j=0}^{m-1} a_{i j} u^{i} z^{j}</script><p><strong>Bei Polynomen 1.Grade</strong>, y 在点$(u_i,z_i)$ 泰勒展开：</p>
+<p><img src="/archives/4eb14690/image-20200220203036550.png" style="zoom:50%;"></p>
+<p><strong>Bilinearen Interpolation:</strong><br>Durch <strong>Approximation </strong>der Ableitungen mittels Differenzenquotienten folgt:</p>
+<p><img src="/archives/4eb14690/image-20200220203204882.png" style="zoom:50%;"></p>
+<p>BSP.<img src="/archives/4eb14690/image-20200220203255851.png" style="zoom:50%;"></p>
+]]></content>
+      <categories>
+        <category>Messtechnik</category>
+        <category>Kurvenanpassung</category>
+      </categories>
+      <tags>
+        <tag>approximation</tag>
+        <tag>Interpolation</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Stationäres Verhalten</title>
     <url>/archives/12c26097.html</url>
     <content><![CDATA[<h3 id="Stationare-Messkennlinie-und-Fehler"><a href="#Stationare-Messkennlinie-und-Fehler" class="headerlink" title="Stationäre Messkennlinie und Fehler"></a>Stationäre Messkennlinie und Fehler</h3><p>Stationäres Verhalten: <strong>Einschwingvorgänge abgeklungen</strong><a id="more"></a><br>z.B. Messsystem durch <strong>Kennlinie</strong> $y(u)$ beschreibbar</p>
@@ -781,143 +1033,6 @@ y=u \cdot \frac{S_{\mathrm{i}} V}{1+K^{\prime} \cdot S_{\mathrm{i}} V}</script><
       <tags>
         <tag>KL-Fehler</tag>
         <tag>Linearsierung</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Kurvenanpassung</title>
-    <url>/archives/4eb14690.html</url>
-    <content><![CDATA[<h2 id="Messsysteme"><a href="#Messsysteme" class="headerlink" title="Messsysteme"></a>Messsysteme</h2><p>Allgemein: Messkette</p>
-<p><img src="/archives/4eb14690/image-20200218174651585.png" style="zoom: 33%;"></p>
-<p><a id="more"></a>Systemtheorie</p>
-<p><img src="/archives/4eb14690/image-20200218174732982.png" style="zoom: 33%;"></p>
-<h2 id="Messfehler"><a href="#Messfehler" class="headerlink" title="Messfehler"></a>Messfehler</h2><p>Definition:<br>Absolute Fehler: $F=y_{anzeige}-y_{wahr}=y_a-y_w$<br>Relativer Fehler: $F_r= \frac{F}{y_w}=\frac{y_a-y_w}{y_w}$</p>
-<p><strong>Fehlerursachen:</strong></p>
-<ul>
-<li><strong>Systematische Fehler:</strong> <strong>Ursache</strong> des Fehlers und Art der Einwirkung <strong>bekannt</strong>. <strong>Kompensation</strong> prinzipiell <strong>möglich</strong></li>
-<li><strong>Zufällige Fehler:</strong> nicht reproduzierbar, <strong>Ursache unbekannt</strong></li>
-</ul>
-<h2 id="Kurvenanpassung"><a href="#Kurvenanpassung" class="headerlink" title="Kurvenanpassung"></a>Kurvenanpassung</h2><p>Modellbildung des Systems $\rightarrow$ analytische Messkennlinie</p>
-<p><strong>Ansätze</strong></p>
-<ol>
-<li>Interpolation: Die Kennlinie soll durch <strong>alle</strong> n Messpunkte gehen (Kleines n)</li>
-<li>Approximation: Die Summe der Fehlerquadrate soll minimiert werden. Die Kennlinie geht nicht durch alle Messpunkte (Große n)</li>
-</ol>
-<p><img src="/archives/4eb14690/image-20200218184618776.png" style="zoom: 33%;"></p>
-<h3 id="Approximation"><a href="#Approximation" class="headerlink" title="Approximation"></a>Approximation</h3><p>Kurve nähert Messwertepaare an</p>
-<p><strong>Ziel:</strong> Darstellung der Kennlinie als endliche Reihe analytischer Funktion $\varphi_i(u)$ </p>
-<p><img src="/archives/4eb14690/image-20200218185443332.png" style="zoom:50%;"></p>
-<p>Berechnen Koeffizienten $a_i$ bei Verwendung einer <strong>orthonormalen Basis</strong>: </p>
-<p><img src="/archives/4eb14690/image-20200218190044347.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200218185817616.png" style="zoom:50%;"></p>
-<p>Vorteil: </p>
-<ul>
-<li>Mittelwertfreie <strong>Fehler</strong> werden <strong>unterdrückt</strong> </li>
-<li><strong>Beliebige</strong> Basisfunktionen verwendbar (solange linear unabhängig voneinander) </li>
-<li><strong>Modellordnung unabhängig</strong> von Stützstellenanzahl</li>
-</ul>
-<h4 id="Least-Squares-Schatzer"><a href="#Least-Squares-Schatzer" class="headerlink" title="Least-Squares-Schätzer"></a>Least-Squares-Schätzer</h4><p>Zur Bestimmung der Koeffizienten $a_i$ wird bei <strong>nicht orthogonalen</strong> Basisfunktionen $\varphi_i(u)$ der <strong>Least-Squares-Schätzer </strong> verwendet</p>
-<p>Haben: n Messwertepaare $(u_i, y_i)$</p>
-<ul>
-<li>Aufstellen des Signalmodells</li>
-</ul>
-<p><img src="/archives/4eb14690/image-20200219124945263.png" style="zoom: 50%;"></p>
-<ul>
-<li><p>Aufstellen des Approximationsansatzes</p>
-<p><img src="/archives/4eb14690/image-20200219125044637.png" style="zoom: 33%;"></p>
-</li>
-</ul>
-<p>Minimierung des Gütemaßes</p>
-<p><img src="/archives/4eb14690/image-20200218192625735.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200218192700099.png" style="zoom:50%;"></p>
-<p>a: Moore-Penrose-Pseudoinverse</p>
-<p><strong>LS-Schätzer bei nichtlinearem Signalmodell</strong></p>
-<p>Was tun, wenn Signalmodell nicht linear ist?</p>
-<p>Bsp. $\hat{y}(u)=A \cdot \mathrm{e}^{\alpha u}, \quad A, \alpha \quad \text { unbekannt }$ </p>
-<p>$\rightarrow$ oft lassen sich die Messdaten so manipulieren so manipulieren, dass das Modell linear wird.</p>
-<p>Hier: logarithmieren</p>
-<p><img src="/archives/4eb14690/image-20200219133300117.png" style="zoom:50%;"></p>
-<h3 id="Interpolation"><a href="#Interpolation" class="headerlink" title="Interpolation"></a>Interpolation</h3><p>Kurve geht exakt durch Wertepaare</p>
-<ul>
-<li>Lagrange-/Newton (globale Polynome)</li>
-<li>Spline-Interpolation</li>
-<li>Kennfeld-Interpolation mehrdimensionale Erweiterung</li>
-</ul>
-<p>Vorteile:</p>
-<ul>
-<li>Kein direktes Signalmodell erforderlich </li>
-<li>Interpolierte Funktion geht durch Wertepaare</li>
-</ul>
-<p>Nachteile:</p>
-<ul>
-<li>Bei Globalen Polynomansätzen steigt Modellordnung mit der Anzahl der Wertepaare $\rightarrow$ Überschwinger </li>
-</ul>
-<p><strong>Globale Polynomansätze</strong></p>
-<ul>
-<li><p>Standard</p>
-<p>$y(u)=\sum_{i=0}^{N-1} a_{i} u^{i}$ (oft rechenintensiv计算量大)</p>
-</li>
-<li><p>Lagrange-Verfahren</p>
-<p>$y(u)=\sum_{i=0}^{N-1} \hat{a}_{i} l_{i}(u) \quad \text { mit } l_{i}(u): \text { Lagrangepolynome }$</p>
-</li>
-<li><p>Newton-Verfahren</p>
-<p>$y(u)=\sum_{i=0}^{N-1} \tilde{a}_{i} n_{i}(u)\quad \text{ mit } n_{i}(u):\text {Newtonpolynome}$</p>
-</li>
-</ul>
-<h4 id="Newton-Interpolation"><a href="#Newton-Interpolation" class="headerlink" title="Newton-Interpolation"></a>Newton-Interpolation</h4><p>Warum Newton-Interpolation?</p>
-<ul>
-<li><strong>geringere Komplexität</strong> der Basispolynome</li>
-<li>leichtere Erweiterbarkeit beim Hinzufügen von Stützstellen</li>
-</ul>
-<p>Ansatz:</p>
-<p><img src="/archives/4eb14690/image-20200219154557093.png" style="zoom:50%;"></p>
-<p><strong>1. Bei äquidistanten Stützstellen</strong></p>
-<p>Zur einfachen Berechnung der Koeffizienten $a_i$ werden <strong>Differenzen </strong> eingeführt</p>
-<p><strong>Differenzenschema:</strong></p>
-<p><img src="/archives/4eb14690/image-20200219155051455.png" style="zoom:50%;"></p>
-<p><strong>Newton Interpolationsformel für äquidistante Stützstellen</strong></p>
-<p><img src="/archives/4eb14690/image-20200219155428818.png" style="zoom:50%;"></p>
-<p><strong>2. Bei nicht-äquidistantem Stützstellenabstand</strong> </p>
-<p><img src="/archives/4eb14690/image-20200219160648184.png" style="zoom: 33%;"></p>
-<h4 id="Lagrange-Interpolation"><a href="#Lagrange-Interpolation" class="headerlink" title="Lagrange-Interpolation"></a>Lagrange-Interpolation</h4><p>In der Praxis arbeitet man bevorzugt mit Langrange-Interpolation</p>
-<p><strong>Grund:</strong> Keine Berechnung der Koeffizienten erforderlich</p>
-<p>Ansatz: <img src="/archives/4eb14690/image-20200219161759340.png" style="zoom:50%;"></p>
-<p>Lagrange-Polynome:</p>
-<p><img src="/archives/4eb14690/image-20200220200754178.png" style="zoom:50%;"></p>
-<p>Eigenschaft: <img src="/archives/4eb14690/image-20200220200849193.png" style="zoom:50%;"></p>
-<p>$\Longrightarrow$Die Stützstellen eines Lagrange-Polynoms werden exakt interpoliert:</p>
-<p><img src="/archives/4eb14690/image-20200220200608006.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200220200643554.png" style="zoom:50%;"></p>
-<h4 id="Spline-Interpolation"><a href="#Spline-Interpolation" class="headerlink" title="Spline-Interpolation"></a>Spline-Interpolation</h4><p>Eigenschaften der Spline-Interpolierenden:</p>
-<p><img src="/archives/4eb14690/image-20200220201145859.png" style="zoom:50%;"></p>
-<p>$s_i(u_i)=y_i$ ; 二阶导相等$s_i^{‘’}(u_{i+1})=s^{‘’}_{i+1}(u_{i+1})$ ; 边界条件, 两个端点二阶导等于零</p>
-<p><strong>Kubische Spline-Interpolation</strong></p>
-<p><img src="/archives/4eb14690/image-20200220201722869.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200220201755791.png" style="zoom:50%;"></p>
-<p>Berechnung der Parameter:</p>
-<p><img src="/archives/4eb14690/image-20200220201834813.png" style="zoom:50%;"></p>
-<p>Haben bereit:  $y_i$ , noch brauchen: $y_i^{‘’}$ </p>
-<p>Nach Stetigkeit der 1. Ableitung an den Stützstellen:</p>
-<p><img src="/archives/4eb14690/image-20200220202318019.png" alt="image-20200220202318019" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200220202404995.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200220202447762.png" style="zoom:50%;"><br>Randbedingung: $y_{0}^{\prime \prime}=0=y_{n-1}^{\prime \prime}$</p>
-<p><img src="/archives/4eb14690/image-20200220202545618.png" style="zoom:50%;"></p>
-<h3 id="Kennfeldinterpolation"><a href="#Kennfeldinterpolation" class="headerlink" title="Kennfeldinterpolation"></a>Kennfeldinterpolation</h3><p>Die Kennfeldinterpolation ist eine 2D-Interpolation. Es werden die Werte y zwischen de äquidistanten Stützstellen $(u_i,z_i)$ interpoliert.</p>
-<p>Standard Interpolation: $\hat{y}(u)=\sum_{i=0}^{n-1} a_{i} u^{i}$</p>
-<p>Auf zwei  Dimensionen erweitert:</p>
-<script type="math/tex; mode=display">
-\hat{y}(u, z)=\sum_{i=0}^{n-1} \sum_{j=0}^{m-1} a_{i j} u^{i} z^{j}</script><p><strong>Bei Polynomen 1.Grade</strong>, y 在点$(u_i,z_i)$ 泰勒展开：</p>
-<p><img src="/archives/4eb14690/image-20200220203036550.png" style="zoom:50%;"></p>
-<p><strong>Bilinearen Interpolation:</strong><br>Durch <strong>Approximation </strong>der Ableitungen mittels Differenzenquotienten folgt:</p>
-<p><img src="/archives/4eb14690/image-20200220203204882.png" style="zoom:50%;"></p>
-<p>BSP.<img src="/archives/4eb14690/image-20200220203255851.png" style="zoom:50%;"></p>
-]]></content>
-      <categories>
-        <category>Messtechnik</category>
-        <category>Kurvenanpassung</category>
-      </categories>
-      <tags>
-        <tag>approximation</tag>
-        <tag>Interpolation</tag>
       </tags>
   </entry>
   <entry>
