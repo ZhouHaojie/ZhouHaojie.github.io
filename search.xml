@@ -4,6 +4,7 @@
     <title>The Rule of Five</title>
     <url>/archives/625ed7a4.html</url>
     <content><![CDATA[<p><strong>The Rule of Five</strong> 在资源管理中尤其重要，由于资源和性能原因，需要避免不必要的复制。 此外，所有STL容器类（例如<code>std :: vector</code>）都使用了五规则，并且使用move语义来提高效率。<a id="more"></a></p>
+<p>这篇文章讲得比较好 <a href="https://www.cnblogs.com/qicosmos/p/4283455.html" rel="external nofollow noopener noreferrer" target="_blank">从4行代码看右值引用</a></p>
 <ol>
 <li>The <strong>destructor</strong>: Responsible for freeing the resource once the object it belongs to goes out of scope.</li>
 <li>The <strong>assignment operator</strong>: The default assignment operation performs a member-wise shallow copy, which does not copy the content behind the resource handle. If a deep copy is needed, it has be implemented by the programmer.</li>

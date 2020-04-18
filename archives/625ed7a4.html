@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="ZhouHaojie的博客">
 <meta property="og:description" content="The Rule of Five 在资源管理中尤其重要，由于资源和性能原因，需要避免不必要的复制。 此外，所有STL容器类（例如std :: vector）都使用了五规则，并且使用move语义来提高效率。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-04-08T22:59:35.410Z">
+<meta property="og:updated_time" content="2020-04-09T10:53:00.557Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://grenze.cn/archives/625ed7a4.html">
@@ -262,7 +262,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-09 00:59:35" itemprop="dateModified" datetime="2020-04-09T00:59:35+02:00">2020-04-09</time>
+                <time title="修改时间：2020-04-09 12:53:00" itemprop="dateModified" datetime="2020-04-09T12:53:00+02:00">2020-04-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -315,6 +315,7 @@
 
       
         <p><strong>The Rule of Five</strong> 在资源管理中尤其重要，由于资源和性能原因，需要避免不必要的复制。 此外，所有STL容器类（例如<code>std :: vector</code>）都使用了五规则，并且使用move语义来提高效率。<a id="more"></a></p>
+<p>这篇文章讲得比较好 <a href="https://www.cnblogs.com/qicosmos/p/4283455.html" rel="external nofollow noopener noreferrer" target="_blank">从4行代码看右值引用</a></p>
 <ol>
 <li>The <strong>destructor</strong>: Responsible for freeing the resource once the object it belongs to goes out of scope.</li>
 <li>The <strong>assignment operator</strong>: The default assignment operation performs a member-wise shallow copy, which does not copy the content behind the resource handle. If a deep copy is needed, it has be implemented by the programmer.</li>
