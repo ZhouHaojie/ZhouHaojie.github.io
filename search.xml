@@ -356,8 +356,7 @@ u t i l(T)=1-\frac{\operatorname{avgslack}(T)}{T}</script><p>bezeichnet die proz
 <p>Intellectual Property wird beim Chipdesign verwendet. </p>
 ]]></content>
       <categories>
-        <category>Bus</category>
-        <category>Network-on-Chip (NoC) &amp; Multicore</category>
+        <category>Hardware Software Co-Design</category>
         <category>System-on-Chip (SoC)</category>
       </categories>
       <tags>
@@ -576,7 +575,6 @@ u t i l(T)=1-\frac{\operatorname{avgslack}(T)}{T}</script><p>bezeichnet die proz
 ]]></content>
       <categories>
         <category>Hardware Software Co-Design</category>
-        <category>Bus</category>
         <category>Network-on-Chip (NoC) &amp; Multicore</category>
       </categories>
       <tags>
