@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Interne Architektur:">
+<meta name="keywords" content="VLWI,Pipelining,superskalar,Cache,SIMD,MIMD">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPP-Performanzsteigerung">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="Interne Architektur:">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200609172119664.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200609172157721.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200609225745052.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200609230048983.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200609230220880.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200609230243961.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200609230419528.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200609230536255.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200609230655624.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200610130136923.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200610125639956.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200610125857997.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200610131547137.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200610131835170.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200610131835170.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200610131653446.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200610132728636.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200610160339720.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200610160432111.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200610160748955.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200610131835170.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200610230540820.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200611130011337.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200611133126792.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200611133221613.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200611133331245.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200611194256829.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200611163417964.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200611163541900.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200611164720814.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200611165401185.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200611165621992.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200611180641626.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200611180921200.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200611195511299.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200611185157512.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200611194256829.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200612205939960.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200612211737067.png">
+<meta property="og:updated_time" content="2020-06-16T21:00:16.725Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;91062da9&#x2F;image-20200609172119664.png">
+
+<link rel="canonical" href="http://grenze.cn/archives/91062da9.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>GPP-Performanzsteigerung | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">61</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">43</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">73</span></a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-automatic-vision">
+
+    <a href="/gitbook-Automatic-Vision/" rel="section"><i class="fa fa-fw fa-book"></i>Automatic-Vision</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/91062da9.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GPP-Performanzsteigerung
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-16 22:58:22 / 修改时间：23:00:16" itemprop="dateCreated datePublished" datetime="2020-06-16T22:58:22+02:00">2020-06-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hardware-Software-Co-Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Hardware Software Co-Design</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hardware-Software-Co-Design/GPP-Performanzsteigerung/" itemprop="url" rel="index">
+                    <span itemprop="name">GPP-Performanzsteigerung</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>17k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>15 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Interne Architektur:</p>
+<p><img src="/archives/91062da9/image-20200609172119664.png" style="zoom:80%;"><a id="more"></a></p>
+<p>Speicherhierarchie in einem Rechner:</p>
+<p><img src="/archives/91062da9/image-20200609172157721.png" style="zoom:80%;"></p>
+<h2 id="GPP-Pipelining"><a href="#GPP-Pipelining" class="headerlink" title="GPP: Pipelining"></a>GPP: Pipelining</h2><h3 id="Konzept"><a href="#Konzept" class="headerlink" title="Konzept"></a>Konzept</h3><p><strong>Befehlspipeline eines Rechners:</strong><br>Die Befehlsbearbeitung wird in n funktionelle Einheiten gegliedert. Ausführung geschieht zeitlich überlappend.</p>
+<p><strong>Pipelining:</strong><br>die Zerlegung einer Maschinenoperation in mehrere Phasen, die dann von Verarbeitungseinheiten taktsynchron bearbeitet werden, wobei jede Verarbeitungseinheit genau eine spezielle Teiloperation ausführt.</p>
+<p><strong>Pipeline-Stufe:</strong> Jede Stufe der Pipeline. Pipeline-Stufen werden durch getaktete <strong>Pipeline-Register</strong> (<strong>latches</strong> ) getrennt. 指令数/几个时钟周期</p>
+<p><strong>Pipeline-Maschinentakt:</strong> die Zeit, um einen Befehl eine Stufe weiter durch die Pipeline zu schieben 流水线机器周期是将指令移动到下一级流水线所花费的时间。</p>
+<p><strong>Latenz:</strong> die Zeit, um alle k Pipeline-Stufen zu durchlaufen. 从头到尾执行一条指令所需要的时间称为延迟latency</p>
+<p><strong>Durchsatz:</strong> die Anzahl der Befehle, die eine Pipeline pro Takt verlassen können. Dieser Wert spiegelt die <strong>Rechenleistung</strong> einer Pipeline.</p>
+<h3 id="Exemplarische-Befehlsausfuhrung"><a href="#Exemplarische-Befehlsausfuhrung" class="headerlink" title="Exemplarische Befehlsausführung"></a>Exemplarische Befehlsausführung</h3><p>Verarbeitungsphasen eines Befehls am <strong>Beispiel</strong></p>
+<ul>
+<li><p>Annahme: einfache <strong>Akkumulatormaschine</strong> </p>
+</li>
+<li><p>Befehlsformat<img src="/archives/91062da9/image-20200609225745052.png" style="zoom:80%;"></p>
+</li>
+</ul>
+<p><strong>Struktur:</strong></p>
+<ul>
+<li>pc: program counter</li>
+<li>ip:  instruction pointer</li>
+<li>ir:   instruction register </li>
+<li>or:  operand register</li>
+<li>ac:  accumulator<br><img src="/archives/91062da9/image-20200609230048983.png" style="zoom:80%;"></li>
+</ul>
+<ol>
+<li><p>Befehlsholphase (instruction fetch, IF)<br><img src="/archives/91062da9/image-20200609230220880.png" style="zoom:80%;"></p>
+</li>
+<li><p>Befehl dekodieren (instruction decode, ID)<br><img src="/archives/91062da9/image-20200609230243961.png" style="zoom:80%;"></p>
+</li>
+<li><p>Operand holen (operand fetch, OF)<br><img src="/archives/91062da9/image-20200609230419528.png" style="zoom:80%;"></p>
+</li>
+<li><p>Befehl ausführen (instruction execute, EX)<br><img src="/archives/91062da9/image-20200609230536255.png" style="zoom:80%;"></p>
+</li>
+<li><p>Befehlszähler inkrementieren </p>
+<ul>
+<li>kann als separater Schritt oder parallel erfolgen</li>
+</ul>
+<p><img src="/archives/91062da9/image-20200609230655624.png" style="zoom:80%;"></p>
+</li>
+<li><p>Resultat: Ergebnis 225 steht im accumulator ac</p>
+</li>
+</ol>
+<p><strong>没有流水线的情况: </strong></p>
+<p><img src="/archives/91062da9/image-20200610130136923.png" style="zoom:80%;"></p>
+<ul>
+<li>Auslastung bei serieller Ausführung:<ul>
+<li>Hauptspeicher: 4/7 = 57% </li>
+<li>CPU: 5/7 = 71%</li>
+</ul>
+</li>
+</ul>
+<p><strong>使用流水线:</strong></p>
+<p><strong>Überlappung der Ausführungsphase mit dem Holen des nächsten Befehls:</strong></p>
+<p><img src="/archives/91062da9/image-20200610125639956.png" style="zoom:80%;"></p>
+<ul>
+<li>Es werden keine zusätzlichen Ressourcen benötigt</li>
+<li><p>Eine zeitliche Einsparung von 2 Takten pro Befehl =&gt; 28,6 % Leistungssteigerung</p>
+</li>
+<li><p>Während eines Speicherzugriffs wird bereits der nächste Speicherzugriff vorbereitet</p>
+</li>
+<li>Ebenfalls Parallel zum Speicherzugriff: Kalkulation des Ergebnisses</li>
+<li>Nur noch 5 Takte notwendig, keine zusätzlichen Kosten</li>
+</ul>
+<p><img src="/archives/91062da9/image-20200610125857997.png" style="zoom:80%;"></p>
+<ul>
+<li>Auslastung bei überlappter Ausführung:<ul>
+<li>Hauptspeicher: 4/5 = 80% </li>
+<li>CPU: 4/5 = 80%</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-stufigen-Befehlspipeline"><a href="#5-stufigen-Befehlspipeline" class="headerlink" title="5-stufigen Befehlspipeline"></a>5-stufigen Befehlspipeline</h3><ul>
+<li><p>Instruction Fetch<br>Der Befehl, der durch den Befehlszähler adressiert ist, wird aus dem Hauptspeicher geladen. Der Befehlszähler wird weitergeschaltet</p>
+</li>
+<li><p>Decode/Operand fetch</p>
+<p>Prozessorinterne Steuersignale werden  erzeugt aus dem Operationscode des Maschinenbefehls (1. Takthälfte).  处理器内部的控制信号由机器命令的操作代码生成（周期的前半部分）。</p>
+<p>Die Operanden werden aus Registern bereitgestellt (2. Takthälfte)</p>
+</li>
+<li><p>ALU Operation<br>Die Operation wird ausgeführt. </p>
+<p>Bei Lade-/Speicherbefehlen wird die effektive Adresse berechnet 为加载/存储命令计算有效地址</p>
+</li>
+<li><p>memory access<br>Der Speicherzugriff wird durchgeführt (Cache oder Hauptspeicher)</p>
+</li>
+<li><p>Write Back<br>Das Ergebnis wird in ein Register geschrieben (1. Takthälfte)</p>
+</li>
+</ul>
+<p><img src="/archives/91062da9/image-20200610131547137.png" style="zoom:80%;"><img src="/archives/91062da9/image-20200610131835170.png" alt="image-20200610131835170"></p>
+<p><img src="/archives/91062da9/image-20200610131835170.png" style="zoom:80%;"></p>
+<p><strong>RISC Prozessor 5 stufige pipeline</strong>:</p>
+<p><img src="/archives/91062da9/image-20200610131653446.png" style="zoom:80%;"></p>
+<h3 id="Beispiel-Optimales-Pipelining"><a href="#Beispiel-Optimales-Pipelining" class="headerlink" title="Beispiel: Optimales Pipelining"></a>Beispiel: Optimales Pipelining</h3><p><img src="/archives/91062da9/image-20200610132728636.png" style="zoom:80%;"></p>
+<ul>
+<li>Alle Operationen arbeiten auf Registern (single cycle execution)</li>
+<li>Zu jedem Taktzyklus wird eine Instruktion beendet<ul>
+<li>Latenz bleibt identisch aber Durchsatz wird erhöht (5x)</li>
+</ul>
+</li>
+</ul>
+<h3 id="Pipeline-Konflikte"><a href="#Pipeline-Konflikte" class="headerlink" title="Pipeline Konflikte"></a>Pipeline Konflikte</h3><ul>
+<li>Die nächste Instruktion im Befehlsstrom im zugewiesenen Taktzyklus wird nicht ausgeführt</li>
+<li>Unterbrechung des taktsynchronen Durchlaufs durch die einzelnen Stufen der Pipeline Verursacht</li>
+<li>Leistungseinbußen, da Durchsatz reduziert wird</li>
+</ul>
+<p><strong>Strukturkonflikte</strong></p>
+<ul>
+<li>Ergeben sich aus Ressourcenkonflikten<ul>
+<li>Die Hardware kann nicht alle mögliche Kombinationen von Befehlen unterstützen, die sich in der Pipeline befinden können 如果某种指令组合因为资源冲突而不能正常执行，则称该处理机有结构冲突（比如说，两条指令在同一周期同时访问内存)</li>
+</ul>
+</li>
+<li>Beispiel: Gleichzeitiger Schreibzugriff zweier Befehle auf eine Registerdatei mit nur einem Schreibeingang. (Zwei Befehle zugreifen auf eine Register gleichzeitig)</li>
+</ul>
+<p><strong>Datenkonflikte</strong></p>
+<ul>
+<li>Ergeben sich aus Datenabhängigkeiten zwischen Befehlen im Programm</li>
+<li>z.B. zweite Befehl ist abhängig von vorherige Befehl</li>
+</ul>
+<p><strong>Steuerkonflikte</strong></p>
+<ul>
+<li>Treten bei Verzweigungsbefehlen und anderen Instruktionen auf, die den Befehlszähler verändern 流水线遇到分支指令和其他会改变PC值的指令所引起的冲突</li>
+</ul>
+<h3 id="Auflosung-von-Pipeline-Konflikten"><a href="#Auflosung-von-Pipeline-Konflikten" class="headerlink" title="Auflösung von Pipeline Konflikten"></a>Auflösung von Pipeline Konflikten</h3><p><strong>Softwarebasierend:</strong></p>
+<ul>
+<li>Aufgabe des Compilers: <ul>
+<li>Erkennen von Datenkonflikten </li>
+<li>Einfügen von Leeroperationen nach jedem Befehl, der einen Konflikt verursacht (NOP)</li>
+</ul>
+</li>
+<li>Statische Verfahren: <ul>
+<li>Instruction Scheduling, Pipeline Scheduling </li>
+<li>Eliminieren von Leeroperationen </li>
+<li>Umordnen der Befehle des Programms (Code-Optimierung)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Hardware-Lösungen (Dynamische Verfahren):</strong></p>
+<ul>
+<li>Erkennen von Konflikten <ul>
+<li>Entsprechende Konflikterkennungslogik notwendig! </li>
+<li>Techniken <ul>
+<li>Leerlauf der Pipeline (Stalling) </li>
+<li>Forwarding</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Beispiel: Load Pipeline</strong></p>
+<p><img src="/archives/91062da9/image-20200610160339720.png" style="zoom:80%;"></p>
+<p><strong>Beispiel: Branch and Link Pipeline</strong></p>
+<p><img src="/archives/91062da9/image-20200610160432111.png" style="zoom:80%;"></p>
+<p><strong>Beispiel: Pipeline - Datenkonflikte</strong></p>
+<ul>
+<li>ADD   <strong>R1</strong>, R2, R3</li>
+<li>AND   R6, <strong>R1</strong>, R8</li>
+<li>XOR    R9, <strong>R1</strong>, R11</li>
+</ul>
+<h3 id="Superpipelining"><a href="#Superpipelining" class="headerlink" title="Superpipelining"></a>Superpipelining</h3><p>Begriffe: Tiefe Pipeline, aber keine superskalaren Einheiten</p>
+<p><img src="/archives/91062da9/image-20200610160748955.png" style="zoom:80%;"></p>
+<h3 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p><strong>Was ist Pipelining?</strong> </p>
+<p>Der <a href="https://de.wikipedia.org/wiki/Maschinensprache" rel="external nofollow noopener noreferrer" target="_blank">Maschinenbefehle</a> mit Pipelining wird in Teilaufgaben zerlegt, die für mehrere Befehle parallel durchgeführt werden</p>
+<p><strong>Wie ist die 5-stufige DLX Pipeline aufgebaut?</strong> </p>
+<p><img src="/archives/91062da9/image-20200610131835170.png" style="zoom:80%;"></p>
+<p><strong>Welche Latenz hat die Pipeline bei einem Takt pro Stufe?</strong> </p>
+<p><strong>Was ist der ideale Durchsatz des Prozessors?</strong> <strong>Kann er erreicht werden?</strong> </p>
+<p><strong>Welche Konflikte können auftreten?</strong> </p>
+<p>Daten, Struktur, SteuerKonflikte</p>
+<p><strong>Wie können diese gelöst werden?</strong> </p>
+<p>Software: einfügt von eine Leeroperation nach jedem Befehl, der ein Konflikt verursacht<br>                  Instruktion Scheduling und Pipelining Scheduling</p>
+<p>Hardware: Leerlauf der Pipeline (Stalling) </p>
+<p><strong>Warum gibt es keine 50-stufigen Pipelines?</strong></p>
+<p>je mehr Stufe, destro mehr Latenz, wegen der Pipelining register, und auch verursacht Konflikte</p>
+<h2 id="Superskalaritat-超标量"><a href="#Superskalaritat-超标量" class="headerlink" title="Superskalarität (超标量)"></a>Superskalarität (超标量)</h2><h3 id="Begriffe"><a href="#Begriffe" class="headerlink" title="Begriffe"></a>Begriffe</h3><p><strong>Superpipeline: </strong>Tiefe Pipeline, aber keine superskalaren Einheiten</p>
+<p><strong>superskalar</strong>: Kann mehr als eine Instruktion/Zyklus ausführen</p>
+<p><strong>Out-of-Order:</strong> Kann Instruktionen außerhalb der Programmreihenfolge ausführen</p>
+<p><strong>Spekulation:</strong> Führt Instruktionen auch nach Branches weiter aus, die später eventuell annulliert werden müssen</p>
+<ul>
+<li>Den Ausführungseinheiten kann mehr als ein Befehl pro Takt zugewiesen werden</li>
+<li>Die Zuweisung der Befehle erfolgt in Hardware durch einen <strong>dynamischen Scheduler</strong></li>
+<li>Die dynamische Zuweisung von Befehlen führt zu einem komplexen Hardware-Scheduler.</li>
+</ul>
+<p>Pipelining nutzt <strong>zeitliche</strong> Parallelität (temporal parallelism) </p>
+<ul>
+<li>提高性能: mit einer längeren Pipeline und höherer Taktfrequenz</li>
+</ul>
+<p>Superskalar nutzt <strong>räumliche</strong> Parallelität (spatial parallelism).</p>
+<ul>
+<li>提高性能: mit Hilfe von mehr Ausführungseinheiten und einer hohen dynamischen Zuweisungsrate</li>
+</ul>
+<p><strong>Zwei Befehle können parallel ausgeführt werden, wenn:</strong></p>
+<ul>
+<li>Beide einfache Instruktionen sind</li>
+<li>Instruktion 1 kein Sprung ist</li>
+<li>Wenn das Ziel von Instruktion 1 nicht die Quelle von Instruktion 2 ist </li>
+<li>Wenn das Ziel von Instruktion 1 nicht das Ziel von Instruktion 2 ist</li>
+</ul>
+<p><strong>Wenn zwei Befehle nicht parallel ausgeführt werden können:</strong></p>
+<ul>
+<li>Instruktion 1 in erster Pipeline abarbeiten </li>
+<li>Instruktion 2 im nächsten Zyklus abarbeiten <ul>
+<li>Wenn möglich, zusammen mit der darauf folgenden Instruktion</li>
+</ul>
+</li>
+</ul>
+<h3 id="Dynamisches-Scheduling-Prozessorpipeline"><a href="#Dynamisches-Scheduling-Prozessorpipeline" class="headerlink" title="Dynamisches Scheduling - Prozessorpipeline"></a>Dynamisches Scheduling - Prozessorpipeline</h3><p><img src="/archives/91062da9/image-20200610230540820.png" style="zoom:80%;"></p>
+<h3 id="Superskalarprinzip-und-dynamisches-Scheduling-Zusammenfassung"><a href="#Superskalarprinzip-und-dynamisches-Scheduling-Zusammenfassung" class="headerlink" title="Superskalarprinzip und dynamisches Scheduling - Zusammenfassung"></a>Superskalarprinzip und dynamisches Scheduling - Zusammenfassung</h3><ul>
+<li>Die Zuweisung erfolgt dynamisch durch die Hardware 分配是由硬件动态进行的</li>
+<li>Es kann mehr als ein Befehl zugewiesen werden 可以分配多个命令</li>
+<li>Die Anzahl der zugewiesenen Befehle pro Takt wird dynamisch von der Hardware bestimmt und liegt zwischen null und der maximalen Zuweisungsbreite 每个周期分配的命令数由硬件动态确定，并且在零和最大分配宽度之间</li>
+<li>Komplexe Hardware für Zuweisungslogik erforderlich</li>
+<li>Mikroarchitektur bestimmt superskalare Eigenschaft</li>
+</ul>
+<h3 id="Q-amp-A-1"><a href="#Q-amp-A-1" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p><strong>Was ist der Unterschied zwischen Skalar und Superskalar?</strong> </p>
+<p>Der Unterschied zwischen skalaren und superskalaren Prozessoren liegt in der Anzahl der Befehle die gleichzeitig geholt, decodiert, ausgeführt und in die Zielregister zurück geschrieben werden können.</p>
+<p>Bei superskalaren wird Prozessoren teilweise hardwareseitig die Befehlsreihenfolge verändert, um eine höhere Parallelität zu erreichen.</p>
+<p><strong>Welche zusätzlichen Einheiten werden benötigt? Welche Funktion habe diese?</strong> </p>
+<p><strong>Welche Probleme ergeben sich durch parallele Pipelines?</strong> </p>
+<p>Häufig gibt es noch mehr Ausführungseinheiten, um potenzielle Strukturkonflikte zu umgehen</p>
+<p><strong>Was ist dynamisches Scheduling?</strong> </p>
+<p><strong>Dynamisches Scheduling</strong> ist eine hardwaregestützte Verfahren der <a href="https://de.wikipedia.org/wiki/Rechnerarchitektur" rel="external nofollow noopener noreferrer" target="_blank">Rechnerarchitektur</a>, um die Funktionseinheiten eines <a href="https://de.wikipedia.org/wiki/Prozessor" rel="external nofollow noopener noreferrer" target="_blank">Prozessors</a> optimal auszulasten und parallel arbeiten zu lassen.</p>
+<p><strong>Was ist spekulative Ausführung?</strong> </p>
+<p>spekulative Ausführung ist eine Optimierungstechnik , führt Instruktionen auch nach Branches weiter aus, die später eventuell annulliert werden müssen</p>
+<p><strong>Einordnung nach Flynn?</strong></p>
+<p>SSID…</p>
+<h2 id="Very-Long-Instruction-Word-VLIW"><a href="#Very-Long-Instruction-Word-VLIW" class="headerlink" title="Very Long Instruction Word (VLIW)"></a>Very Long Instruction Word (VLIW)</h2><p>Architekturtechnik, bei der ein Compiler eine feste Anzahl von einfachen, voneinander unabhängigen Befehlen zu einem Befehlspaket zusammenpackt und in einem Maschinenbefehlswort meist fester Länge speichert.</p>
+<p>Das Maschinenbefehlsformat eines VLIW-Befehlspakets kann mehrere hundert Bits lang sein, in der Praxis sind dies zwischen 128 und 1024 Bits.</p>
+<p>Alle Befehle innerhalb eines VLIW-Befehlspakets müssen unabhängig voneinander sein und eigene Opcodes und Operandenbezeichner enthalten. VLIW指令包中的所有指令必须彼此独立，并包含其自己的操作码和操作数标识符。</p>
+<ul>
+<li>Die Anzahl der Befehle in einem VLIW-Befehlspaket ist in der Regel fest. <ul>
+<li>Wenn die volle Bandbreite eines VLIW-Befehlspakets nicht ausgenutzt werden kann, muss es mit Leerbefehlen aufgefüllt werden.</li>
+</ul>
+</li>
+<li><strong>Problem</strong> bei VLIW-Architekturen:<ul>
+<li>volle Parallelität nicht immer ausnutzbar → Befehlswort teilweise unnötig lang 完全并行并不总是可用→命令字有时会不必要地长</li>
+<li>Neuere VLIW-Architekturen sind in der Lage, durch ein komprimiertes Befehlsformat auf das Auffüllen mit Leerbefehlen zu verzichten. 由于压缩的命令格式，较新的VLIW架构无需填充空命令即可执行操作。</li>
+</ul>
+</li>
+<li><strong>Lösung</strong>: Instruction-Packing: Instruktionswort enthält mehrere Teil-Instruktionen<br><img src="/archives/91062da9/image-20200611130011337.png" style="zoom:80%;"></li>
+</ul>
+<p>Befehlswort enthält bis zu 8 32-Bit-Befehle = Befehlspaket</p>
+<ul>
+<li>ein Bit gibt an, ob nächster Befehl zum selben Befehlspaket gehört, 其中一位，用来指示下一个指令是否在当前包里</li>
+<li>erlaubt Befehle unterschiedlicher Bitbreite</li>
+</ul>
+<p>Die Befehle in einem solchen VLIW-Befehlswort werden dann gleichzeitig geholt, decodiert, zugewiesen und ausgeführt.</p>
+<p>Vom Compiler generiertes Scheduling zur Laufzeit von Hardware durchzuführen</p>
+<p><strong>VLIW-Befehl vs. CISC und SIMD-Befehl</strong></p>
+<p>Unterschied zu einem CISC-Befehl: </p>
+<ul>
+<li>CISC-Befehl kann mit einem Opcode mehrere, eventuell sequenziell nacheinander ablaufende Operationen codieren CISC命令可以使用操作码对几种操作进行编码，这些操作可以是顺序的</li>
+</ul>
+<p>Unterschied zu einem SIMD-Befehl: </p>
+<ul>
+<li>SIMD-Befehle sind die Multimediabefehlen, bei denen ein Opcode eine gleichartige Operation auf einer Anzahl von Operanden(paaren) auslöst. </li>
+<li>Die Operationen innerhalb eines VLIW-Befehlspakets sind in der Regel verschiedenartig.</li>
+</ul>
+<h3 id="Q-amp-A-2"><a href="#Q-amp-A-2" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p><strong>Wo findet die Parallelisierung statt?</strong> </p>
+<p><strong>Wie unterscheidet sich die Instruktion?</strong> </p>
+<p>Die Befehle in einem solchen VLIW-Befehlswort werden dann gleichzeitig geholt, decodiert, zugewiesen und ausgeführt.</p>
+<p><strong>Wie muss die Hardware aufgebaut sein?</strong></p>
+<h2 id="Single-Instruction-Multiple-Data-SIMD"><a href="#Single-Instruction-Multiple-Data-SIMD" class="headerlink" title="Single Instruction Multiple Data (SIMD)"></a>Single Instruction Multiple Data (SIMD)</h2><p>Gleiche Instruktion auf mehreren Daten</p>
+<ul>
+<li>Multimediaanwendungen <ul>
+<li>Viele Daten gleichzeitig </li>
+<li>Viele Parallelisierungsmöglichkeiten</li>
+</ul>
+</li>
+</ul>
+<p>Reduziert Zyklenzahl für gleiche Menge von Daten</p>
+<p>Vektorisierung von Daten </p>
+<ul>
+<li>Parallele Berechnung der Vektoren </li>
+<li>Speichern der einzelnen Daten in Register</li>
+</ul>
+<p>Schwer zu implementieren</p>
+<ul>
+<li>Schwer automatisch Code zu finden, der SIMD gut ausnutzt <ul>
+<li>Code von Hand schreiben/optimieren</li>
+</ul>
+</li>
+</ul>
+<p>Sub-Word Execution Model </p>
+<ul>
+<li>32/64-Bit Register und ALUs in kleinere Einheiten auftrennen </li>
+<li>Instruktionen arbeiten parallel auf den Einheiten -&gt; SIMD</li>
+</ul>
+<h3 id="SIMD-–-Sub-Word-Execution-Model"><a href="#SIMD-–-Sub-Word-Execution-Model" class="headerlink" title="SIMD – Sub-Word Execution Model"></a>SIMD – Sub-Word Execution Model</h3><p>Beispiel: 64-Bit Datentyp in kleinere Einheiten auftrennen </p>
+<p>Instruktionen parallel auf kleineren Ausführungseinheiten</p>
+<p><img src="/archives/91062da9/image-20200611133126792.png" style="zoom: 67%;"></p>
+<p><strong>Beispiel 1: Addition</strong> </p>
+<p>Instruktionen parallel auf 4 Ausführungseinheiten</p>
+<p><img src="/archives/91062da9/image-20200611133221613.png" style="zoom: 67%;"></p>
+<p><strong>Beispiel 2: Permutation</strong></p>
+<p>Vertauschen der Reihenfolge der Half-Words</p>
+<p><img src="/archives/91062da9/image-20200611133331245.png" style="zoom: 80%;"><img src="/archives/91062da9/image-20200611194256829.png" alt="image-20200611194256829"></p>
+<h3 id="Q-amp-A-3"><a href="#Q-amp-A-3" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p><strong>Welche Funktion haben SIMD instruktionen?</strong> </p>
+<p>Gleiche Instruktion auf mehreren Daten</p>
+<p><strong>Welche Parallelität wird ausgenutzt?</strong> </p>
+<p>Instruktionen arbeiten parallel auf den Einheiten 不确定</p>
+<p><strong>In welchen Anwendungen macht SIMD Sinn?</strong> </p>
+<p>Multimedia, z.B. Audio, Videokonferenzen</p>
+<p><strong>Welche bekannten Beispiele gibt es für SIMD-Funktions-Einheiten?</strong></p>
+<p>MMX (Intel), SSE (Intel), VIS (UltraSparc), MDMX (MIPS), MAX-2 (HP)</p>
+<h2 id="Caches"><a href="#Caches" class="headerlink" title="Caches"></a>Caches</h2><p>Caches reduzieren unperformante Hauptspeicherzugriffe, durch Einsatz schnellerer Zwischenspeicher</p>
+<p>Das Cache ist software-transparent, d.h. der Benutzer braucht nichts von seiner Existenz zu wissen.</p>
+<h3 id="Caches-Speicherhierarchie"><a href="#Caches-Speicherhierarchie" class="headerlink" title="Caches - Speicherhierarchie"></a>Caches - Speicherhierarchie</h3><ul>
+<li>In der Regel besitzt ein Rechner einen getrennten Cache für Instruktionen (Instruktionscache) und für Daten (Datencache)</li>
+<li>Cache Level: Level 1 bis Level N bezeichnet die Cache Speicher beginnend mit dem schnellsten Speicherzugriff</li>
+</ul>
+<p><img src="/archives/91062da9/image-20200611163417964.png" style="zoom:80%;"></p>
+<h3 id="Caches-Aufbau"><a href="#Caches-Aufbau" class="headerlink" title="Caches - Aufbau"></a>Caches - Aufbau</h3><p>Cache besteht aus Controller und mehreren Sets (Cache Lines)</p>
+<p><img src="/archives/91062da9/image-20200611163541900.png" style="zoom:80%;"></p>
+<p>Parameter:</p>
+<ul>
+<li>Wordbreite (M)</li>
+<li>Words-per-Line (WpL)</li>
+<li>Linesize: Linesize [bit] = WpL * M</li>
+<li>Assoziativität (N)</li>
+<li>Anzahl Cache Sets (S)</li>
+<li>Cache-Größe: Größe [bit] = S <em> N </em> WpL * M</li>
+</ul>
+<p>Verhaltensparameter:</p>
+<ul>
+<li>Replacement-Strategy</li>
+<li>Cache-Strategy</li>
+</ul>
+<h3 id="Cache-Eintrage"><a href="#Cache-Eintrage" class="headerlink" title="Cache Einträge"></a>Cache Einträge</h3><p>Definitionen:</p>
+<ul>
+<li><strong>Cache Hit</strong> := Daten befinden sich im Cache und sind sofort verfügbar </li>
+<li><strong>Cache Miss</strong> := Daten sind nicht im Cache und müssen aus dem Hauptspeicher (oder der nachfolgenden Cache Ebene) geladen werden </li>
+<li><strong>Hit-Rate</strong> := Verhältnis zwische Zahl der Cache Hits und der Gesamtzugriffe</li>
+</ul>
+<p>Ein Blockrahmen enthält mehrere Informationen:</p>
+<p><img src="/archives/91062da9/image-20200611164720814.png" style="zoom:80%;"></p>
+<h3 id="Caches-Lesezugriff"><a href="#Caches-Lesezugriff" class="headerlink" title="Caches - Lesezugriff"></a>Caches - Lesezugriff</h3><p>Lese Datum aus dem Arbeitsspeicher unter Adresse:</p>
+<p>CPU überprüft, ob eine Kopie der Hauptspeicherzelle address im Cache abgelegt ist</p>
+<ul>
+<li><p>ja(cache hit)</p>
+<p>Die CPU entnimmt (取出) das Datum aus dem Cache. </p>
+</li>
+<li><p>nein(cache miss)<br>die CPU greift auf den Arbeitsspeicher zu, lädt den umgebenden Block des Datums in den Cache und lädt das Datum von dort in die CPU</p>
+</li>
+</ul>
+<p>当CPU读数据时，发生cache缺失，这种情况下都会分配一个cache line缓存从主存读取的数据。默认情况下，cache都支持读分配。</p>
+<p><img src="/archives/91062da9/image-20200611165401185.png" style="zoom:80%;"></p>
+<h3 id="Caches-–-Schreibzugriff"><a href="#Caches-–-Schreibzugriff" class="headerlink" title="Caches – Schreibzugriff"></a>Caches – Schreibzugriff</h3><p>Was passiert beim Schreiben?</p>
+<ul>
+<li>Daten im Cache und Hauptspeicher sind so lange identisch, wie der Prozessor die Daten nicht aktualisiert </li>
+<li>Bei einer Aktualisierung wird ein sogenanntes dirty bit gesetzt, dass auf die Modifikation hinweist. </li>
+<li>Aktualisierung im Hauptspeicher hängt von der Schreibstrategie ab.</li>
+</ul>
+<p><img src="/archives/91062da9/image-20200611165621992.png" style="zoom:80%;"></p>
+<p>当CPU写数据发生cache缺失时，才会考虑写分配策略。当我们不支持写分配的情况下，写指令只会更新主存数据，然后就结束了。当支持写分配的时候，我们首先从主存中加载数据到cache line中（相当于先做个读分配动作），然后会更新cache line中的数据。</p>
+<h3 id="Cache更新策略-Cache-update-policy"><a href="#Cache更新策略-Cache-update-policy" class="headerlink" title="Cache更新策略(Cache update policy)"></a>Cache更新策略(Cache update policy)</h3><p>cache更新策略是指当发生cache命中时，写操作应该如何更新数据。cache更新策略分成两种：写直通和回写。</p>
+<h4 id="写直通-write-through"><a href="#写直通-write-through" class="headerlink" title="写直通(write through)"></a>写直通(write through)</h4><p>当CPU执行store指令并在cache命中时，我们更新cache中的数据并且更新主存中的数据。<strong>cache和主存的数据始终保持一致</strong>。</p>
+<h4 id="写回-write-back"><a href="#写回-write-back" class="headerlink" title="写回(write back)"></a>写回(write back)</h4><p>当CPU执行store指令并在cache命中时，我们只更新cache中的数据。并且每个cache line中会有一个bit位记录数据是否被修改过，称之为dirty bit（翻翻前面的图片，cache line旁边有一个D就是dirty bit）。我们会将dirty bit置位。主存中的数据只会在cache line被替换或者显示的clean操作时更新。因此，主存中的数据可能是未修改的数据，而修改的数据躺在cache中。<strong>cache和主存的数据可能不一致。</strong></p>
+<p>同时思考个问题，为什么cache line大小是cache控制器和主存之间数据传输的最小单位呢？这也是因为每个cache line只有一个dirty bit。这一个dirty bit代表着整个cache line是否被修改的状态。</p>
+<h3 id="Cache-miss-Heise-und-kalte-Caches"><a href="#Cache-miss-Heise-und-kalte-Caches" class="headerlink" title="Cache miss, Heiße und kalte Caches"></a>Cache miss, Heiße und kalte Caches</h3><p><strong>Heißer Cache</strong>: Cache arbeitet optimal, nur wenige Misses </p>
+<p><strong>Kalter Cache</strong>: hohe Missrate</p>
+<p>Es werden <strong>drei Arten</strong> von Cache Misses unterschieden:</p>
+<ul>
+<li>Capacity: <ul>
+<li>Daten wurden verdrängt, weil der Cache zu klein ist. </li>
+<li>Abhilfe: Vergrößerung des Caches</li>
+</ul>
+</li>
+<li>Conflict: <ul>
+<li>In einem Set ist nicht ausreichend Platz obwohl andere Sets frei sind. </li>
+<li>Abhilfe: Erhöhung der Assoziativität</li>
+</ul>
+</li>
+<li>Compulsory: <ul>
+<li>Beim erstmaligen Zugriff befinden sich die Daten noch nicht im Cache. </li>
+<li>Abhilfe: Spekulatives Laden durch Prefetcher</li>
+</ul>
+</li>
+</ul>
+<h3 id="Caches-Verdrangungsstrategien"><a href="#Caches-Verdrangungsstrategien" class="headerlink" title="Caches - Verdrängungsstrategien"></a>Caches - Verdrängungsstrategien</h3><p>Szenario: Cache miss, alle Speicherbereiche des Caches belegt 高速缓存的所有内存区域均被占用</p>
+<p>Ausweg: verdränge einen Block aus dem Cache, lade an seine Stelle den gerade benötigten Block阻止某一块，加载现在需要的那块</p>
+<p><strong>FIFO (First-In-First-Out):</strong></p>
+<ul>
+<li><strong>schlechte</strong> Strategie, da der Block, der zuerst geladen wurde, als erstes überschrieben wird</li>
+<li>Blöcke werden überschrieben, die häufig gebraucht werden</li>
+</ul>
+<p><strong>Optimale Ersetzungsstrategie:</strong></p>
+<ul>
+<li>der Block, dessen Daten <strong>in Zukunft</strong> am längsten (zeitlich) nicht mehr benutzt werden, wird ausgetauscht 把未来长时间不用的block替换</li>
+<li>Nachteil: diese Information steht meist nicht zur Verfügung</li>
+</ul>
+<p>LRU (Least-Recently-Used):</p>
+<p>der Block, der <strong>in der Vergangenheit</strong> am längsten (zeitlich) nicht mehr gebraucht wurde, wird ausgetauscht</p>
+<p><strong>Random</strong></p>
+<p>Zufällige Auswahl des Blockes, der ersetzt wird</p>
+<h3 id="Caches-Organisation"><a href="#Caches-Organisation" class="headerlink" title="Caches - Organisation"></a>Caches - Organisation</h3><h4 id="1-Variante-Direct-Mapped"><a href="#1-Variante-Direct-Mapped" class="headerlink" title="1. Variante: Direct Mapped"></a>1. Variante: Direct Mapped</h4><ul>
+<li>Jede Adresse ist nach einem festen Schema direkt einer Cachezeile zugeordnet.</li>
+<li>Einfach, aber niedrige Hit-Rate</li>
+<li>Nachteil <ul>
+<li>keine Flexibilität: Verdrängung kann auftreten(发生) wenn der Cache nicht voll ist.</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/91062da9/image-20200611180641626.png" style="zoom:80%;"></p>
+<h4 id="2-Variante-Voll-Assoziativ"><a href="#2-Variante-Voll-Assoziativ" class="headerlink" title="2. Variante: Voll-Assoziativ"></a>2. Variante: Voll-Assoziativ</h4><ul>
+<li>Jeder Block kann in jeder Cachezeile gespeichert werden. </li>
+<li>Sehr hohe Hit-Rate </li>
+<li>Nachteil: für das Auffinden eines Blocks im Cache muss das Tag jeder Zeile verglichen werden (hoher Aufwand, komplex) 为了在缓存中找到一个块，必须比较每行的标签（费力，复杂）</li>
+</ul>
+<p><img src="/archives/91062da9/image-20200611180921200.png" style="zoom:80%;"></p>
+<h4 id="3-Variante-n-Wege-Assoziativ"><a href="#3-Variante-n-Wege-Assoziativ" class="headerlink" title="3. Variante: n-Wege Assoziativ"></a>3. Variante: n-Wege Assoziativ</h4><ul>
+<li>Kombination aus Voll-Assoziativ und direct-mapped Cache</li>
+<li>Speicheradresse wird in 1 Set des Caches gemapped <ul>
+<li>Set besteht aus mehreren Cache Lines </li>
+<li>Vergleich nur Innerhalb des Sets</li>
+</ul>
+</li>
+<li>Vergleichbar zu n unabhängigen Caches 相当于n个独立的缓存</li>
+<li>Beispiel: 2 Wege Assoziativ, jeder Index hat zwei Möglichkeiten</li>
+</ul>
+<p><img src="/archives/91062da9/image-20200611195511299.png" style="zoom:80%;"></p>
+<h3 id="Caches-–-Missrate-Vergleich"><a href="#Caches-–-Missrate-Vergleich" class="headerlink" title="Caches – Missrate Vergleich"></a>Caches – Missrate Vergleich</h3><p><img src="/archives/91062da9/image-20200611185157512.png" style="zoom:80%;"></p>
+<h3 id="Q-amp-A-4"><a href="#Q-amp-A-4" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p><strong>Was ist ein Cache?</strong> </p>
+<p>Caches reduzieren unperformante Hauptspeicherzugriffe, durch Einsatz schnellerer Zwischenspeicher</p>
+<p><strong>Welche Funktion hat ein Cache in einem 1-Computer System? Welche in einem 2-Computer-System?</strong> </p>
+<p><strong>Welche Cache-Stragegien gibt es? Welche Vorteile hat welche Strategie?</strong> </p>
+<p>Direct Mapped: Jede Adresse ist nach einem festen Schema direkt einer Cachezeile zugeordnet. Einfach</p>
+<p>Voll-Assoziativ: Jeder Block kann in jeder Cachezeile gespeichert werden. Sehr hohe Hit-Rate </p>
+<p> n-Wege Assoziativ: Kombination aus Voll-Assoziativ und direct-mapped Cache. Vergleich nur Innerhalb des Sets</p>
+<p><strong>Welche Schreib-Strategien gibt es? Welche machen Sinn?</strong> </p>
+<p><strong>Wie sind Offset, Index &amp; Tag aufgeteilt?</strong> </p>
+<p><img src="/archives/91062da9/image-20200611194256829.png" alt="image-20200611194256829" style="zoom:80%;"></p>
+<ul>
+<li><p>我们一共有8行cache line，cache line大小是8 Bytes。所以我们可以利用地址低3 bits（如上图地址蓝色部分）用来寻址8 bytes中某一字节，我们称这部分bit组合为offset</p>
+</li>
+<li><p>同理，8行cache line，为了覆盖所有行。我们需要3 bits（如上图地址黄色部分）查找某一行，这部分地址部分称之为index</p>
+</li>
+<li>每一个cache line都对应唯一一个tag，tag中保存的是整个地址位宽去除index和offset使用的bit剩余部分</li>
+</ul>
+<p><strong>Was ist Cache Kohärenz?</strong></p>
+<p>Cache-Kohärenz ist die Regelmäßigkeit oder Konsistenz von Daten, die im <a href="http://www.betriebswirtschaft-lernen.net/erklaerung/cache-speicher/" rel="external nofollow noopener noreferrer" target="_blank">Cache-Speicher</a> gespeichert sind. </p>
+<h2 id="Multiple-Instruction-Multiple-Data-MIMD"><a href="#Multiple-Instruction-Multiple-Data-MIMD" class="headerlink" title="Multiple Instruction Multiple Data (MIMD)"></a>Multiple Instruction Multiple Data (MIMD)</h2><p>Im Gegensatz zu SIMD-Prozessoren können MIMD-Prozessoren mehrere Programme auf mehreren Prozessoren ausführen =&gt; Flexibilität</p>
+<h3 id="SIMD-vs-MIMD"><a href="#SIMD-vs-MIMD" class="headerlink" title="SIMD vs MIMD"></a>SIMD vs MIMD</h3><ul>
+<li>SIMD Computer brauchen weniger Hardware als MIMD Computer =&gt; Eine Steuer-Einheit</li>
+<li>SIMD Prozessoren sind speziell designed, sind teuer und haben lange Design-Zyklen</li>
+<li>Nicht alle Applikationen passen zu SIMD</li>
+</ul>
+<h3 id="MIMD-Prozessor-Klassifizierung"><a href="#MIMD-Prozessor-Klassifizierung" class="headerlink" title="MIMD Prozessor Klassifizierung"></a>MIMD Prozessor Klassifizierung</h3><p><strong>Shared Memory:</strong> Uniform Memory Access (UMA), gemeinsamer Adressbereich</p>
+<p><strong>Distributed Memory:</strong> </p>
+<ul>
+<li>Speicher ist verteilt für jeden Prozessor, um die Skalierbarkeit zu verbessern</li>
+<li>No Remote Memory Access (NoRMA): kein Prozessor kann direkt den Speicher eines anderen Prozessors ansprechen, Kommunikation erfolgt über dedizierte Kommunikation (Message Passing). Jeder Core hat seinen eigenen Adressbereich. 没有处理器可以直接寻址另一个处理器的内存，而是通过专用通信（消息传递）进行通信。 每个内核都有自己的地址范围。</li>
+<li>Non-Uniform Memory Access (NUMA): Speicher ist verteilt, aber alle Cores können auf den Speicher der anderen Cores zugreifen. Gemeinsamer Adressbereich.</li>
+</ul>
+<p><img src="/archives/91062da9/image-20200612205939960.png" style="zoom:80%;"></p>
+<h3 id="Interconnect-in-MIMD-Architekturen"><a href="#Interconnect-in-MIMD-Architekturen" class="headerlink" title="Interconnect in MIMD Architekturen"></a>Interconnect in MIMD Architekturen</h3><ul>
+<li>Kommunikation über gemeinsame Variable oder Nachrichten</li>
+<li>Kopplung über Verbindungs-Netzwerke</li>
+<li>Typischerweise Parallelrechner (Einsatz z.B. Wettersimulationen, Chemie etc.)</li>
+</ul>
+<p><img src="/archives/91062da9/image-20200612211737067.png" style="zoom:80%;"></p>
+<h3 id="MIMD-Design-Issues"><a href="#MIMD-Design-Issues" class="headerlink" title="MIMD Design Issues"></a>MIMD Design Issues</h3><p>Design  sind sehr komplex, da Hardware und Software Probleme involviert sind.</p>
+<p>Wichtige Probleme: Interconnect Struktur, Inter-Prozessor Kommunikationsprotokolle, Speicher Hierarchie, Prozessor design…</p>
+<h3 id="Q-amp-A-5"><a href="#Q-amp-A-5" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p><strong>Welche Vorteile bringt MIMD?</strong> </p>
+<p>MIMD-Prozessoren können mehrere Programme auf mehreren Prozessoren ausführen =&gt; Flexibilität</p>
+<p><strong>Welche Art der Klassifizierung gibts es bei MIMD?</strong> </p>
+<p>shared Memory: Es gibt gemeinsame Adressbereich</p>
+<p>distribute Memory: Speicher ist verteilt für jeden Prozessor</p>
+<p><strong>Wie grenzen sich Superskalar, SIMD, VLIW und MIMD ab? 如何区分</strong> </p>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/91062da9.html" title="GPP-Performanzsteigerung">http://grenze.cn/archives/91062da9.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/VLWI/" rel="tag"><i class="fa fa-tag"></i> VLWI</a>
+              <a href="/tags/Pipelining/" rel="tag"><i class="fa fa-tag"></i> Pipelining</a>
+              <a href="/tags/superskalar/" rel="tag"><i class="fa fa-tag"></i> superskalar</a>
+              <a href="/tags/Cache/" rel="tag"><i class="fa fa-tag"></i> Cache</a>
+              <a href="/tags/SIMD/" rel="tag"><i class="fa fa-tag"></i> SIMD</a>
+              <a href="/tags/MIMD/" rel="tag"><i class="fa fa-tag"></i> MIMD</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/fd286243.html" rel="prev" title="GPP-Architekturen">
+      <i class="fa fa-chevron-left"></i> GPP-Architekturen
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/5dd49fab.html" rel="next" title="Spezialprozessoren">
+      Spezialprozessoren <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GPP-Pipelining"><span class="nav-number">1.</span> <span class="nav-text">GPP: Pipelining</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Konzept"><span class="nav-number">1.1.</span> <span class="nav-text">Konzept</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exemplarische-Befehlsausfuhrung"><span class="nav-number">1.2.</span> <span class="nav-text">Exemplarische Befehlsausführung</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-stufigen-Befehlspipeline"><span class="nav-number">1.3.</span> <span class="nav-text">5-stufigen Befehlspipeline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Beispiel-Optimales-Pipelining"><span class="nav-number">1.4.</span> <span class="nav-text">Beispiel: Optimales Pipelining</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pipeline-Konflikte"><span class="nav-number">1.5.</span> <span class="nav-text">Pipeline Konflikte</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Auflosung-von-Pipeline-Konflikten"><span class="nav-number">1.6.</span> <span class="nav-text">Auflösung von Pipeline Konflikten</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Superpipelining"><span class="nav-number">1.7.</span> <span class="nav-text">Superpipelining</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-amp-A"><span class="nav-number">1.8.</span> <span class="nav-text">Q&amp;A</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Superskalaritat-超标量"><span class="nav-number">2.</span> <span class="nav-text">Superskalarität (超标量)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Begriffe"><span class="nav-number">2.1.</span> <span class="nav-text">Begriffe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dynamisches-Scheduling-Prozessorpipeline"><span class="nav-number">2.2.</span> <span class="nav-text">Dynamisches Scheduling - Prozessorpipeline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Superskalarprinzip-und-dynamisches-Scheduling-Zusammenfassung"><span class="nav-number">2.3.</span> <span class="nav-text">Superskalarprinzip und dynamisches Scheduling - Zusammenfassung</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-amp-A-1"><span class="nav-number">2.4.</span> <span class="nav-text">Q&amp;A</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Very-Long-Instruction-Word-VLIW"><span class="nav-number">3.</span> <span class="nav-text">Very Long Instruction Word (VLIW)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-amp-A-2"><span class="nav-number">3.1.</span> <span class="nav-text">Q&amp;A</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Instruction-Multiple-Data-SIMD"><span class="nav-number">4.</span> <span class="nav-text">Single Instruction Multiple Data (SIMD)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SIMD-–-Sub-Word-Execution-Model"><span class="nav-number">4.1.</span> <span class="nav-text">SIMD – Sub-Word Execution Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-amp-A-3"><span class="nav-number">4.2.</span> <span class="nav-text">Q&amp;A</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Caches"><span class="nav-number">5.</span> <span class="nav-text">Caches</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Caches-Speicherhierarchie"><span class="nav-number">5.1.</span> <span class="nav-text">Caches - Speicherhierarchie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Caches-Aufbau"><span class="nav-number">5.2.</span> <span class="nav-text">Caches - Aufbau</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-Eintrage"><span class="nav-number">5.3.</span> <span class="nav-text">Cache Einträge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Caches-Lesezugriff"><span class="nav-number">5.4.</span> <span class="nav-text">Caches - Lesezugriff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Caches-–-Schreibzugriff"><span class="nav-number">5.5.</span> <span class="nav-text">Caches – Schreibzugriff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache更新策略-Cache-update-policy"><span class="nav-number">5.6.</span> <span class="nav-text">Cache更新策略(Cache update policy)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#写直通-write-through"><span class="nav-number">5.6.1.</span> <span class="nav-text">写直通(write through)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写回-write-back"><span class="nav-number">5.6.2.</span> <span class="nav-text">写回(write back)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-miss-Heise-und-kalte-Caches"><span class="nav-number">5.7.</span> <span class="nav-text">Cache miss, Heiße und kalte Caches</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Caches-Verdrangungsstrategien"><span class="nav-number">5.8.</span> <span class="nav-text">Caches - Verdrängungsstrategien</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Caches-Organisation"><span class="nav-number">5.9.</span> <span class="nav-text">Caches - Organisation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Variante-Direct-Mapped"><span class="nav-number">5.9.1.</span> <span class="nav-text">1. Variante: Direct Mapped</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Variante-Voll-Assoziativ"><span class="nav-number">5.9.2.</span> <span class="nav-text">2. Variante: Voll-Assoziativ</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Variante-n-Wege-Assoziativ"><span class="nav-number">5.9.3.</span> <span class="nav-text">3. Variante: n-Wege Assoziativ</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Caches-–-Missrate-Vergleich"><span class="nav-number">5.10.</span> <span class="nav-text">Caches – Missrate Vergleich</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-amp-A-4"><span class="nav-number">5.11.</span> <span class="nav-text">Q&amp;A</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiple-Instruction-Multiple-Data-MIMD"><span class="nav-number">6.</span> <span class="nav-text">Multiple Instruction Multiple Data (MIMD)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SIMD-vs-MIMD"><span class="nav-number">6.1.</span> <span class="nav-text">SIMD vs MIMD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MIMD-Prozessor-Klassifizierung"><span class="nav-number">6.2.</span> <span class="nav-text">MIMD Prozessor Klassifizierung</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interconnect-in-MIMD-Architekturen"><span class="nav-number">6.3.</span> <span class="nav-text">Interconnect in MIMD Architekturen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MIMD-Design-Issues"><span class="nav-number">6.4.</span> <span class="nav-text">MIMD Design Issues</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-amp-A-5"><span class="nav-number">6.5.</span> <span class="nav-text">Q&amp;A</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="tidioChatApi.open();">
+    
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/archives/f7568654.html" title="Field Programmable Gate Arrays (FPGA)" target="_blank">Field Programmable Gate Arrays (FPGA)</a>
+          </li>
+        
+          <li>
+            <a href="/archives/a93cd1f.html" title="Schätzung der Entwurfsqualität" target="_blank">Schätzung der Entwurfsqualität</a>
+          </li>
+        
+          <li>
+            <a href="/archives/81f161f5.html" title="System-on-Chip (SoC)" target="_blank">System-on-Chip (SoC)</a>
+          </li>
+        
+          <li>
+            <a href="/archives/8723f221.html" title="Bus, Network-on-Chip (NoC) & Multicore" target="_blank">Bus, Network-on-Chip (NoC) & Multicore</a>
+          </li>
+        
+          <li>
+            <a href="/archives/5dd49fab.html" title="Spezialprozessoren" target="_blank">Spezialprozessoren</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">232k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:31</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+  <script src="//code.tidio.co/vogvafxbif7muwutoktvfceankdjkpis.js"></script>
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: '4501d7bb74deff30665c3b1cb5fce474',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>

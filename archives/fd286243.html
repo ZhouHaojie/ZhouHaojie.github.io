@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Allgemeiner AufbauVergleich der Zielarchitekturen">
+<meta name="keywords" content="GPP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPP-Architekturen">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="Allgemeiner AufbauVergleich der Zielarchitekturen">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609110503882.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609111231282.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609111719266.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609113242311.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609114657253.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609115056373.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609120248782.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609120313375.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609152119714.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609152417301.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609153233353.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609153432477.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609155259125.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609160032094.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609165725356.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609170037130.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609170125784.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609170539201.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609170539201.png">
+<meta property="og:updated_time" content="2020-06-16T20:57:10.420Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;fd286243&#x2F;image-20200609110503882.png">
+
+<link rel="canonical" href="http://grenze.cn/archives/fd286243.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>GPP-Architekturen | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">61</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">43</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">73</span></a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-automatic-vision">
+
+    <a href="/gitbook-Automatic-Vision/" rel="section"><i class="fa fa-fw fa-book"></i>Automatic-Vision</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/fd286243.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GPP-Architekturen
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-16 22:55:03 / 修改时间：22:57:10" itemprop="dateCreated datePublished" datetime="2020-06-16T22:55:03+02:00">2020-06-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hardware-Software-Co-Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Hardware Software Co-Design</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hardware-Software-Co-Design/GPP-Architekturen/" itemprop="url" rel="index">
+                    <span itemprop="name">GPP-Architekturen</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Allgemeiner-Aufbau"><a href="#Allgemeiner-Aufbau" class="headerlink" title="Allgemeiner Aufbau"></a>Allgemeiner Aufbau</h1><p><strong>Vergleich der Zielarchitekturen</strong></p>
+<p><img src="/archives/fd286243/image-20200609110503882.png" style="zoom: 67%;"><a id="more"></a></p>
+<h2 id="Rechnerarchitekturen"><a href="#Rechnerarchitekturen" class="headerlink" title="Rechnerarchitekturen"></a>Rechnerarchitekturen</h2><p><img src="/archives/fd286243/image-20200609111231282.png" style="zoom:67%;"></p>
+<p>Interne Architektur definiert die interne Struktur des Prozessors</p>
+<ul>
+<li>Verschiedene interne Architektur können dieselbe externe Architektur aufweisen(不同的内部架构可以具有相同的外部架构)</li>
+<li>Computerfamilie</li>
+</ul>
+<h3 id="Aufbau-eines-einfachen-Prozessors"><a href="#Aufbau-eines-einfachen-Prozessors" class="headerlink" title="Aufbau eines einfachen Prozessors"></a>Aufbau eines einfachen Prozessors</h3><p>主要有Steuerwerk, Speicherwerk, Rechenwerk, Eingabe/Ausgabe Werk</p>
+<p><img src="/archives/fd286243/image-20200609111719266.png" style="zoom: 80%;"></p>
+<h4 id="Steuerwerk"><a href="#Steuerwerk" class="headerlink" title="Steuerwerk"></a>Steuerwerk</h4><p>Koordination der Komponenten des Prozessors:</p>
+<ul>
+<li>Versorgung mit Daten und Adressen </li>
+<li>Selektion von Geräten </li>
+<li>Auswahl von Operanden und Operationen</li>
+</ul>
+<p>Ursprünglich Steuerung durch den Bediener, später Automatisierung durch zeitliche Abfolge von Binärinformationen 开始由操作者控制，之后按照二进制信息自动控制</p>
+<h4 id="Speicherwerk"><a href="#Speicherwerk" class="headerlink" title="Speicherwerk"></a>Speicherwerk</h4><ul>
+<li><p>Im einfachsten Fall nur einige Registern zur Aufbewahrung von Operanden, Bedingungsvektor und Ergebnis 只有一些用于存储操作数，条件向量和结果的寄存器。</p>
+</li>
+<li><p>Es ist ermöglicht, während der Verarbeitung eine große Zahl von Operanden und (Zwischen-) Ergebnissen bereitzuhalten</p>
+</li>
+<li><p>Die Zahl der verfügbaren Speicherzellen richtet sich nach der Breite des Adressvektors 可用存储单元的数量取决于地址向量的宽度</p>
+</li>
+</ul>
+<p><img src="/archives/fd286243/image-20200609113242311.png" style="zoom:67%;"></p>
+<h4 id="Rechenwerk"><a href="#Rechenwerk" class="headerlink" title="Rechenwerk"></a>Rechenwerk</h4><ul>
+<li>Verarbeitung der Daten</li>
+<li>Bsp. für einfaches Rechenwerk:<ul>
+<li>Arithmetisch: Addition, Subtraktion</li>
+<li>Logisch: Konjunktion, Disjunktion, Vergleich</li>
+<li>Komplementbildung</li>
+<li>Links-/Rechtsverschiebung</li>
+<li>Links-/Rechtsrotation</li>
+</ul>
+</li>
+</ul>
+<p><strong>Arithmetisch-logische Einheit</strong> </p>
+<ul>
+<li>Üblicherweise Beschränkung auf Funktionen mit zwei Operanden bei gegebener maximalen Stellenzahl   通常仅限于具有两个操作数的函数<ul>
+<li>Genauigkeit (Bitbreite der Architektur)</li>
+</ul>
+</li>
+<li>“Carry, Negative, Zero, Overflow” können als Binärwerte in einem Bedingungsvektor („flags“) zur Verfügung gestellt werden</li>
+</ul>
+<p><img src="/archives/fd286243/image-20200609114657253.png" style="zoom: 80%;"></p>
+<h4 id="Eingabe-Ausgabewerk"><a href="#Eingabe-Ausgabewerk" class="headerlink" title="Eingabe-/Ausgabewerk"></a>Eingabe-/Ausgabewerk</h4><ul>
+<li>Kommunikation mit dem Benutzer<br><img src="/archives/fd286243/image-20200609115056373.png" style="zoom:80%;"></li>
+</ul>
+<h4 id="Von-Neumann-Zyklus-Arbeitsweise工作原理）"><a href="#Von-Neumann-Zyklus-Arbeitsweise工作原理）" class="headerlink" title="Von-Neumann-Zyklus(Arbeitsweise工作原理）"></a>Von-Neumann-Zyklus(Arbeitsweise工作原理）</h4><ol>
+<li>FETCH:  Befehl aus dem Speicher holen从存储器中取指令</li>
+<li>DECODE: Befehl im Steuerwerk dekodieren</li>
+<li>FETCH OPERANDS: Operanden aus dem Speicher oder der Peripherie in den Prozessor holen从内存或者外设中获取操作数到处理器中</li>
+<li>EXECUTE: Befehl im Rechenwerk ausführen</li>
+<li>WRITE BACK: Ergebnis in den Speicher oder die Peripherie(外设) schreiben</li>
+</ol>
+<h4 id="Befehlstypen"><a href="#Befehlstypen" class="headerlink" title="Befehlstypen"></a>Befehlstypen</h4><ol>
+<li><p>Transportbefehle</p>
+<ul>
+<li><p>Externer Transport (Arbeitsspeicher, E/A-System)</p>
+</li>
+<li><p>Interner Transport (Register-Register)</p>
+</li>
+</ul>
+</li>
+<li><p>Verarbeitungsbefehle </p>
+<ul>
+<li><p>Arithmetische und logische Befehle </p>
+</li>
+<li><p>Schiebebefehle </p>
+</li>
+<li><p>Vergleichsbefehle</p>
+</li>
+</ul>
+</li>
+<li><p>Sprungbefehle</p>
+</li>
+<li>Systembefehle  (z.B. Unterbrechungsbearbeitung, Speicherverwaltung)</li>
+</ol>
+<h4 id="Speicheranbindung"><a href="#Speicheranbindung" class="headerlink" title="Speicheranbindung"></a>Speicheranbindung</h4><ul>
+<li><p>Von Neumann-Architektur:</p>
+<ul>
+<li>Vorteile: geringer Hardwareaufwand, geringer Speicheraufwand</li>
+</ul>
+<p><img src="/archives/fd286243/image-20200609120248782.png" style="zoom:80%;"></p>
+</li>
+<li><p>Harvard-Architektur:</p>
+<p><img src="/archives/fd286243/image-20200609120313375.png" style="zoom:80%;"><br>Daten und Programme jeweils in getrennten Speichern</p>
+<ul>
+<li>Vorteile: Parallele Verarbeitung </li>
+</ul>
+</li>
+</ul>
+<p>哈佛结构是将指令存储器和数据存储器分开的一种存储器结构；而冯.诺依曼结构将指令存储器和数据存储器合在一起的存储器结构。</p>
+<h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><p><strong>Was ist ein Prozessor?</strong> </p>
+<p>Ein <strong>Prozessor</strong> ist ein  <a href="https://de.wikipedia.org/wiki/Programmierung" rel="external nofollow noopener noreferrer" target="_blank">programmierbares</a> <a href="https://de.wikipedia.org/wiki/Rechenwerk" rel="external nofollow noopener noreferrer" target="_blank">Rechenwerk</a>,  die übergebenen <a href="https://de.wikipedia.org/wiki/Anweisung_(Programmierung" rel="external nofollow noopener noreferrer" target="_blank">Befehlen</a>) andere Maschinen oder elektrische Schaltungen steuert und dabei einen <a href="https://de.wikipedia.org/wiki/Algorithmus" rel="external nofollow noopener noreferrer" target="_blank">Algorithmus</a> (<a href="https://de.wikipedia.org/wiki/Prozess_(Informatik" rel="external nofollow noopener noreferrer" target="_blank">Prozess</a>)) vorantreibt</p>
+<p><strong>Wie ist ein einfacher Prozessor aufgebaut?</strong><br>Steuerwerk, Speicherwerk, Rechenwerk, Eingabe/Ausgabe Werk</p>
+<ul>
+<li><strong>Wie ist ein Rechenwerk aufgebaut?</strong><br>Es besteht zum einen aus der arithmetisch-logischen Einheit (ALU), zum anderen aus den Arbeitsregistern. </li>
+</ul>
+<p><strong>Wie kann die Speicheranbindung klassifiziert werden?</strong><br>von-Neumann Architektur und Harvard Architektur </p>
+<ul>
+<li><p><strong>Ist der Bus unidirektional?</strong> </p>
+<p>Für die Harvard-Architektur, Befehls- und Datenspeicher wird über getrennte Busse zugegriffen, also unabhängig und parallel, das ist direktional</p>
+<p>Für Von-Neumann-Architektur, Daten und Befehls Bus ist unidirektional </p>
+</li>
+<li><p><strong>Was ist der Unterschied zwischen primären und sekundären Speicher?</strong></p>
+<p>Harvard-Architektur: Daten und Befehle jeweils in getrennten Speichern</p>
+<p>Von-Neumann-Architektur: gesamte </p>
+</li>
+</ul>
+<h1 id="Klassifikation"><a href="#Klassifikation" class="headerlink" title="Klassifikation"></a>Klassifikation</h1><h3 id="Flynn’sche-Taxonomie-费林分类法"><a href="#Flynn’sche-Taxonomie-费林分类法" class="headerlink" title="Flynn’sche Taxonomie 费林分类法"></a><strong>Flynn’sche Taxonomie</strong> 费林分类法</h3><p>Je Datenstrom und Instruktionsstrom zwei Klassen: single und multiple</p>
+<p><img src="/archives/fd286243/image-20200609152119714.png" style="zoom:80%;"></p>
+<h4 id="Single-Instruction-Single-Data-SISD"><a href="#Single-Instruction-Single-Data-SISD" class="headerlink" title="Single Instruction, Single Data (SISD)"></a>Single Instruction, Single Data (SISD)</h4><ul>
+<li><p>Von-Neumann-Architektur </p>
+<ul>
+<li>gemeinsamer Daten- und Instruktions-Speicher</li>
+</ul>
+</li>
+<li><p>Harvard-Architektur </p>
+<ul>
+<li>getrennter Daten- und Instruktions-Speiche</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/fd286243/image-20200609152417301.png" style="zoom:80%;"></p>
+<h4 id="Single-Instruction-Multiple-Data-SIMD"><a href="#Single-Instruction-Multiple-Data-SIMD" class="headerlink" title="Single Instruction, Multiple Data (SIMD)"></a>Single Instruction, Multiple Data (SIMD)</h4><ul>
+<li>Vektorprozessor<br>schnelle Ausführung gleichartiger Rechenoperationen auf mehrere gleichzeitig eintreffende oder zur Verfügung stehende Eingangsdatenströme 一个数组或向量处理系统，它可以对不同的数据并行执行相同的操作 4+5 和 3+2</li>
+</ul>
+<h4 id="Multiple-Instruction-Single-Data-MISD"><a href="#Multiple-Instruction-Single-Data-MISD" class="headerlink" title="Multiple Instruction, Single Data (MISD)"></a>Multiple Instruction, Single Data (MISD)</h4><ul>
+<li>Fehlertolerante, redundante Rechner<br>Redundante Datenströme zur Fehlererkennung bzw. –korrektur 这种冗余多用于容错系统</li>
+</ul>
+<p><img src="/archives/fd286243/image-20200609153233353.png" style="zoom:80%;"></p>
+<h4 id="Multiple-Instruction-Multiple-Data-MIMD"><a href="#Multiple-Instruction-Multiple-Data-MIMD" class="headerlink" title="Multiple Instruction, Multiple Data (MIMD)"></a>Multiple Instruction, Multiple Data (MIMD)</h4><ul>
+<li>Multiprozessorsysteme (多处理器系统)<ul>
+<li>Führen gleichzeitig verschiedene Operationen auf verschieden gearteten Eingangsdatenströmen durch </li>
+<li>Nebenläufige Kontrollflüsse </li>
+<li>Kopplung über Verbindungs-Netzwerke</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/fd286243/image-20200609153432477.png" style="zoom:80%;"></p>
+<h2 id="Q-amp-A-1"><a href="#Q-amp-A-1" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><p><strong>Wie können Prozessoren klassifiziert werden?</strong> </p>
+<p>Je Datenstrom und Instruktionsstrom zwei Klassen: single und multiple</p>
+<p><strong>Welche Beispiele gibt es für die jeweiligen Klassen?</strong> </p>
+<p>SISD: von-neumann, Harvard-Architekturen </p>
+<p>SIMD: Vektorprozessor</p>
+<p>MISD: Fehlertolerant Rechner</p>
+<p>MIMD: Multiprozessorsystem</p>
+<p><strong>Lassen sich alle heutigen Prozessoren eindeutig klassifizieren?</strong></p>
+<p>?</p>
+<h1 id="General-Purpose-Prozessoren-GPP"><a href="#General-Purpose-Prozessoren-GPP" class="headerlink" title="General-Purpose Prozessoren (GPP)"></a>General-Purpose Prozessoren (GPP)</h1><p>Eigenschaften</p>
+<ul>
+<li><p>hohe Performanz für großes Anwendungsspektrum, nicht für eine spezielle Anwendung optimiert</p>
+<p>—&gt;universell</p>
+</li>
+<li><p>Größe Leistungsaufnahme, da i.a. hohe Taktraten</p>
+</li>
+</ul>
+<h2 id="GPP-Architekturen"><a href="#GPP-Architekturen" class="headerlink" title="GPP: Architekturen"></a>GPP: Architekturen</h2><h3 id="GPP-Arch-Akkumulatormaschine"><a href="#GPP-Arch-Akkumulatormaschine" class="headerlink" title="GPP-Arch: Akkumulatormaschine"></a>GPP-Arch: Akkumulatormaschine</h3><p>Die Rechenergebnisse wurden in einem Register, dem Akkumulator (AC), „akkumuliert“</p>
+<ul>
+<li>LAC m: Lade Wert unter Adresse m in den AC </li>
+<li>SAC m: Speichere den Inhalt von AC nach Adresse m </li>
+<li>ADD m: Addiere den Inhalt von AC mit dem Wert unter Adresse m und speichere das Resultat nach AC</li>
+</ul>
+<p>BSP: c:=a+b</p>
+<ul>
+<li>LAC a (从累加器中lade 到ALU)</li>
+<li>ADD b (b是在存储器中)</li>
+<li>SAC c</li>
+</ul>
+<p><strong>Struktur:</strong></p>
+<p><img src="/archives/fd286243/image-20200609155259125.png" style="zoom:80%;"></p>
+<h3 id="GPP-Arch-Stackmaschine"><a href="#GPP-Arch-Stackmaschine" class="headerlink" title="GPP-Arch: Stackmaschine"></a>GPP-Arch: Stackmaschine</h3><p>speichere die Zwischenergebnisse in einen Stack</p>
+<ul>
+<li><strong>PUSH m</strong> Lege den Wert unter Adresse m auf den Stack </li>
+<li><strong>ADD</strong> Addiere die beiden obersten Werte des Stacks, entferne sie und lege die Summe als oberstes Element auf den Stack</li>
+<li><strong>STORE m</strong> Speichere das oberste Element auf dem Stack nach der Adresse m</li>
+</ul>
+<p>BSP: c:=a+b</p>
+<ul>
+<li>PUSH a</li>
+<li>PUSH b</li>
+<li>ADD 将堆栈的前两个值相加后，移除这两个值，将和作为顶部元素放入堆栈</li>
+<li>STORE c 存储到c中</li>
+</ul>
+<p><strong>Struktur:</strong></p>
+<p><img src="/archives/fd286243/image-20200609160032094.png" style="zoom:80%;"></p>
+<h3 id="GPP-Arch-Registersatzmaschine"><a href="#GPP-Arch-Registersatzmaschine" class="headerlink" title="GPP-Arch: Registersatzmaschine"></a>GPP-Arch: Registersatzmaschine</h3><p>Der Prozessor enthält z.B. 32 Universalregister</p>
+<p>Typische Befehle:</p>
+<ul>
+<li>Datenverarbeitungs-Instruktionen <ul>
+<li>Arithmetic, Logisch, Compare, Move</li>
+</ul>
+</li>
+<li>Verzweigungs-Instruktionen <ul>
+<li>Branch</li>
+</ul>
+</li>
+<li>Register-Daten-Transfer-Instruktionen <ul>
+<li>Load, Store</li>
+</ul>
+</li>
+</ul>
+<p>Üblich sind Dreiadressbefehle oder Zweiadressbefehle</p>
+<ul>
+<li>OP DEST, SRC1, SRC2 DEST := SRC1 </li>
+<li>OP SRC2 OP DEST, SRC<br>BSP DEST := DEST OP SRC Beispiel: ADD R5, R6 bedeutet R5 := R5 + R6</li>
+</ul>
+<p><img src="/archives/fd286243/image-20200609165725356.png" style="zoom:80%;"></p>
+<p><strong>Struktur:</strong></p>
+<p><img src="/archives/fd286243/image-20200609170037130.png" style="zoom:80%;"></p>
+<p><img src="/archives/fd286243/image-20200609170125784.png" style="zoom:80%;"><img src="/archives/fd286243/image-20200609170539201.png" alt="image-20200609170539201"></p>
+<p><img src="/archives/fd286243/image-20200609170539201.png" style="zoom:80%;"></p>
+<h3 id="Q-amp-A-2"><a href="#Q-amp-A-2" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p><strong>Wie können General Purpose Prozessoren unterschieden werden?</strong> </p>
+<p>Je nach die Architekturen, z.B. Wie werden Operanden von Befehlen im Prozessor gespeichert, es gibt Akkumulatormaschine, Stackmaschine, Registermaschine</p>
+<p><strong>Wovon hängt die Geschwindigkeit eines GPP ab?</strong> </p>
+<p>Programmgröße, transportierte Daten und Code sowie Ausführungszeiten</p>
+<p><strong>Was ist der Nachteil eines RISC Prozessors?</strong></p>
+<ul>
+<li>Größe Codegröße</li>
+<li>benötigt mehr Transistoren für Speicherregister</li>
+<li>Schwerpunkt auf Software </li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/fd286243.html" title="GPP-Architekturen">http://grenze.cn/archives/fd286243.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/GPP/" rel="tag"><i class="fa fa-tag"></i> GPP</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/20b992ae.html" rel="prev" title="Git Commit Message Style Guide">
+      <i class="fa fa-chevron-left"></i> Git Commit Message Style Guide
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/91062da9.html" rel="next" title="GPP-Performanzsteigerung">
+      GPP-Performanzsteigerung <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Allgemeiner-Aufbau"><span class="nav-number">1.</span> <span class="nav-text">Allgemeiner Aufbau</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Rechnerarchitekturen"><span class="nav-number">1.1.</span> <span class="nav-text">Rechnerarchitekturen</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Aufbau-eines-einfachen-Prozessors"><span class="nav-number">1.1.1.</span> <span class="nav-text">Aufbau eines einfachen Prozessors</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Steuerwerk"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">Steuerwerk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Speicherwerk"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">Speicherwerk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rechenwerk"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">Rechenwerk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Eingabe-Ausgabewerk"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">Eingabe-/Ausgabewerk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Von-Neumann-Zyklus-Arbeitsweise工作原理）"><span class="nav-number">1.1.1.5.</span> <span class="nav-text">Von-Neumann-Zyklus(Arbeitsweise工作原理）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Befehlstypen"><span class="nav-number">1.1.1.6.</span> <span class="nav-text">Befehlstypen</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Speicheranbindung"><span class="nav-number">1.1.1.7.</span> <span class="nav-text">Speicheranbindung</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-amp-A"><span class="nav-number">1.2.</span> <span class="nav-text">Q&amp;A</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Klassifikation"><span class="nav-number">2.</span> <span class="nav-text">Klassifikation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Flynn’sche-Taxonomie-费林分类法"><span class="nav-number">2.0.1.</span> <span class="nav-text">Flynn’sche Taxonomie 费林分类法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Single-Instruction-Single-Data-SISD"><span class="nav-number">2.0.1.1.</span> <span class="nav-text">Single Instruction, Single Data (SISD)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Single-Instruction-Multiple-Data-SIMD"><span class="nav-number">2.0.1.2.</span> <span class="nav-text">Single Instruction, Multiple Data (SIMD)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multiple-Instruction-Single-Data-MISD"><span class="nav-number">2.0.1.3.</span> <span class="nav-text">Multiple Instruction, Single Data (MISD)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multiple-Instruction-Multiple-Data-MIMD"><span class="nav-number">2.0.1.4.</span> <span class="nav-text">Multiple Instruction, Multiple Data (MIMD)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-amp-A-1"><span class="nav-number">2.1.</span> <span class="nav-text">Q&amp;A</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#General-Purpose-Prozessoren-GPP"><span class="nav-number">3.</span> <span class="nav-text">General-Purpose Prozessoren (GPP)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GPP-Architekturen"><span class="nav-number">3.1.</span> <span class="nav-text">GPP: Architekturen</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GPP-Arch-Akkumulatormaschine"><span class="nav-number">3.1.1.</span> <span class="nav-text">GPP-Arch: Akkumulatormaschine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GPP-Arch-Stackmaschine"><span class="nav-number">3.1.2.</span> <span class="nav-text">GPP-Arch: Stackmaschine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GPP-Arch-Registersatzmaschine"><span class="nav-number">3.1.3.</span> <span class="nav-text">GPP-Arch: Registersatzmaschine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-amp-A-2"><span class="nav-number">3.1.4.</span> <span class="nav-text">Q&amp;A</span></a></li></ol></li></ol></li></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="tidioChatApi.open();">
+    
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/archives/f7568654.html" title="Field Programmable Gate Arrays (FPGA)" target="_blank">Field Programmable Gate Arrays (FPGA)</a>
+          </li>
+        
+          <li>
+            <a href="/archives/a93cd1f.html" title="Schätzung der Entwurfsqualität" target="_blank">Schätzung der Entwurfsqualität</a>
+          </li>
+        
+          <li>
+            <a href="/archives/81f161f5.html" title="System-on-Chip (SoC)" target="_blank">System-on-Chip (SoC)</a>
+          </li>
+        
+          <li>
+            <a href="/archives/8723f221.html" title="Bus, Network-on-Chip (NoC) & Multicore" target="_blank">Bus, Network-on-Chip (NoC) & Multicore</a>
+          </li>
+        
+          <li>
+            <a href="/archives/5dd49fab.html" title="Spezialprozessoren" target="_blank">Spezialprozessoren</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">232k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:31</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+  <script src="//code.tidio.co/vogvafxbif7muwutoktvfceankdjkpis.js"></script>
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: '6d3627b0b9cfa7b835d34f10c757edd4',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>

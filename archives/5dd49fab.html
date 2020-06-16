@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="MikrocontrollerMikrocontroller: Schalenmodell (壳层模型)Kosten spielen meist die dominante Rolle">
+<meta name="keywords" content="Microcontroller,DSP,GPU">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spezialprozessoren">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="MikrocontrollerMikrocontroller: Schalenmodell (壳层模型)Kosten spielen meist die dominante Rolle">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200613135153940.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200613135821465.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200613135916927.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200613140038564.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200613140508515.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200613140654589.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200613141310982.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200613193537845.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200613193618713.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200613193618713.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200613195241915.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200613195351855.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200614201241457.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200614201644832.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200614232517185.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200614232557250.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200614232557250.png">
+<meta property="og:updated_time" content="2020-06-16T21:02:01.467Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;5dd49fab&#x2F;image-20200613135153940.png">
+
+<link rel="canonical" href="http://grenze.cn/archives/5dd49fab.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Spezialprozessoren | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">61</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">43</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">73</span></a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-automatic-vision">
+
+    <a href="/gitbook-Automatic-Vision/" rel="section"><i class="fa fa-fw fa-book"></i>Automatic-Vision</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/5dd49fab.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spezialprozessoren
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-16 23:00:43 / 修改时间：23:02:01" itemprop="dateCreated datePublished" datetime="2020-06-16T23:00:43+02:00">2020-06-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hardware-Software-Co-Design/" itemprop="url" rel="index">
+                    <span itemprop="name">Hardware Software Co-Design</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hardware-Software-Co-Design/Spezialprozessoren/" itemprop="url" rel="index">
+                    <span itemprop="name">Spezialprozessoren</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Mikrocontroller"><a href="#Mikrocontroller" class="headerlink" title="Mikrocontroller"></a>Mikrocontroller</h1><h3 id="Mikrocontroller-Schalenmodell-壳层模型"><a href="#Mikrocontroller-Schalenmodell-壳层模型" class="headerlink" title="Mikrocontroller: Schalenmodell (壳层模型)"></a>Mikrocontroller: Schalenmodell (壳层模型)</h3><p>Kosten spielen meist die dominante Rolle <a id="more"></a></p>
+<ul>
+<li>einfacher als der Kern eines Mikroprozessors</li>
+</ul>
+<p><img src="/archives/5dd49fab/image-20200613135153940.png" style="zoom:80%;"></p>
+<h3 id="Mikrocontroller-Prozessorkern-Varianten"><a href="#Mikrocontroller-Prozessorkern-Varianten" class="headerlink" title="Mikrocontroller: Prozessorkern - Varianten"></a>Mikrocontroller: Prozessorkern - Varianten</h3><p>Verwendung älterer Kerne von Mikroprozessoren 使用旧核</p>
+<ul>
+<li><p>Leistungsvermögen meist ausreichend  性能足够</p>
+</li>
+<li><p>Modifikationen: </p>
+<ul>
+<li>Stromsparmodus </li>
+<li>kein Cache </li>
+<li>keine virtuelle Speicherverwaltung<br>→ Reduktion des Stromverbrauchs, Verbesserung des Echtzeitverhaltens</li>
+</ul>
+</li>
+</ul>
+<h3 id="Mikrocontroller-Peripherie"><a href="#Mikrocontroller-Peripherie" class="headerlink" title="Mikrocontroller: Peripherie"></a>Mikrocontroller: Peripherie</h3><p><img src="/archives/5dd49fab/image-20200613135821465.png" style="zoom:80%;"></p>
+<h3 id="Mikrocontroller-Speicher"><a href="#Mikrocontroller-Speicher" class="headerlink" title="Mikrocontroller: Speicher"></a>Mikrocontroller: Speicher</h3><p><img src="/archives/5dd49fab/image-20200613135916927.png" style="zoom:80%;"></p>
+<h3 id="Mikrocontroller-I-O-Module"><a href="#Mikrocontroller-I-O-Module" class="headerlink" title="Mikrocontroller: I/O Module"></a>Mikrocontroller: I/O Module</h3><p><img src="/archives/5dd49fab/image-20200613140038564.png" style="zoom:80%;"></p>
+<h4 id="Analog-Digital-Converter-ADC"><a href="#Analog-Digital-Converter-ADC" class="headerlink" title="Analog/Digital Converter (ADC)"></a>Analog/Digital Converter (ADC)</h4><ul>
+<li><p>Verwandelt analoge Signale in digitale Datenströme</p>
+</li>
+<li><p>Amplitude eines kontinuierlichen analogen Signals wird zu bestimmten Zeitpunkten gesampelt und das Ergebnis in einem Register abgelegt.</p>
+</li>
+<li><p>Spannungsbereich und Auflösung hängen vom Controller ab</p>
+</li>
+</ul>
+<p><img src="/archives/5dd49fab/image-20200613140508515.png" style="zoom:80%;"></p>
+<h4 id="Pulsweitenmodulation-PWM"><a href="#Pulsweitenmodulation-PWM" class="headerlink" title="Pulsweitenmodulation (PWM)"></a>Pulsweitenmodulation (PWM)</h4><ul>
+<li>Wird zur Intensitätssteuerung von Aktoren verwendet</li>
+<li>Änderung des On-/Off-Verhältnisses innerhalb eines festen Zyklus (duty cycle) steuert Intensität</li>
+<li>Beispiele: <ul>
+<li>Änderung des duty cycle ändert Geschwindigkeit von Motoren </li>
+<li>Änderung des duty cycle ändert Helligkeit von LEDs</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/5dd49fab/image-20200613140654589.png" style="zoom:80%;"></p>
+<h3 id="Mikrocontroller-Zahler-und-Zeitgeber"><a href="#Mikrocontroller-Zahler-und-Zeitgeber" class="headerlink" title="Mikrocontroller: Zähler und Zeitgeber"></a>Mikrocontroller: Zähler und Zeitgeber</h3><p>Anwendung:</p>
+<ul>
+<li>Zählen von Ereignissen, Messen von Zeiten kommen mit einem Zähler bzw. Zeitgeber aus</li>
+<li>Pulsweitenmodulation, Frequenz- oder Drehzahlmessung, Schrittmotorsteuerungen benötigen mehrere Einheiten</li>
+</ul>
+<h3 id="Mikrocontroller-Watchdog"><a href="#Mikrocontroller-Watchdog" class="headerlink" title="Mikrocontroller: Watchdog"></a>Mikrocontroller: Watchdog</h3><p>Watchdog zur Überwachung der Programmaktivitäten eines Mikrocontrollers 用于监视微控制器的程序活动</p>
+<p>Programm muss in regelmäßigen Abständen Lebenszeichen liefern 定期发送正常的信息</p>
+<ul>
+<li>Bleiben diese aus, so nimmt Watchdog einen Fehler im Programmablauf an =&gt; <strong>Reset</strong> 否则会重置</li>
+</ul>
+<p><img src="/archives/5dd49fab/image-20200613141310982.png" style="zoom:80%;"></p>
+<h3 id="Mikrocontroller-Anwendungen"><a href="#Mikrocontroller-Anwendungen" class="headerlink" title="Mikrocontroller: Anwendungen"></a>Mikrocontroller: Anwendungen</h3><p>Steuerungsdominante Anwendungen</p>
+<ul>
+<li>kontrollfluss-dominanter Code 控制流主导代码<ul>
+<li>viele Verzweigungen und Sprünge</li>
+</ul>
+</li>
+<li>weniger komplexe arithmetische Operationen </li>
+<li>geringer Datendurchsatz </li>
+<li>Multitasking ≅ schnelle Kontextwechsel</li>
+</ul>
+<h3 id="Mikrocontroller-Low-Cost"><a href="#Mikrocontroller-Low-Cost" class="headerlink" title="Mikrocontroller: Low-Cost"></a>Mikrocontroller: Low-Cost</h3><ul>
+<li>Systeme mit 4/8/16-Bit Prozessoren</li>
+<li><strong>Codegröße</strong> dominiert die Chipfläche und damit die Kosten 代码量会对芯片面积和功耗影响较大</li>
+<li>Performanzanforderungen oftmals gering 性能要求很少</li>
+<li>optimiert auf bestimmte Anwendungsgebiete 针对特定领域优化<ul>
+<li>Industriesteuerungen, Regelungstechnik, Bedienschnittstellen, …</li>
+</ul>
+</li>
+</ul>
+<h3 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p><strong>Was ist ein Mikrocontroller?</strong></p>
+<p>Mikrocontroller ist ein spezieller Mikrorechner, die einen <a href="https://de.wikipedia.org/wiki/Prozessor" rel="external nofollow noopener noreferrer" target="_blank">Prozessor</a> und zugleich auch <a href="https://de.wikipedia.org/wiki/Peripherie#Verwendung_in_der_Computertechnik" rel="external nofollow noopener noreferrer" target="_blank">Peripheriefunktionen</a> enthalten.</p>
+<p><strong>Gib Beispiele für 8/16/32/64 bit Mikrocontroller</strong> </p>
+<p>8-Bit, Intel-8051(MCS51)</p>
+<p>16-Bit, MSP430</p>
+<p>32-Bit, ARM</p>
+<p><strong>Warum ist der 8051 ein 8 bit Mikrocontroller?</strong> </p>
+<p>kann gleichzeitig 8 Bit Daten verarbeiten</p>
+<p><strong>Was ist der Unterschied zwischen einem Mikroprozessor und einem Mikrocontroller?</strong></p>
+<ul>
+<li>einfacher als der Kern eines Mikroprozessors</li>
+<li>Kosten spielen meist die dominante Rolle</li>
+</ul>
+<h1 id="Digitale-Signalprozessoren-DSPs"><a href="#Digitale-Signalprozessoren-DSPs" class="headerlink" title="Digitale Signalprozessoren (DSPs)"></a>Digitale Signalprozessoren (DSPs)</h1><p>Architektur spezialisiert auf digitale Signalverarbeitung</p>
+<h3 id="DSP-Signalverarbeitungs-Anwendungen"><a href="#DSP-Signalverarbeitungs-Anwendungen" class="headerlink" title="DSP: Signalverarbeitungs-Anwendungen"></a>DSP: Signalverarbeitungs-Anwendungen</h3><ul>
+<li>Datenfluß-dominanter Code</li>
+<li>viele arithmetische Operationen</li>
+<li>wenig Sprünge und Verzweigungen</li>
+<li>oftmals große Parallelisierung möglich</li>
+<li>sehr große Datenmengen, hoher Datendurchsat</li>
+</ul>
+<h3 id="DSP-Datenpfad-Architektur-Optimierung"><a href="#DSP-Datenpfad-Architektur-Optimierung" class="headerlink" title="DSP: Datenpfad- / Architektur Optimierung"></a>DSP: Datenpfad- / Architektur Optimierung</h3><p>Harvard-Architektur, Mehrfachzugriffe auf Operanden</p>
+<ul>
+<li><strong>MAC-Instruktion:</strong> Zugriff auf Instruktion und <strong>zwei Operanden</strong> in einem Zyklus 在一个周期内访问指令和两个操作数<ul>
+<li>Speicherarchitektur mit Mehrfachzugriff notwendig</li>
+</ul>
+</li>
+<li>Architektur muss für <strong>Instruktionen und Daten getrennte Busse</strong> haben <ul>
+<li>Harvard-Architektur: mehrere Datenbusse für mehrfachen Operandenzugriff</li>
+</ul>
+</li>
+<li>Erste DSPs: getrennte externe Busse für Instruktionen und Daten.</li>
+<li>Moderne DSPs: nur interne Harvard-Architektur, aber extern oft zwei identische Speicherschnittstellen, über die gleichzeitig auf verschiedene Off- Chip Speicherbausteine zugegriffen wird (heute oft auch On-Chip!). 仅是内部哈佛架构，但在外部通常是两个相同的存储器接口，通过它们可以同时访问不同的片外存储器模块</li>
+</ul>
+<p>Parallel-Instruktionen (MAC - Multiply &amp; Accumulate)</p>
+<ul>
+<li>MAC-Operation ist oft benötigte Operatorverkettung<br>d.h., <strong>in einem Befehlszyklus</strong> werden <strong>2 Operanden</strong> multipliziert und das Resultat in einem Register akkumuliert</li>
+<li>Multiplikationsdatenpfad optimiert in Hardware realisiert<br>DSP 首次具有乘法器，可用于浮点运算</li>
+</ul>
+<p>Zero-Overhead Schleifen</p>
+<ul>
+<li>Schleifen mit bekannter Anzahl von Durchläufen enthalten speziellen Zähler 循环内包含计数器，与0比较</li>
+<li>DSPs besitzen hierzu Spezial-Register zur Hardwareunterstützung<ul>
+<li>mit Anfangs- und End-Adresse der Schleife sowie dem Zähler geladen 加载了循环的开始和结束地址以及计数器</li>
+<li>Während Schleifendurchlauf: Zähler wird parallel dekrementiert und die Adresse der entsprechenden Instruktion (Zurückspringen oder nicht!) gesetzt 在循环运行期间：计数器并行减少，并设置相应指令的地址（是否跳转！）</li>
+</ul>
+</li>
+<li>keine Takte für die Schleifensteuerung notwendig</li>
+</ul>
+<p>spezielle DSP-Adressierungsarten (circular, bit-revers)</p>
+<ul>
+<li>Adressgeneratoren arbeiten parallel zur eigentlichen Instruktionsabarbeitung 地址生成器与指令的实际处理并行工作</li>
+<li>Einsparung von Prozessorzyklen für die Adressberechnung</li>
+</ul>
+<h3 id="DSP-Multiply-and-Accumulate"><a href="#DSP-Multiply-and-Accumulate" class="headerlink" title="DSP: Multiply and Accumulate"></a>DSP: Multiply and Accumulate</h3><p><img src="/archives/5dd49fab/image-20200613193537845.png" style="zoom:80%;"><img src="/archives/5dd49fab/image-20200613193618713.png" alt="image-20200613193618713"></p>
+<p><img src="/archives/5dd49fab/image-20200613193618713.png" style="zoom:80%;"></p>
+<h3 id="DSP-Wichtige-Eigenschaften"><a href="#DSP-Wichtige-Eigenschaften" class="headerlink" title="DSP: Wichtige Eigenschaften"></a>DSP: Wichtige Eigenschaften</h3><ul>
+<li>Eingeschränkte Parallelität 有限的并行性, Viele DSPs haben nur 1-2 MAC-Einheiten</li>
+<li><p>Heterogene Register 异构寄存器</p>
+<ul>
+<li>mehrere verschiedene Registersätze (Zugriff nur durch spezielle Funktionseinheiten)</li>
+<li>Standardprozessoren verwenden dagegen meist nur einen General-PurposeRegistersatz</li>
+</ul>
+</li>
+<li><p>Echtzeitfähigkeit</p>
+<ul>
+<li>Oft ist Angabe der maximalen Laufzeit (nicht das Mittel) wichtig. 通常，指定最大持续时间（而不是平均值）很重要。</li>
+</ul>
+</li>
+<li>mehr Rechenleistung pro Watt als bei Standardprozessoren 每瓦的计算能力比标准处理器高<br>=&gt; wichtig bei portablen Geräten</li>
+</ul>
+<h3 id="DSP-Zahlenformate"><a href="#DSP-Zahlenformate" class="headerlink" title="DSP: Zahlenformate"></a>DSP: Zahlenformate</h3><p>Mantisse bestimmt die Genauigkeit<br>Exponent bestimmt die Dynamik</p>
+<p><strong>Fixed Point (FX)</strong></p>
+<ul>
+<li>gleiche Mantissenbreite: kleiner (billiger) + schneller als Floating-Point 相同的尾数宽度: 比浮点更小+更快</li>
+<li>Entwurf von manchen Anwendungen durch Rundungs- und Skalierungsprobleme erschwert 由于四舍五入和缩放问题，一些应用程序的设计很困难</li>
+</ul>
+<p><strong>Floating Point (FP)</strong></p>
+<ul>
+<li>Große Dynamik des Zahlenbereiches</li>
+<li>einfacherer Entwurf von Anwendungen</li>
+<li>Aber: teure Hardware (komplex, große Fläche)</li>
+</ul>
+<h3 id="DSP-Arithmetik-Genauigkeit"><a href="#DSP-Arithmetik-Genauigkeit" class="headerlink" title="DSP: Arithmetik / Genauigkeit"></a>DSP: Arithmetik / Genauigkeit</h3><p>Blocked Floating-Point: einzelner Exponent für Gruppe von Zahlen</p>
+<ul>
+<li>Exponent wird in extra Variable gespeichert</li>
+<li>Nach Operation müssen die Ergebnisse entsprechend diesem Exponenten durch Schiebeoperationen wieder angepasst werden</li>
+</ul>
+<p>DSPs stammen eigentlich von analogen Signalprozessoren (ASP)</p>
+<p>Begrenzung bei Arithmetiküberläufen: Sättigungs-Arithmetik 算术溢出的局限性：饱和算术</p>
+<h3 id="DSP-Programmentwicklung"><a href="#DSP-Programmentwicklung" class="headerlink" title="DSP: Programmentwicklung"></a>DSP: Programmentwicklung</h3><p>Assembler, Compiler</p>
+<ul>
+<li>bisher nur in Assembler nutzbar 以前只能用汇编</li>
+<li>Programmierung in C 现在可以使用C语言</li>
+</ul>
+<p>Codegeneratoren</p>
+<ul>
+<li>Spezielle Entwicklungsumgebungen <ul>
+<li>Modellierung, Simulation + Codegenerierung</li>
+<li>Beispiele: Matlab, Synopsys COSSAP, SPW</li>
+</ul>
+</li>
+</ul>
+<h3 id="OpenMP-Einfuhrung"><a href="#OpenMP-Einfuhrung" class="headerlink" title="OpenMP Einführung"></a>OpenMP Einführung</h3><ul>
+<li><p>API zur Programmierung von Multiprozessor-Systemen mit Shared Memory</p>
+</li>
+<li><p>Bestehend aus Compilerdirektiven, Bibliotheksfunktionen und Umgebungsvariablen</p>
+</li>
+<li>Parallelisierung auf Thread- bzw. Schleifenebene</li>
+<li>Programmablauf nach fork/join-Modell:<br><img src="/archives/5dd49fab/image-20200613195241915.png" style="zoom:80%;"></li>
+</ul>
+<p>BSP. data parallelism</p>
+<p><img src="/archives/5dd49fab/image-20200613195351855.png" style="zoom:80%;"></p>
+<p><strong>Vorteile:</strong></p>
+<ul>
+<li>Erweiterung der C-Programmierbarkeit</li>
+<li>Beschleunigter Softwareentwurf </li>
+<li>Hohe Portierbarkeit, da standardisiert und plattformunabhängig 高可移植性，因为它是标准化的且与平台无关</li>
+<li>Wachsende Zahl an unterstützenden Compilern Threadhandling läuft automatisch ab 越来越多的支持编译器线程处理自动运行</li>
+</ul>
+<p><strong>Nachteile:</strong></p>
+<ul>
+<li>Datenabhängigkeiten werden nicht erkannt</li>
+<li>Synchronisation der Threads nötig</li>
+</ul>
+<h3 id="Q-amp-A-1"><a href="#Q-amp-A-1" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p><strong>Was ist ein digitaler Signalprozessor?</strong> </p>
+<p>Architektur spezialisiert auf digitale Signalverarbeitung</p>
+<p><strong>Was ist der Unterschied zwischen einem Mikroprozessor und einem digitalen Signalprozessor?</strong> </p>
+<p>Architektur spezialisiert auf digitale Signalverarbeitung</p>
+<p><strong>Wie werden DSPs heute programmiert?</strong> </p>
+<p>Programmierung in C </p>
+<p><strong>Wie kann Parallelität realisiert werden?</strong></p>
+<p>openMP verwenden</p>
+<h1 id="Grafik-Prozessoren-GPU"><a href="#Grafik-Prozessoren-GPU" class="headerlink" title="Grafik Prozessoren (GPU)"></a>Grafik Prozessoren (GPU)</h1><h3 id="Was-ist-eine-GPU"><a href="#Was-ist-eine-GPU" class="headerlink" title="Was ist eine GPU?"></a>Was ist eine GPU?</h3><p>GPU ist Heterogener Chip Multi-Prozessor, spezial für Grafikanwendungen</p>
+<h3 id="CPU-style-Kerne"><a href="#CPU-style-Kerne" class="headerlink" title="CPU-style Kerne"></a>CPU-style Kerne</h3><p><img src="/archives/5dd49fab/image-20200614201241457.png" style="zoom:80%;"></p>
+<h3 id="Einfacher-Prozessorkern"><a href="#Einfacher-Prozessorkern" class="headerlink" title="Einfacher Prozessorkern"></a>Einfacher Prozessorkern</h3><p>Wie viele Fragmente sollen sich einen Instruktionsstrom teilen?</p>
+<ul>
+<li>Idee: Amortisieren von Kosten/Komplexität bei der Verwaltung von Instruktionsströmen zwischen vielen ALUs 摊销许多ALU之间的指令流的成本/复杂性</li>
+</ul>
+<p>Hinzufügen von ALUs ➔ SIMD </p>
+<ul>
+<li>Neu kompilierter Shader sollte auf Anzahl der im Shader Core vorhandenen ALUs angepasst sein<ul>
+<li>Hier: 8 parallele Fragmente für 8 ALUs</li>
+</ul>
+</li>
+</ul>
+<p><img src="/archives/5dd49fab/image-20200614201644832.png" style="zoom:80%;"></p>
+<h3 id="SIMD-Prozessierung"><a href="#SIMD-Prozessierung" class="headerlink" title="SIMD Prozessierung"></a>SIMD Prozessierung</h3><ul>
+<li>SIMD Prozessierung impliziert nicht SIMD Instruktionen SIMD处理并不意味着SIMD指令</li>
+<li>Option 1: Explizite Vektor Instruktionen</li>
+<li>Option 2: Skalare Instruktionen, implizite Hardware Vektorisierung<ul>
+<li>Hardware entscheidet Verteilung der Instruktionsströme auf ALUs</li>
+</ul>
+</li>
+<li>Realität: 16 bis 64 Fragmente teilen sich einen Instruktionsstrom</li>
+</ul>
+<h3 id="Stalls-und-Interleaved-Processing"><a href="#Stalls-und-Interleaved-Processing" class="headerlink" title="Stalls und Interleaved Processing"></a>Stalls und Interleaved Processing</h3><ul>
+<li>Stalls kommen vor, wenn ein Kern aufgrund einer Abhängigkeit</li>
+<li>Aber wir haben eine Menge unabhängiger Fragmente<ul>
+<li>Idee #3:<br>Die Ausführung vielr Fragmente verschachteln um stalls durch Operationen mit hoher Latenz zu vermeiden.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Durchsatz"><a href="#Durchsatz" class="headerlink" title="Durchsatz"></a>Durchsatz</h3><p><img src="/archives/5dd49fab/image-20200614232517185.png" style="zoom:80%;"><img src="/archives/5dd49fab/image-20200614232557250.png" alt="image-20200614232557250"></p>
+<p><img src="/archives/5dd49fab/image-20200614232557250.png" style="zoom:80%;"></p>
+<h3 id="Q-amp-A-2"><a href="#Q-amp-A-2" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p><strong>Was ist eine GPU?</strong> </p>
+<p>GPU ist Heterogener Chip Multi-Prozessor, spezial für Grafikanwendungen</p>
+<p><strong>Was ist ein Shader Core?</strong> </p>
+<p><strong>Shader</strong> sind <a href="https://de.wikipedia.org/wiki/Hardware" rel="external nofollow noopener noreferrer" target="_blank">Hardware</a>- oder <a href="https://de.wikipedia.org/wiki/Software" rel="external nofollow noopener noreferrer" target="_blank">Software</a>-Module, die bestimmte <a href="https://de.wikipedia.org/wiki/Bildsynthese" rel="external nofollow noopener noreferrer" target="_blank">Rendering</a>-Effekte bei der 3D-<a href="https://de.wikipedia.org/wiki/Computergrafik" rel="external nofollow noopener noreferrer" target="_blank">Computergrafik</a> implementieren.</p>
+<p><strong>Wieso gibts es mehrere ALUs pro Kern?</strong> </p>
+<p>Amortisieren von Kosten/Komplexität</p>
+<p><strong>Wie kann der Durchsatz erhöht werden?</strong> </p>
+<p>Increase run time of one group</p>
+<p><strong>Wie kann hoher Durchsatz bei geringer Leistungsaufnahme erreicht werden?</strong>  如何以低功耗实现高吞吐量？</p>
+<p><strong>Wieso kann eine Vielfache Beschleunigung gegenüber GPProzessoren erreicht werden?</strong> 与GPP相比，为什么可以实现多重加速？</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/5dd49fab.html" title="Spezialprozessoren">http://grenze.cn/archives/5dd49fab.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Microcontroller/" rel="tag"><i class="fa fa-tag"></i> Microcontroller</a>
+              <a href="/tags/DSP/" rel="tag"><i class="fa fa-tag"></i> DSP</a>
+              <a href="/tags/GPU/" rel="tag"><i class="fa fa-tag"></i> GPU</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/91062da9.html" rel="prev" title="GPP-Performanzsteigerung">
+      <i class="fa fa-chevron-left"></i> GPP-Performanzsteigerung
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/archives/8723f221.html" rel="next" title="Bus, Network-on-Chip (NoC) & Multicore">
+      Bus, Network-on-Chip (NoC) & Multicore <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mikrocontroller"><span class="nav-number">1.</span> <span class="nav-text">Mikrocontroller</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mikrocontroller-Schalenmodell-壳层模型"><span class="nav-number">1.0.1.</span> <span class="nav-text">Mikrocontroller: Schalenmodell (壳层模型)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mikrocontroller-Prozessorkern-Varianten"><span class="nav-number">1.0.2.</span> <span class="nav-text">Mikrocontroller: Prozessorkern - Varianten</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mikrocontroller-Peripherie"><span class="nav-number">1.0.3.</span> <span class="nav-text">Mikrocontroller: Peripherie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mikrocontroller-Speicher"><span class="nav-number">1.0.4.</span> <span class="nav-text">Mikrocontroller: Speicher</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mikrocontroller-I-O-Module"><span class="nav-number">1.0.5.</span> <span class="nav-text">Mikrocontroller: I/O Module</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Analog-Digital-Converter-ADC"><span class="nav-number">1.0.5.1.</span> <span class="nav-text">Analog/Digital Converter (ADC)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pulsweitenmodulation-PWM"><span class="nav-number">1.0.5.2.</span> <span class="nav-text">Pulsweitenmodulation (PWM)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mikrocontroller-Zahler-und-Zeitgeber"><span class="nav-number">1.0.6.</span> <span class="nav-text">Mikrocontroller: Zähler und Zeitgeber</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mikrocontroller-Watchdog"><span class="nav-number">1.0.7.</span> <span class="nav-text">Mikrocontroller: Watchdog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mikrocontroller-Anwendungen"><span class="nav-number">1.0.8.</span> <span class="nav-text">Mikrocontroller: Anwendungen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mikrocontroller-Low-Cost"><span class="nav-number">1.0.9.</span> <span class="nav-text">Mikrocontroller: Low-Cost</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-amp-A"><span class="nav-number">1.0.10.</span> <span class="nav-text">Q&amp;A</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Digitale-Signalprozessoren-DSPs"><span class="nav-number">2.</span> <span class="nav-text">Digitale Signalprozessoren (DSPs)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DSP-Signalverarbeitungs-Anwendungen"><span class="nav-number">2.0.1.</span> <span class="nav-text">DSP: Signalverarbeitungs-Anwendungen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DSP-Datenpfad-Architektur-Optimierung"><span class="nav-number">2.0.2.</span> <span class="nav-text">DSP: Datenpfad- / Architektur Optimierung</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DSP-Multiply-and-Accumulate"><span class="nav-number">2.0.3.</span> <span class="nav-text">DSP: Multiply and Accumulate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DSP-Wichtige-Eigenschaften"><span class="nav-number">2.0.4.</span> <span class="nav-text">DSP: Wichtige Eigenschaften</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DSP-Zahlenformate"><span class="nav-number">2.0.5.</span> <span class="nav-text">DSP: Zahlenformate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DSP-Arithmetik-Genauigkeit"><span class="nav-number">2.0.6.</span> <span class="nav-text">DSP: Arithmetik / Genauigkeit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DSP-Programmentwicklung"><span class="nav-number">2.0.7.</span> <span class="nav-text">DSP: Programmentwicklung</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenMP-Einfuhrung"><span class="nav-number">2.0.8.</span> <span class="nav-text">OpenMP Einführung</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-amp-A-1"><span class="nav-number">2.0.9.</span> <span class="nav-text">Q&amp;A</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Grafik-Prozessoren-GPU"><span class="nav-number">3.</span> <span class="nav-text">Grafik Prozessoren (GPU)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Was-ist-eine-GPU"><span class="nav-number">3.0.1.</span> <span class="nav-text">Was ist eine GPU?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU-style-Kerne"><span class="nav-number">3.0.2.</span> <span class="nav-text">CPU-style Kerne</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Einfacher-Prozessorkern"><span class="nav-number">3.0.3.</span> <span class="nav-text">Einfacher Prozessorkern</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SIMD-Prozessierung"><span class="nav-number">3.0.4.</span> <span class="nav-text">SIMD Prozessierung</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stalls-und-Interleaved-Processing"><span class="nav-number">3.0.5.</span> <span class="nav-text">Stalls und Interleaved Processing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Durchsatz"><span class="nav-number">3.0.6.</span> <span class="nav-text">Durchsatz</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-amp-A-2"><span class="nav-number">3.0.7.</span> <span class="nav-text">Q&amp;A</span></a></li></ol></li></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="tidioChatApi.open();">
+    
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/archives/f7568654.html" title="Field Programmable Gate Arrays (FPGA)" target="_blank">Field Programmable Gate Arrays (FPGA)</a>
+          </li>
+        
+          <li>
+            <a href="/archives/a93cd1f.html" title="Schätzung der Entwurfsqualität" target="_blank">Schätzung der Entwurfsqualität</a>
+          </li>
+        
+          <li>
+            <a href="/archives/81f161f5.html" title="System-on-Chip (SoC)" target="_blank">System-on-Chip (SoC)</a>
+          </li>
+        
+          <li>
+            <a href="/archives/8723f221.html" title="Bus, Network-on-Chip (NoC) & Multicore" target="_blank">Bus, Network-on-Chip (NoC) & Multicore</a>
+          </li>
+        
+          <li>
+            <a href="/archives/5dd49fab.html" title="Spezialprozessoren" target="_blank">Spezialprozessoren</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">232k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:31</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+  <script src="//code.tidio.co/vogvafxbif7muwutoktvfceankdjkpis.js"></script>
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: 'cf972dd59b5863eaae29afbe46e31a08',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
