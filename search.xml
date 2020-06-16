@@ -103,7 +103,7 @@
   <entry>
     <title>Schätzung der Entwurfsqualität</title>
     <url>/archives/a93cd1f.html</url>
-    <content><![CDATA[<h1 id="Abstraktionsebenen"><a href="#Abstraktionsebenen" class="headerlink" title="Abstraktionsebenen"></a>Abstraktionsebenen</h1><p><img src="/archives/a93cd1f/image-20200616121155134.png" style="zoom:80%;"><a id="more"></a></p>
+    <content><![CDATA[<h1 id="Abstraktionsebenen"><a href="#Abstraktionsebenen" class="headerlink" title="Abstraktionsebenen"></a>Abstraktionsebenen</h1><p><img src="/archives/a93cd1f/image-20200616121155134.png" style="zoom: 50%;"><a id="more"></a></p>
 <h1 id="Synthese"><a href="#Synthese" class="headerlink" title="Synthese"></a>Synthese</h1><p><strong>Verhalten:</strong> Funktionen unabhängig von ihrer konkreten Implementierung beschrieben.</p>
 <p><strong>Struktur:</strong></p>
 <ul>
@@ -133,16 +133,16 @@
 </li>
 </ul>
 <h4 id="Spezifikation-auf-Systemebene"><a href="#Spezifikation-auf-Systemebene" class="headerlink" title="Spezifikation auf Systemebene"></a>Spezifikation auf Systemebene</h4><p><strong>Taskgraph</strong>: bestehend aus sequentieller und paralleler Abfolge von Tasks</p>
-<p><img src="/archives/a93cd1f/image-20200616123204654.png" style="zoom:80%;"></p>
+<p><img src="/archives/a93cd1f/image-20200616123204654.png" style="zoom: 50%;"></p>
 <h4 id="Allokation-auf-Systemebene"><a href="#Allokation-auf-Systemebene" class="headerlink" title="Allokation auf Systemebene"></a>Allokation auf Systemebene</h4><ul>
 <li>Prozessoren, dedizierte Hardwarebausteine 处理器，专用硬件组件</li>
 <li>Speicher, I/O</li>
 <li>Verbindungsstrukturen</li>
 </ul>
-<p><img src="/archives/a93cd1f/image-20200616124202947.png" style="zoom:80%;"></p>
+<p><img src="/archives/a93cd1f/image-20200616124202947.png" style="zoom: 50%;"></p>
 <h4 id="Bindung-auf-Systemebene"><a href="#Bindung-auf-Systemebene" class="headerlink" title="Bindung auf Systemebene"></a>Bindung auf Systemebene</h4><p>Abbildung und Bindung der Tasks auf Prozessoren oder ASICs</p>
-<p><img src="/archives/a93cd1f/image-20200616124252440.png" style="zoom:80%;"></p>
-<h4 id="Ablaufplanung-auf-Systemebene"><a href="#Ablaufplanung-auf-Systemebene" class="headerlink" title="Ablaufplanung auf Systemebene"></a>Ablaufplanung auf Systemebene</h4><p><img src="/archives/a93cd1f/image-20200616124334586.png" style="zoom:80%;"></p>
+<p><img src="/archives/a93cd1f/image-20200616124252440.png" style="zoom: 50%;"></p>
+<h4 id="Ablaufplanung-auf-Systemebene"><a href="#Ablaufplanung-auf-Systemebene" class="headerlink" title="Ablaufplanung auf Systemebene"></a>Ablaufplanung auf Systemebene</h4><p><img src="/archives/a93cd1f/image-20200616124334586.png" style="zoom: 50%;"></p>
 <h3 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p><strong>Was ist Synthese? Welche Aufgaben hat sie?</strong></p>
 <p><strong>Was sind Ziele der Systemsynthese?</strong> </p>
 <p>Aufbauend auf der überprüften Problemdefinition sind alternative Lösungsprinzipien und weiters optimale Systemstrukturen sowie Detailauslegung zu entwickeln</p>
@@ -156,11 +156,11 @@
 <li>Kommutativität und Assoziativität in den Ausdrücken erlauben verschiedene DFGs. 表达式中的可交换性和关联性允许使用不同的DFG。</li>
 <li>keine Modellierung von Kontrollstrukturen, wie z.B. Verzweigungen und Iterationen.</li>
 </ul>
-<p><img src="/archives/a93cd1f/image-20200616125903559.png" style="zoom:80%;"></p>
+<p><img src="/archives/a93cd1f/image-20200616125903559.png" style="zoom: 50%;"></p>
 <h3 id="Kontrollflusgraphen-CFG’s"><a href="#Kontrollflusgraphen-CFG’s" class="headerlink" title="Kontrollflußgraphen (CFG’s)"></a>Kontrollflußgraphen (CFG’s)</h3><p>Erlaubt Modellierung von Kontrollstrukturen, wie z.B. Verzweigungen und Iterationen.</p>
 <p><strong>Nachteil:</strong> Möglichkeit der parallelen Ausführung von Anweisungen wird von vorneherein nicht betrachtet.  从一开始就没有考虑并行执行指令的可能性。</p>
 <p><strong>Lösung:</strong> hierarchische Sequenzgraphen.</p>
-<p><img src="/archives/a93cd1f/image-20200616130220732.png" style="zoom:80%;"></p>
+<p><img src="/archives/a93cd1f/image-20200616130220732.png" style="zoom: 50%;"></p>
 <h4 id="Hierarchische-Sequenzgraphen"><a href="#Hierarchische-Sequenzgraphen" class="headerlink" title="Hierarchische Sequenzgraphen"></a>Hierarchische Sequenzgraphen</h4><p>Hierarchie von verketteten Einheiten</p>
 <ul>
 <li>die Einheiten modellieren den Datenfluß </li>
@@ -181,13 +181,13 @@
 <li>Einfügen eines NOP- Endknotens mit je einer Kante von jedem Knoten ohne Nachfolger zu diesem Endknoten.</li>
 </ul>
 <p><strong>Sequenzgraphen – Einheit</strong></p>
-<p><img src="/archives/a93cd1f/image-20200616130614389.png" style="zoom:80%;"></p>
+<p><img src="/archives/a93cd1f/image-20200616130614389.png" style="zoom: 50%;"></p>
 <p><strong>Sequenzgraphen - Branch</strong></p>
-<p><img src="/archives/a93cd1f/image-20200616130836236.png" style="zoom:80%;"></p>
+<p><img src="/archives/a93cd1f/image-20200616130836236.png" style="zoom: 50%;"></p>
 <p><strong>Sequenzgraphen – Loop</strong></p>
-<p><img src="/archives/a93cd1f/image-20200616132649920.png" style="zoom:80%;"></p>
+<p><img src="/archives/a93cd1f/image-20200616132649920.png" style="zoom: 50%;"></p>
 <p><strong>Sequenzgraphen - Call</strong></p>
-<p><img src="/archives/a93cd1f/image-20200616132756457.png" style="zoom:80%;"></p>
+<p><img src="/archives/a93cd1f/image-20200616132756457.png" style="zoom: 50%;"></p>
 <h3 id="Q-amp-A-1"><a href="#Q-amp-A-1" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p><strong>Was ist Pareto-optimal?</strong> </p>
 <p>Ein <strong>Pareto-Optimal</strong> ist ein Zustand, in dem es nicht möglich ist, eine Eigenschaft zu verbessern, ohne zugleich eine andere verschlechtern zu müssen. 不可能改善一个特性，同时不使另一个特性恶化</p>
 <p><strong>Welche Graphenmodelle gibt es? Welche Eigenschalften haben sie?</strong> </p>
@@ -199,8 +199,8 @@
 <p><strong>Wie wird Programmcode in Graphen dargestellt?</strong></p>
 <p>durch Konten und Kanten</p>
 <h1 id="Parameter-von-Schatzverfahren"><a href="#Parameter-von-Schatzverfahren" class="headerlink" title="Parameter von Schätzverfahren"></a>Parameter von Schätzverfahren</h1><h3 id="Abschatzung-der-Entwurfsqualitat"><a href="#Abschatzung-der-Entwurfsqualitat" class="headerlink" title="Abschätzung der Entwurfsqualität"></a>Abschätzung der Entwurfsqualität</h3><p><strong>Motivation:</strong> Feststellen der Systemparameter, ohne es zu implementieren</p>
-<p><img src="/archives/a93cd1f/image-20200616135759398.png" style="zoom:80%;"></p>
-<h3 id="Parameter-von-Schatzverfahren-1"><a href="#Parameter-von-Schatzverfahren-1" class="headerlink" title="Parameter von Schätzverfahren"></a>Parameter von Schätzverfahren</h3><p><img src="/archives/a93cd1f/image-20200616135936018.png" style="zoom:80%;"></p>
+<p><img src="/archives/a93cd1f/image-20200616135759398.png" style="zoom: 50%;"></p>
+<h3 id="Parameter-von-Schatzverfahren-1"><a href="#Parameter-von-Schatzverfahren-1" class="headerlink" title="Parameter von Schätzverfahren"></a>Parameter von Schätzverfahren</h3><p><img src="/archives/a93cd1f/image-20200616135936018.png" style="zoom: 50%;"></p>
 <h4 id="Metriken-und-Exaktheit-der-Schatzung"><a href="#Metriken-und-Exaktheit-der-Schatzung" class="headerlink" title="Metriken und Exaktheit der Schätzung"></a>Metriken und Exaktheit der Schätzung</h4><p>Qualitätsmaße/Metriken: Performance, Kosten (Fläche), Leistungsaufnahme, Energiebedarf, Zuverlässigkeit, Testbarkeit, Time-to-market, …</p>
 <p>Definition : Exaktheit</p>
 <ul>
@@ -212,7 +212,7 @@
 <li>Sei D = { D1, D2 ,…, Dn } eine Menge von Implementierungen Bsp. D1= ASIC, D2= FPGA</li>
 <li>Die Treue F ist ein Maß für die Zuverlässigkeit einer Schätzmethode, welche die Implementierungen Di gegeneinander vergleicht:</li>
 </ul>
-<p><img src="/archives/a93cd1f/image-20200616152547147.png" style="zoom:80%;"></p>
+<p><img src="/archives/a93cd1f/image-20200616152547147.png" style="zoom: 50%;"></p>
 <h3 id="Q-amp-A-2"><a href="#Q-amp-A-2" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p><strong>Warum erfolgt eine Schätzung der Entwurfsqualität?</strong> </p>
 <p>Feststellen der Systemparameter, ohne es zu implementieren</p>
 <p><strong>Welche Metriken können geschätzt werden?</strong> </p>
@@ -225,12 +225,12 @@
 <p><strong>Ausführungszeit:</strong> $T_{ex}= T \cdot L$ </p>
 <p><strong>Durchsatz:</strong> $\mathrm{R}=1 / \mathrm{T}_{\mathrm{ex}}$</p>
 <h4 id="Hardware-Performanz-Beispiel"><a href="#Hardware-Performanz-Beispiel" class="headerlink" title="Hardware-Performanz: Beispiel"></a>Hardware-Performanz: Beispiel</h4><p><strong>Beispiel 1</strong></p>
-<p><img src="/archives/a93cd1f/image-20200616155934842.png" style="zoom:80%;"></p>
+<p><img src="/archives/a93cd1f/image-20200616155934842.png" style="zoom: 50%;"></p>
 <p><strong>Beispiel 2</strong></p>
-<p><img src="/archives/a93cd1f/image-20200616160454043.png" style="zoom:80%;"><img src="/archives/a93cd1f/image-20200616160638656.png" alt="image-20200616160638656"></p>
+<p><img src="/archives/a93cd1f/image-20200616160454043.png" style="zoom: 50%;"></p>
 <p><strong>Beispiel 3</strong></p>
-<p><img src="/archives/a93cd1f/image-20200616160638656.png" style="zoom:80%;"></p>
-<h3 id="Hardware-Performanz-Pipelining"><a href="#Hardware-Performanz-Pipelining" class="headerlink" title="Hardware-Performanz: Pipelining"></a>Hardware-Performanz: Pipelining</h3><p><img src="/archives/a93cd1f/image-20200616164100655.png" style="zoom:80%;"></p>
+<p><img src="/archives/a93cd1f/image-20200616160638656.png" style="zoom: 50%;"></p>
+<h3 id="Hardware-Performanz-Pipelining"><a href="#Hardware-Performanz-Pipelining" class="headerlink" title="Hardware-Performanz: Pipelining"></a>Hardware-Performanz: Pipelining</h3><p><img src="/archives/a93cd1f/image-20200616164100655.png" style="zoom: 50%;"></p>
 <h4 id="Hardware-Performanz-Schatzung-der-Taktperiode"><a href="#Hardware-Performanz-Schatzung-der-Taktperiode" class="headerlink" title="Hardware-Performanz: Schätzung der Taktperiode"></a>Hardware-Performanz: Schätzung der Taktperiode</h4><p>Funktionale Einheiten $v_k$ mit delays delay($v_k$) </p>
 <ul>
 <li><p>Methode der <strong>maximalen Operatorverzögerung</strong><br>$T=\max_{k}\left(\operatorname{delay}\left(v_{k}\right)\right)$</p>
@@ -244,7 +244,7 @@
 </li>
 </ul>
 <h4 id="Hardware-Performanz-Taktschlupf"><a href="#Hardware-Performanz-Taktschlupf" class="headerlink" title="Hardware-Performanz: Taktschlupf"></a>Hardware-Performanz: Taktschlupf</h4><p>Der Clockschlupf (clock slack) bezeichnet den proportionalen Anteil einer Taktperiode, in dem eine funktionale Einheit $v_k$ nicht ausgenutzt wird.</p>
-<p><img src="/archives/a93cd1f/image-20200616190944831.png" style="zoom:80%;"></p>
+<p><img src="/archives/a93cd1f/image-20200616190944831.png" style="zoom: 67%;"></p>
 <script type="math/tex; mode=display">
 \operatorname{slack}\left(T, v_{k}\right)=\left(\left\lceil\operatorname{delay}\left(v_{k}\right) / T\right\rceil\right) \cdot T-\operatorname{delay}\left(v_{k}\right)</script><h4 id="Hardware-Performanz-Taktschlupfminimierung"><a href="#Hardware-Performanz-Taktschlupfminimierung" class="headerlink" title="Hardware-Performanz: Taktschlupfminimierung"></a>Hardware-Performanz: Taktschlupfminimierung</h4><p>Mit occ(vk), der Anzahl der Operationen vom Typ $v_k$, und $|V_T|$, der Anzahl unterschiedlicher Operationstypen, ist der mittlere Schlupf für eine Taktperiode T:</p>
 <script type="math/tex; mode=display">
@@ -252,12 +252,12 @@
 <p><strong>Taktauslastung</strong></p>
 <script type="math/tex; mode=display">
 u t i l(T)=1-\frac{\operatorname{avgslack}(T)}{T}</script><p>bezeichnet die prozentuale mittlere Auslastung aller Funktionseinheiten. 表示所有功能单元的平均利用率百分比。</p>
-<h4 id="Hardware-Performanz-FSMD-Modell"><a href="#Hardware-Performanz-FSMD-Modell" class="headerlink" title="Hardware-Performanz: FSMD - Modell"></a>Hardware-Performanz: FSMD - Modell</h4><p><img src="/archives/a93cd1f/image-20200616191521011.png" style="zoom:80%;"></p>
+<h4 id="Hardware-Performanz-FSMD-Modell"><a href="#Hardware-Performanz-FSMD-Modell" class="headerlink" title="Hardware-Performanz: FSMD - Modell"></a>Hardware-Performanz: FSMD - Modell</h4><p><img src="/archives/a93cd1f/image-20200616191521011.png" style="zoom: 67%;"></p>
 <h4 id="Hardware-Kostenmetriken"><a href="#Hardware-Kostenmetriken" class="headerlink" title="Hardware - Kostenmetriken"></a>Hardware - Kostenmetriken</h4><p><img src="/archives/a93cd1f/image-20200616191634676.png" style="zoom:80%;"></p>
 <h3 id="Q-amp-A-3"><a href="#Q-amp-A-3" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p><strong>Was ist Hardware-Performanz? Wie setzt sich diese zusammen?</strong> </p>
 <p>bestehen aus Taktperiod, Latenz, Ausführungszeit und Durchsatz</p>
 <p><strong>Wie kann Pipelining ausgenutzt werden?</strong> </p>
-<p><img src="/archives/a93cd1f/image-20200616164100655.png" style="zoom:80%;"></p>
+<p><img src="/archives/a93cd1f/image-20200616164100655.png" style="zoom: 50%;"></p>
 <p><strong>Wieso wird die Taktperiode geschätzt? Wie kann sie optimiert werden?</strong> </p>
 <p><strong>Wieso wird zwischen Hardware Leistung und Energie unterschieden?</strong></p>
 <p>Leistung ist Energie pro Zeit. Sie gibt an, wie schnell Energie in Arbeit umgewandelt wird</p>
