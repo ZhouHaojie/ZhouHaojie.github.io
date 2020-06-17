@@ -3,8 +3,8 @@
   <entry>
     <title>Field Programmable Gate Arrays (FPGA)</title>
     <url>/archives/f7568654.html</url>
-    <content><![CDATA[<h1 id="Entwurfsstile-Phasen-bei-Integrierten-Schaltungen"><a href="#Entwurfsstile-Phasen-bei-Integrierten-Schaltungen" class="headerlink" title="Entwurfsstile: Phasen bei Integrierten Schaltungen"></a>Entwurfsstile: Phasen bei Integrierten Schaltungen</h1><p><img src="/archives/f7568654/image-20200615180023903.png" style="zoom:80%;"><br><a id="more"></a></p>
-<h1 id="Vergleich-der-wichtigsten-Entwurfsstile"><a href="#Vergleich-der-wichtigsten-Entwurfsstile" class="headerlink" title="Vergleich der wichtigsten Entwurfsstile"></a>Vergleich der wichtigsten Entwurfsstile</h1><p><img src="/archives/f7568654/image-20200615183804747.png" style="zoom:80%;"></p>
+    <content><![CDATA[<h1 id="Entwurfsstile-Phasen-bei-Integrierten-Schaltungen"><a href="#Entwurfsstile-Phasen-bei-Integrierten-Schaltungen" class="headerlink" title="Entwurfsstile: Phasen bei Integrierten Schaltungen"></a>Entwurfsstile: Phasen bei Integrierten Schaltungen</h1><p><img src="/archives/f7568654/image-20200615180023903.png" style="zoom: 50%;"><br><a id="more"></a></p>
+<h1 id="Vergleich-der-wichtigsten-Entwurfsstile"><a href="#Vergleich-der-wichtigsten-Entwurfsstile" class="headerlink" title="Vergleich der wichtigsten Entwurfsstile"></a>Vergleich der wichtigsten Entwurfsstile</h1><p><img src="/archives/f7568654/image-20200615183804747.png" style="zoom: 67%;"></p>
 <h1 id="Gate-Array-Technologie"><a href="#Gate-Array-Technologie" class="headerlink" title="Gate-Array Technologie"></a>Gate-Array Technologie</h1><ul>
 <li><p>Einfache Logik Gatter </p>
 <ul>
@@ -47,9 +47,9 @@
 <p><img src="/archives/f7568654/image-20200615182556110.png" style="zoom:80%;"></p>
 <p>Lösung: Look-up-Table (LUT) mit 2 Eingängen</p>
 <p><img src="/archives/f7568654/image-20200615182635591.png" style="zoom:80%;"></p>
-<h1 id="FPGA-Design-Flow"><a href="#FPGA-Design-Flow" class="headerlink" title="FPGA Design Flow"></a>FPGA Design Flow</h1><p><img src="/archives/f7568654/image-20200615182952517.png" style="zoom:80%;"></p>
+<h1 id="FPGA-Design-Flow"><a href="#FPGA-Design-Flow" class="headerlink" title="FPGA Design Flow"></a>FPGA Design Flow</h1><p><img src="/archives/f7568654/image-20200615182952517.png" style="zoom: 67%;"></p>
 <h1 id="Was-ist-partielle-Rekonfiguration"><a href="#Was-ist-partielle-Rekonfiguration" class="headerlink" title="Was ist partielle Rekonfiguration?"></a>Was ist partielle Rekonfiguration?</h1><p>Partielle Rekonfiguration ist die Fähigkeit teile der Hardwarestrukturen dynamisch, ohne dass die restliche Funktion beeinflusst wird. 部分重新配置是通过加载部分位文件而不影响其余功能，在运行时动态调整硬件结构的部分的能力。</p>
-<p><img src="/archives/f7568654/image-20200615183345560.png" style="zoom:80%;"></p>
+<p><img src="/archives/f7568654/image-20200615183345560.png" style="zoom: 50%;"></p>
 <h3 id="Technologie-amp-Nutzen"><a href="#Technologie-amp-Nutzen" class="headerlink" title="Technologie &amp; Nutzen"></a>Technologie &amp; Nutzen</h3><p>Partial Reconfiguration ermöglicht: </p>
 <ul>
 <li>Flexibilität</li>
@@ -65,7 +65,7 @@
 <li>Custom Computing</li>
 </ul>
 <h1 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h1><p><strong>Welche Entwurfsstilte gibts es? Was sind Vor- und Nachteile?</strong> </p>
-<p><img src="/archives/f7568654/image-20200615183804747.png" style="zoom:80%;"></p>
+<p><img src="/archives/f7568654/image-20200615183804747.png" style="zoom: 67%;"></p>
 <p><strong>Welche Gate-Array Technologien gibt es?</strong> </p>
 <ul>
 <li>Einfache Logik Gatter</li>
@@ -1539,7 +1539,7 @@ u t i l(T)=1-\frac{\operatorname{avgslack}(T)}{T}</script><p>bezeichnet die proz
 </ul>
 <p><img src="/archives/fd286243/image-20200609165725356.png" style="zoom:80%;"></p>
 <p><strong>Struktur:</strong></p>
-<p><img src="/archives/fd286243/image-20200609170037130.png" style="zoom:80%;"></p>
+<p><img src="/archives/fd286243/image-20200609170037130.png" style="zoom: 67%;"></p>
 <p><img src="/archives/fd286243/image-20200609170125784.png" style="zoom:80%;"><img src="/archives/fd286243/image-20200609170539201.png" alt="image-20200609170539201"></p>
 <p><img src="/archives/fd286243/image-20200609170539201.png" style="zoom:80%;"></p>
 <h3 id="Q-amp-A-2"><a href="#Q-amp-A-2" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p><strong>Wie können General Purpose Prozessoren unterschieden werden?</strong> </p>
