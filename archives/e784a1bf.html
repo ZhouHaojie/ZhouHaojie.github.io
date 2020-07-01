@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Begriffe und TerminologieGraph: $G&#x3D;(V,E)$ besteht aus einer Menge V von Koten und einer Menge $E \subseteq V \times V$ von Kanten">
+<meta name="keywords" content="Graphen,DFS,BFS,Dijkstra-Algorithm,Kruskal-Algorithm,Prim-Algorithm,Clique-Problem,NP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c2 Algorithmen">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="Begriffe und TerminologieGraph: $G&#x3D;(V,E)$ besteht aus einer Menge V von Koten und einer Menge $E \subseteq V \times V$ von Kanten">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200428124853116.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200428130045881.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200428133804788.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200428152013629.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200428152202281.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200428152222715.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200428153205485.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200428153101239.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200428153819817.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200428154243588.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200428154826554.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200511193938972.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200511204100775.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200511204355148.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200511205224097.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200511215609497.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200511215642697.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200511220057090.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200628194020603.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200628194044703.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200628194155129.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200628194242388.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200628194544743.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200629181439459.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200629181501890.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200629181602675.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200629181649319.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200701092948664.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200701093257835.png">
+<meta property="og:updated_time" content="2020-07-01T07:58:54.113Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;e784a1bf&#x2F;image-20200428124853116.png">
+
+<link rel="canonical" href="http://grenze.cn/archives/e784a1bf.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>c2 Algorithmen | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">69</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">75</span></a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-automatic-vision">
+
+    <a href="/gitbook-Automatic-Vision/" rel="section"><i class="fa fa-fw fa-book"></i>Automatic-Vision</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/e784a1bf.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          c2 Algorithmen
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-01 09:52:52 / 修改时间：09:58:54" itemprop="dateCreated datePublished" datetime="2020-07-01T09:52:52+02:00">2020-07-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hardware-und-Software-Optimierung/" itemprop="url" rel="index">
+                    <span itemprop="name">Hardware und Software Optimierung</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hardware-und-Software-Optimierung/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Begriffe-und-Terminologie"><a href="#Begriffe-und-Terminologie" class="headerlink" title="Begriffe und Terminologie"></a>Begriffe und Terminologie</h2><p><strong>Graph:</strong> $G=(V,E)$ besteht aus einer Menge V von <strong>Koten</strong> und einer Menge $E \subseteq V \times V$ von <strong>Kanten</strong><a id="more"></a></p>
+<p><strong>Kante:</strong> Ein Paar $(v,v^{‘}) \in E$ , $v$: Startknoten,  $v^{‘}$: Endknoten</p>
+<p><strong>adjazent(benachbart):</strong> $v,v^{‘}$ </p>
+<p><strong>Subgraph:</strong> Ein Graph $G^{\prime}=\left(V^{\prime}, E^{\prime}\right)$ ist ein Subgraph von $G=(V, E),$ wenn $V^{\prime} \subseteq V$ und $\mathrm{E}^{\prime} \subseteq \mathrm{E}$</p>
+<p> <img src="/archives/e784a1bf/image-20200428124853116.png" style="zoom:50%;"></p>
+<p><strong>Zyklus:</strong> Ein Zyklus ist ein Weg von einem Knoten v nach v</p>
+<p><strong>Vollständig:</strong> Ein Graph heißt vollständig, wenn alle möglichen Knotenpaare benachbart sind</p>
+<p><strong>Komplement-Graphen:</strong> Die nicht benachbarten Knoten eines Graphen sind in seinem Komplement-Graphen benachbart und umgekehrt</p>
+<p><strong>Clique:</strong> Ein vollständiger Subgraph</p>
+<p><strong>Verbunden:</strong> Ein Graph ist verbunden, wenn für alle Knotenpaare $(v, v’)$ ein Weg von v nach v’ existiert (= zusammenhängender Graph)</p>
+<p><strong>Baum:</strong> Ein Baum ist ein verbundener Graph ohne Zyklus</p>
+<p><img src="/archives/e784a1bf/image-20200428130045881.png" style="zoom:50%;"></p>
+<h2 id="Graphenklassen"><a href="#Graphenklassen" class="headerlink" title="Graphenklassen"></a>Graphenklassen</h2><blockquote>
+<p><strong>Intervall:</strong> Ein Intervall $I_i$ wird von zwei Endknoten $I_i,I_i$ repräsentiert</p>
+</blockquote>
+<p><strong>Overlap-Graphen:</strong><br>$G_{O}=\left(V, E_{O}\right),$ wobei:</p>
+<ul>
+<li>$V=\left\{v_{i} | v_{i} \text { repräsentiert Intervall }I_{i}\right\}$ </li>
+<li>$E_{\mathrm{O}}=\left\{\left(\mathrm{v}_{\mathrm{i}} ; \mathrm{v}_{\mathrm{j}}\right) | \mathrm{I}_{\mathrm{i}}&lt;\mathrm{I}_{\mathrm{j}}&lt;\mathrm{r}_{\mathrm{i}}&lt;\mathrm{r}_{\mathrm{j}}\right\}$<br>(d.h. nur Überschneidung)</li>
+</ul>
+<p><img src="/archives/e784a1bf/image-20200428133804788.png" style="zoom:50%;"><img src="/archives/e784a1bf/image-20200428152013629.png" alt="image-20200428152013629" style="zoom:50%;"></p>
+<p><strong>Containment-Graph:</strong><br>$G_{C}=\left(V ; E_{C}\right),$ wobei:</p>
+<ul>
+<li>$V=\left\{v_{i} | v_{i} \text { repräsentiert Intervall }I_{i} \right\}$ </li>
+<li>$E_{C}=f(v_{i} ; v_{j}) I_{i} \leq I_{j} ; r_{j} \leq r_{i}$ (d.h. $I_{j}$ <strong>komplett</strong> in $i$ <strong>enthalten</strong>)</li>
+</ul>
+<p><img src="/archives/e784a1bf/image-20200428152202281.png" style="zoom:50%;"> <img src="/archives/e784a1bf/image-20200428152222715.png" alt="image-20200428152222715" style="zoom:50%;"></p>
+<p><strong>Intervall-Graph:</strong><br>$E_{I}=\left\{\left(v_{i}, v_{i}\right) | I_{i} \cap I_{j} \neq \varnothing\right\}, \text { d.h. } E_{1}=E_{c} \cup E_{0}$ 有重叠的都算</p>
+<p><img src="/archives/e784a1bf/image-20200428153205485.png" style="zoom:50%;"><img src="/archives/e784a1bf/image-20200428153101239.png" style="zoom:50%;"></p>
+<p><strong>Permutation-Graph:</strong><br>$E_{p}=\left\{\left(v_{i}, v_{j}\right) | \text{ wenn sich Linie i und Linie j schneiden.}\right\}$ 相交</p>
+<p><img src="/archives/e784a1bf/image-20200428153819817.png" style="zoom:50%;"></p>
+<blockquote>
+<p><strong>Rechteckmengengraph:</strong> Sei $\mathrm{R}=\left\{\mathrm{R}_{1}, \mathrm{R}_{2}, \ldots, \mathrm{R}_{\mathrm{m}}\right\}$ eine Menge von Rechtecken, die einem Layout entsprechen.</p>
+</blockquote>
+<p><strong>Nachbarschaftsgraph:</strong><br>$E=\left\{\left(v_{i}, v_{j}\right) | \text { wenn } R_{i} \text { und } R_{j} \text { Nachbarn sind }\right\}$ </p>
+<p><img src="/archives/e784a1bf/image-20200428154243588.png" style="zoom:50%;"></p>
+<p><strong>Rektangulärer dualer Graph:</strong><br>zwei Rechtecke eine Kante teilen, wenn ihre entsprechenden Knoten benachbart sind</p>
+<p><img src="/archives/e784a1bf/image-20200428154826554.png" style="zoom:50%;"></p>
+<h2 id="Graphentraversierung"><a href="#Graphentraversierung" class="headerlink" title="Graphentraversierung"></a>Graphentraversierung</h2><p>Es gibt zwei prinzipielle Arten einen Graphen zu traversieren:</p>
+<ul>
+<li>Tiefensuche</li>
+<li>Breitensuche</li>
+</ul>
+<h3 id="Tiefensuche-Algorithmus-DFS"><a href="#Tiefensuche-Algorithmus-DFS" class="headerlink" title="Tiefensuche-Algorithmus(DFS)"></a>Tiefensuche-Algorithmus(DFS)</h3><p><img src="/archives/e784a1bf/image-20200511193938972.png" style="zoom:50%;"></p>
+<p><strong>linke nachfolge geht zuerst</strong><br>Diese Programm ist sehr effizient weniger durchführbar</p>
+<h3 id="Breitensuche-Algorithmus-BFS"><a href="#Breitensuche-Algorithmus-BFS" class="headerlink" title="Breitensuche-Algorithmus(BFS)"></a>Breitensuche-Algorithmus(BFS)</h3><p><img src="/archives/e784a1bf/image-20200511204100775.png" style="zoom:50%;"></p>
+<p><img src="/archives/e784a1bf/image-20200511204355148.png" style="zoom:50%;"></p>
+<p><img src="/archives/e784a1bf/image-20200511205224097.png" style="zoom:50%;"></p>
+<h3 id="Anwendungsbeispiele"><a href="#Anwendungsbeispiele" class="headerlink" title="Anwendungsbeispiele"></a>Anwendungsbeispiele</h3><p><strong>Für Breitensuche:</strong> </p>
+<ul>
+<li>Dijkstra-Algorithmus für kürzeste Wege </li>
+<li>Prim-Algorithmus für minimal aufspannende Bäume</li>
+</ul>
+<p><strong>Für Tiefensuche:</strong></p>
+<ul>
+<li>Algorithmen zur Clique-Bestimmung</li>
+</ul>
+<h2 id="Dijkstra-Algorithmus-fur-kurzeste-Wege-DA"><a href="#Dijkstra-Algorithmus-fur-kurzeste-Wege-DA" class="headerlink" title="Dijkstra-Algorithmus für kürzeste Wege (DA)"></a>Dijkstra-Algorithmus für kürzeste Wege (DA)</h2><ul>
+<li>DA findet den kürzesten Weg von einem Knoten zu allen anderen Knoten unter Anwendung einer Greedy-Strategie.</li>
+<li>D(w) ist die Länge des Weges von dem Knoten s nach w.</li>
+<li>P(w) ist ein Vater von w.</li>
+<li>Die Komplexität ist $O(|V|^2)$.</li>
+</ul>
+<p><img src="/archives/e784a1bf/image-20200511215609497.png" style="zoom:50%;"></p>
+<p><img src="/archives/e784a1bf/image-20200511215642697.png" style="zoom:50%;"></p>
+<p><img src="/archives/e784a1bf/image-20200511220057090.png" style="zoom:50%;"></p>
+<p>Anwendungsbeispiel:</p>
+<ul>
+<li>Routing im physikalischen Entwurf (global, detailliert)</li>
+<li>Heuristiken zur Konstruktion minimaler Steinerbäume.</li>
+</ul>
+<h2 id="Kruskal-Algorithmen-fur-MAB"><a href="#Kruskal-Algorithmen-fur-MAB" class="headerlink" title="Kruskal-Algorithmen für MAB"></a>Kruskal-Algorithmen für MAB</h2><p>Die Kante werden nach aufsteigendem Gewicht sortiert. Für jede Kante aus sortierten Menge: wenn u und v zur selben Menge gehören, wird die Kante gelöscht; anderenfalls(否则), erstellt man eine neue Menge durch die Vereinigung dieser beiden Menge</p>
+<p><img src="/archives/e784a1bf/image-20200628194020603.png" style="zoom: 67%;"></p>
+<p><img src="/archives/e784a1bf/image-20200628194044703.png" style="zoom:67%;"></p>
+<p><img src="/archives/e784a1bf/image-20200628194155129.png" style="zoom:67%;"></p>
+<p><img src="/archives/e784a1bf/image-20200628194242388.png" style="zoom:67%;"></p>
+<p>Es sind verschiedene MABs möglich, die aber alle die gleiche minimale Kantensumme aufweisen.</p>
+<p><img src="/archives/e784a1bf/image-20200628194544743.png" style="zoom:67%;"></p>
+<p><strong>Eigenschaft</strong></p>
+<ul>
+<li>Greddy-Algorithmus</li>
+<li>Die Zeitkomplexität ist $O(|E| \cdot lg(|E|)$</li>
+<li>Der MAB ist zyklenfrei</li>
+<li>Anwendungbeispiel: <strong>Global Routing</strong> als Startlösung für das Steinerbaum-Problem</li>
+</ul>
+<h2 id="Prim-Algorithmus"><a href="#Prim-Algorithmus" class="headerlink" title="Prim-Algorithmus"></a>Prim-Algorithmus</h2><p>Prim-Algorithmus berechnet wie groß kann aufspannenden Baum exakt und optimal.</p>
+<p>Der Baum beginnt von einem beliebigen Knoten und vergößert sich mit dem Knoten, der am nächsten am MAB liegt  选择距离MAB(离MBA集合中的点)最近的点来扩展 das heißt, der geringsten abstand in den Rest des Grafen hat.</p>
+<p>key[v] muss  minimal im abstand zum bisher konstruierten partiellen MAB</p>
+<p><strong>Beispiel：</strong></p>
+<p><img src="/archives/e784a1bf/image-20200629181439459.png" style="zoom:67%;"></p>
+<p><img src="/archives/e784a1bf/image-20200629181501890.png" style="zoom:67%;"></p>
+<p><img src="/archives/e784a1bf/image-20200629181602675.png" style="zoom:67%;"></p>
+<p><img src="/archives/e784a1bf/image-20200629181649319.png" style="zoom:67%;"></p>
+<p><strong>Eigenschaft:</strong></p>
+<ul>
+<li>Greedy-Algorithmus</li>
+<li>Breitensuche</li>
+<li>$O(|E| \cdot lg|V|)$</li>
+</ul>
+<h2 id="Clique-Problem"><a href="#Clique-Problem" class="headerlink" title="Clique-Problem"></a>Clique-Problem</h2><p><strong>Voraussetzung für das Clique-Problem:</strong></p>
+<p>Sei $G=(V, E)$ ein Graph und $K \leq|V|$ eine positive ganze Zahl.</p>
+<p><strong>Frage:</strong> Enthält G eine Clique mit der Größe $|K|$, d.h. gibt es eine Untermenge $V^{\prime} \subset V,$ so dass zwischen je zwei Knoten aus $V^{\prime}$ eine Kante in E existiert und<br>$\left|V^{\prime}\right| \geq K ?$ </p>
+<p><strong>Maximales-Clique-Problem</strong> ist die Optimierungs-Variante des CliqueProblems.</p>
+<p>Obwohl das Problem für allgemeine Graphen <strong>NP-vollständig</strong> ist, gibt es Graphenklassen, für die das Clique-Problem in <strong>polynomieller Zeit lösbar</strong> ist.</p>
+<p><img src="/archives/e784a1bf/image-20200701092948664.png" style="zoom:67%;"></p>
+<p>Die Funktion SORT-INTERVAL sortiert die Endpunkte, und A[i] weist auf,  ob ein linker oder rechter Endpunkt ist. wenn der Endpunkt ist ein linker Endpunkte, wird Intervall Clique hinzugefügt. Anderenfalls entfernen der nicht überlappenden Intervalle.</p>
+<ol>
+<li>将线段的所有端点进行排序</li>
+<li>遍历所有端点，若A[i] = L, 即左端点，则cliq+1; 若为右端点，则cliq-1</li>
+<li>最后找出最大的 cliq</li>
+</ol>
+<p><img src="/archives/e784a1bf/image-20200701093257835.png" style="zoom:67%;"></p>
+<p>Anwendungsbeispiel:</p>
+<ul>
+<li>Detailliertes Routing(single row)</li>
+<li>High-level-Synthese<ul>
+<li>Scheduling</li>
+<li>Allokation</li>
+</ul>
+</li>
+</ul>
+<h2 id="Zeitkomplexitat-und-NP-Vollstandigkeit"><a href="#Zeitkomplexitat-und-NP-Vollstandigkeit" class="headerlink" title="Zeitkomplexität und NP-Vollständigkeit"></a>Zeitkomplexität und NP-Vollständigkeit</h2><p>Zeitkomplexität ist zur Beurteilung der Effizienz von Algorithmen</p>
+<p>Die Klasse aller Probleme kann man in die zwei wichtigsten Komplexitätsklasse P und NP einteilen</p>
+<p><strong>P:</strong> Ein Problem ist auf einer deterministischen Turingmaschine in polynomialer Zeit lösbar</p>
+<p><strong>NP:</strong> Ein Problem ist auf einer nicht-deternimistischen Turingmaschine in polynomialer Zeit lösbar</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/e784a1bf.html" title="c2 Algorithmen">http://grenze.cn/archives/e784a1bf.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Graphen/" rel="tag"><i class="fa fa-tag"></i> Graphen</a>
+              <a href="/tags/DFS/" rel="tag"><i class="fa fa-tag"></i> DFS</a>
+              <a href="/tags/BFS/" rel="tag"><i class="fa fa-tag"></i> BFS</a>
+              <a href="/tags/Dijkstra-Algorithm/" rel="tag"><i class="fa fa-tag"></i> Dijkstra-Algorithm</a>
+              <a href="/tags/Kruskal-Algorithm/" rel="tag"><i class="fa fa-tag"></i> Kruskal-Algorithm</a>
+              <a href="/tags/Prim-Algorithm/" rel="tag"><i class="fa fa-tag"></i> Prim-Algorithm</a>
+              <a href="/tags/Clique-Problem/" rel="tag"><i class="fa fa-tag"></i> Clique-Problem</a>
+              <a href="/tags/NP/" rel="tag"><i class="fa fa-tag"></i> NP</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/44abed72.html" rel="prev" title="01 SV 验证-数据类型">
+      <i class="fa fa-chevron-left"></i> 01 SV 验证-数据类型
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Begriffe-und-Terminologie"><span class="nav-number">1.</span> <span class="nav-text">Begriffe und Terminologie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graphenklassen"><span class="nav-number">2.</span> <span class="nav-text">Graphenklassen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graphentraversierung"><span class="nav-number">3.</span> <span class="nav-text">Graphentraversierung</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tiefensuche-Algorithmus-DFS"><span class="nav-number">3.1.</span> <span class="nav-text">Tiefensuche-Algorithmus(DFS)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Breitensuche-Algorithmus-BFS"><span class="nav-number">3.2.</span> <span class="nav-text">Breitensuche-Algorithmus(BFS)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Anwendungsbeispiele"><span class="nav-number">3.3.</span> <span class="nav-text">Anwendungsbeispiele</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dijkstra-Algorithmus-fur-kurzeste-Wege-DA"><span class="nav-number">4.</span> <span class="nav-text">Dijkstra-Algorithmus für kürzeste Wege (DA)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kruskal-Algorithmen-fur-MAB"><span class="nav-number">5.</span> <span class="nav-text">Kruskal-Algorithmen für MAB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prim-Algorithmus"><span class="nav-number">6.</span> <span class="nav-text">Prim-Algorithmus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Clique-Problem"><span class="nav-number">7.</span> <span class="nav-text">Clique-Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zeitkomplexitat-und-NP-Vollstandigkeit"><span class="nav-number">8.</span> <span class="nav-text">Zeitkomplexität und NP-Vollständigkeit</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="tidioChatApi.open();">
+    
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/archives/e784a1bf.html" title="c2 Algorithmen" target="_blank">c2 Algorithmen</a>
+          </li>
+        
+          <li>
+            <a href="/archives/44abed72.html" title="01 SV 验证-数据类型" target="_blank">01 SV 验证-数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/archives/f7568654.html" title="Field Programmable Gate Arrays (FPGA)" target="_blank">Field Programmable Gate Arrays (FPGA)</a>
+          </li>
+        
+          <li>
+            <a href="/archives/a93cd1f.html" title="Schätzung der Entwurfsqualität" target="_blank">Schätzung der Entwurfsqualität</a>
+          </li>
+        
+          <li>
+            <a href="/archives/81f161f5.html" title="System-on-Chip (SoC)" target="_blank">System-on-Chip (SoC)</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">243k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:41</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+  <script src="//code.tidio.co/vogvafxbif7muwutoktvfceankdjkpis.js"></script>
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: '773530f179904e62a5f54a99cac6d0a2',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
