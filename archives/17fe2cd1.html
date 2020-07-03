@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Motivation:  Komplexitätsbeherrschung (控制复杂度) Produktivitätssteigerung  Qualitätssicherung&amp;lt;—-more—-&amp;gt;Größere Freiheitsgrade bei der HW-Synthese:  Anzahl der Register  Anzahl der funktionalen Einh">
+<meta name="keywords" content="loop-fusion,Strip-Mining">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c3 High_Level_Synthese">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;17fe2cd1.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="Motivation:  Komplexitätsbeherrschung (控制复杂度) Produktivitätssteigerung  Qualitätssicherung&amp;lt;—-more—-&amp;gt;Größere Freiheitsgrade bei der HW-Synthese:  Anzahl der Register  Anzahl der funktionalen Einh">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;17fe2cd1&#x2F;image-20200702103155899.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;17fe2cd1&#x2F;image-20200702111750858.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;17fe2cd1&#x2F;image-20200702110146850.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;17fe2cd1&#x2F;image-20200703100411968.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;17fe2cd1&#x2F;image-20200703103312641.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;17fe2cd1&#x2F;image-20200703103844612.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;17fe2cd1&#x2F;image-20200703110412918.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;17fe2cd1&#x2F;image-20200703144419198.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;17fe2cd1&#x2F;image-20200703153414341.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;17fe2cd1&#x2F;image-20200703155136688.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;17fe2cd1&#x2F;image-20200703155216534.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;17fe2cd1&#x2F;image-20200703160313380.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;17fe2cd1&#x2F;image-20200703160513554.png">
+<meta property="og:updated_time" content="2020-07-03T14:31:55.909Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;17fe2cd1&#x2F;image-20200702103155899.png">
+
+<link rel="canonical" href="http://grenze.cn/archives/17fe2cd1.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>c3 High_Level_Synthese | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">71</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">46</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">76</span></a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-automatic-vision">
+
+    <a href="/gitbook-Automatic-Vision/" rel="section"><i class="fa fa-fw fa-book"></i>Automatic-Vision</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/17fe2cd1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          c3 High_Level_Synthese
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-03 16:27:50 / 修改时间：16:31:55" itemprop="dateCreated datePublished" datetime="2020-07-03T16:27:50+02:00">2020-07-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/High-Level-Synthese/" itemprop="url" rel="index">
+                    <span itemprop="name">High Level Synthese</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/High-Level-Synthese/Einleitung/" itemprop="url" rel="index">
+                    <span itemprop="name">Einleitung</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>Motivation:</strong></p>
+<ul>
+<li>Komplexitätsbeherrschung (控制复杂度)</li>
+<li>Produktivitätssteigerung </li>
+<li><p>Qualitätssicherung<br>&lt;—-more—-&gt;<br><strong>Größere Freiheitsgrade bei der HW-Synthese:</strong></p>
+</li>
+<li><p>Anzahl der Register</p>
+</li>
+<li>Anzahl der funktionalen Einheiten</li>
+<li>Seriell/parallel-Trade-off</li>
+</ul>
+<p>Aber auch eine größere Komplexität in der Auswahl, wie mache ich das mit der Anzahl der Register..</p>
+<p><img src="/archives/17fe2cd1/image-20200702103155899.png" style="zoom:67%;"></p>
+<h2 id="Syntheseablauf"><a href="#Syntheseablauf" class="headerlink" title="Syntheseablauf"></a>Syntheseablauf</h2><p><img src="/archives/17fe2cd1/image-20200702111750858.png" style="zoom: 80%;"></p>
+<h2 id="Ubergange-im-Y-Diagramm"><a href="#Ubergange-im-Y-Diagramm" class="headerlink" title="Übergänge im Y-Diagramm"></a>Übergänge im Y-Diagramm</h2><p><strong>2a</strong></p>
+<p>Eine Verhaltensbeschreibung im eine RT Beschreibung hier transformiert. Hier die High-Level-Synthese, was wird wann wo ausgeführt, wie viel Multiplexe und wie viel Register brauch ich an dieser stelle. wie kann ich dann mit welche typen und welche Verbindungen und welcher Anzahl von Registern </p>
+<p><img src="/archives/17fe2cd1/image-20200702110146850.png" style="zoom:67%;"></p>
+<h2 id="Begriffe"><a href="#Begriffe" class="headerlink" title="Begriffe"></a>Begriffe</h2><h4 id="System-Level-Synthese"><a href="#System-Level-Synthese" class="headerlink" title="System-Level-Synthese"></a>System-Level-Synthese</h4><p><strong>Systemebene</strong>; Spezifikation durch <strong>Funktionalität</strong> (z. B. Instruction-Set) und <strong>Nebenbedingungen</strong> (Constraints), <strong>Partitionierung</strong> des Systems in Teilsysteme<br>⇒ Menge <strong>kommunizierender, paralleler Prozesse</strong> (inkl. deren Verhaltensbeschreibungen auf algorithmischer Ebene)</p>
+<h4 id="High-Level-Synthese-HLS"><a href="#High-Level-Synthese-HLS" class="headerlink" title="High-Level-Synthese(HLS)"></a>High-Level-Synthese(HLS)</h4><p><strong>Algorithmische Ebene</strong> (Verhaltensebene); Spezifikation durch Operationen und Berechnungssequenzen auf Eingabewerten zur Erzeugung benötigter Ausgabewerte (z. B. arithmetische/logische Operationen, Prozeduraufrufe, etc.)<br><strong>Syntheseschritte: Scheduling, Allokation, Binding</strong><br>⇒ Kontroller-/Datenpfad-Architektur</p>
+<h4 id="Register-Transfer-Level-Synthese-RTL-Synthese"><a href="#Register-Transfer-Level-Synthese-RTL-Synthese" class="headerlink" title="Register-Transfer-Level-Synthese (RTL-Synthese)"></a>Register-Transfer-Level-Synthese (RTL-Synthese)</h4><p><strong>Register-Transfer-Ebene</strong>; Spezifikation durch <strong>Datenpfad/Controller</strong>-Beschreibung<br><strong>Datenpfad:</strong> Optimierung und Operatorauswahl (in Abhängigkeit der Bibliothek)<br><strong>Controller:</strong> Synthese ausgehend von abstrakten Beschreibung einer Finite-State-Machine (FSM) mit Zuständen und Transitionen</p>
+<h4 id="Logiksynthese"><a href="#Logiksynthese" class="headerlink" title="Logiksynthese"></a>Logiksynthese</h4><p><strong>Logische Ebene</strong>; Spezifikation mit booleschen Funktionen (kombinatorische Logik) und Speicherkomponenten; meistens nur Optimierung (Logikminimierung)</p>
+<h4 id="Technologieabbildung-Technology-Mapping"><a href="#Technologieabbildung-Technology-Mapping" class="headerlink" title="Technologieabbildung (Technology Mapping)"></a>Technologieabbildung (Technology Mapping)</h4><p><strong>Technologie Ebene (Struktur)</strong>; Spezifikation durch Netzwerk mit abstrakten Gattern; muss auf eine vorgegebene Zielarchitektur umgesetzt werden (ASIC, FPGA, etc.)</p>
+<h4 id="重点Einordnung-der-Synthese-in-Bezug-auf-den-zeitlichen-Freiheitsgrad-分类"><a href="#重点Einordnung-der-Synthese-in-Bezug-auf-den-zeitlichen-Freiheitsgrad-分类" class="headerlink" title="重点Einordnung der Synthese in Bezug auf den zeitlichen Freiheitsgrad 分类"></a><code>重点</code>Einordnung der Synthese in Bezug auf den zeitlichen Freiheitsgrad 分类</h4><p><strong>High-Level-Synthese:</strong> </p>
+<ul>
+<li><p>Optimierung der Trade-Offs innerhalb <strong>mehrerer Taktzyklen.</strong></p>
+<blockquote>
+<p>optimieren mehrere Taktzyklen. Die entsprechenden Verfahren, Scheduling, Allokation, Bindung</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>RTL-Synthese:</strong> </p>
+<ul>
+<li><p>Optimierung der Trade-Offs innerhalb eines <strong>einzelnen Taktzyklus.</strong></p>
+<blockquote>
+<p>Retiming Method in der RTL Synthese über einen einzelnen Taktzyklus</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>Logiksynthese:</strong></p>
+<ul>
+<li><p>Optimierung der Trade-Offs innerhalb <strong>kombinatorischer Logik.</strong></p>
+<blockquote>
+<p>optimiere auf die Fläche, minimiert und dann kosten Flächen effizient</p>
+</blockquote>
+</li>
+</ul>
+<p><code>考试可能会问：</code></p>
+<h2 id="Methoden-der-HLS"><a href="#Methoden-der-HLS" class="headerlink" title="Methoden der HLS"></a>Methoden der HLS</h2><h3 id="1-Allokation"><a href="#1-Allokation" class="headerlink" title="1. Allokation"></a>1. Allokation</h3><p><strong>Festlegung:</strong> <strong>Anzahl und Art </strong>(wie viel Hardware-Einheiten) der  in dem System benutzten Ressourcen.</p>
+<blockquote>
+<p>das heißt, wie viel operationelle Einheiten benötige ich</p>
+</blockquote>
+<ul>
+<li><p>Anzahl und Art der Operationseinheiten</p>
+<p>benutzen ALUs oder spezielle Typen(Addiere) ? zu bestimmen</p>
+</li>
+<li><p>Anzahl und Art der Register</p>
+</li>
+<li><p>Anzahl und Art der Verbindungen</p>
+<p>Busse oder Multiplexer zu bestimmen</p>
+</li>
+</ul>
+<h3 id="2-Bindung"><a href="#2-Bindung" class="headerlink" title="2. Bindung"></a>2. Bindung</h3><p>Zuordnung: Operationen zu den HW-Ressourcen </p>
+<p>=&gt; wo? welche HW-Einheiten? Die HW-Ressourcen Auswahl und Zuordnung Schritt</p>
+<h3 id="3-Scheduling"><a href="#3-Scheduling" class="headerlink" title="3. Scheduling"></a>3. Scheduling</h3><p>Zuordnung von Operationen zu Ausführungszeitpunkten</p>
+<p>=&gt; wann wird eine Operation entsprechend ausgeführt?</p>
+<ul>
+<li>ein vorgegebenes Kostenkriterium wird minimiert</li>
+<li>Der optimal Schedule ist nicht immer das globale optimal manchmal. Es ist ein Kompromiss zwischen maximal parallel und minimal klein Konfiguration<br>was ist maximal parallel? =&gt; bei ASAP: as soon as posssible</li>
+</ul>
+<p><img src="/archives/17fe2cd1/image-20200703100411968.png" style="zoom:67%;"></p>
+<p>Schedule 2 hat weniger Hardware-Ressourcen, nur ein multipliziere dafür viel Zeitschritte.</p>
+<h2 id="Transformation-und-interne-Darstellung"><a href="#Transformation-und-interne-Darstellung" class="headerlink" title="Transformation und interne Darstellung"></a>Transformation und interne Darstellung</h2><p><strong>Umsetzung</strong> einer HDL Beschreibung in ein internes Darstellungsformat, z.B. DFG, CFG …</p>
+<p><strong>Anwendung</strong> von Transformationen auf internes Format<br>=&gt; Optimierung vor der HLS</p>
+<p><strong>Interne Darstellungen Beispiel 1</strong></p>
+<p><img src="/archives/17fe2cd1/image-20200703103312641.png" style="zoom:67%;"></p>
+<p> <strong>Beispiel 2</strong></p>
+<p><img src="/archives/17fe2cd1/image-20200703103844612.png" style="zoom: 80%;"></p>
+<p>CFG: Die Auswertung der Bedienung erfolgt geht man in die unterschiedlichen Statement Blöcke rein. maximal ein Pfad im CFG kann durchlaufen werden, AFAP</p>
+<p><strong>Beispiel 3</strong></p>
+<p><img src="/archives/17fe2cd1/image-20200703110412918.png" style="zoom:67%;"></p>
+<p>Der Datenfluss Graphen entsprechend mit einem ASAP praktisch maximal parallelisieren. wenn man den minimalen von HW benötigt, muss man die Operationen  in 12, 14 Zeitschritt schieben.</p>
+<p>Man kann gegebenenfalls  noch später im Retiming durchführen. d.h. die Taktraten minimieren</p>
+<h2 id="Transformationen"><a href="#Transformationen" class="headerlink" title="Transformationen"></a>Transformationen</h2><h4 id="Loop-Fusion"><a href="#Loop-Fusion" class="headerlink" title="Loop-Fusion:"></a>Loop-Fusion:</h4><p><img src="/archives/17fe2cd1/image-20200703144419198.png" style="zoom:67%;"></p>
+<p>wenn ich nur zwei Schleifen zusammenbringe und dann Block 1 und Block2 auf einen Hardware Unit bringen statt auf zwei getrennte Chips. </p>
+<p><strong>Loop-Splitting</strong>: wenn die Ressourcen nicht ausreichen sind, der FPGA als zu klein, kann man praktisch in zwei kleine adjazente Schleifen aufteilen</p>
+<h4 id="Strip-Mining"><a href="#Strip-Mining" class="headerlink" title="Strip-Mining:"></a>Strip-Mining:</h4><p>Parallelisierung von Index-Subräumen</p>
+<p>Kandidaten für parallel Ausführungen auf Hardware</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">100</span>; i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;<span class="number">100</span>; j++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">		a[i,j] = b[i,j] + c[i,j];</span></pre></td></tr></table></figure>
+<p>=&gt;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">100</span>; i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	parbegin</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;<span class="number">50</span>; j++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">			a[i,j] = b[i,j] + c[i,j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">		<span class="keyword">for</span>(j=<span class="number">50</span>; j&lt;<span class="number">100</span>; j++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">			a[i,j] = b[i,j] + c[i,j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	parend</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// die beiden for Schleifen parallel ausgeführt werden hier in diesem parallelisierte Statement</span></span></pre></td></tr></table></figure>
+<p><strong>Anwendung</strong>: Bildverarbeitung</p>
+<p><img src="/archives/17fe2cd1/image-20200703153414341.png" style="zoom:67%;"></p>
+<p>ich habe hier gezielt in der Bildverarbeitung, dann diese Index unter Räum mit Strip-Minining parallelisiert, das dann in dem gewissen Anzahl aufteile je nach dem wie viel FPGA oder Multi-Cores </p>
+<h4 id="Konstanten-propagieren"><a href="#Konstanten-propagieren" class="headerlink" title="Konstanten propagieren"></a>Konstanten propagieren</h4><p><img src="/archives/17fe2cd1/image-20200703155136688.png" style="zoom:67%;"></p>
+<p>Reduktion von Operationen</p>
+<h4 id="Redundante-Operatoren-beseitigen"><a href="#Redundante-Operatoren-beseitigen" class="headerlink" title="Redundante Operatoren beseitigen"></a>Redundante Operatoren beseitigen</h4><p><img src="/archives/17fe2cd1/image-20200703155216534.png" style="zoom:67%;"></p>
+<p>Die auftreten mit gleichen inputs und der gleiche Operator muss ich nur einmal entsprechend realisieren und kann den mehrfach verwenden, statt mehrfach zu realisieren.</p>
+<h4 id="Tree-height-Reduktion"><a href="#Tree-height-Reduktion" class="headerlink" title="Tree-height-Reduktion"></a>Tree-height-Reduktion</h4><p><img src="/archives/17fe2cd1/image-20200703160313380.png" style="zoom:67%;"></p>
+<p>initial parse tree: ein sequenzieller an dieser Stelle </p>
+<p>=&gt; Assoziativ gesetzt, kriege ich entsprechende parallele Levels und kann ich natürlich parallel durchzuführen </p>
+<h4 id="Kontroll-Datenflusstransformation"><a href="#Kontroll-Datenflusstransformation" class="headerlink" title="Kontroll-Datenflusstransformation"></a>Kontroll-Datenflusstransformation</h4><p><img src="/archives/17fe2cd1/image-20200703160513554.png" style="zoom:67%;"></p>
+<p>Ausnutzung von Parallelität indem ich die Datenfluss Informationen gezielt hinzufügen, zur opt</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/17fe2cd1.html" title="c3 High_Level_Synthese">http://grenze.cn/archives/17fe2cd1.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/loop-fusion/" rel="tag"><i class="fa fa-tag"></i> loop-fusion</a>
+              <a href="/tags/Strip-Mining/" rel="tag"><i class="fa fa-tag"></i> Strip-Mining</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/e784a1bf.html" rel="prev" title="c2 Algorithmen">
+      <i class="fa fa-chevron-left"></i> c2 Algorithmen
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Syntheseablauf"><span class="nav-number">1.</span> <span class="nav-text">Syntheseablauf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubergange-im-Y-Diagramm"><span class="nav-number">2.</span> <span class="nav-text">Übergänge im Y-Diagramm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Begriffe"><span class="nav-number">3.</span> <span class="nav-text">Begriffe</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#System-Level-Synthese"><span class="nav-number">3.0.1.</span> <span class="nav-text">System-Level-Synthese</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#High-Level-Synthese-HLS"><span class="nav-number">3.0.2.</span> <span class="nav-text">High-Level-Synthese(HLS)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Register-Transfer-Level-Synthese-RTL-Synthese"><span class="nav-number">3.0.3.</span> <span class="nav-text">Register-Transfer-Level-Synthese (RTL-Synthese)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Logiksynthese"><span class="nav-number">3.0.4.</span> <span class="nav-text">Logiksynthese</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Technologieabbildung-Technology-Mapping"><span class="nav-number">3.0.5.</span> <span class="nav-text">Technologieabbildung (Technology Mapping)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重点Einordnung-der-Synthese-in-Bezug-auf-den-zeitlichen-Freiheitsgrad-分类"><span class="nav-number">3.0.6.</span> <span class="nav-text">重点Einordnung der Synthese in Bezug auf den zeitlichen Freiheitsgrad 分类</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#Methoden-der-HLS"><span class="nav-number">4.</span> <span class="nav-text">Methoden der HLS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Allokation"><span class="nav-number">4.1.</span> <span class="nav-text">1. Allokation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Bindung"><span class="nav-number">4.2.</span> <span class="nav-text">2. Bindung</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Scheduling"><span class="nav-number">4.3.</span> <span class="nav-text">3. Scheduling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transformation-und-interne-Darstellung"><span class="nav-number">5.</span> <span class="nav-text">Transformation und interne Darstellung</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transformationen"><span class="nav-number">6.</span> <span class="nav-text">Transformationen</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Loop-Fusion"><span class="nav-number">6.0.1.</span> <span class="nav-text">Loop-Fusion:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Strip-Mining"><span class="nav-number">6.0.2.</span> <span class="nav-text">Strip-Mining:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Konstanten-propagieren"><span class="nav-number">6.0.3.</span> <span class="nav-text">Konstanten propagieren</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Redundante-Operatoren-beseitigen"><span class="nav-number">6.0.4.</span> <span class="nav-text">Redundante Operatoren beseitigen</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tree-height-Reduktion"><span class="nav-number">6.0.5.</span> <span class="nav-text">Tree-height-Reduktion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kontroll-Datenflusstransformation"><span class="nav-number">6.0.6.</span> <span class="nav-text">Kontroll-Datenflusstransformation</span></a></li></ol></li></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="tidioChatApi.open();">
+    
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/archives/17fe2cd1.html" title="c3 High_Level_Synthese" target="_blank">c3 High_Level_Synthese</a>
+          </li>
+        
+          <li>
+            <a href="/archives/e784a1bf.html" title="c2 Algorithmen" target="_blank">c2 Algorithmen</a>
+          </li>
+        
+          <li>
+            <a href="/archives/44abed72.html" title="01 SV 验证-数据类型" target="_blank">01 SV 验证-数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/archives/f7568654.html" title="Field Programmable Gate Arrays (FPGA)" target="_blank">Field Programmable Gate Arrays (FPGA)</a>
+          </li>
+        
+          <li>
+            <a href="/archives/a93cd1f.html" title="Schätzung der Entwurfsqualität" target="_blank">Schätzung der Entwurfsqualität</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">248k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:46</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+  <script src="//code.tidio.co/vogvafxbif7muwutoktvfceankdjkpis.js"></script>
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: '60ef4d99bb115d1a642342b3b2df382c',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>

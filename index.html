@@ -156,17 +156,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">69</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">71</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">44</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">46</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">75</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">76</span></a>
 
   </li>
         <li class="menu-item menu-item-movies">
@@ -234,6 +234,200 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/17fe2cd1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/archives/17fe2cd1.html" class="post-title-link" itemprop="url">c3 High_Level_Synthese</a>
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-03 16:27:50 / 修改时间：16:31:55" itemprop="dateCreated datePublished" datetime="2020-07-03T16:27:50+02:00">2020-07-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/High-Level-Synthese/" itemprop="url" rel="index">
+                    <span itemprop="name">High Level Synthese</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/High-Level-Synthese/Einleitung/" itemprop="url" rel="index">
+                    <span itemprop="name">Einleitung</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>Motivation:</strong></p>
+<ul>
+<li>Komplexitätsbeherrschung (控制复杂度)</li>
+<li>Produktivitätssteigerung </li>
+<li><p>Qualitätssicherung<br>&lt;—-more—-&gt;<br><strong>Größere Freiheitsgrade bei der HW-Synthese:</strong></p>
+</li>
+<li><p>Anzahl der Register</p>
+</li>
+<li>Anzahl der funktionalen Einheiten</li>
+<li>Seriell/parallel-Trade-off</li>
+</ul>
+<p>Aber auch eine größere Komplexität in der Auswahl, wie mache ich das mit der Anzahl der Register..</p>
+<p><img src="/archives/17fe2cd1/image-20200702103155899.png" style="zoom:67%;"></p>
+<h2 id="Syntheseablauf"><a href="#Syntheseablauf" class="headerlink" title="Syntheseablauf"></a>Syntheseablauf</h2><p><img src="/archives/17fe2cd1/image-20200702111750858.png" style="zoom: 80%;"></p>
+<h2 id="Ubergange-im-Y-Diagramm"><a href="#Ubergange-im-Y-Diagramm" class="headerlink" title="Übergänge im Y-Diagramm"></a>Übergänge im Y-Diagramm</h2><p><strong>2a</strong></p>
+<p>Eine Verhaltensbeschreibung im eine RT Beschreibung hier transformiert. Hier die High-Level-Synthese, was wird wann wo ausgeführt, wie viel Multiplexe und wie viel Register brauch ich an dieser stelle. wie kann ich dann mit welche typen und welche Verbindungen und welcher Anzahl von Registern </p>
+<p><img src="/archives/17fe2cd1/image-20200702110146850.png" style="zoom:67%;"></p>
+<h2 id="Begriffe"><a href="#Begriffe" class="headerlink" title="Begriffe"></a>Begriffe</h2><h4 id="System-Level-Synthese"><a href="#System-Level-Synthese" class="headerlink" title="System-Level-Synthese"></a>System-Level-Synthese</h4><p><strong>Systemebene</strong>; Spezifikation durch <strong>Funktionalität</strong> (z. B. Instruction-Set) und <strong>Nebenbedingungen</strong> (Constraints), <strong>Partitionierung</strong> des Systems in Teilsysteme<br>⇒ Menge <strong>kommunizierender, paralleler Prozesse</strong> (inkl. deren Verhaltensbeschreibungen auf algorithmischer Ebene)</p>
+<h4 id="High-Level-Synthese-HLS"><a href="#High-Level-Synthese-HLS" class="headerlink" title="High-Level-Synthese(HLS)"></a>High-Level-Synthese(HLS)</h4><p><strong>Algorithmische Ebene</strong> (Verhaltensebene); Spezifikation durch Operationen und Berechnungssequenzen auf Eingabewerten zur Erzeugung benötigter Ausgabewerte (z. B. arithmetische/logische Operationen, Prozeduraufrufe, etc.)<br><strong>Syntheseschritte: Scheduling, Allokation, Binding</strong><br>⇒ Kontroller-/Datenpfad-Architektur</p>
+<h4 id="Register-Transfer-Level-Synthese-RTL-Synthese"><a href="#Register-Transfer-Level-Synthese-RTL-Synthese" class="headerlink" title="Register-Transfer-Level-Synthese (RTL-Synthese)"></a>Register-Transfer-Level-Synthese (RTL-Synthese)</h4><p><strong>Register-Transfer-Ebene</strong>; Spezifikation durch <strong>Datenpfad/Controller</strong>-Beschreibung<br><strong>Datenpfad:</strong> Optimierung und Operatorauswahl (in Abhängigkeit der Bibliothek)<br><strong>Controller:</strong> Synthese ausgehend von abstrakten Beschreibung einer Finite-State-Machine (FSM) mit Zuständen und Transitionen</p>
+<h4 id="Logiksynthese"><a href="#Logiksynthese" class="headerlink" title="Logiksynthese"></a>Logiksynthese</h4><p><strong>Logische Ebene</strong>; Spezifikation mit booleschen Funktionen (kombinatorische Logik) und Speicherkomponenten; meistens nur Optimierung (Logikminimierung)</p>
+<h4 id="Technologieabbildung-Technology-Mapping"><a href="#Technologieabbildung-Technology-Mapping" class="headerlink" title="Technologieabbildung (Technology Mapping)"></a>Technologieabbildung (Technology Mapping)</h4><p><strong>Technologie Ebene (Struktur)</strong>; Spezifikation durch Netzwerk mit abstrakten Gattern; muss auf eine vorgegebene Zielarchitektur umgesetzt werden (ASIC, FPGA, etc.)</p>
+<h4 id="重点Einordnung-der-Synthese-in-Bezug-auf-den-zeitlichen-Freiheitsgrad-分类"><a href="#重点Einordnung-der-Synthese-in-Bezug-auf-den-zeitlichen-Freiheitsgrad-分类" class="headerlink" title="重点Einordnung der Synthese in Bezug auf den zeitlichen Freiheitsgrad 分类"></a><code>重点</code>Einordnung der Synthese in Bezug auf den zeitlichen Freiheitsgrad 分类</h4><p><strong>High-Level-Synthese:</strong> </p>
+<ul>
+<li><p>Optimierung der Trade-Offs innerhalb <strong>mehrerer Taktzyklen.</strong></p>
+<blockquote>
+<p>optimieren mehrere Taktzyklen. Die entsprechenden Verfahren, Scheduling, Allokation, Bindung</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>RTL-Synthese:</strong> </p>
+<ul>
+<li><p>Optimierung der Trade-Offs innerhalb eines <strong>einzelnen Taktzyklus.</strong></p>
+<blockquote>
+<p>Retiming Method in der RTL Synthese über einen einzelnen Taktzyklus</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>Logiksynthese:</strong></p>
+<ul>
+<li><p>Optimierung der Trade-Offs innerhalb <strong>kombinatorischer Logik.</strong></p>
+<blockquote>
+<p>optimiere auf die Fläche, minimiert und dann kosten Flächen effizient</p>
+</blockquote>
+</li>
+</ul>
+<p><code>考试可能会问：</code></p>
+<h2 id="Methoden-der-HLS"><a href="#Methoden-der-HLS" class="headerlink" title="Methoden der HLS"></a>Methoden der HLS</h2><h3 id="1-Allokation"><a href="#1-Allokation" class="headerlink" title="1. Allokation"></a>1. Allokation</h3><p><strong>Festlegung:</strong> <strong>Anzahl und Art </strong>(wie viel Hardware-Einheiten) der  in dem System benutzten Ressourcen.</p>
+<blockquote>
+<p>das heißt, wie viel operationelle Einheiten benötige ich</p>
+</blockquote>
+<ul>
+<li><p>Anzahl und Art der Operationseinheiten</p>
+<p>benutzen ALUs oder spezielle Typen(Addiere) ? zu bestimmen</p>
+</li>
+<li><p>Anzahl und Art der Register</p>
+</li>
+<li><p>Anzahl und Art der Verbindungen</p>
+<p>Busse oder Multiplexer zu bestimmen</p>
+</li>
+</ul>
+<h3 id="2-Bindung"><a href="#2-Bindung" class="headerlink" title="2. Bindung"></a>2. Bindung</h3><p>Zuordnung: Operationen zu den HW-Ressourcen </p>
+<p>=&gt; wo? welche HW-Einheiten? Die HW-Ressourcen Auswahl und Zuordnung Schritt</p>
+<h3 id="3-Scheduling"><a href="#3-Scheduling" class="headerlink" title="3. Scheduling"></a>3. Scheduling</h3><p>Zuordnung von Operationen zu Ausführungszeitpunkten</p>
+<p>=&gt; wann wird eine Operation entsprechend ausgeführt?</p>
+<ul>
+<li>ein vorgegebenes Kostenkriterium wird minimiert</li>
+<li>Der optimal Schedule ist nicht immer das globale optimal manchmal. Es ist ein Kompromiss zwischen maximal parallel und minimal klein Konfiguration<br>was ist maximal parallel? =&gt; bei ASAP: as soon as posssible</li>
+</ul>
+<p><img src="/archives/17fe2cd1/image-20200703100411968.png" style="zoom:67%;"></p>
+<p>Schedule 2 hat weniger Hardware-Ressourcen, nur ein multipliziere dafür viel Zeitschritte.</p>
+<h2 id="Transformation-und-interne-Darstellung"><a href="#Transformation-und-interne-Darstellung" class="headerlink" title="Transformation und interne Darstellung"></a>Transformation und interne Darstellung</h2><p><strong>Umsetzung</strong> einer HDL Beschreibung in ein internes Darstellungsformat, z.B. DFG, CFG …</p>
+<p><strong>Anwendung</strong> von Transformationen auf internes Format<br>=&gt; Optimierung vor der HLS</p>
+<p><strong>Interne Darstellungen Beispiel 1</strong></p>
+<p><img src="/archives/17fe2cd1/image-20200703103312641.png" style="zoom:67%;"></p>
+<p> <strong>Beispiel 2</strong></p>
+<p><img src="/archives/17fe2cd1/image-20200703103844612.png" style="zoom: 80%;"></p>
+<p>CFG: Die Auswertung der Bedienung erfolgt geht man in die unterschiedlichen Statement Blöcke rein. maximal ein Pfad im CFG kann durchlaufen werden, AFAP</p>
+<p><strong>Beispiel 3</strong></p>
+<p><img src="/archives/17fe2cd1/image-20200703110412918.png" style="zoom:67%;"></p>
+<p>Der Datenfluss Graphen entsprechend mit einem ASAP praktisch maximal parallelisieren. wenn man den minimalen von HW benötigt, muss man die Operationen  in 12, 14 Zeitschritt schieben.</p>
+<p>Man kann gegebenenfalls  noch später im Retiming durchführen. d.h. die Taktraten minimieren</p>
+<h2 id="Transformationen"><a href="#Transformationen" class="headerlink" title="Transformationen"></a>Transformationen</h2><h4 id="Loop-Fusion"><a href="#Loop-Fusion" class="headerlink" title="Loop-Fusion:"></a>Loop-Fusion:</h4><p><img src="/archives/17fe2cd1/image-20200703144419198.png" style="zoom:67%;"></p>
+<p>wenn ich nur zwei Schleifen zusammenbringe und dann Block 1 und Block2 auf einen Hardware Unit bringen statt auf zwei getrennte Chips. </p>
+<p><strong>Loop-Splitting</strong>: wenn die Ressourcen nicht ausreichen sind, der FPGA als zu klein, kann man praktisch in zwei kleine adjazente Schleifen aufteilen</p>
+<h4 id="Strip-Mining"><a href="#Strip-Mining" class="headerlink" title="Strip-Mining:"></a>Strip-Mining:</h4><p>Parallelisierung von Index-Subräumen</p>
+<p>Kandidaten für parallel Ausführungen auf Hardware</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">100</span>; i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;<span class="number">100</span>; j++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">		a[i,j] = b[i,j] + c[i,j];</span></pre></td></tr></table></figure>
+<p>=&gt;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">100</span>; i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	parbegin</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;<span class="number">50</span>; j++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">			a[i,j] = b[i,j] + c[i,j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">		<span class="keyword">for</span>(j=<span class="number">50</span>; j&lt;<span class="number">100</span>; j++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">			a[i,j] = b[i,j] + c[i,j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	parend</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// die beiden for Schleifen parallel ausgeführt werden hier in diesem parallelisierte Statement</span></span></pre></td></tr></table></figure>
+<p><strong>Anwendung</strong>: Bildverarbeitung</p>
+<p><img src="/archives/17fe2cd1/image-20200703153414341.png" style="zoom:67%;"></p>
+<p>ich habe hier gezielt in der Bildverarbeitung, dann diese Index unter Räum mit Strip-Minining parallelisiert, das dann in dem gewissen Anzahl aufteile je nach dem wie viel FPGA oder Multi-Cores </p>
+<h4 id="Konstanten-propagieren"><a href="#Konstanten-propagieren" class="headerlink" title="Konstanten propagieren"></a>Konstanten propagieren</h4><p><img src="/archives/17fe2cd1/image-20200703155136688.png" style="zoom:67%;"></p>
+<p>Reduktion von Operationen</p>
+<h4 id="Redundante-Operatoren-beseitigen"><a href="#Redundante-Operatoren-beseitigen" class="headerlink" title="Redundante Operatoren beseitigen"></a>Redundante Operatoren beseitigen</h4><p><img src="/archives/17fe2cd1/image-20200703155216534.png" style="zoom:67%;"></p>
+<p>Die auftreten mit gleichen inputs und der gleiche Operator muss ich nur einmal entsprechend realisieren und kann den mehrfach verwenden, statt mehrfach zu realisieren.</p>
+<h4 id="Tree-height-Reduktion"><a href="#Tree-height-Reduktion" class="headerlink" title="Tree-height-Reduktion"></a>Tree-height-Reduktion</h4><p><img src="/archives/17fe2cd1/image-20200703160313380.png" style="zoom:67%;"></p>
+<p>initial parse tree: ein sequenzieller an dieser Stelle </p>
+<p>=&gt; Assoziativ gesetzt, kriege ich entsprechende parallele Levels und kann ich natürlich parallel durchzuführen </p>
+<h4 id="Kontroll-Datenflusstransformation"><a href="#Kontroll-Datenflusstransformation" class="headerlink" title="Kontroll-Datenflusstransformation"></a>Kontroll-Datenflusstransformation</h4><p><img src="/archives/17fe2cd1/image-20200703160513554.png" style="zoom:67%;"></p>
+<p>Ausnutzung von Parallelität indem ich die Datenfluss Informationen gezielt hinzufügen, zur opt</p>
+
+      
+    </div>
+
+    
+    
+    
+      
+
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/e784a1bf.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -258,10 +452,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-07-01 09:52:52 / 修改时间：09:59:19" itemprop="dateCreated datePublished" datetime="2020-07-01T09:52:52+02:00">2020-07-01</time>
+              <time title="创建时间：2020-07-01 09:52:52" itemprop="dateCreated datePublished" datetime="2020-07-01T09:52:52+02:00">2020-07-01</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-02 10:33:00" itemprop="dateModified" datetime="2020-07-02T10:33:00+02:00">2020-07-02</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -1157,100 +1357,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/20b992ae.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="ZhouHaojie">
-      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhouHaojie的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/archives/20b992ae.html" class="post-title-link" itemprop="url">Git Commit Message Style Guide</a>
-        </h1>
-
-        <div class="post-meta">
-			
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-19 13:46:13 / 修改时间：19:25:45" itemprop="dateCreated datePublished" datetime="2020-04-19T13:46:13+02:00">2020-04-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index">
-                    <span itemprop="name">git</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This style guide acts as the official guide to follow in your projects. Udacity evaluators will use this guide to grade your projects. There are many opinions on the “ideal” style in the world of development. Therefore, in order to reduce the confusion on what style students should follow during the course of their projects, we urge all students to refer to this style guide for their projects.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/archives/20b992ae.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1302,20 +1408,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-count">71</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1349,6 +1455,10 @@
         
         
           <li>
+            <a href="/archives/17fe2cd1.html" title="c3 High_Level_Synthese" target="_blank">c3 High_Level_Synthese</a>
+          </li>
+        
+          <li>
             <a href="/archives/e784a1bf.html" title="c2 Algorithmen" target="_blank">c2 Algorithmen</a>
           </li>
         
@@ -1362,10 +1472,6 @@
         
           <li>
             <a href="/archives/a93cd1f.html" title="Schätzung der Entwurfsqualität" target="_blank">Schätzung der Entwurfsqualität</a>
-          </li>
-        
-          <li>
-            <a href="/archives/81f161f5.html" title="System-on-Chip (SoC)" target="_blank">System-on-Chip (SoC)</a>
           </li>
         
       </ul>
@@ -1398,13 +1504,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">243k</span>
+    <span title="站点总字数">248k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:41</span>
+    <span title="站点阅读时长">3:46</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>
