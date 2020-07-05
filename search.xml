@@ -1,6 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>验证通识1-验证环境的结构和组件</title>
+    <url>/archives/639d4c23.html</url>
+    <content><![CDATA[<h2 id="测试平台"><a href="#测试平台" class="headerlink" title="测试平台"></a>测试平台</h2><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p><strong>测试平台</strong>(testbench)是整个验证平台的总称。包括验证结构中的<strong>各个组件、组件之间的连接关系、测试平台的配置和控制。</strong></p>
+<p>从更系统的意义来讲，它还包括<strong>编译仿真</strong>的流程、<strong>结果分析</strong>报告和<strong>覆盖率</strong>检查等。</p>
+<p>从狭义上讲，我们主要关注验证平台的 <strong>结构和组件</strong>部分，他们可以产生设计所需的各种<strong>输入</strong>，也会进行设计<strong>功能的检查</strong> <a id="more"></a></p>
+<h4 id="测试平台结构图"><a href="#测试平台结构图" class="headerlink" title="测试平台结构图"></a>测试平台结构图</h4><p><img src="/archives/639d4c23/image-20200704205725998.png" style="zoom:67%;"></p>
+<ul>
+<li>各个组件之间是相互<strong>独立</strong>的</li>
+<li>验证组件与设计之间需要<strong>连接</strong></li>
+<li>验证组件之间需要进行<strong>通信</strong></li>
+<li>验证环境也需要<strong>时钟</strong>和<strong>复位信号</strong>的<strong>驱动</strong></li>
+</ul>
+<h2 id="硬件设计描述"><a href="#硬件设计描述" class="headerlink" title="硬件设计描述"></a>硬件设计描述</h2><h4 id="MCDF简介"><a href="#MCDF简介" class="headerlink" title="MCDF简介"></a>MCDF简介</h4><p>多通道数据整型器 (multi-channel data formatter)，它可以将上行多个通道数据经过内部的FIFO，最终以数据包的形式送出。</p>
+<p><img src="/archives/639d4c23/image-20200704210720597.png" style="zoom: 67%;"></p>
+<h4 id="MCDF接口描述"><a href="#MCDF接口描述" class="headerlink" title="MCDF接口描述"></a>MCDF接口描述</h4><p><strong>系统信号接口：</strong></p>
+<ul>
+<li>CLK(0): 时钟信号</li>
+<li>RSTN(0)：复位信号，低位有效</li>
+</ul>
+<p><strong>通道从端接口：</strong></p>
+<ul>
+<li>CHx_DATA(31:0): 通道数据输入</li>
+<li>CHx_VALID(0): 通道数据有效标志信号，高位有效 </li>
+<li>CHx_READY(0):  通道数据接收信号，高位表示接收成功</li>
+</ul>
+<p><strong>整型器接口：</strong><br><img src="/archives/639d4c23/image-20200704211640888.png" style="zoom:67%;"></p>
+<p><strong>控制寄存器接口：</strong><br><img src="/archives/639d4c23/image-20200704211752200.png" style="zoom:67%;"></p>
+<h4 id="MCDF接口时序"><a href="#MCDF接口时序" class="headerlink" title="MCDF接口时序"></a>MCDF接口时序</h4><p><strong>通道Slave端接口时序：</strong></p>
+<p><img src="/archives/639d4c23/image-20200704212231448.png" style="zoom:67%;"></p>
+<p>当valid为高时，表示写入数据。ready为高时表示已经将数据写入；ready为低时，需等到ready为高时才可以将数据的写入</p>
+<p><strong>控制寄存器接口时序：</strong></p>
+<p><img src="/archives/639d4c23/image-20200704212638104.png" style="zoom:67%;"></p>
+<p>在接口控制器上需要在每一个时钟解析cmd。当cmd为WR时，需要把数据cmd_data_in写入到cmd_addr对应的寄存器中；当cmd为RD时，需要读取数据，并在下一周期，将数据驱动至cmd_data_out接口。</p>
+<p><strong>整型器接口时序：</strong></p>
+<p><img src="/archives/639d4c23/image-20200704213044936.png" style="zoom:67%;"></p>
+<p>整型器是按照数据包的形式发送数据的，数据包的可选长度有4，8，16，32。必须发送完整的发送某一个通道的数据包后，才可以发送下一个数据包，在发送数据包期间，fmt_child和fmt_length应保持不变，直到数据包发送完毕。</p>
+<p>Data数据必须连续发送，无法间隔发送；req信号比grant信号至少差一拍；相邻数据包之间应至少有一个时钟周期的空闲，即fmt_end从高位被拉低后，至少需经历一个时钟周期fmt_req才可以再次被置高。</p>
+<h4 id="MCDF寄存器描述"><a href="#MCDF寄存器描述" class="headerlink" title="MCDF寄存器描述"></a>MCDF寄存器描述</h4><p><strong>读写寄存器</strong></p>
+<h4 id><a href="#" class="headerlink" title></a><img src="/archives/639d4c23/image-20200705112012683.png"></h4><p><strong>只读寄存器</strong></p>
+<h4 id="-1"><a href="#-1" class="headerlink" title></a><img src="/archives/639d4c23/image-20200705112148674.png" alt></h4><h2 id="激励发生器"><a href="#激励发生器" class="headerlink" title="激励发生器"></a>激励发生器</h2><p>Stimulator的主要职责是<strong>模拟与DUT相邻设计的接口协议</strong>，只需要关注于如何模拟接口信号，使其能够以真实的接口协议来发送激励给DUT。</p>
+<p>Stimulator不应该违反协议，但不拘束于真实的硬件行为，可以给出更丰富的激励，使得在模块级的验证更加充分。</p>
+<p>Stimultor的接口主要是与DUT之间的连接，此外也应该有时钟和复位的输入，确保生成的数据与DUT的接口侧是同步关系。激励发生器也可以有存储接口数据生成历史的功能，这可以用来在仿真运行时或者结束后查看接口数据，方便统计或者调试。</p>
+<p>从stimulator同DUT的连接关系来看，可以将其分为两种：<strong>initiator(发起器)</strong>和<strong>responder(响应器)</strong>。initiator功能是<strong>主动发起接口数据传输</strong>；responder功能是<strong>对接口的数据发送请求做出响应，而它本身不会主动发送数据。</strong></p>
+<p><strong>1. Channel initiator</strong><br><img src="/archives/639d4c23/image-20200705115420952.png" alt></p>
+<p><strong>2. Register initiator</strong><br><img src="/archives/639d4c23/image-20200705115703026.png" alt></p>
+<p><strong>3. Formatter responder</strong><br><img src="/archives/639d4c23/image-20200705115803026.png" alt></p>
+<p><strong>MCDF验证环境的stimulator结构</strong></p>
+<p><img src="/archives/639d4c23/image-20200705115946427.png" style="zoom: 50%;"></p>
+<h2 id="监测器"><a href="#监测器" class="headerlink" title="监测器"></a>监测器</h2><p>Monitor的主要功能是<strong>观察DUT的边界或内部信号，并将它们整理再传送给其他验证平台的组件</strong>，如checker。</p>
+<p>从监测信号的层次来划分monitor的功能，可分为观察DUT边界信号和观察DUT内部信号。</p>
+<p><strong>观察DUT边界信号</strong></p>
+<p>对于系统信号如时钟，可以监测其频率变化；对于总线信号，可以监测总线的传输类型和数据内容，以及检查总线时序是否符合协议。</p>
+<p><strong>观察DUT内部信号</strong></p>
+<p>从灰盒验证的手段来看，往往需要探视DUT内部信号，用来指导stimulator的激励发送，或者完成覆盖率收集，又或者完成内部功能的检查。</p>
+<p><strong>监测器结构方案1</strong></p>
+<p><img src="/archives/639d4c23/image-20200705122247813.png" style="zoom:67%;"></p>
+<p>全局性的monitor，监视整个环境中的信号。</p>
+<p><strong>监测器结构方案2</strong></p>
+<p><img src="/archives/639d4c23/image-20200705122145156.png" style="zoom:67%;"></p>
+<p>每一个monitor对应一个激励发生器，虚线代表监测内部信号。</p>
+<p><strong>两个方案对比：</strong></p>
+<ul>
+<li><strong>独立性</strong>，采用后者，因为各接口的功能之间没有相关性，易于切割。</li>
+<li><strong>复用性</strong>，后者，相对独立的monitor可以更好的作为验证IP被其他验证环境所复用。</li>
+<li>可维护性，后者，设计的外部接口必定先于内部信号趋于稳定，那么平行的monitor更有利于在验证后期的维护。同样到了后期项目或者设计遇到修改时，更有可能修改的是内部逻辑，而非接口信号，因此只需更新MCDF monitor。</li>
+<li><strong>封装性</strong>，后者，一个激励发生器对应一个monitor，可将其封装成独立的组件。</li>
+</ul>
+<p><strong>内部信号监测建议</strong></p>
+<ul>
+<li>大多数情况下，我们应该采取<strong>灰盒验证</strong></li>
+<li>观察的<strong>内部信号应当尽量少</strong>，且应当是表示状态的信号。因为中间变量信号的时序、逻辑都不稳定，对于验证环境的收敛是有害的</li>
+<li>可以通过接口信息计算的，就尽量少去监测内部信号，因为这种方式有悖于假定设计有缺陷的验证思想。</li>
+</ul>
+<h2 id="比较器"><a href="#比较器" class="headerlink" title="比较器"></a>比较器</h2><p>比较器负责模拟设计行为和功能的检查任务，更细致的看checker的功能包括：</p>
+<ul>
+<li><strong>缓存从各个monitor收集到的数据</strong></li>
+<li>将DUT输入接口侧的数据汇集给<strong>reference model</strong>。reference model 在这里扮演了模拟硬件功能的角色</li>
+<li>通过<strong>数据比较</strong>的方法，检查实际收到的DUT输出端接口数据是否与reference model产生的期望一致</li>
+<li>对于设计<strong>内部</strong>的关键功能模块，也有<strong>相对应的线程进行独立的检查</strong></li>
+<li>在检查过程中，可以将检查成功的信息统一纳入到检查报告中，便于仿真后的追溯。如果检查失败，也可以采取暂停仿真同时报告错误信息的方式，进行在线调试</li>
+</ul>
+<p><strong>实现方式</strong></p>
+<ul>
+<li><strong>线上比较(online check):</strong> 在仿真时收集数据和在线比较，并实时报告。</li>
+<li><strong>线下比较(offline check):</strong> 将仿真时收集到的数据记录在文件中，仿真结束后通过脚本或其他手段进行数据比较。</li>
+</ul>
+<p>我们通常会将checker添加到验证环境中，需要它分析DUT的边界激励，理解数据的输入，并且按照硬件功能来预测输出的数据内容。这种预测过程发生在reference model中。</p>
+<p>reference model也会<strong>内置一些缓存</strong>，分别存放从<strong>DUT输入端观察到的数据</strong>，以及经过功能转换的数据，同时checker也有其他缓存来存放<strong>从输出端采集到的数据</strong>。</p>
+<p><strong>MCDF验证环境的比较器结构</strong></p>
+<p><img src="/archives/639d4c23/image-20200705151608526.png" alt></p>
+<p><strong>checker分散搁置和集群搁置的特点</strong></p>
+<p><strong>分散搁置：</strong></p>
+<ul>
+<li>各自检查对应模块的功能</li>
+<li>checker之间通信需要特殊连接</li>
+<li>报告信息较难统一</li>
+<li>对各个checker的是能控制因其分散变得复杂</li>
+</ul>
+<p><strong>集群搁置：</strong></p>
+<ul>
+<li>各自检查对应模块的功能</li>
+<li>checker各自相邻，可以共享monitor的输入，减少复杂的连接关系</li>
+<li>可以按照统一的报告形式，写入记录文件中</li>
+<li>集中管理各个checker，例如在前期使能各个模块的checker，在后期可以将其作为黑盒验证，只使能data checker.</li>
+</ul>
+<p>对于复杂的系统验证，我们倾向于集中管理stimulator和checker，因为它们都需要主动给出激励或判断结果，需要较多协调处理。Monitor则相对独立，只是作为监测方，将数据交给checker。</p>
+]]></content>
+      <categories>
+        <category>验证通识</category>
+        <category>验证通识1-验证环境的结构和组件</category>
+      </categories>
+      <tags>
+        <tag>stimulator</tag>
+        <tag>initiator</tag>
+        <tag>respondder</tag>
+        <tag>monitor</tag>
+        <tag>checker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>c3 High_Level_Synthese</title>
     <url>/archives/17fe2cd1.html</url>
     <content><![CDATA[<p><strong>Motivation:</strong></p>
@@ -2671,143 +2791,6 @@ P_m\left(\chi^{2} \leq \chi_{\alpha}^{2}\right)=1-\alpha \quad \rightarrow \quad
       </tags>
   </entry>
   <entry>
-    <title>Kurvenanpassung</title>
-    <url>/archives/4eb14690.html</url>
-    <content><![CDATA[<h2 id="Messsysteme"><a href="#Messsysteme" class="headerlink" title="Messsysteme"></a>Messsysteme</h2><p>Allgemein: Messkette</p>
-<p><img src="/archives/4eb14690/image-20200218174651585.png" style="zoom: 33%;"></p>
-<p><a id="more"></a>Systemtheorie</p>
-<p><img src="/archives/4eb14690/image-20200218174732982.png" style="zoom: 33%;"></p>
-<h2 id="Messfehler"><a href="#Messfehler" class="headerlink" title="Messfehler"></a>Messfehler</h2><p>Definition:<br>Absolute Fehler: $F=y_{anzeige}-y_{wahr}=y_a-y_w$<br>Relativer Fehler: $F_r= \frac{F}{y_w}=\frac{y_a-y_w}{y_w}$</p>
-<p><strong>Fehlerursachen:</strong></p>
-<ul>
-<li><strong>Systematische Fehler:</strong> <strong>Ursache</strong> des Fehlers und Art der Einwirkung <strong>bekannt</strong>. <strong>Kompensation</strong> prinzipiell <strong>möglich</strong></li>
-<li><strong>Zufällige Fehler:</strong> nicht reproduzierbar, <strong>Ursache unbekannt</strong></li>
-</ul>
-<h2 id="Kurvenanpassung"><a href="#Kurvenanpassung" class="headerlink" title="Kurvenanpassung"></a>Kurvenanpassung</h2><p>Modellbildung des Systems $\rightarrow$ analytische Messkennlinie</p>
-<p><strong>Ansätze</strong></p>
-<ol>
-<li>Interpolation: Die Kennlinie soll durch <strong>alle</strong> n Messpunkte gehen (Kleines n)</li>
-<li>Approximation: Die Summe der Fehlerquadrate soll minimiert werden. Die Kennlinie geht nicht durch alle Messpunkte (Große n)</li>
-</ol>
-<p><img src="/archives/4eb14690/image-20200218184618776.png" style="zoom: 33%;"></p>
-<h3 id="Approximation"><a href="#Approximation" class="headerlink" title="Approximation"></a>Approximation</h3><p>Kurve nähert Messwertepaare an</p>
-<p><strong>Ziel:</strong> Darstellung der Kennlinie als endliche Reihe analytischer Funktion $\varphi_i(u)$ </p>
-<p><img src="/archives/4eb14690/image-20200218185443332.png" style="zoom:50%;"></p>
-<p>Berechnen Koeffizienten $a_i$ bei Verwendung einer <strong>orthonormalen Basis</strong>: </p>
-<p><img src="/archives/4eb14690/image-20200218190044347.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200218185817616.png" style="zoom:50%;"></p>
-<p>Vorteil: </p>
-<ul>
-<li>Mittelwertfreie <strong>Fehler</strong> werden <strong>unterdrückt</strong> </li>
-<li><strong>Beliebige</strong> Basisfunktionen verwendbar (solange linear unabhängig voneinander) </li>
-<li><strong>Modellordnung unabhängig</strong> von Stützstellenanzahl</li>
-</ul>
-<h4 id="Least-Squares-Schatzer"><a href="#Least-Squares-Schatzer" class="headerlink" title="Least-Squares-Schätzer"></a>Least-Squares-Schätzer</h4><p>Zur Bestimmung der Koeffizienten $a_i$ wird bei <strong>nicht orthogonalen</strong> Basisfunktionen $\varphi_i(u)$ der <strong>Least-Squares-Schätzer </strong> verwendet</p>
-<p>Haben: n Messwertepaare $(u_i, y_i)$</p>
-<ul>
-<li>Aufstellen des Signalmodells</li>
-</ul>
-<p><img src="/archives/4eb14690/image-20200219124945263.png" style="zoom: 50%;"></p>
-<ul>
-<li><p>Aufstellen des Approximationsansatzes</p>
-<p><img src="/archives/4eb14690/image-20200219125044637.png" style="zoom: 33%;"></p>
-</li>
-</ul>
-<p>Minimierung des Gütemaßes</p>
-<p><img src="/archives/4eb14690/image-20200218192625735.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200218192700099.png" style="zoom:50%;"></p>
-<p>a: Moore-Penrose-Pseudoinverse</p>
-<p><strong>LS-Schätzer bei nichtlinearem Signalmodell</strong></p>
-<p>Was tun, wenn Signalmodell nicht linear ist?</p>
-<p>Bsp. $\hat{y}(u)=A \cdot \mathrm{e}^{\alpha u}, \quad A, \alpha \quad \text { unbekannt }$ </p>
-<p>$\rightarrow$ oft lassen sich die Messdaten so manipulieren so manipulieren, dass das Modell linear wird.</p>
-<p>Hier: logarithmieren</p>
-<p><img src="/archives/4eb14690/image-20200219133300117.png" style="zoom:50%;"></p>
-<h3 id="Interpolation"><a href="#Interpolation" class="headerlink" title="Interpolation"></a>Interpolation</h3><p>Kurve geht exakt durch Wertepaare</p>
-<ul>
-<li>Lagrange-/Newton (globale Polynome)</li>
-<li>Spline-Interpolation</li>
-<li>Kennfeld-Interpolation mehrdimensionale Erweiterung</li>
-</ul>
-<p>Vorteile:</p>
-<ul>
-<li>Kein direktes Signalmodell erforderlich </li>
-<li>Interpolierte Funktion geht durch Wertepaare</li>
-</ul>
-<p>Nachteile:</p>
-<ul>
-<li>Bei Globalen Polynomansätzen steigt Modellordnung mit der Anzahl der Wertepaare $\rightarrow$ Überschwinger </li>
-</ul>
-<p><strong>Globale Polynomansätze</strong></p>
-<ul>
-<li><p>Standard</p>
-<p>$y(u)=\sum_{i=0}^{N-1} a_{i} u^{i}$ (oft rechenintensiv计算量大)</p>
-</li>
-<li><p>Lagrange-Verfahren</p>
-<p>$y(u)=\sum_{i=0}^{N-1} \hat{a}_{i} l_{i}(u) \quad \text { mit } l_{i}(u): \text { Lagrangepolynome }$</p>
-</li>
-<li><p>Newton-Verfahren</p>
-<p>$y(u)=\sum_{i=0}^{N-1} \tilde{a}_{i} n_{i}(u)\quad \text{ mit } n_{i}(u):\text {Newtonpolynome}$</p>
-</li>
-</ul>
-<h4 id="Newton-Interpolation"><a href="#Newton-Interpolation" class="headerlink" title="Newton-Interpolation"></a>Newton-Interpolation</h4><p>Warum Newton-Interpolation?</p>
-<ul>
-<li><strong>geringere Komplexität</strong> der Basispolynome</li>
-<li>leichtere Erweiterbarkeit beim Hinzufügen von Stützstellen</li>
-</ul>
-<p>Ansatz:</p>
-<p><img src="/archives/4eb14690/image-20200219154557093.png" style="zoom:50%;"></p>
-<p><strong>1. Bei äquidistanten Stützstellen</strong></p>
-<p>Zur einfachen Berechnung der Koeffizienten $a_i$ werden <strong>Differenzen </strong> eingeführt</p>
-<p><strong>Differenzenschema:</strong></p>
-<p><img src="/archives/4eb14690/image-20200219155051455.png" style="zoom:50%;"></p>
-<p><strong>Newton Interpolationsformel für äquidistante Stützstellen</strong></p>
-<p><img src="/archives/4eb14690/image-20200219155428818.png" style="zoom:50%;"></p>
-<p><strong>2. Bei nicht-äquidistantem Stützstellenabstand</strong> </p>
-<p><img src="/archives/4eb14690/image-20200219160648184.png" style="zoom: 33%;"></p>
-<h4 id="Lagrange-Interpolation"><a href="#Lagrange-Interpolation" class="headerlink" title="Lagrange-Interpolation"></a>Lagrange-Interpolation</h4><p>In der Praxis arbeitet man bevorzugt mit Langrange-Interpolation</p>
-<p><strong>Grund:</strong> Keine Berechnung der Koeffizienten erforderlich</p>
-<p>Ansatz: <img src="/archives/4eb14690/image-20200219161759340.png" style="zoom:50%;"></p>
-<p>Lagrange-Polynome:</p>
-<p><img src="/archives/4eb14690/image-20200220200754178.png" style="zoom:50%;"></p>
-<p>Eigenschaft: <img src="/archives/4eb14690/image-20200220200849193.png" style="zoom:50%;"></p>
-<p>$\Longrightarrow$Die Stützstellen eines Lagrange-Polynoms werden exakt interpoliert:</p>
-<p><img src="/archives/4eb14690/image-20200220200608006.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200220200643554.png" style="zoom:50%;"></p>
-<h4 id="Spline-Interpolation"><a href="#Spline-Interpolation" class="headerlink" title="Spline-Interpolation"></a>Spline-Interpolation</h4><p>Eigenschaften der Spline-Interpolierenden:</p>
-<p><img src="/archives/4eb14690/image-20200220201145859.png" style="zoom:50%;"></p>
-<p>$s_i(u_i)=y_i$ ; 二阶导相等$s_i^{‘’}(u_{i+1})=s^{‘’}_{i+1}(u_{i+1})$ ; 边界条件, 两个端点二阶导等于零</p>
-<p><strong>Kubische Spline-Interpolation</strong></p>
-<p><img src="/archives/4eb14690/image-20200220201722869.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200220201755791.png" style="zoom:50%;"></p>
-<p>Berechnung der Parameter:</p>
-<p><img src="/archives/4eb14690/image-20200220201834813.png" style="zoom:50%;"></p>
-<p>Haben bereit:  $y_i$ , noch brauchen: $y_i^{‘’}$ </p>
-<p>Nach Stetigkeit der 1. Ableitung an den Stützstellen:</p>
-<p><img src="/archives/4eb14690/image-20200220202318019.png" alt="image-20200220202318019" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200220202404995.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200220202447762.png" style="zoom:50%;"><br>Randbedingung: $y_{0}^{\prime \prime}=0=y_{n-1}^{\prime \prime}$</p>
-<p><img src="/archives/4eb14690/image-20200220202545618.png" style="zoom:50%;"></p>
-<h3 id="Kennfeldinterpolation"><a href="#Kennfeldinterpolation" class="headerlink" title="Kennfeldinterpolation"></a>Kennfeldinterpolation</h3><p>Die Kennfeldinterpolation ist eine 2D-Interpolation. Es werden die Werte y zwischen de äquidistanten Stützstellen $(u_i,z_i)$ interpoliert.</p>
-<p>Standard Interpolation: $\hat{y}(u)=\sum_{i=0}^{n-1} a_{i} u^{i}$</p>
-<p>Auf zwei  Dimensionen erweitert:</p>
-<script type="math/tex; mode=display">
-\hat{y}(u, z)=\sum_{i=0}^{n-1} \sum_{j=0}^{m-1} a_{i j} u^{i} z^{j}</script><p><strong>Bei Polynomen 1.Grade</strong>, y 在点$(u_i,z_i)$ 泰勒展开：</p>
-<p><img src="/archives/4eb14690/image-20200220203036550.png" style="zoom:50%;"></p>
-<p><strong>Bilinearen Interpolation:</strong><br>Durch <strong>Approximation </strong>der Ableitungen mittels Differenzenquotienten folgt:</p>
-<p><img src="/archives/4eb14690/image-20200220203204882.png" style="zoom:50%;"></p>
-<p>BSP.<img src="/archives/4eb14690/image-20200220203255851.png" style="zoom:50%;"></p>
-]]></content>
-      <categories>
-        <category>Messtechnik</category>
-        <category>Kurvenanpassung</category>
-      </categories>
-      <tags>
-        <tag>approximation</tag>
-        <tag>Interpolation</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Stationäres Verhalten</title>
     <url>/archives/12c26097.html</url>
     <content><![CDATA[<h3 id="Stationare-Messkennlinie-und-Fehler"><a href="#Stationare-Messkennlinie-und-Fehler" class="headerlink" title="Stationäre Messkennlinie und Fehler"></a>Stationäre Messkennlinie und Fehler</h3><p>Stationäres Verhalten: <strong>Einschwingvorgänge abgeklungen</strong><a id="more"></a><br>z.B. Messsystem durch <strong>Kennlinie</strong> $y(u)$ beschreibbar</p>
@@ -2957,6 +2940,143 @@ y=u \cdot \frac{S_{\mathrm{i}} V}{1+K^{\prime} \cdot S_{\mathrm{i}} V}</script><
       <tags>
         <tag>KL-Fehler</tag>
         <tag>Linearsierung</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Kurvenanpassung</title>
+    <url>/archives/4eb14690.html</url>
+    <content><![CDATA[<h2 id="Messsysteme"><a href="#Messsysteme" class="headerlink" title="Messsysteme"></a>Messsysteme</h2><p>Allgemein: Messkette</p>
+<p><img src="/archives/4eb14690/image-20200218174651585.png" style="zoom: 33%;"></p>
+<p><a id="more"></a>Systemtheorie</p>
+<p><img src="/archives/4eb14690/image-20200218174732982.png" style="zoom: 33%;"></p>
+<h2 id="Messfehler"><a href="#Messfehler" class="headerlink" title="Messfehler"></a>Messfehler</h2><p>Definition:<br>Absolute Fehler: $F=y_{anzeige}-y_{wahr}=y_a-y_w$<br>Relativer Fehler: $F_r= \frac{F}{y_w}=\frac{y_a-y_w}{y_w}$</p>
+<p><strong>Fehlerursachen:</strong></p>
+<ul>
+<li><strong>Systematische Fehler:</strong> <strong>Ursache</strong> des Fehlers und Art der Einwirkung <strong>bekannt</strong>. <strong>Kompensation</strong> prinzipiell <strong>möglich</strong></li>
+<li><strong>Zufällige Fehler:</strong> nicht reproduzierbar, <strong>Ursache unbekannt</strong></li>
+</ul>
+<h2 id="Kurvenanpassung"><a href="#Kurvenanpassung" class="headerlink" title="Kurvenanpassung"></a>Kurvenanpassung</h2><p>Modellbildung des Systems $\rightarrow$ analytische Messkennlinie</p>
+<p><strong>Ansätze</strong></p>
+<ol>
+<li>Interpolation: Die Kennlinie soll durch <strong>alle</strong> n Messpunkte gehen (Kleines n)</li>
+<li>Approximation: Die Summe der Fehlerquadrate soll minimiert werden. Die Kennlinie geht nicht durch alle Messpunkte (Große n)</li>
+</ol>
+<p><img src="/archives/4eb14690/image-20200218184618776.png" style="zoom: 33%;"></p>
+<h3 id="Approximation"><a href="#Approximation" class="headerlink" title="Approximation"></a>Approximation</h3><p>Kurve nähert Messwertepaare an</p>
+<p><strong>Ziel:</strong> Darstellung der Kennlinie als endliche Reihe analytischer Funktion $\varphi_i(u)$ </p>
+<p><img src="/archives/4eb14690/image-20200218185443332.png" style="zoom:50%;"></p>
+<p>Berechnen Koeffizienten $a_i$ bei Verwendung einer <strong>orthonormalen Basis</strong>: </p>
+<p><img src="/archives/4eb14690/image-20200218190044347.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200218185817616.png" style="zoom:50%;"></p>
+<p>Vorteil: </p>
+<ul>
+<li>Mittelwertfreie <strong>Fehler</strong> werden <strong>unterdrückt</strong> </li>
+<li><strong>Beliebige</strong> Basisfunktionen verwendbar (solange linear unabhängig voneinander) </li>
+<li><strong>Modellordnung unabhängig</strong> von Stützstellenanzahl</li>
+</ul>
+<h4 id="Least-Squares-Schatzer"><a href="#Least-Squares-Schatzer" class="headerlink" title="Least-Squares-Schätzer"></a>Least-Squares-Schätzer</h4><p>Zur Bestimmung der Koeffizienten $a_i$ wird bei <strong>nicht orthogonalen</strong> Basisfunktionen $\varphi_i(u)$ der <strong>Least-Squares-Schätzer </strong> verwendet</p>
+<p>Haben: n Messwertepaare $(u_i, y_i)$</p>
+<ul>
+<li>Aufstellen des Signalmodells</li>
+</ul>
+<p><img src="/archives/4eb14690/image-20200219124945263.png" style="zoom: 50%;"></p>
+<ul>
+<li><p>Aufstellen des Approximationsansatzes</p>
+<p><img src="/archives/4eb14690/image-20200219125044637.png" style="zoom: 33%;"></p>
+</li>
+</ul>
+<p>Minimierung des Gütemaßes</p>
+<p><img src="/archives/4eb14690/image-20200218192625735.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200218192700099.png" style="zoom:50%;"></p>
+<p>a: Moore-Penrose-Pseudoinverse</p>
+<p><strong>LS-Schätzer bei nichtlinearem Signalmodell</strong></p>
+<p>Was tun, wenn Signalmodell nicht linear ist?</p>
+<p>Bsp. $\hat{y}(u)=A \cdot \mathrm{e}^{\alpha u}, \quad A, \alpha \quad \text { unbekannt }$ </p>
+<p>$\rightarrow$ oft lassen sich die Messdaten so manipulieren so manipulieren, dass das Modell linear wird.</p>
+<p>Hier: logarithmieren</p>
+<p><img src="/archives/4eb14690/image-20200219133300117.png" style="zoom:50%;"></p>
+<h3 id="Interpolation"><a href="#Interpolation" class="headerlink" title="Interpolation"></a>Interpolation</h3><p>Kurve geht exakt durch Wertepaare</p>
+<ul>
+<li>Lagrange-/Newton (globale Polynome)</li>
+<li>Spline-Interpolation</li>
+<li>Kennfeld-Interpolation mehrdimensionale Erweiterung</li>
+</ul>
+<p>Vorteile:</p>
+<ul>
+<li>Kein direktes Signalmodell erforderlich </li>
+<li>Interpolierte Funktion geht durch Wertepaare</li>
+</ul>
+<p>Nachteile:</p>
+<ul>
+<li>Bei Globalen Polynomansätzen steigt Modellordnung mit der Anzahl der Wertepaare $\rightarrow$ Überschwinger </li>
+</ul>
+<p><strong>Globale Polynomansätze</strong></p>
+<ul>
+<li><p>Standard</p>
+<p>$y(u)=\sum_{i=0}^{N-1} a_{i} u^{i}$ (oft rechenintensiv计算量大)</p>
+</li>
+<li><p>Lagrange-Verfahren</p>
+<p>$y(u)=\sum_{i=0}^{N-1} \hat{a}_{i} l_{i}(u) \quad \text { mit } l_{i}(u): \text { Lagrangepolynome }$</p>
+</li>
+<li><p>Newton-Verfahren</p>
+<p>$y(u)=\sum_{i=0}^{N-1} \tilde{a}_{i} n_{i}(u)\quad \text{ mit } n_{i}(u):\text {Newtonpolynome}$</p>
+</li>
+</ul>
+<h4 id="Newton-Interpolation"><a href="#Newton-Interpolation" class="headerlink" title="Newton-Interpolation"></a>Newton-Interpolation</h4><p>Warum Newton-Interpolation?</p>
+<ul>
+<li><strong>geringere Komplexität</strong> der Basispolynome</li>
+<li>leichtere Erweiterbarkeit beim Hinzufügen von Stützstellen</li>
+</ul>
+<p>Ansatz:</p>
+<p><img src="/archives/4eb14690/image-20200219154557093.png" style="zoom:50%;"></p>
+<p><strong>1. Bei äquidistanten Stützstellen</strong></p>
+<p>Zur einfachen Berechnung der Koeffizienten $a_i$ werden <strong>Differenzen </strong> eingeführt</p>
+<p><strong>Differenzenschema:</strong></p>
+<p><img src="/archives/4eb14690/image-20200219155051455.png" style="zoom:50%;"></p>
+<p><strong>Newton Interpolationsformel für äquidistante Stützstellen</strong></p>
+<p><img src="/archives/4eb14690/image-20200219155428818.png" style="zoom:50%;"></p>
+<p><strong>2. Bei nicht-äquidistantem Stützstellenabstand</strong> </p>
+<p><img src="/archives/4eb14690/image-20200219160648184.png" style="zoom: 33%;"></p>
+<h4 id="Lagrange-Interpolation"><a href="#Lagrange-Interpolation" class="headerlink" title="Lagrange-Interpolation"></a>Lagrange-Interpolation</h4><p>In der Praxis arbeitet man bevorzugt mit Langrange-Interpolation</p>
+<p><strong>Grund:</strong> Keine Berechnung der Koeffizienten erforderlich</p>
+<p>Ansatz: <img src="/archives/4eb14690/image-20200219161759340.png" style="zoom:50%;"></p>
+<p>Lagrange-Polynome:</p>
+<p><img src="/archives/4eb14690/image-20200220200754178.png" style="zoom:50%;"></p>
+<p>Eigenschaft: <img src="/archives/4eb14690/image-20200220200849193.png" style="zoom:50%;"></p>
+<p>$\Longrightarrow$Die Stützstellen eines Lagrange-Polynoms werden exakt interpoliert:</p>
+<p><img src="/archives/4eb14690/image-20200220200608006.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200220200643554.png" style="zoom:50%;"></p>
+<h4 id="Spline-Interpolation"><a href="#Spline-Interpolation" class="headerlink" title="Spline-Interpolation"></a>Spline-Interpolation</h4><p>Eigenschaften der Spline-Interpolierenden:</p>
+<p><img src="/archives/4eb14690/image-20200220201145859.png" style="zoom:50%;"></p>
+<p>$s_i(u_i)=y_i$ ; 二阶导相等$s_i^{‘’}(u_{i+1})=s^{‘’}_{i+1}(u_{i+1})$ ; 边界条件, 两个端点二阶导等于零</p>
+<p><strong>Kubische Spline-Interpolation</strong></p>
+<p><img src="/archives/4eb14690/image-20200220201722869.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200220201755791.png" style="zoom:50%;"></p>
+<p>Berechnung der Parameter:</p>
+<p><img src="/archives/4eb14690/image-20200220201834813.png" style="zoom:50%;"></p>
+<p>Haben bereit:  $y_i$ , noch brauchen: $y_i^{‘’}$ </p>
+<p>Nach Stetigkeit der 1. Ableitung an den Stützstellen:</p>
+<p><img src="/archives/4eb14690/image-20200220202318019.png" alt="image-20200220202318019" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200220202404995.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200220202447762.png" style="zoom:50%;"><br>Randbedingung: $y_{0}^{\prime \prime}=0=y_{n-1}^{\prime \prime}$</p>
+<p><img src="/archives/4eb14690/image-20200220202545618.png" style="zoom:50%;"></p>
+<h3 id="Kennfeldinterpolation"><a href="#Kennfeldinterpolation" class="headerlink" title="Kennfeldinterpolation"></a>Kennfeldinterpolation</h3><p>Die Kennfeldinterpolation ist eine 2D-Interpolation. Es werden die Werte y zwischen de äquidistanten Stützstellen $(u_i,z_i)$ interpoliert.</p>
+<p>Standard Interpolation: $\hat{y}(u)=\sum_{i=0}^{n-1} a_{i} u^{i}$</p>
+<p>Auf zwei  Dimensionen erweitert:</p>
+<script type="math/tex; mode=display">
+\hat{y}(u, z)=\sum_{i=0}^{n-1} \sum_{j=0}^{m-1} a_{i j} u^{i} z^{j}</script><p><strong>Bei Polynomen 1.Grade</strong>, y 在点$(u_i,z_i)$ 泰勒展开：</p>
+<p><img src="/archives/4eb14690/image-20200220203036550.png" style="zoom:50%;"></p>
+<p><strong>Bilinearen Interpolation:</strong><br>Durch <strong>Approximation </strong>der Ableitungen mittels Differenzenquotienten folgt:</p>
+<p><img src="/archives/4eb14690/image-20200220203204882.png" style="zoom:50%;"></p>
+<p>BSP.<img src="/archives/4eb14690/image-20200220203255851.png" style="zoom:50%;"></p>
+]]></content>
+      <categories>
+        <category>Messtechnik</category>
+        <category>Kurvenanpassung</category>
+      </categories>
+      <tags>
+        <tag>approximation</tag>
+        <tag>Interpolation</tag>
       </tags>
   </entry>
   <entry>

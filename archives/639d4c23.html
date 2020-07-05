@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="测试平台概述测试平台(testbench)是整个验证平台的总称。包括验证结构中的各个组件、组件之间的连接关系、测试平台的配置和控制。 从更系统的意义来讲，它还包括编译仿真的流程、结果分析报告和覆盖率检查等。 从狭义上讲，我们主要关注验证平台的 结构和组件部分，他们可以产生设计所需的各种输入，也会进行设计功能的检查">
+<meta name="keywords" content="stimulator,initiator,respondder,monitor,checker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="验证通识1-验证环境的结构和组件">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="测试平台概述测试平台(testbench)是整个验证平台的总称。包括验证结构中的各个组件、组件之间的连接关系、测试平台的配置和控制。 从更系统的意义来讲，它还包括编译仿真的流程、结果分析报告和覆盖率检查等。 从狭义上讲，我们主要关注验证平台的 结构和组件部分，他们可以产生设计所需的各种输入，也会进行设计功能的检查">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200704205725998.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200704210720597.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200704211640888.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200704211752200.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200704212231448.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200704212638104.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200704213044936.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200705112012683.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200705112148674.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200705115420952.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200705115703026.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200705115803026.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200705115946427.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200705122247813.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200705122145156.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200705151608526.png">
+<meta property="og:updated_time" content="2020-07-05T13:41:45.867Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200704205725998.png">
+
+<link rel="canonical" href="http://grenze.cn/archives/639d4c23.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>验证通识1-验证环境的结构和组件 | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">76</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">48</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">77</span></a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-automatic-vision">
+
+    <a href="/gitbook-Automatic-Vision/" rel="section"><i class="fa fa-fw fa-book"></i>Automatic-Vision</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/639d4c23.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          验证通识1-验证环境的结构和组件
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-05 14:13:51 / 修改时间：15:41:45" itemprop="dateCreated datePublished" datetime="2020-07-05T14:13:51+02:00">2020-07-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%AA%8C%E8%AF%81%E9%80%9A%E8%AF%86/" itemprop="url" rel="index">
+                    <span itemprop="name">验证通识</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%AA%8C%E8%AF%81%E9%80%9A%E8%AF%86/%E9%AA%8C%E8%AF%81%E9%80%9A%E8%AF%861-%E9%AA%8C%E8%AF%81%E7%8E%AF%E5%A2%83%E7%9A%84%E7%BB%93%E6%9E%84%E5%92%8C%E7%BB%84%E4%BB%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">验证通识1-验证环境的结构和组件</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="测试平台"><a href="#测试平台" class="headerlink" title="测试平台"></a>测试平台</h2><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p><strong>测试平台</strong>(testbench)是整个验证平台的总称。包括验证结构中的<strong>各个组件、组件之间的连接关系、测试平台的配置和控制。</strong></p>
+<p>从更系统的意义来讲，它还包括<strong>编译仿真</strong>的流程、<strong>结果分析</strong>报告和<strong>覆盖率</strong>检查等。</p>
+<p>从狭义上讲，我们主要关注验证平台的 <strong>结构和组件</strong>部分，他们可以产生设计所需的各种<strong>输入</strong>，也会进行设计<strong>功能的检查</strong> <a id="more"></a></p>
+<h4 id="测试平台结构图"><a href="#测试平台结构图" class="headerlink" title="测试平台结构图"></a>测试平台结构图</h4><p><img src="/archives/639d4c23/image-20200704205725998.png" style="zoom:67%;"></p>
+<ul>
+<li>各个组件之间是相互<strong>独立</strong>的</li>
+<li>验证组件与设计之间需要<strong>连接</strong></li>
+<li>验证组件之间需要进行<strong>通信</strong></li>
+<li>验证环境也需要<strong>时钟</strong>和<strong>复位信号</strong>的<strong>驱动</strong></li>
+</ul>
+<h2 id="硬件设计描述"><a href="#硬件设计描述" class="headerlink" title="硬件设计描述"></a>硬件设计描述</h2><h4 id="MCDF简介"><a href="#MCDF简介" class="headerlink" title="MCDF简介"></a>MCDF简介</h4><p>多通道数据整型器 (multi-channel data formatter)，它可以将上行多个通道数据经过内部的FIFO，最终以数据包的形式送出。</p>
+<p><img src="/archives/639d4c23/image-20200704210720597.png" style="zoom: 67%;"></p>
+<h4 id="MCDF接口描述"><a href="#MCDF接口描述" class="headerlink" title="MCDF接口描述"></a>MCDF接口描述</h4><p><strong>系统信号接口：</strong></p>
+<ul>
+<li>CLK(0): 时钟信号</li>
+<li>RSTN(0)：复位信号，低位有效</li>
+</ul>
+<p><strong>通道从端接口：</strong></p>
+<ul>
+<li>CHx_DATA(31:0): 通道数据输入</li>
+<li>CHx_VALID(0): 通道数据有效标志信号，高位有效 </li>
+<li>CHx_READY(0):  通道数据接收信号，高位表示接收成功</li>
+</ul>
+<p><strong>整型器接口：</strong><br><img src="/archives/639d4c23/image-20200704211640888.png" style="zoom:67%;"></p>
+<p><strong>控制寄存器接口：</strong><br><img src="/archives/639d4c23/image-20200704211752200.png" style="zoom:67%;"></p>
+<h4 id="MCDF接口时序"><a href="#MCDF接口时序" class="headerlink" title="MCDF接口时序"></a>MCDF接口时序</h4><p><strong>通道Slave端接口时序：</strong></p>
+<p><img src="/archives/639d4c23/image-20200704212231448.png" style="zoom:67%;"></p>
+<p>当valid为高时，表示写入数据。ready为高时表示已经将数据写入；ready为低时，需等到ready为高时才可以将数据的写入</p>
+<p><strong>控制寄存器接口时序：</strong></p>
+<p><img src="/archives/639d4c23/image-20200704212638104.png" style="zoom:67%;"></p>
+<p>在接口控制器上需要在每一个时钟解析cmd。当cmd为WR时，需要把数据cmd_data_in写入到cmd_addr对应的寄存器中；当cmd为RD时，需要读取数据，并在下一周期，将数据驱动至cmd_data_out接口。</p>
+<p><strong>整型器接口时序：</strong></p>
+<p><img src="/archives/639d4c23/image-20200704213044936.png" style="zoom:67%;"></p>
+<p>整型器是按照数据包的形式发送数据的，数据包的可选长度有4，8，16，32。必须发送完整的发送某一个通道的数据包后，才可以发送下一个数据包，在发送数据包期间，fmt_child和fmt_length应保持不变，直到数据包发送完毕。</p>
+<p>Data数据必须连续发送，无法间隔发送；req信号比grant信号至少差一拍；相邻数据包之间应至少有一个时钟周期的空闲，即fmt_end从高位被拉低后，至少需经历一个时钟周期fmt_req才可以再次被置高。</p>
+<h4 id="MCDF寄存器描述"><a href="#MCDF寄存器描述" class="headerlink" title="MCDF寄存器描述"></a>MCDF寄存器描述</h4><p><strong>读写寄存器</strong></p>
+<h4 id><a href="#" class="headerlink" title></a><img src="/archives/639d4c23/image-20200705112012683.png"></h4><p><strong>只读寄存器</strong></p>
+<h4 id="-1"><a href="#-1" class="headerlink" title></a><img src="/archives/639d4c23/image-20200705112148674.png" alt></h4><h2 id="激励发生器"><a href="#激励发生器" class="headerlink" title="激励发生器"></a>激励发生器</h2><p>Stimulator的主要职责是<strong>模拟与DUT相邻设计的接口协议</strong>，只需要关注于如何模拟接口信号，使其能够以真实的接口协议来发送激励给DUT。</p>
+<p>Stimulator不应该违反协议，但不拘束于真实的硬件行为，可以给出更丰富的激励，使得在模块级的验证更加充分。</p>
+<p>Stimultor的接口主要是与DUT之间的连接，此外也应该有时钟和复位的输入，确保生成的数据与DUT的接口侧是同步关系。激励发生器也可以有存储接口数据生成历史的功能，这可以用来在仿真运行时或者结束后查看接口数据，方便统计或者调试。</p>
+<p>从stimulator同DUT的连接关系来看，可以将其分为两种：<strong>initiator(发起器)</strong>和<strong>responder(响应器)</strong>。initiator功能是<strong>主动发起接口数据传输</strong>；responder功能是<strong>对接口的数据发送请求做出响应，而它本身不会主动发送数据。</strong></p>
+<p><strong>1. Channel initiator</strong><br><img src="/archives/639d4c23/image-20200705115420952.png" alt></p>
+<p><strong>2. Register initiator</strong><br><img src="/archives/639d4c23/image-20200705115703026.png" alt></p>
+<p><strong>3. Formatter responder</strong><br><img src="/archives/639d4c23/image-20200705115803026.png" alt></p>
+<p><strong>MCDF验证环境的stimulator结构</strong></p>
+<p><img src="/archives/639d4c23/image-20200705115946427.png" style="zoom: 50%;"></p>
+<h2 id="监测器"><a href="#监测器" class="headerlink" title="监测器"></a>监测器</h2><p>Monitor的主要功能是<strong>观察DUT的边界或内部信号，并将它们整理再传送给其他验证平台的组件</strong>，如checker。</p>
+<p>从监测信号的层次来划分monitor的功能，可分为观察DUT边界信号和观察DUT内部信号。</p>
+<p><strong>观察DUT边界信号</strong></p>
+<p>对于系统信号如时钟，可以监测其频率变化；对于总线信号，可以监测总线的传输类型和数据内容，以及检查总线时序是否符合协议。</p>
+<p><strong>观察DUT内部信号</strong></p>
+<p>从灰盒验证的手段来看，往往需要探视DUT内部信号，用来指导stimulator的激励发送，或者完成覆盖率收集，又或者完成内部功能的检查。</p>
+<p><strong>监测器结构方案1</strong></p>
+<p><img src="/archives/639d4c23/image-20200705122247813.png" style="zoom:67%;"></p>
+<p>全局性的monitor，监视整个环境中的信号。</p>
+<p><strong>监测器结构方案2</strong></p>
+<p><img src="/archives/639d4c23/image-20200705122145156.png" style="zoom:67%;"></p>
+<p>每一个monitor对应一个激励发生器，虚线代表监测内部信号。</p>
+<p><strong>两个方案对比：</strong></p>
+<ul>
+<li><strong>独立性</strong>，采用后者，因为各接口的功能之间没有相关性，易于切割。</li>
+<li><strong>复用性</strong>，后者，相对独立的monitor可以更好的作为验证IP被其他验证环境所复用。</li>
+<li>可维护性，后者，设计的外部接口必定先于内部信号趋于稳定，那么平行的monitor更有利于在验证后期的维护。同样到了后期项目或者设计遇到修改时，更有可能修改的是内部逻辑，而非接口信号，因此只需更新MCDF monitor。</li>
+<li><strong>封装性</strong>，后者，一个激励发生器对应一个monitor，可将其封装成独立的组件。</li>
+</ul>
+<p><strong>内部信号监测建议</strong></p>
+<ul>
+<li>大多数情况下，我们应该采取<strong>灰盒验证</strong></li>
+<li>观察的<strong>内部信号应当尽量少</strong>，且应当是表示状态的信号。因为中间变量信号的时序、逻辑都不稳定，对于验证环境的收敛是有害的</li>
+<li>可以通过接口信息计算的，就尽量少去监测内部信号，因为这种方式有悖于假定设计有缺陷的验证思想。</li>
+</ul>
+<h2 id="比较器"><a href="#比较器" class="headerlink" title="比较器"></a>比较器</h2><p>比较器负责模拟设计行为和功能的检查任务，更细致的看checker的功能包括：</p>
+<ul>
+<li><strong>缓存从各个monitor收集到的数据</strong></li>
+<li>将DUT输入接口侧的数据汇集给<strong>reference model</strong>。reference model 在这里扮演了模拟硬件功能的角色</li>
+<li>通过<strong>数据比较</strong>的方法，检查实际收到的DUT输出端接口数据是否与reference model产生的期望一致</li>
+<li>对于设计<strong>内部</strong>的关键功能模块，也有<strong>相对应的线程进行独立的检查</strong></li>
+<li>在检查过程中，可以将检查成功的信息统一纳入到检查报告中，便于仿真后的追溯。如果检查失败，也可以采取暂停仿真同时报告错误信息的方式，进行在线调试</li>
+</ul>
+<p><strong>实现方式</strong></p>
+<ul>
+<li><strong>线上比较(online check):</strong> 在仿真时收集数据和在线比较，并实时报告。</li>
+<li><strong>线下比较(offline check):</strong> 将仿真时收集到的数据记录在文件中，仿真结束后通过脚本或其他手段进行数据比较。</li>
+</ul>
+<p>我们通常会将checker添加到验证环境中，需要它分析DUT的边界激励，理解数据的输入，并且按照硬件功能来预测输出的数据内容。这种预测过程发生在reference model中。</p>
+<p>reference model也会<strong>内置一些缓存</strong>，分别存放从<strong>DUT输入端观察到的数据</strong>，以及经过功能转换的数据，同时checker也有其他缓存来存放<strong>从输出端采集到的数据</strong>。</p>
+<p><strong>MCDF验证环境的比较器结构</strong></p>
+<p><img src="/archives/639d4c23/image-20200705151608526.png" alt></p>
+<p><strong>checker分散搁置和集群搁置的特点</strong></p>
+<p><strong>分散搁置：</strong></p>
+<ul>
+<li>各自检查对应模块的功能</li>
+<li>checker之间通信需要特殊连接</li>
+<li>报告信息较难统一</li>
+<li>对各个checker的是能控制因其分散变得复杂</li>
+</ul>
+<p><strong>集群搁置：</strong></p>
+<ul>
+<li>各自检查对应模块的功能</li>
+<li>checker各自相邻，可以共享monitor的输入，减少复杂的连接关系</li>
+<li>可以按照统一的报告形式，写入记录文件中</li>
+<li>集中管理各个checker，例如在前期使能各个模块的checker，在后期可以将其作为黑盒验证，只使能data checker.</li>
+</ul>
+<p>对于复杂的系统验证，我们倾向于集中管理stimulator和checker，因为它们都需要主动给出激励或判断结果，需要较多协调处理。Monitor则相对独立，只是作为监测方，将数据交给checker。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/639d4c23.html" title="验证通识1-验证环境的结构和组件">http://grenze.cn/archives/639d4c23.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/stimulator/" rel="tag"><i class="fa fa-tag"></i> stimulator</a>
+              <a href="/tags/initiator/" rel="tag"><i class="fa fa-tag"></i> initiator</a>
+              <a href="/tags/respondder/" rel="tag"><i class="fa fa-tag"></i> respondder</a>
+              <a href="/tags/monitor/" rel="tag"><i class="fa fa-tag"></i> monitor</a>
+              <a href="/tags/checker/" rel="tag"><i class="fa fa-tag"></i> checker</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/17fe2cd1.html" rel="prev" title="c3 High_Level_Synthese">
+      <i class="fa fa-chevron-left"></i> c3 High_Level_Synthese
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#测试平台"><span class="nav-number">1.</span> <span class="nav-text">测试平台</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述"><span class="nav-number">1.0.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试平台结构图"><span class="nav-number">1.0.2.</span> <span class="nav-text">测试平台结构图</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件设计描述"><span class="nav-number">2.</span> <span class="nav-text">硬件设计描述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MCDF简介"><span class="nav-number">2.0.1.</span> <span class="nav-text">MCDF简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MCDF接口描述"><span class="nav-number">2.0.2.</span> <span class="nav-text">MCDF接口描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MCDF接口时序"><span class="nav-number">2.0.3.</span> <span class="nav-text">MCDF接口时序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MCDF寄存器描述"><span class="nav-number">2.0.4.</span> <span class="nav-text">MCDF寄存器描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">2.0.5.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#-1"><span class="nav-number">2.0.6.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#激励发生器"><span class="nav-number">3.</span> <span class="nav-text">激励发生器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监测器"><span class="nav-number">4.</span> <span class="nav-text">监测器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较器"><span class="nav-number">5.</span> <span class="nav-text">比较器</span></a></li></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">76</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="tidioChatApi.open();">
+    
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/archives/639d4c23.html" title="验证通识1-验证环境的结构和组件" target="_blank">验证通识1-验证环境的结构和组件</a>
+          </li>
+        
+          <li>
+            <a href="/archives/17fe2cd1.html" title="c3 High_Level_Synthese" target="_blank">c3 High_Level_Synthese</a>
+          </li>
+        
+          <li>
+            <a href="/archives/e784a1bf.html" title="c2 Algorithmen" target="_blank">c2 Algorithmen</a>
+          </li>
+        
+          <li>
+            <a href="/archives/44abed72.html" title="01 SV 验证-数据类型" target="_blank">01 SV 验证-数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/archives/f7568654.html" title="Field Programmable Gate Arrays (FPGA)" target="_blank">Field Programmable Gate Arrays (FPGA)</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">251k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:48</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+  <script src="//code.tidio.co/vogvafxbif7muwutoktvfceankdjkpis.js"></script>
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: 'ca80ba143401590c345aeb18bef39e05',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
