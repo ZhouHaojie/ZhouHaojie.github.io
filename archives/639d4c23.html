@@ -71,7 +71,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200705122247813.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200705122145156.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200705151608526.png">
-<meta property="og:updated_time" content="2020-07-05T13:41:45.867Z">
+<meta property="og:updated_time" content="2020-07-05T14:15:52.441Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200704205725998.png">
 
@@ -278,7 +278,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-07-05 14:13:51 / 修改时间：15:41:45" itemprop="dateCreated datePublished" datetime="2020-07-05T14:13:51+02:00">2020-07-05</time>
+              <time title="创建时间：2020-07-05 14:13:51 / 修改时间：16:15:52" itemprop="dateCreated datePublished" datetime="2020-07-05T14:13:51+02:00">2020-07-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -330,19 +330,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="测试平台"><a href="#测试平台" class="headerlink" title="测试平台"></a>测试平台</h2><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p><strong>测试平台</strong>(testbench)是整个验证平台的总称。包括验证结构中的<strong>各个组件、组件之间的连接关系、测试平台的配置和控制。</strong></p>
+        <h2 id="测试平台"><a href="#测试平台" class="headerlink" title="测试平台"></a>测试平台</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>测试平台</strong>(testbench)是整个验证平台的总称。包括验证结构中的<strong>各个组件、组件之间的连接关系、测试平台的配置和控制。</strong></p>
 <p>从更系统的意义来讲，它还包括<strong>编译仿真</strong>的流程、<strong>结果分析</strong>报告和<strong>覆盖率</strong>检查等。</p>
 <p>从狭义上讲，我们主要关注验证平台的 <strong>结构和组件</strong>部分，他们可以产生设计所需的各种<strong>输入</strong>，也会进行设计<strong>功能的检查</strong> <a id="more"></a></p>
-<h4 id="测试平台结构图"><a href="#测试平台结构图" class="headerlink" title="测试平台结构图"></a>测试平台结构图</h4><p><img src="/archives/639d4c23/image-20200704205725998.png" style="zoom:67%;"></p>
+<h3 id="测试平台结构图"><a href="#测试平台结构图" class="headerlink" title="测试平台结构图"></a>测试平台结构图</h3><p><img src="/archives/639d4c23/image-20200704205725998.png" style="zoom:67%;"></p>
 <ul>
 <li>各个组件之间是相互<strong>独立</strong>的</li>
 <li>验证组件与设计之间需要<strong>连接</strong></li>
 <li>验证组件之间需要进行<strong>通信</strong></li>
 <li>验证环境也需要<strong>时钟</strong>和<strong>复位信号</strong>的<strong>驱动</strong></li>
 </ul>
-<h2 id="硬件设计描述"><a href="#硬件设计描述" class="headerlink" title="硬件设计描述"></a>硬件设计描述</h2><h4 id="MCDF简介"><a href="#MCDF简介" class="headerlink" title="MCDF简介"></a>MCDF简介</h4><p>多通道数据整型器 (multi-channel data formatter)，它可以将上行多个通道数据经过内部的FIFO，最终以数据包的形式送出。</p>
+<h2 id="硬件设计描述"><a href="#硬件设计描述" class="headerlink" title="硬件设计描述"></a>硬件设计描述</h2><h3 id="MCDF简介"><a href="#MCDF简介" class="headerlink" title="MCDF简介"></a>MCDF简介</h3><p>多通道数据整型器 (multi-channel data formatter)，它可以将上行多个通道数据经过内部的FIFO，最终以数据包的形式送出。</p>
 <p><img src="/archives/639d4c23/image-20200704210720597.png" style="zoom: 67%;"></p>
-<h4 id="MCDF接口描述"><a href="#MCDF接口描述" class="headerlink" title="MCDF接口描述"></a>MCDF接口描述</h4><p><strong>系统信号接口：</strong></p>
+<h3 id="MCDF接口描述"><a href="#MCDF接口描述" class="headerlink" title="MCDF接口描述"></a>MCDF接口描述</h3><p><strong>系统信号接口：</strong></p>
 <ul>
 <li>CLK(0): 时钟信号</li>
 <li>RSTN(0)：复位信号，低位有效</li>
@@ -355,7 +355,7 @@
 </ul>
 <p><strong>整型器接口：</strong><br><img src="/archives/639d4c23/image-20200704211640888.png" style="zoom:67%;"></p>
 <p><strong>控制寄存器接口：</strong><br><img src="/archives/639d4c23/image-20200704211752200.png" style="zoom:67%;"></p>
-<h4 id="MCDF接口时序"><a href="#MCDF接口时序" class="headerlink" title="MCDF接口时序"></a>MCDF接口时序</h4><p><strong>通道Slave端接口时序：</strong></p>
+<h3 id="MCDF接口时序"><a href="#MCDF接口时序" class="headerlink" title="MCDF接口时序"></a>MCDF接口时序</h3><p><strong>通道Slave端接口时序：</strong></p>
 <p><img src="/archives/639d4c23/image-20200704212231448.png" style="zoom:67%;"></p>
 <p>当valid为高时，表示写入数据。ready为高时表示已经将数据写入；ready为低时，需等到ready为高时才可以将数据的写入</p>
 <p><strong>控制寄存器接口时序：</strong></p>
@@ -365,9 +365,11 @@
 <p><img src="/archives/639d4c23/image-20200704213044936.png" style="zoom:67%;"></p>
 <p>整型器是按照数据包的形式发送数据的，数据包的可选长度有4，8，16，32。必须发送完整的发送某一个通道的数据包后，才可以发送下一个数据包，在发送数据包期间，fmt_child和fmt_length应保持不变，直到数据包发送完毕。</p>
 <p>Data数据必须连续发送，无法间隔发送；req信号比grant信号至少差一拍；相邻数据包之间应至少有一个时钟周期的空闲，即fmt_end从高位被拉低后，至少需经历一个时钟周期fmt_req才可以再次被置高。</p>
-<h4 id="MCDF寄存器描述"><a href="#MCDF寄存器描述" class="headerlink" title="MCDF寄存器描述"></a>MCDF寄存器描述</h4><p><strong>读写寄存器</strong></p>
-<h4 id><a href="#" class="headerlink" title></a><img src="/archives/639d4c23/image-20200705112012683.png"></h4><p><strong>只读寄存器</strong></p>
-<h4 id="-1"><a href="#-1" class="headerlink" title></a><img src="/archives/639d4c23/image-20200705112148674.png" alt></h4><h2 id="激励发生器"><a href="#激励发生器" class="headerlink" title="激励发生器"></a>激励发生器</h2><p>Stimulator的主要职责是<strong>模拟与DUT相邻设计的接口协议</strong>，只需要关注于如何模拟接口信号，使其能够以真实的接口协议来发送激励给DUT。</p>
+<h3 id="MCDF寄存器描述"><a href="#MCDF寄存器描述" class="headerlink" title="MCDF寄存器描述"></a>MCDF寄存器描述</h3><p><strong>读写寄存器</strong></p>
+<p><img src="/archives/639d4c23/image-20200705112012683.png"></p>
+<p><strong>只读寄存器</strong></p>
+<p><img src="/archives/639d4c23/image-20200705112148674.png" alt></p>
+<h2 id="激励发生器"><a href="#激励发生器" class="headerlink" title="激励发生器"></a>激励发生器</h2><p>Stimulator的主要职责是<strong>模拟与DUT相邻设计的接口协议</strong>，只需要关注于如何模拟接口信号，使其能够以真实的接口协议来发送激励给DUT。</p>
 <p>Stimulator不应该违反协议，但不拘束于真实的硬件行为，可以给出更丰富的激励，使得在模块级的验证更加充分。</p>
 <p>Stimultor的接口主要是与DUT之间的连接，此外也应该有时钟和复位的输入，确保生成的数据与DUT的接口侧是同步关系。激励发生器也可以有存储接口数据生成历史的功能，这可以用来在仿真运行时或者结束后查看接口数据，方便统计或者调试。</p>
 <p>从stimulator同DUT的连接关系来看，可以将其分为两种：<strong>initiator(发起器)</strong>和<strong>responder(响应器)</strong>。initiator功能是<strong>主动发起接口数据传输</strong>；responder功能是<strong>对接口的数据发送请求做出响应，而它本身不会主动发送数据。</strong></p>
@@ -543,7 +545,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#测试平台"><span class="nav-number">1.</span> <span class="nav-text">测试平台</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述"><span class="nav-number">1.0.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试平台结构图"><span class="nav-number">1.0.2.</span> <span class="nav-text">测试平台结构图</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件设计描述"><span class="nav-number">2.</span> <span class="nav-text">硬件设计描述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MCDF简介"><span class="nav-number">2.0.1.</span> <span class="nav-text">MCDF简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MCDF接口描述"><span class="nav-number">2.0.2.</span> <span class="nav-text">MCDF接口描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MCDF接口时序"><span class="nav-number">2.0.3.</span> <span class="nav-text">MCDF接口时序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MCDF寄存器描述"><span class="nav-number">2.0.4.</span> <span class="nav-text">MCDF寄存器描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">2.0.5.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#-1"><span class="nav-number">2.0.6.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#激励发生器"><span class="nav-number">3.</span> <span class="nav-text">激励发生器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监测器"><span class="nav-number">4.</span> <span class="nav-text">监测器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较器"><span class="nav-number">5.</span> <span class="nav-text">比较器</span></a></li></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#测试平台"><span class="nav-number">1.</span> <span class="nav-text">测试平台</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试平台结构图"><span class="nav-number">1.2.</span> <span class="nav-text">测试平台结构图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件设计描述"><span class="nav-number">2.</span> <span class="nav-text">硬件设计描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MCDF简介"><span class="nav-number">2.1.</span> <span class="nav-text">MCDF简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MCDF接口描述"><span class="nav-number">2.2.</span> <span class="nav-text">MCDF接口描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MCDF接口时序"><span class="nav-number">2.3.</span> <span class="nav-text">MCDF接口时序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MCDF寄存器描述"><span class="nav-number">2.4.</span> <span class="nav-text">MCDF寄存器描述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#激励发生器"><span class="nav-number">3.</span> <span class="nav-text">激励发生器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监测器"><span class="nav-number">4.</span> <span class="nav-text">监测器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较器"><span class="nav-number">5.</span> <span class="nav-text">比较器</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
