@@ -71,7 +71,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200705122247813.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200705122145156.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200705151608526.png">
-<meta property="og:updated_time" content="2020-07-05T14:15:52.441Z">
+<meta property="og:updated_time" content="2020-07-06T18:17:59.726Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;639d4c23&#x2F;image-20200704205725998.png">
 
@@ -175,17 +175,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">76</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">77</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">48</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">49</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">77</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">78</span></a>
 
   </li>
         <li class="menu-item menu-item-movies">
@@ -276,10 +276,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-07-05 14:13:51 / 修改时间：16:15:52" itemprop="dateCreated datePublished" datetime="2020-07-05T14:13:51+02:00">2020-07-05</time>
+              <time title="创建时间：2020-07-05 14:13:51" itemprop="dateCreated datePublished" datetime="2020-07-05T14:13:51+02:00">2020-07-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-06 20:17:59" itemprop="dateModified" datetime="2020-07-06T20:17:59+02:00">2020-07-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -353,8 +359,10 @@
 <li>CHx_VALID(0): 通道数据有效标志信号，高位有效 </li>
 <li>CHx_READY(0):  通道数据接收信号，高位表示接收成功</li>
 </ul>
-<p><strong>整型器接口：</strong><br><img src="/archives/639d4c23/image-20200704211640888.png" style="zoom:67%;"></p>
-<p><strong>控制寄存器接口：</strong><br><img src="/archives/639d4c23/image-20200704211752200.png" style="zoom:67%;"></p>
+<p><strong>整型器接口：</strong></p>
+<p><img src="/archives/639d4c23/image-20200704211640888.png" style="zoom:67%;" align="left"></p>
+<p><strong>控制寄存器接口：</strong></p>
+<p><img src="/archives/639d4c23/image-20200704211752200.png" style="zoom:67%;" align="left"></p>
 <h3 id="MCDF接口时序"><a href="#MCDF接口时序" class="headerlink" title="MCDF接口时序"></a>MCDF接口时序</h3><p><strong>通道Slave端接口时序：</strong></p>
 <p><img src="/archives/639d4c23/image-20200704212231448.png" style="zoom:67%;"></p>
 <p>当valid为高时，表示写入数据。ready为高时表示已经将数据写入；ready为低时，需等到ready为高时才可以将数据的写入</p>
@@ -366,16 +374,18 @@
 <p>整型器是按照数据包的形式发送数据的，数据包的可选长度有4，8，16，32。必须发送完整的发送某一个通道的数据包后，才可以发送下一个数据包，在发送数据包期间，fmt_child和fmt_length应保持不变，直到数据包发送完毕。</p>
 <p>Data数据必须连续发送，无法间隔发送；req信号比grant信号至少差一拍；相邻数据包之间应至少有一个时钟周期的空闲，即fmt_end从高位被拉低后，至少需经历一个时钟周期fmt_req才可以再次被置高。</p>
 <h3 id="MCDF寄存器描述"><a href="#MCDF寄存器描述" class="headerlink" title="MCDF寄存器描述"></a>MCDF寄存器描述</h3><p><strong>读写寄存器</strong></p>
-<p><img src="/archives/639d4c23/image-20200705112012683.png"></p>
+<p><img src="/archives/639d4c23/image-20200705112012683.png" align="left"></p>
 <p><strong>只读寄存器</strong></p>
-<p><img src="/archives/639d4c23/image-20200705112148674.png" alt></p>
+<p><img src="/archives/639d4c23/image-20200705112148674.png" align="left"></p>
 <h2 id="激励发生器"><a href="#激励发生器" class="headerlink" title="激励发生器"></a>激励发生器</h2><p>Stimulator的主要职责是<strong>模拟与DUT相邻设计的接口协议</strong>，只需要关注于如何模拟接口信号，使其能够以真实的接口协议来发送激励给DUT。</p>
 <p>Stimulator不应该违反协议，但不拘束于真实的硬件行为，可以给出更丰富的激励，使得在模块级的验证更加充分。</p>
 <p>Stimultor的接口主要是与DUT之间的连接，此外也应该有时钟和复位的输入，确保生成的数据与DUT的接口侧是同步关系。激励发生器也可以有存储接口数据生成历史的功能，这可以用来在仿真运行时或者结束后查看接口数据，方便统计或者调试。</p>
 <p>从stimulator同DUT的连接关系来看，可以将其分为两种：<strong>initiator(发起器)</strong>和<strong>responder(响应器)</strong>。initiator功能是<strong>主动发起接口数据传输</strong>；responder功能是<strong>对接口的数据发送请求做出响应，而它本身不会主动发送数据。</strong></p>
-<p><strong>1. Channel initiator</strong><br><img src="/archives/639d4c23/image-20200705115420952.png" alt></p>
-<p><strong>2. Register initiator</strong><br><img src="/archives/639d4c23/image-20200705115703026.png" alt></p>
-<p><strong>3. Formatter responder</strong><br><img src="/archives/639d4c23/image-20200705115803026.png" alt></p>
+<p><strong>1. Channel initiator</strong><br><img src="/archives/639d4c23/image-20200705115420952.png" align="left"></p>
+<p><strong>2. Register initiator</strong></p>
+<p><img src="/archives/639d4c23/image-20200705115703026.png" align="left"></p>
+<p><strong>3. Formatter responder</strong></p>
+<p><img src="/archives/639d4c23/image-20200705115803026.png" align="left"></p>
 <p><strong>MCDF验证环境的stimulator结构</strong></p>
 <p><img src="/archives/639d4c23/image-20200705115946427.png" style="zoom: 50%;"></p>
 <h2 id="监测器"><a href="#监测器" class="headerlink" title="监测器"></a>监测器</h2><p>Monitor的主要功能是<strong>观察DUT的边界或内部信号，并将它们整理再传送给其他验证平台的组件</strong>，如checker。</p>
@@ -506,7 +516,10 @@
     <a href="/archives/17fe2cd1.html" rel="prev" title="c3 High_Level_Synthese">
       <i class="fa fa-chevron-left"></i> c3 High_Level_Synthese
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/archives/6944cdce.html" rel="next" title="c4 Scheduling-Auspraegungen und Trade-offs">
+      c4 Scheduling-Auspraegungen und Trade-offs <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -562,20 +575,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">78</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-count">49</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">76</span>
+        <span class="site-state-item-count">77</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -609,6 +622,10 @@
         
         
           <li>
+            <a href="/archives/6944cdce.html" title="c4 Scheduling-Auspraegungen und Trade-offs" target="_blank">c4 Scheduling-Auspraegungen und Trade-offs</a>
+          </li>
+        
+          <li>
             <a href="/archives/639d4c23.html" title="验证通识1-验证环境的结构和组件" target="_blank">验证通识1-验证环境的结构和组件</a>
           </li>
         
@@ -622,10 +639,6 @@
         
           <li>
             <a href="/archives/44abed72.html" title="01 SV 验证-数据类型" target="_blank">01 SV 验证-数据类型</a>
-          </li>
-        
-          <li>
-            <a href="/archives/f7568654.html" title="Field Programmable Gate Arrays (FPGA)" target="_blank">Field Programmable Gate Arrays (FPGA)</a>
           </li>
         
       </ul>
@@ -658,13 +671,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">251k</span>
+    <span title="站点总字数">253k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:48</span>
+    <span title="站点阅读时长">3:50</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>

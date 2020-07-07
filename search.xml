@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>c4 Scheduling-Auspraegungen und Trade-offs</title>
+    <url>/archives/6944cdce.html</url>
+    <content><![CDATA[<h2 id="Beschreibung-des-Schedulingproblems"><a href="#Beschreibung-des-Schedulingproblems" class="headerlink" title="Beschreibung des Schedulingproblems"></a>Beschreibung des Schedulingproblems</h2><p><strong>Freiheit:</strong> Operationen verschiedenen Zeitschritten zuordnen.</p>
+<p>der DFG oder CFG und die Randbedingungen ermöglichen zu berücksichtigen und entsprechend die Zeitschritte versuchen optimiert festzulegen. Zum Beispiel, die Ressourcen vorgegeben haben, die entsprechenden Anzahl von notwendigen Zeitschritte zu minimieren</p>
+<p><strong>Allgemeine Definition: </strong></p>
+<p><strong>Scheduling</strong> ist die zeitliche Zuordnung einer Menge von Aufgaben. d.h. es wird festgelegt, wie einzelne Aufgaben in zeitlichen Abfolge ausgeführt </p>
+<p><strong>Verschiedene Ausprägungen des Scheduling Problems:</strong></p>
+<ul>
+<li><p><strong>Resource constrained -Schedulingproblem:</strong> allen Aufgaben werden im möglichst kurzer Zeit ausgeführt und die Ressourcen sind unbegrenzt.</p>
+</li>
+<li><p><strong>Time constrained -Schedulingproblem:</strong> eine feste Zeit vorgegeben haben, minimiere die Anzahl der notwendigen Ressourcen.</p>
+</li>
+<li><p><strong>Feasible -Scedulingproblem:</strong> Zeit- und Ressourcen Beschränkung sind vorgegeben.</p>
+</li>
+</ul>
+<p>alle sind NP-Vollständig </p>
+<h2 id="Feasible-Scheduling-Problem"><a href="#Feasible-Scheduling-Problem" class="headerlink" title="Feasible Scheduling Problem"></a>Feasible Scheduling Problem</h2><p><img src="/archives/6944cdce/image-20200706200746977.png" style="zoom: 80%;" align="left"></p>
+<h2 id="Schedulingproblem-Uberlegungen-Trade-offs"><a href="#Schedulingproblem-Uberlegungen-Trade-offs" class="headerlink" title="Schedulingproblem - Überlegungen + Trade-offs"></a>Schedulingproblem - Überlegungen + Trade-offs</h2><p><strong>HLS Ansatz:</strong></p>
+<ul>
+<li><strong>komplexere Prozessormodelle</strong> und Aufgaben=&gt;keine abstrakten universellen Prozessoren, sondern dedizierte Module</li>
+<li><strong>Verzögerung</strong> der Prozessoren <strong>variieren</strong> =&gt; Multi-Cycle </li>
+<li><strong>nicht jeder Prozessor</strong> ist in der Lage, <strong>jede Aufgabe</strong> auszuführen. Das heißt muss spezifisch zuordnen die entsprechenden Hardware Einheit Typen</li>
+<li>Zusammenspiel und <strong>Trade-offs</strong> in Allokation/Binding/Scheduling</li>
+</ul>
+<p><strong>Beispiel:</strong></p>
+<p>Lösung von Differentialgleichungen mit <strong>Forward Euler</strong> im Intervall $[0, a], x(0)=x, y(0)=y, x^{\prime}(0)=u$</p>
+<script type="math/tex; mode=display">
+\frac{d^{2} y}{d x^{2}}+5 \frac{d y}{d x}+3 y=0</script><p>Analog-Schaltung simulieren mit Simulator(SPICE)</p>
+<p><strong>Forward Euler (VHDL-Beschreibung):</strong></p>
+<p><img src="/archives/6944cdce/image-20200706204828972.png" style="zoom:80%;"></p>
+<p><strong>Mögliches Ergebnis: DESIGN 1:</strong></p>
+<p><img src="/archives/6944cdce/image-20200706205712408.png" style="zoom:67%;"></p>
+<p>mit zwei Hardware Einheiten, ein Multipliziere und eine ALU, der ein Takt benötigt.</p>
+<p><strong>Mögliches Ergebnis: DESIGN 2:</strong></p>
+<p>5 Hardware Module(1 Takt pro Module)</p>
+<p>4 Zeitschritte statt 6 Zeitschritte ausführen</p>
+<p><img src="/archives/6944cdce/image-20200706210531080.png" style="zoom:67%;"></p>
+<p><strong>Mögliches Ergebnis: DESIGN 3:</strong></p>
+<p>2 parallele Multipliziere (2 Takt pro Modul), 1 ALU (1 Takt)</p>
+<p>Kritische Pfad: keine Mobilität 不能移动了</p>
+<p><img src="/archives/6944cdce/image-20200706212029208.png" style="zoom:67%;"></p>
+<p><strong>Realisierung Datenpfad mit Multiplexern als Verbindungen</strong></p>
+<p>wo die entsprechenden Variablen, die ich für die Operation benötige, dann gespeichert. Die Register entsprechend durchführen </p>
+<p><img src="/archives/6944cdce/image-20200706212924843.png" style="zoom:67%;"></p>
+<p><strong>Ressourcen/Zeit-Trade-offs:</strong></p>
+<p><img src="/archives/6944cdce/image-20200706213631164.png" style="zoom:67%;"></p>
+]]></content>
+      <categories>
+        <category>High Level Synthese</category>
+        <category>Scheduling</category>
+      </categories>
+      <tags>
+        <tag>Scheduling</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>验证通识1-验证环境的结构和组件</title>
     <url>/archives/639d4c23.html</url>
     <content><![CDATA[<h2 id="测试平台"><a href="#测试平台" class="headerlink" title="测试平台"></a>测试平台</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>测试平台</strong>(testbench)是整个验证平台的总称。包括验证结构中的<strong>各个组件、组件之间的连接关系、测试平台的配置和控制。</strong></p>
@@ -26,8 +82,10 @@
 <li>CHx_VALID(0): 通道数据有效标志信号，高位有效 </li>
 <li>CHx_READY(0):  通道数据接收信号，高位表示接收成功</li>
 </ul>
-<p><strong>整型器接口：</strong><br><img src="/archives/639d4c23/image-20200704211640888.png" style="zoom:67%;"></p>
-<p><strong>控制寄存器接口：</strong><br><img src="/archives/639d4c23/image-20200704211752200.png" style="zoom:67%;"></p>
+<p><strong>整型器接口：</strong></p>
+<p><img src="/archives/639d4c23/image-20200704211640888.png" style="zoom:67%;" align="left"></p>
+<p><strong>控制寄存器接口：</strong></p>
+<p><img src="/archives/639d4c23/image-20200704211752200.png" style="zoom:67%;" align="left"></p>
 <h3 id="MCDF接口时序"><a href="#MCDF接口时序" class="headerlink" title="MCDF接口时序"></a>MCDF接口时序</h3><p><strong>通道Slave端接口时序：</strong></p>
 <p><img src="/archives/639d4c23/image-20200704212231448.png" style="zoom:67%;"></p>
 <p>当valid为高时，表示写入数据。ready为高时表示已经将数据写入；ready为低时，需等到ready为高时才可以将数据的写入</p>
@@ -39,16 +97,18 @@
 <p>整型器是按照数据包的形式发送数据的，数据包的可选长度有4，8，16，32。必须发送完整的发送某一个通道的数据包后，才可以发送下一个数据包，在发送数据包期间，fmt_child和fmt_length应保持不变，直到数据包发送完毕。</p>
 <p>Data数据必须连续发送，无法间隔发送；req信号比grant信号至少差一拍；相邻数据包之间应至少有一个时钟周期的空闲，即fmt_end从高位被拉低后，至少需经历一个时钟周期fmt_req才可以再次被置高。</p>
 <h3 id="MCDF寄存器描述"><a href="#MCDF寄存器描述" class="headerlink" title="MCDF寄存器描述"></a>MCDF寄存器描述</h3><p><strong>读写寄存器</strong></p>
-<p><img src="/archives/639d4c23/image-20200705112012683.png"></p>
+<p><img src="/archives/639d4c23/image-20200705112012683.png" align="left"></p>
 <p><strong>只读寄存器</strong></p>
-<p><img src="/archives/639d4c23/image-20200705112148674.png" alt></p>
+<p><img src="/archives/639d4c23/image-20200705112148674.png" align="left"></p>
 <h2 id="激励发生器"><a href="#激励发生器" class="headerlink" title="激励发生器"></a>激励发生器</h2><p>Stimulator的主要职责是<strong>模拟与DUT相邻设计的接口协议</strong>，只需要关注于如何模拟接口信号，使其能够以真实的接口协议来发送激励给DUT。</p>
 <p>Stimulator不应该违反协议，但不拘束于真实的硬件行为，可以给出更丰富的激励，使得在模块级的验证更加充分。</p>
 <p>Stimultor的接口主要是与DUT之间的连接，此外也应该有时钟和复位的输入，确保生成的数据与DUT的接口侧是同步关系。激励发生器也可以有存储接口数据生成历史的功能，这可以用来在仿真运行时或者结束后查看接口数据，方便统计或者调试。</p>
 <p>从stimulator同DUT的连接关系来看，可以将其分为两种：<strong>initiator(发起器)</strong>和<strong>responder(响应器)</strong>。initiator功能是<strong>主动发起接口数据传输</strong>；responder功能是<strong>对接口的数据发送请求做出响应，而它本身不会主动发送数据。</strong></p>
-<p><strong>1. Channel initiator</strong><br><img src="/archives/639d4c23/image-20200705115420952.png" alt></p>
-<p><strong>2. Register initiator</strong><br><img src="/archives/639d4c23/image-20200705115703026.png" alt></p>
-<p><strong>3. Formatter responder</strong><br><img src="/archives/639d4c23/image-20200705115803026.png" alt></p>
+<p><strong>1. Channel initiator</strong><br><img src="/archives/639d4c23/image-20200705115420952.png" align="left"></p>
+<p><strong>2. Register initiator</strong></p>
+<p><img src="/archives/639d4c23/image-20200705115703026.png" align="left"></p>
+<p><strong>3. Formatter responder</strong></p>
+<p><img src="/archives/639d4c23/image-20200705115803026.png" align="left"></p>
 <p><strong>MCDF验证环境的stimulator结构</strong></p>
 <p><img src="/archives/639d4c23/image-20200705115946427.png" style="zoom: 50%;"></p>
 <h2 id="监测器"><a href="#监测器" class="headerlink" title="监测器"></a>监测器</h2><p>Monitor的主要功能是<strong>观察DUT的边界或内部信号，并将它们整理再传送给其他验证平台的组件</strong>，如checker。</p>
@@ -354,6 +414,7 @@
 <li>最后找出最大的 cliq</li>
 </ol>
 <p><img src="/archives/e784a1bf/image-20200701093257835.png" style="zoom:67%;"></p>
+<p><strong>Zeitkomplex:</strong> $O(n\cdot lg(n))$</p>
 <p>Anwendungsbeispiel:</p>
 <ul>
 <li>Detailliertes Routing(single row)</li>
