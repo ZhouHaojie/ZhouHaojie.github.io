@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Vereinfachende Annahmen für HLS Verzögerung der einzelnen Operationen: ganzzahliges Vielfaches der Taktzylendauer (Multi-Cyle), d.h. ein oder mehrere Takt Schritte als Verzögerung, als Laufzeit der Op">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c4 Scheduling-Definition des HLS-Schedulingproblems">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6578d19d.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="Vereinfachende Annahmen für HLS Verzögerung der einzelnen Operationen: ganzzahliges Vielfaches der Taktzylendauer (Multi-Cyle), d.h. ein oder mehrere Takt Schritte als Verzögerung, als Laufzeit der Op">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6578d19d&#x2F;image-20200707112358900.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6578d19d&#x2F;image-20200707144033439.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6578d19d&#x2F;image-20200707144346039.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6578d19d&#x2F;image-20200707171200001.png">
+<meta property="og:updated_time" content="2020-07-07T15:38:26.097Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;6578d19d&#x2F;image-20200707112358900.png">
+
+<link rel="canonical" href="http://grenze.cn/archives/6578d19d.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>c4 Scheduling-Definition des HLS-Schedulingproblems | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">77</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">48</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">79</span></a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-automatic-vision">
+
+    <a href="/gitbook-Automatic-Vision/" rel="section"><i class="fa fa-fw fa-book"></i>Automatic-Vision</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/6578d19d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          c4 Scheduling-Definition des HLS-Schedulingproblems
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-07 17:34:19 / 修改时间：17:38:26" itemprop="dateCreated datePublished" datetime="2020-07-07T17:34:19+02:00">2020-07-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hardware-und-Software-Optimierung/" itemprop="url" rel="index">
+                    <span itemprop="name">Hardware und Software Optimierung</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hardware-und-Software-Optimierung/High-Level-Synthese/" itemprop="url" rel="index">
+                    <span itemprop="name">High Level Synthese</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hardware-und-Software-Optimierung/High-Level-Synthese/Scheduling/" itemprop="url" rel="index">
+                    <span itemprop="name">Scheduling</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Vereinfachende-Annahmen-fur-HLS"><a href="#Vereinfachende-Annahmen-fur-HLS" class="headerlink" title="Vereinfachende Annahmen für HLS"></a>Vereinfachende Annahmen für HLS</h2><ul>
+<li><p><strong>Verzögerung der einzelnen Operationen:</strong> ganzzahliges Vielfaches der Taktzylendauer (Multi-Cyle), d.h. ein oder mehrere Takt Schritte als Verzögerung, als Laufzeit der Operationen entsprechend <a id="more"></a></p>
+</li>
+<li><p><strong>Keine ALU verwendet,</strong> d.h. jeder <strong>Operation</strong> kann einem bestimmten Typ einer funktionellen EInheit zugeordnet werden</p>
+</li>
+<li><p>Die <strong>Eingänge </strong>müssen <strong>stabil</strong> sein; Der <strong>Ausgang</strong> im den letzte Zeitschritt liefert den <strong>gültigen Wert</strong></p>
+</li>
+<li><p>Der zu synthetisierende <strong>Datenpfad</strong> ist “<strong>non-pipelined</strong>“</p>
+</li>
+<li>Das Schedulingproblem ist auf <strong>azyklischem Datenflussgraphen</strong> mit keinerlei Kontrollstrukturen definiert (z.B. Schleifenkörper oder konditionale Blöcke) </li>
+</ul>
+<h2 id="Definition-Schedulingproblem-in-High-Level-Synthese"><a href="#Definition-Schedulingproblem-in-High-Level-Synthese" class="headerlink" title="Definition: Schedulingproblem in High-Level-Synthese"></a>Definition: Schedulingproblem in High-Level-Synthese</h2><ul>
+<li><p>Ein <strong>Datenflussgraph</strong> wird durch einen gerichteten, azyklischen Graphen (DAG) <strong>DFG (V, E)</strong> repräsentiert</p>
+</li>
+<li><p>Die <strong>Knotenmenge</strong> $V=\left\{o_{i}, \ldots, o_{|V|}\right\}$ besteht aus <strong>auszuführenden Operationen</strong> $o_{i}$.<br>Jeder Operation $o_{i}$ ist ein Typ $\tau\left(o_{i}\right)$ zugeordnet<br>Sei $T=\left\{\tau\left(o_{i}\right)|1 \leq i \leq| V \mid\right\}$ die Menge aller vorkommenden Typen</p>
+</li>
+<li>Die <strong>Kantenmenge E</strong> repräsentiert die Präzedenzrelationen,<br>d. h. benötigt Operation o $_{\mathrm{j}}$ das Ergebnis der Operation $\mathrm{o}_{\mathrm{i}},$ so ist $\left(\mathrm{o}_{\mathrm{i}}, \mathrm{o}_{\mathrm{j}}\right) \in \mathrm{E}$</li>
+<li>Sei <strong>fanout</strong> $\left(o_{i}\right)=\left\{o_{k} \mid\left(o_{i}, o_{k}\right) \in E\right\}$, die Menge der Fanout-Operationen von $o_i$</li>
+<li><p>Jeder <strong>Operation</strong> $o_{i}$ sei eine <strong>Variable</strong> $\mathbf{x}_{i}$ zugeordnet</p>
+</li>
+<li><p>$\mathbf{o}_{\mathbf{i}}$ schreibt auf $\mathbf{x}_{\mathbf{i}}$</p>
+</li>
+<li>Ist $o_{k} \in$ fanout $\left(o_{i}\right): o_{k}$ <strong>liest</strong> die Variable $x_{i}$</li>
+<li>Die Kantenmenge $\left\{\left(o_{i}, o_{k}\right) \mid o_{k} \in \text { fanout }\left(o_{i}\right)\right\}$ entspricht somit der Variablen $\mathbf{x}_{\mathbf{i}}$</li>
+<li>Der <strong>DFG</strong> erfüllt die “<strong>single assignment</strong>“ Bedingung,<br>d. h. jede Variable wird nur einmal geschrieben</li>
+<li><strong>Deshalb</strong>: im folgenden wird <strong>kein Unterschied</strong> zwischen dem Wert einer Variablen sowie der Variablen selbst gemacht.<br>O.B.d.A. gehen wir davon aus, dass <strong>alle Operationen</strong> eines <strong>bestimmten Typs</strong> die gleiche <strong>Verzögerung</strong> $\delta\left(o_{i}\right)$ besitzen.</li>
+</ul>
+<p><strong>Definition Datenpfad:</strong></p>
+<p>DP(FE,R,B) besteht aus die Menge von Funktion Einheiten, die Menge von Registern und die Menge von Bussen(oder Multiplexer), verbinden die FE und Register.</p>
+<p>Beispiel:</p>
+<p><img src="/archives/6578d19d/image-20200707112358900.png" style="zoom:67%;"></p>
+<h2 id="Definition-Feasible-HLS-Schedulingproblem"><a href="#Definition-Feasible-HLS-Schedulingproblem" class="headerlink" title="Definition: Feasible-HLS-Schedulingproblem"></a>Definition: Feasible-HLS-Schedulingproblem</h2><p>Gegeben</p>
+<ul>
+<li>ein <strong>Datenflussgraph</strong> DFG(V, E) &lt;= Präzedenzrelation</li>
+<li>eine Allokation DP(FE, R, B) &lt;= Resource-Constraint</li>
+<li>eine zeitliche Beschränkung $D \in Z^+$ &lt;= Zeit-Constraint</li>
+</ul>
+<p>Feasible-HLS Schedulingproblem ist definiert: (NP-Vollständig)</p>
+<p>Gibt es einen Schedule $\phi:V \rightarrow \{1,…,D\}$ , der eine <strong>Abbildung</strong> des <strong>DFG</strong> auf <strong>DP</strong> ermöglicht.</p>
+<p><strong>Beispiel 1</strong></p>
+<p><img src="/archives/6578d19d/image-20200707144033439.png" style="zoom:67%;"></p>
+<p>die Menge V besteht aus 5 Knoten als Operationen. auf $X_i$ geschrieben und gespeichert im letzte Zeitschritte.</p>
+<p><strong>Beispiel 2</strong></p>
+<p><img src="/archives/6578d19d/image-20200707144346039.png" style="zoom:67%;"></p>
+<p>$o_i$ Operation ist aktive von Zeitschritte 1 bis 1+2-1=2.</p>
+<p><strong>Bedingungen:</strong></p>
+<ol>
+<li><p>Präzedenzrelationen(Datenabhängigkeiten):</p>
+<script type="math/tex; mode=display">
+\forall\left(o_{i}, o_{j}\right) \in E: \phi\left(o_{i}\right)+\delta\left(o_{i}\right) \leq \phi\left(o_{j}\right)</script><p>Der Ausgang von $o_i$ als Eingang von $o_j$ stabil verfügbar zu sein</p>
+</li>
+<li><p>ich muss schauen ob in jedem Zeitschritt die Hardware Ressourcen nicht überschritten werden.<br>$\operatorname{Sei} v_{t_{y}}=\left\{o_{i} \mid o_{i} \in V, \tau\left(o_{i}\right)=t_{y}\right\}$ die Menge der Operationen vom Typ $t_{y}$<br>Dann muss gelten:</p>
+<script type="math/tex; mode=display">
+\forall \mathrm{t}_{\mathrm{y}} \in \mathrm{T}, \forall \mathrm{c} \in[1, \mathrm{D}]:\left|\left\{\mathrm{o}_{\mathrm{i}} \mid\left(\mathrm{O}_{\mathrm{i}} \in \mathrm{V}_{\mathrm{t}_{\mathrm{y}}}\right) \wedge\left(\mathrm{c} \in\left\{\phi\left(\mathrm{o}_{\mathrm{i}}\right), \ldots, \phi\left(\mathrm{o}_{\mathrm{i}}\right)+\delta\left(\mathrm{o}_{\mathrm{i}}\right)-1\right\}\right)\right\}\right| \leq\left|\mathrm{f}_{\mathrm{t}_{\mathrm{y}}}\right|</script><p>=&gt; Module von Typ ty in Zeitschritt c</p>
+</li>
+<li><p>Sei life(o, c) = 1 genau dann, wenn $\left(\phi\left(o_{i}\right)+\delta\left(o_{i}\right)-1 \leq c\right) \wedge\left(\exists o_{k} \in \text { fanout }\left(o_{i}\right): \phi\left(o_{k}\right)&gt;c\right)$<br>ansonsten sei life $(0 ; \mathrm{c})=0$ </p>
+<p>=&gt; <strong>Dann muss gelten:</strong> $\quad \forall c \in[1, D]: \sum_{o_{i} \in V} \operatorname{life}\left(o_{i}, c\right) \leq|R|$</p>
+<p>Kosten nicht von den Modulen der funktionellen Einheiten, sondern von den Registern. Life ist 1, wenn die Operation vor dem Zeitschritt c oder im Zeitschritt c beendet wurden. Wenn  eine nachfolgende Operation das Ergebnis benötigt, müssen wir ausreichen Register zur Verfügung stellen.</p>
+<p>in jedem Zeitschritt überprüft werden muss, die darf die Anzahl der verfügbaren Register nicht überschreiten</p>
+</li>
+<li><p>parallele Multiplex Netzwerk oder parallele Busse zur Verfügung haben. Die sowohl alle inputs als auch alle outputs zur Verfügung stellen.</p>
+<p>Alle die werden parallel geschrieben bei allen Operationen</p>
+<p><img src="/archives/6578d19d/image-20200707171200001.png" style="zoom:67%;" align="left"></p>
+<p>genügend parallele Multiplexer Strukturen oder parallele Bus Strukturen zur Verfügung stehen </p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/6578d19d.html" title="c4 Scheduling-Definition des HLS-Schedulingproblems">http://grenze.cn/archives/6578d19d.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/6944cdce.html" rel="prev" title="c4 Scheduling-Auspraegungen und Trade-offs">
+      <i class="fa fa-chevron-left"></i> c4 Scheduling-Auspraegungen und Trade-offs
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vereinfachende-Annahmen-fur-HLS"><span class="nav-number">1.</span> <span class="nav-text">Vereinfachende Annahmen für HLS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition-Schedulingproblem-in-High-Level-Synthese"><span class="nav-number">2.</span> <span class="nav-text">Definition: Schedulingproblem in High-Level-Synthese</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition-Feasible-HLS-Schedulingproblem"><span class="nav-number">3.</span> <span class="nav-text">Definition: Feasible-HLS-Schedulingproblem</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">77</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="tidioChatApi.open();">
+    
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/archives/6578d19d.html" title="c4 Scheduling-Definition des HLS-Schedulingproblems" target="_blank">c4 Scheduling-Definition des HLS-Schedulingproblems</a>
+          </li>
+        
+          <li>
+            <a href="/archives/6944cdce.html" title="c4 Scheduling-Auspraegungen und Trade-offs" target="_blank">c4 Scheduling-Auspraegungen und Trade-offs</a>
+          </li>
+        
+          <li>
+            <a href="/archives/639d4c23.html" title="验证通识1-验证环境的结构和组件" target="_blank">验证通识1-验证环境的结构和组件</a>
+          </li>
+        
+          <li>
+            <a href="/archives/17fe2cd1.html" title="c3 High_Level_Synthese" target="_blank">c3 High_Level_Synthese</a>
+          </li>
+        
+          <li>
+            <a href="/archives/e784a1bf.html" title="c2 Algorithmen" target="_blank">c2 Algorithmen</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">257k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:54</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+  <script src="//code.tidio.co/vogvafxbif7muwutoktvfceankdjkpis.js"></script>
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: 'e324ca0336083351896dd82fb640676a',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
