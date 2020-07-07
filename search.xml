@@ -49,6 +49,7 @@
 <p><img src="/archives/6944cdce/image-20200706213631164.png" style="zoom:67%;"></p>
 ]]></content>
       <categories>
+        <category>Hardware und Software Optimierung</category>
         <category>High Level Synthese</category>
         <category>Scheduling</category>
       </categories>
@@ -291,8 +292,9 @@
 <p>Ausnutzung von Parallelität indem ich die Datenfluss Informationen gezielt hinzufügen, zur opt</p>
 ]]></content>
       <categories>
+        <category>Hardware und Software Optimierung</category>
         <category>High Level Synthese</category>
-        <category>Einleitung</category>
+        <category>Allgemeine</category>
       </categories>
       <tags>
         <tag>loop-fusion</tag>
