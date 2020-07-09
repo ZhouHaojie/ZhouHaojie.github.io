@@ -66,9 +66,9 @@
 <li><p>parallele Multiplex Netzwerk oder parallele Busse zur Verfügung haben. Die sowohl alle inputs als auch alle outputs zur Verfügung stellen.</p>
 <p>Alle die werden parallel geschrieben bei allen Operationen</p>
 <p><img src="/archives/6578d19d/image-20200707171200001.png" style="zoom:67%;" align="left"></p>
-<p>genügend parallele Multiplexer Strukturen oder parallele Bus Strukturen zur Verfügung stehen </p>
 </li>
 </ol>
+<p>   genügend parallele Multiplexer Strukturen oder parallele Bus Strukturen zur Verfügung stehen </p>
 ]]></content>
       <categories>
         <category>Hardware und Software Optimierung</category>
