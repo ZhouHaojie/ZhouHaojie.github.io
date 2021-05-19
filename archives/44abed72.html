@@ -56,7 +56,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;44abed72&#x2F;image-20200626170332911.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;44abed72&#x2F;image-20200626194226374.png">
-<meta property="og:updated_time" content="2020-06-27T09:35:42.566Z">
+<meta property="og:updated_time" content="2021-05-19T19:58:47.509Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;44abed72&#x2F;image-20200626170332911.png">
 
@@ -256,10 +256,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-06-27 11:30:45 / 修改时间：11:35:42" itemprop="dateCreated datePublished" datetime="2020-06-27T11:30:45+02:00">2020-06-27</time>
+              <time title="创建时间：2020-06-27 11:30:45" itemprop="dateCreated datePublished" datetime="2020-06-27T11:30:45+02:00">2020-06-27</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-19 21:58:47" itemprop="dateModified" datetime="2021-05-19T21:58:47+02:00">2021-05-19</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -291,7 +297,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.1k</span>
+              <span>6.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -339,7 +345,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">int ascend[4] &#x3D; &#39;&#123;0,1,2,3&#125;; &#x2F;&#x2F; 对四个元素初始化</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">int descend[5]; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">descend[0:2] &#x3D; &#39;&#123;5,6,7&#125;; &#x2F;&#x2F; 为前三个元素赋值</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">ascend &#x3D; &#39;&#123;4&#123;8&#125;&#125;; &#x2F;&#x2F; 四个值全部为8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">descend &#x3D; &#39;&#123;9,8,default:1&#125;; &#x2F;&#x2F; &#123;8,8,1,1,1&#125;</span></pre></td></tr></table></figure>
 <p><strong>存储空间考量</strong></p>
 <p>很大SV 仿真器在存放数组元素时使用32 bit 的字边界，所以byte, shortint, int 都是放在一个word中，而longint则放到两个word中</p>
-<p><code>bit [3][7:0] b_pack; // 合并数组</code></p>
+<p><code>bit [3:0][7:0] b_pack; // 合并数组</code></p>
 <p><code>bit [7:0] b_unpack[3] // 非合并数组</code> </p>
 <p><img src="/archives/44abed72/image-20200626170332911.png" style="zoom: 80%;"></p>
 <p>从上图可得b_unpack实际会占据3个word的存储空间，但b_pack则之会占据一个word空间</p>
@@ -356,6 +362,7 @@
 <p>对于比较，在不使用循环的情况下，也可以使用”==” 或 “!=” 来比较数组的内容，但结果仅限于内容相同或不同。</p>
 <h2 id="动态数组"><a href="#动态数组" class="headerlink" title="动态数组"></a>动态数组</h2><p>前面介绍的定宽数组，其宽度在编译时就确定了。但如果直到程序执行之前都还不知道数组的宽度，我们就需要用到动态数组，它可以在仿真时分配空间或调整宽度</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">int d1[],d2[]; &#x2F;&#x2F; 声明动态数组</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">initial begin</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    d1 &#x3D; new[5]; &#x2F;&#x2F; 分配5个元素</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    foreach(d1[i])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        d1[i] &#x3D; i; &#x2F;&#x2F; 初始化</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    d2 &#x3D; d1 &#x2F;&#x2F; 复制动态数组</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    d2[0] &#x3D; 5; &#x2F;&#x2F; 修改复制值</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    d1 &#x3D; new[20](dyn); &#x2F;&#x2F; 分配20个数值并进行复制低五位，其余位为0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    d1 &#x3D; new[100]; &#x2F;&#x2F; 重新分配100个数值，而旧值不复存在</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    d1.delete(); &#x2F;&#x2F; 删除所有元素</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">end</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">logic [31:0] chnl0_arr[]; &#x2F;&#x2F; 具有[]个32bit 的元素</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">initial begin</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  chnl0_arr &#x3D; new[100];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  foreach (chnl0_arr[i]) begin</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">      chnl0_arr[i] &#x3D; &#39;h00C0_0000 + i; &#x2F;&#x2F; 赋值都用 “&#x3D;”, 变量i可以重复使用</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  end</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">end</span></pre></td></tr></table></figure>
 <h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><p>队列结合了链表和数组的优点，可以在任何地方添加或删除元素，并且通过索引实现对任一元素的访问。</p>
 <p>队列声明使用[$]，队列标号从0到$</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">int j &#x3D;1, q2[$] &#x3D; &#123;3,4&#125;, q[$] &#x3D; &#123;0,2,5&#125;; &#x2F;&#x2F; 队列赋值不需要&#39;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">initial begin</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    q.insert(1,j); &#x2F;&#x2F; &#123;0,1,2,5&#125; 在2之前插入</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    q.insert(3,q2); &#x2F;&#x2F; &#123;0,1,2,3,4,5&#125; 插入队列</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    q.delete(1); &#x2F;&#x2F; &#123;0，2，3，4，5&#125; 删除第一个元素</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    q.push_front(6); &#x2F;&#x2F; &#123;6,0,2,3，4，5&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    j &#x3D; q.pop_back; &#x2F;&#x2F; &#123;6,0,2，3，4&#125; j&#x3D;5</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    q.push_back(8); &#x2F;&#x2F; &#123;6,0,2,3,4,8&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    foreach(q[i])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        $display(q[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    q.delete();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">end</span></pre></td></tr></table></figure>
@@ -580,7 +587,7 @@
 <div class="copyright">
   
   &copy; 2018 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -590,7 +597,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">257k</span>
+    <span title="站点总字数">258k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
