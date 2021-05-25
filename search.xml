@@ -119,7 +119,6 @@
       <categories>
         <category>Hardware und Software Optimierung</category>
         <category>High Level Synthese</category>
-        <category>Scheduling</category>
       </categories>
   </entry>
   <entry>
@@ -173,7 +172,6 @@
       <categories>
         <category>Hardware und Software Optimierung</category>
         <category>High Level Synthese</category>
-        <category>Scheduling</category>
       </categories>
       <tags>
         <tag>Scheduling</tag>
@@ -416,7 +414,6 @@
       <categories>
         <category>Hardware und Software Optimierung</category>
         <category>High Level Synthese</category>
-        <category>Allgemeine</category>
       </categories>
       <tags>
         <tag>loop-fusion</tag>
@@ -635,6 +632,8 @@
 <p>如果没有特别指出，枚举类型会被当成int类型储存，nstate是一个int类型，右侧是枚举类型可以直接赋值给左侧的整型 INT = ENUM; 若右侧是整型，左侧是枚举类型，那右侧需要做类型转换，ENUM = T’(INT)</p>
 <h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>SV中string类型可以用来保存长度可变的字符串，单个字符是byte类型。与C语言不同的是，字符串的结尾不带标识符null</p>
 <figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">string</span> s; <span class="comment">// 是""，而不是"\0"</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    s = <span class="string">"IEEE "</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(s<span class="variable">.getc</span>(<span class="number">0</span>)); <span class="comment">// 返回第一个字符I</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(s<span class="variable">.tolower</span>()); <span class="comment">// ieee</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    s<span class="variable">.putc</span>(s<span class="variable">.len</span>()-<span class="number">1</span>, <span class="string">"-"</span>); <span class="comment">// 将最后一个字符(空格)变成"-"</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    s = &#123;s,<span class="string">"p1800"</span>&#125;; <span class="comment">// IEEE-p1800</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(s<span class="variable">.substr</span>(<span class="number">2</span>,<span class="number">5</span>)); <span class="comment">// EE-p</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="comment">// 创建临时字符串</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    my_log(<span class="built_in">$sformatf</span>(<span class="string">"%s,%5d"</span>,s,<span class="number">42</span>)); <span class="comment">// “%5d”以整形来格式化参数，并且当整数字符数少于5个情况下，多格式化一定数量空格来填充，以使得空格和整数所用字符数的总和达到至少5个，5前面是-则表示左对齐，无符号则默认为+右对齐。</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">end</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> my_log(<span class="keyword">string</span> msg);</span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"@%0t: %s"</span>,<span class="built_in">$time</span>, msg); <span class="comment">// 打印消息</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">endfunction</span></span></pre></td></tr></table></figure>
+<p><code>sformatf()</code> 用法</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">string</span> s1, s2, s3, s4;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">wait</span>(b_string_format == <span class="number">1</span>);<span class="built_in">$display</span>(<span class="string">"string_format process block started"</span>);</span></pre></td></tr><tr><td class="code"><pre><span class="line">s1 = <span class="string">"Welcome"</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line">s2 = <span class="string">"World"</span>;</span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(s3 == <span class="string">""</span>) <span class="comment">// 判断字符串是否为空</span></span></pre></td></tr><tr><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"s3 is empty"</span>)</span></pre></td></tr><tr><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="code"><pre><span class="line">s3 = &#123;s1, <span class="string">" to "</span>, s2&#125;; <span class="comment">// concatenation operator '&#123;...&#125;'</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="built_in">$display</span>(<span class="string">"s3 content: %s"</span>, s3);</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">s4 = <span class="built_in">$sformatf</span>(<span class="string">"%s to %s"</span>, s1, s2); <span class="comment">// system format function</span></span></pre></td></tr><tr><td class="code"><pre><span class="line"><span class="built_in">$display</span>(<span class="string">"s4 content: %s"</span>, s4);</span></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>SV验证</category>
@@ -734,7 +733,6 @@
 ]]></content>
       <categories>
         <category>Hardware Software Co-Design</category>
-        <category>FPGA</category>
       </categories>
       <tags>
         <tag>FPGA</tag>
@@ -906,7 +904,6 @@ u t i l(T)=1-\frac{\operatorname{avgslack}(T)}{T}</script><p>bezeichnet die proz
 ]]></content>
       <categories>
         <category>Hardware Software Co-Design</category>
-        <category>Schätzung der Entwurfsqualität</category>
       </categories>
       <tags>
         <tag>Synthese</tag>
@@ -998,7 +995,6 @@ u t i l(T)=1-\frac{\operatorname{avgslack}(T)}{T}</script><p>bezeichnet die proz
 ]]></content>
       <categories>
         <category>Hardware Software Co-Design</category>
-        <category>System-on-Chip (SoC)</category>
       </categories>
       <tags>
         <tag>system level integrate</tag>
@@ -1216,7 +1212,6 @@ u t i l(T)=1-\frac{\operatorname{avgslack}(T)}{T}</script><p>bezeichnet die proz
 ]]></content>
       <categories>
         <category>Hardware Software Co-Design</category>
-        <category>Network-on-Chip (NoC) &amp; Multicore</category>
       </categories>
       <tags>
         <tag>Bus</tag>
@@ -1474,7 +1469,6 @@ u t i l(T)=1-\frac{\operatorname{avgslack}(T)}{T}</script><p>bezeichnet die proz
 ]]></content>
       <categories>
         <category>Hardware Software Co-Design</category>
-        <category>Spezialprozessoren</category>
       </categories>
       <tags>
         <tag>Microcontroller</tag>
@@ -1955,7 +1949,6 @@ u t i l(T)=1-\frac{\operatorname{avgslack}(T)}{T}</script><p>bezeichnet die proz
 ]]></content>
       <categories>
         <category>Hardware Software Co-Design</category>
-        <category>GPP-Performanzsteigerung</category>
       </categories>
       <tags>
         <tag>VLWI</tag>
@@ -2196,7 +2189,6 @@ u t i l(T)=1-\frac{\operatorname{avgslack}(T)}{T}</script><p>bezeichnet die proz
 ]]></content>
       <categories>
         <category>Hardware Software Co-Design</category>
-        <category>GPP-Architekturen</category>
       </categories>
       <tags>
         <tag>GPP</tag>
@@ -2980,143 +2972,6 @@ P_m\left(\chi^{2} \leq \chi_{\alpha}^{2}\right)=1-\alpha \quad \rightarrow \quad
       </tags>
   </entry>
   <entry>
-    <title>Kurvenanpassung</title>
-    <url>/archives/4eb14690.html</url>
-    <content><![CDATA[<h2 id="Messsysteme"><a href="#Messsysteme" class="headerlink" title="Messsysteme"></a>Messsysteme</h2><p>Allgemein: Messkette</p>
-<p><img src="/archives/4eb14690/image-20200218174651585.png" style="zoom: 33%;"></p>
-<p><a id="more"></a>Systemtheorie</p>
-<p><img src="/archives/4eb14690/image-20200218174732982.png" style="zoom: 33%;"></p>
-<h2 id="Messfehler"><a href="#Messfehler" class="headerlink" title="Messfehler"></a>Messfehler</h2><p>Definition:<br>Absolute Fehler: $F=y_{anzeige}-y_{wahr}=y_a-y_w$<br>Relativer Fehler: $F_r= \frac{F}{y_w}=\frac{y_a-y_w}{y_w}$</p>
-<p><strong>Fehlerursachen:</strong></p>
-<ul>
-<li><strong>Systematische Fehler:</strong> <strong>Ursache</strong> des Fehlers und Art der Einwirkung <strong>bekannt</strong>. <strong>Kompensation</strong> prinzipiell <strong>möglich</strong></li>
-<li><strong>Zufällige Fehler:</strong> nicht reproduzierbar, <strong>Ursache unbekannt</strong></li>
-</ul>
-<h2 id="Kurvenanpassung"><a href="#Kurvenanpassung" class="headerlink" title="Kurvenanpassung"></a>Kurvenanpassung</h2><p>Modellbildung des Systems $\rightarrow$ analytische Messkennlinie</p>
-<p><strong>Ansätze</strong></p>
-<ol>
-<li>Interpolation: Die Kennlinie soll durch <strong>alle</strong> n Messpunkte gehen (Kleines n)</li>
-<li>Approximation: Die Summe der Fehlerquadrate soll minimiert werden. Die Kennlinie geht nicht durch alle Messpunkte (Große n)</li>
-</ol>
-<p><img src="/archives/4eb14690/image-20200218184618776.png" style="zoom: 33%;"></p>
-<h3 id="Approximation"><a href="#Approximation" class="headerlink" title="Approximation"></a>Approximation</h3><p>Kurve nähert Messwertepaare an</p>
-<p><strong>Ziel:</strong> Darstellung der Kennlinie als endliche Reihe analytischer Funktion $\varphi_i(u)$ </p>
-<p><img src="/archives/4eb14690/image-20200218185443332.png" style="zoom:50%;"></p>
-<p>Berechnen Koeffizienten $a_i$ bei Verwendung einer <strong>orthonormalen Basis</strong>: </p>
-<p><img src="/archives/4eb14690/image-20200218190044347.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200218185817616.png" style="zoom:50%;"></p>
-<p>Vorteil: </p>
-<ul>
-<li>Mittelwertfreie <strong>Fehler</strong> werden <strong>unterdrückt</strong> </li>
-<li><strong>Beliebige</strong> Basisfunktionen verwendbar (solange linear unabhängig voneinander) </li>
-<li><strong>Modellordnung unabhängig</strong> von Stützstellenanzahl</li>
-</ul>
-<h4 id="Least-Squares-Schatzer"><a href="#Least-Squares-Schatzer" class="headerlink" title="Least-Squares-Schätzer"></a>Least-Squares-Schätzer</h4><p>Zur Bestimmung der Koeffizienten $a_i$ wird bei <strong>nicht orthogonalen</strong> Basisfunktionen $\varphi_i(u)$ der <strong>Least-Squares-Schätzer </strong> verwendet</p>
-<p>Haben: n Messwertepaare $(u_i, y_i)$</p>
-<ul>
-<li>Aufstellen des Signalmodells</li>
-</ul>
-<p><img src="/archives/4eb14690/image-20200219124945263.png" style="zoom: 50%;"></p>
-<ul>
-<li><p>Aufstellen des Approximationsansatzes</p>
-<p><img src="/archives/4eb14690/image-20200219125044637.png" style="zoom: 33%;"></p>
-</li>
-</ul>
-<p>Minimierung des Gütemaßes</p>
-<p><img src="/archives/4eb14690/image-20200218192625735.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200218192700099.png" style="zoom:50%;"></p>
-<p>a: Moore-Penrose-Pseudoinverse</p>
-<p><strong>LS-Schätzer bei nichtlinearem Signalmodell</strong></p>
-<p>Was tun, wenn Signalmodell nicht linear ist?</p>
-<p>Bsp. $\hat{y}(u)=A \cdot \mathrm{e}^{\alpha u}, \quad A, \alpha \quad \text { unbekannt }$ </p>
-<p>$\rightarrow$ oft lassen sich die Messdaten so manipulieren so manipulieren, dass das Modell linear wird.</p>
-<p>Hier: logarithmieren</p>
-<p><img src="/archives/4eb14690/image-20200219133300117.png" style="zoom:50%;"></p>
-<h3 id="Interpolation"><a href="#Interpolation" class="headerlink" title="Interpolation"></a>Interpolation</h3><p>Kurve geht exakt durch Wertepaare</p>
-<ul>
-<li>Lagrange-/Newton (globale Polynome)</li>
-<li>Spline-Interpolation</li>
-<li>Kennfeld-Interpolation mehrdimensionale Erweiterung</li>
-</ul>
-<p>Vorteile:</p>
-<ul>
-<li>Kein direktes Signalmodell erforderlich </li>
-<li>Interpolierte Funktion geht durch Wertepaare</li>
-</ul>
-<p>Nachteile:</p>
-<ul>
-<li>Bei Globalen Polynomansätzen steigt Modellordnung mit der Anzahl der Wertepaare $\rightarrow$ Überschwinger </li>
-</ul>
-<p><strong>Globale Polynomansätze</strong></p>
-<ul>
-<li><p>Standard</p>
-<p>$y(u)=\sum_{i=0}^{N-1} a_{i} u^{i}$ (oft rechenintensiv计算量大)</p>
-</li>
-<li><p>Lagrange-Verfahren</p>
-<p>$y(u)=\sum_{i=0}^{N-1} \hat{a}_{i} l_{i}(u) \quad \text { mit } l_{i}(u): \text { Lagrangepolynome }$</p>
-</li>
-<li><p>Newton-Verfahren</p>
-<p>$y(u)=\sum_{i=0}^{N-1} \tilde{a}_{i} n_{i}(u)\quad \text{ mit } n_{i}(u):\text {Newtonpolynome}$</p>
-</li>
-</ul>
-<h4 id="Newton-Interpolation"><a href="#Newton-Interpolation" class="headerlink" title="Newton-Interpolation"></a>Newton-Interpolation</h4><p>Warum Newton-Interpolation?</p>
-<ul>
-<li><strong>geringere Komplexität</strong> der Basispolynome</li>
-<li>leichtere Erweiterbarkeit beim Hinzufügen von Stützstellen</li>
-</ul>
-<p>Ansatz:</p>
-<p><img src="/archives/4eb14690/image-20200219154557093.png" style="zoom:50%;"></p>
-<p><strong>1. Bei äquidistanten Stützstellen</strong></p>
-<p>Zur einfachen Berechnung der Koeffizienten $a_i$ werden <strong>Differenzen </strong> eingeführt</p>
-<p><strong>Differenzenschema:</strong></p>
-<p><img src="/archives/4eb14690/image-20200219155051455.png" style="zoom:50%;"></p>
-<p><strong>Newton Interpolationsformel für äquidistante Stützstellen</strong></p>
-<p><img src="/archives/4eb14690/image-20200219155428818.png" style="zoom:50%;"></p>
-<p><strong>2. Bei nicht-äquidistantem Stützstellenabstand</strong> </p>
-<p><img src="/archives/4eb14690/image-20200219160648184.png" style="zoom: 33%;"></p>
-<h4 id="Lagrange-Interpolation"><a href="#Lagrange-Interpolation" class="headerlink" title="Lagrange-Interpolation"></a>Lagrange-Interpolation</h4><p>In der Praxis arbeitet man bevorzugt mit Langrange-Interpolation</p>
-<p><strong>Grund:</strong> Keine Berechnung der Koeffizienten erforderlich</p>
-<p>Ansatz: <img src="/archives/4eb14690/image-20200219161759340.png" style="zoom:50%;"></p>
-<p>Lagrange-Polynome:</p>
-<p><img src="/archives/4eb14690/image-20200220200754178.png" style="zoom:50%;"></p>
-<p>Eigenschaft: <img src="/archives/4eb14690/image-20200220200849193.png" style="zoom:50%;"></p>
-<p>$\Longrightarrow$Die Stützstellen eines Lagrange-Polynoms werden exakt interpoliert:</p>
-<p><img src="/archives/4eb14690/image-20200220200608006.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200220200643554.png" style="zoom:50%;"></p>
-<h4 id="Spline-Interpolation"><a href="#Spline-Interpolation" class="headerlink" title="Spline-Interpolation"></a>Spline-Interpolation</h4><p>Eigenschaften der Spline-Interpolierenden:</p>
-<p><img src="/archives/4eb14690/image-20200220201145859.png" style="zoom:50%;"></p>
-<p>$s_i(u_i)=y_i$ ; 二阶导相等$s_i^{‘’}(u_{i+1})=s^{‘’}_{i+1}(u_{i+1})$ ; 边界条件, 两个端点二阶导等于零</p>
-<p><strong>Kubische Spline-Interpolation</strong></p>
-<p><img src="/archives/4eb14690/image-20200220201722869.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200220201755791.png" style="zoom:50%;"></p>
-<p>Berechnung der Parameter:</p>
-<p><img src="/archives/4eb14690/image-20200220201834813.png" style="zoom:50%;"></p>
-<p>Haben bereit:  $y_i$ , noch brauchen: $y_i^{‘’}$ </p>
-<p>Nach Stetigkeit der 1. Ableitung an den Stützstellen:</p>
-<p><img src="/archives/4eb14690/image-20200220202318019.png" alt="image-20200220202318019" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200220202404995.png" style="zoom:50%;"></p>
-<p><img src="/archives/4eb14690/image-20200220202447762.png" style="zoom:50%;"><br>Randbedingung: $y_{0}^{\prime \prime}=0=y_{n-1}^{\prime \prime}$</p>
-<p><img src="/archives/4eb14690/image-20200220202545618.png" style="zoom:50%;"></p>
-<h3 id="Kennfeldinterpolation"><a href="#Kennfeldinterpolation" class="headerlink" title="Kennfeldinterpolation"></a>Kennfeldinterpolation</h3><p>Die Kennfeldinterpolation ist eine 2D-Interpolation. Es werden die Werte y zwischen de äquidistanten Stützstellen $(u_i,z_i)$ interpoliert.</p>
-<p>Standard Interpolation: $\hat{y}(u)=\sum_{i=0}^{n-1} a_{i} u^{i}$</p>
-<p>Auf zwei  Dimensionen erweitert:</p>
-<script type="math/tex; mode=display">
-\hat{y}(u, z)=\sum_{i=0}^{n-1} \sum_{j=0}^{m-1} a_{i j} u^{i} z^{j}</script><p><strong>Bei Polynomen 1.Grade</strong>, y 在点$(u_i,z_i)$ 泰勒展开：</p>
-<p><img src="/archives/4eb14690/image-20200220203036550.png" style="zoom:50%;"></p>
-<p><strong>Bilinearen Interpolation:</strong><br>Durch <strong>Approximation </strong>der Ableitungen mittels Differenzenquotienten folgt:</p>
-<p><img src="/archives/4eb14690/image-20200220203204882.png" style="zoom:50%;"></p>
-<p>BSP.<img src="/archives/4eb14690/image-20200220203255851.png" style="zoom:50%;"></p>
-]]></content>
-      <categories>
-        <category>Messtechnik</category>
-        <category>Kurvenanpassung</category>
-      </categories>
-      <tags>
-        <tag>approximation</tag>
-        <tag>Interpolation</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Stationäres Verhalten</title>
     <url>/archives/12c26097.html</url>
     <content><![CDATA[<h3 id="Stationare-Messkennlinie-und-Fehler"><a href="#Stationare-Messkennlinie-und-Fehler" class="headerlink" title="Stationäre Messkennlinie und Fehler"></a>Stationäre Messkennlinie und Fehler</h3><p>Stationäres Verhalten: <strong>Einschwingvorgänge abgeklungen</strong><a id="more"></a><br>z.B. Messsystem durch <strong>Kennlinie</strong> $y(u)$ beschreibbar</p>
@@ -3266,6 +3121,143 @@ y=u \cdot \frac{S_{\mathrm{i}} V}{1+K^{\prime} \cdot S_{\mathrm{i}} V}</script><
       <tags>
         <tag>KL-Fehler</tag>
         <tag>Linearsierung</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Kurvenanpassung</title>
+    <url>/archives/4eb14690.html</url>
+    <content><![CDATA[<h2 id="Messsysteme"><a href="#Messsysteme" class="headerlink" title="Messsysteme"></a>Messsysteme</h2><p>Allgemein: Messkette</p>
+<p><img src="/archives/4eb14690/image-20200218174651585.png" style="zoom: 33%;"></p>
+<p><a id="more"></a>Systemtheorie</p>
+<p><img src="/archives/4eb14690/image-20200218174732982.png" style="zoom: 33%;"></p>
+<h2 id="Messfehler"><a href="#Messfehler" class="headerlink" title="Messfehler"></a>Messfehler</h2><p>Definition:<br>Absolute Fehler: $F=y_{anzeige}-y_{wahr}=y_a-y_w$<br>Relativer Fehler: $F_r= \frac{F}{y_w}=\frac{y_a-y_w}{y_w}$</p>
+<p><strong>Fehlerursachen:</strong></p>
+<ul>
+<li><strong>Systematische Fehler:</strong> <strong>Ursache</strong> des Fehlers und Art der Einwirkung <strong>bekannt</strong>. <strong>Kompensation</strong> prinzipiell <strong>möglich</strong></li>
+<li><strong>Zufällige Fehler:</strong> nicht reproduzierbar, <strong>Ursache unbekannt</strong></li>
+</ul>
+<h2 id="Kurvenanpassung"><a href="#Kurvenanpassung" class="headerlink" title="Kurvenanpassung"></a>Kurvenanpassung</h2><p>Modellbildung des Systems $\rightarrow$ analytische Messkennlinie</p>
+<p><strong>Ansätze</strong></p>
+<ol>
+<li>Interpolation: Die Kennlinie soll durch <strong>alle</strong> n Messpunkte gehen (Kleines n)</li>
+<li>Approximation: Die Summe der Fehlerquadrate soll minimiert werden. Die Kennlinie geht nicht durch alle Messpunkte (Große n)</li>
+</ol>
+<p><img src="/archives/4eb14690/image-20200218184618776.png" style="zoom: 33%;"></p>
+<h3 id="Approximation"><a href="#Approximation" class="headerlink" title="Approximation"></a>Approximation</h3><p>Kurve nähert Messwertepaare an</p>
+<p><strong>Ziel:</strong> Darstellung der Kennlinie als endliche Reihe analytischer Funktion $\varphi_i(u)$ </p>
+<p><img src="/archives/4eb14690/image-20200218185443332.png" style="zoom:50%;"></p>
+<p>Berechnen Koeffizienten $a_i$ bei Verwendung einer <strong>orthonormalen Basis</strong>: </p>
+<p><img src="/archives/4eb14690/image-20200218190044347.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200218185817616.png" style="zoom:50%;"></p>
+<p>Vorteil: </p>
+<ul>
+<li>Mittelwertfreie <strong>Fehler</strong> werden <strong>unterdrückt</strong> </li>
+<li><strong>Beliebige</strong> Basisfunktionen verwendbar (solange linear unabhängig voneinander) </li>
+<li><strong>Modellordnung unabhängig</strong> von Stützstellenanzahl</li>
+</ul>
+<h4 id="Least-Squares-Schatzer"><a href="#Least-Squares-Schatzer" class="headerlink" title="Least-Squares-Schätzer"></a>Least-Squares-Schätzer</h4><p>Zur Bestimmung der Koeffizienten $a_i$ wird bei <strong>nicht orthogonalen</strong> Basisfunktionen $\varphi_i(u)$ der <strong>Least-Squares-Schätzer </strong> verwendet</p>
+<p>Haben: n Messwertepaare $(u_i, y_i)$</p>
+<ul>
+<li>Aufstellen des Signalmodells</li>
+</ul>
+<p><img src="/archives/4eb14690/image-20200219124945263.png" style="zoom: 50%;"></p>
+<ul>
+<li><p>Aufstellen des Approximationsansatzes</p>
+<p><img src="/archives/4eb14690/image-20200219125044637.png" style="zoom: 33%;"></p>
+</li>
+</ul>
+<p>Minimierung des Gütemaßes</p>
+<p><img src="/archives/4eb14690/image-20200218192625735.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200218192700099.png" style="zoom:50%;"></p>
+<p>a: Moore-Penrose-Pseudoinverse</p>
+<p><strong>LS-Schätzer bei nichtlinearem Signalmodell</strong></p>
+<p>Was tun, wenn Signalmodell nicht linear ist?</p>
+<p>Bsp. $\hat{y}(u)=A \cdot \mathrm{e}^{\alpha u}, \quad A, \alpha \quad \text { unbekannt }$ </p>
+<p>$\rightarrow$ oft lassen sich die Messdaten so manipulieren so manipulieren, dass das Modell linear wird.</p>
+<p>Hier: logarithmieren</p>
+<p><img src="/archives/4eb14690/image-20200219133300117.png" style="zoom:50%;"></p>
+<h3 id="Interpolation"><a href="#Interpolation" class="headerlink" title="Interpolation"></a>Interpolation</h3><p>Kurve geht exakt durch Wertepaare</p>
+<ul>
+<li>Lagrange-/Newton (globale Polynome)</li>
+<li>Spline-Interpolation</li>
+<li>Kennfeld-Interpolation mehrdimensionale Erweiterung</li>
+</ul>
+<p>Vorteile:</p>
+<ul>
+<li>Kein direktes Signalmodell erforderlich </li>
+<li>Interpolierte Funktion geht durch Wertepaare</li>
+</ul>
+<p>Nachteile:</p>
+<ul>
+<li>Bei Globalen Polynomansätzen steigt Modellordnung mit der Anzahl der Wertepaare $\rightarrow$ Überschwinger </li>
+</ul>
+<p><strong>Globale Polynomansätze</strong></p>
+<ul>
+<li><p>Standard</p>
+<p>$y(u)=\sum_{i=0}^{N-1} a_{i} u^{i}$ (oft rechenintensiv计算量大)</p>
+</li>
+<li><p>Lagrange-Verfahren</p>
+<p>$y(u)=\sum_{i=0}^{N-1} \hat{a}_{i} l_{i}(u) \quad \text { mit } l_{i}(u): \text { Lagrangepolynome }$</p>
+</li>
+<li><p>Newton-Verfahren</p>
+<p>$y(u)=\sum_{i=0}^{N-1} \tilde{a}_{i} n_{i}(u)\quad \text{ mit } n_{i}(u):\text {Newtonpolynome}$</p>
+</li>
+</ul>
+<h4 id="Newton-Interpolation"><a href="#Newton-Interpolation" class="headerlink" title="Newton-Interpolation"></a>Newton-Interpolation</h4><p>Warum Newton-Interpolation?</p>
+<ul>
+<li><strong>geringere Komplexität</strong> der Basispolynome</li>
+<li>leichtere Erweiterbarkeit beim Hinzufügen von Stützstellen</li>
+</ul>
+<p>Ansatz:</p>
+<p><img src="/archives/4eb14690/image-20200219154557093.png" style="zoom:50%;"></p>
+<p><strong>1. Bei äquidistanten Stützstellen</strong></p>
+<p>Zur einfachen Berechnung der Koeffizienten $a_i$ werden <strong>Differenzen </strong> eingeführt</p>
+<p><strong>Differenzenschema:</strong></p>
+<p><img src="/archives/4eb14690/image-20200219155051455.png" style="zoom:50%;"></p>
+<p><strong>Newton Interpolationsformel für äquidistante Stützstellen</strong></p>
+<p><img src="/archives/4eb14690/image-20200219155428818.png" style="zoom:50%;"></p>
+<p><strong>2. Bei nicht-äquidistantem Stützstellenabstand</strong> </p>
+<p><img src="/archives/4eb14690/image-20200219160648184.png" style="zoom: 33%;"></p>
+<h4 id="Lagrange-Interpolation"><a href="#Lagrange-Interpolation" class="headerlink" title="Lagrange-Interpolation"></a>Lagrange-Interpolation</h4><p>In der Praxis arbeitet man bevorzugt mit Langrange-Interpolation</p>
+<p><strong>Grund:</strong> Keine Berechnung der Koeffizienten erforderlich</p>
+<p>Ansatz: <img src="/archives/4eb14690/image-20200219161759340.png" style="zoom:50%;"></p>
+<p>Lagrange-Polynome:</p>
+<p><img src="/archives/4eb14690/image-20200220200754178.png" style="zoom:50%;"></p>
+<p>Eigenschaft: <img src="/archives/4eb14690/image-20200220200849193.png" style="zoom:50%;"></p>
+<p>$\Longrightarrow$Die Stützstellen eines Lagrange-Polynoms werden exakt interpoliert:</p>
+<p><img src="/archives/4eb14690/image-20200220200608006.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200220200643554.png" style="zoom:50%;"></p>
+<h4 id="Spline-Interpolation"><a href="#Spline-Interpolation" class="headerlink" title="Spline-Interpolation"></a>Spline-Interpolation</h4><p>Eigenschaften der Spline-Interpolierenden:</p>
+<p><img src="/archives/4eb14690/image-20200220201145859.png" style="zoom:50%;"></p>
+<p>$s_i(u_i)=y_i$ ; 二阶导相等$s_i^{‘’}(u_{i+1})=s^{‘’}_{i+1}(u_{i+1})$ ; 边界条件, 两个端点二阶导等于零</p>
+<p><strong>Kubische Spline-Interpolation</strong></p>
+<p><img src="/archives/4eb14690/image-20200220201722869.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200220201755791.png" style="zoom:50%;"></p>
+<p>Berechnung der Parameter:</p>
+<p><img src="/archives/4eb14690/image-20200220201834813.png" style="zoom:50%;"></p>
+<p>Haben bereit:  $y_i$ , noch brauchen: $y_i^{‘’}$ </p>
+<p>Nach Stetigkeit der 1. Ableitung an den Stützstellen:</p>
+<p><img src="/archives/4eb14690/image-20200220202318019.png" alt="image-20200220202318019" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200220202404995.png" style="zoom:50%;"></p>
+<p><img src="/archives/4eb14690/image-20200220202447762.png" style="zoom:50%;"><br>Randbedingung: $y_{0}^{\prime \prime}=0=y_{n-1}^{\prime \prime}$</p>
+<p><img src="/archives/4eb14690/image-20200220202545618.png" style="zoom:50%;"></p>
+<h3 id="Kennfeldinterpolation"><a href="#Kennfeldinterpolation" class="headerlink" title="Kennfeldinterpolation"></a>Kennfeldinterpolation</h3><p>Die Kennfeldinterpolation ist eine 2D-Interpolation. Es werden die Werte y zwischen de äquidistanten Stützstellen $(u_i,z_i)$ interpoliert.</p>
+<p>Standard Interpolation: $\hat{y}(u)=\sum_{i=0}^{n-1} a_{i} u^{i}$</p>
+<p>Auf zwei  Dimensionen erweitert:</p>
+<script type="math/tex; mode=display">
+\hat{y}(u, z)=\sum_{i=0}^{n-1} \sum_{j=0}^{m-1} a_{i j} u^{i} z^{j}</script><p><strong>Bei Polynomen 1.Grade</strong>, y 在点$(u_i,z_i)$ 泰勒展开：</p>
+<p><img src="/archives/4eb14690/image-20200220203036550.png" style="zoom:50%;"></p>
+<p><strong>Bilinearen Interpolation:</strong><br>Durch <strong>Approximation </strong>der Ableitungen mittels Differenzenquotienten folgt:</p>
+<p><img src="/archives/4eb14690/image-20200220203204882.png" style="zoom:50%;"></p>
+<p>BSP.<img src="/archives/4eb14690/image-20200220203255851.png" style="zoom:50%;"></p>
+]]></content>
+      <categories>
+        <category>Messtechnik</category>
+        <category>Kurvenanpassung</category>
+      </categories>
+      <tags>
+        <tag>approximation</tag>
+        <tag>Interpolation</tag>
       </tags>
   </entry>
   <entry>

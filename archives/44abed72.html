@@ -56,7 +56,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;44abed72&#x2F;image-20200626170332911.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;44abed72&#x2F;image-20200626194226374.png">
-<meta property="og:updated_time" content="2021-05-20T14:21:49.333Z">
+<meta property="og:updated_time" content="2021-05-25T12:39:20.344Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;44abed72&#x2F;image-20200626170332911.png">
 
@@ -165,7 +165,7 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">50</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">41</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -264,7 +264,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-20 16:21:49" itemprop="dateModified" datetime="2021-05-20T16:21:49+02:00">2021-05-20</time>
+                <time title="修改时间：2021-05-25 14:39:20" itemprop="dateModified" datetime="2021-05-25T14:39:20+02:00">2021-05-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -297,7 +297,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.2k</span>
+              <span>5.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -380,6 +380,8 @@
 <p>如果没有特别指出，枚举类型会被当成int类型储存，nstate是一个int类型，右侧是枚举类型可以直接赋值给左侧的整型 INT = ENUM; 若右侧是整型，左侧是枚举类型，那右侧需要做类型转换，ENUM = T’(INT)</p>
 <h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>SV中string类型可以用来保存长度可变的字符串，单个字符是byte类型。与C语言不同的是，字符串的结尾不带标识符null</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span> s; <span class="comment">// 是""，而不是"\0"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    s = <span class="string">"IEEE "</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(s<span class="variable">.getc</span>(<span class="number">0</span>)); <span class="comment">// 返回第一个字符I</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(s<span class="variable">.tolower</span>()); <span class="comment">// ieee</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    s<span class="variable">.putc</span>(s<span class="variable">.len</span>()-<span class="number">1</span>, <span class="string">"-"</span>); <span class="comment">// 将最后一个字符(空格)变成"-"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    s = &#123;s,<span class="string">"p1800"</span>&#125;; <span class="comment">// IEEE-p1800</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(s<span class="variable">.substr</span>(<span class="number">2</span>,<span class="number">5</span>)); <span class="comment">// EE-p</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 创建临时字符串</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    my_log(<span class="built_in">$sformatf</span>(<span class="string">"%s,%5d"</span>,s,<span class="number">42</span>)); <span class="comment">// “%5d”以整形来格式化参数，并且当整数字符数少于5个情况下，多格式化一定数量空格来填充，以使得空格和整数所用字符数的总和达到至少5个，5前面是-则表示左对齐，无符号则默认为+右对齐。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="keyword">void</span> my_log(<span class="keyword">string</span> msg);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"@%0t: %s"</span>,<span class="built_in">$time</span>, msg); <span class="comment">// 打印消息</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endfunction</span></span></pre></td></tr></table></figure>
+<p><code>sformatf()</code> 用法</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span> s1, s2, s3, s4;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">wait</span>(b_string_format == <span class="number">1</span>);<span class="built_in">$display</span>(<span class="string">"string_format process block started"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">s1 = <span class="string">"Welcome"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">s2 = <span class="string">"World"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(s3 == <span class="string">""</span>) <span class="comment">// 判断字符串是否为空</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"s3 is empty"</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">s3 = &#123;s1, <span class="string">" to "</span>, s2&#125;; <span class="comment">// concatenation operator '&#123;...&#125;'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">$display</span>(<span class="string">"s3 content: %s"</span>, s3);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">s4 = <span class="built_in">$sformatf</span>(<span class="string">"%s to %s"</span>, s1, s2); <span class="comment">// system format function</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">$display</span>(<span class="string">"s4 content: %s"</span>, s4);</span></pre></td></tr></table></figure>
 
     </div>
 
@@ -508,7 +510,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -592,7 +594,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">263k</span>
+    <span title="站点总字数">264k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
