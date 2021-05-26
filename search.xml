@@ -48,6 +48,7 @@
 ]]></content>
       <categories>
         <category>SV验证</category>
+        <category>SV精通</category>
       </categories>
       <tags>
         <tag>接口</tag>
@@ -345,6 +346,7 @@
 <p>对于复杂的系统验证，我们倾向于集中管理stimulator和checker，因为它们都需要主动给出激励或判断结果，需要较多协调处理。Monitor则相对独立，只是作为监测方，将数据交给checker。</p>
 ]]></content>
       <categories>
+        <category>SV验证</category>
         <category>验证通识</category>
       </categories>
       <tags>
@@ -689,6 +691,7 @@
 ]]></content>
       <categories>
         <category>SV验证</category>
+        <category>SV精通</category>
       </categories>
   </entry>
   <entry>
