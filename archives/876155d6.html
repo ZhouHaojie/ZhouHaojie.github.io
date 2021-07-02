@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="介绍为什么需要随机？  芯片体积增大，复杂度日渐提高，原先的定向测试无法满足需求，因此随机测试比例不断提高 CRT 方法通过随机激励，可以找到意想不到的bug CRT 需要激励，参考模型和在线比较，搭建完环境后，即可运行上百次仿真而无需手工检查结果，可以提高验证效率">
+<meta name="keywords" content="随机化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="04 SV 验证-随机化">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;876155d6.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="介绍为什么需要随机？  芯片体积增大，复杂度日渐提高，原先的定向测试无法满足需求，因此随机测试比例不断提高 CRT 方法通过随机激励，可以找到意想不到的bug CRT 需要激励，参考模型和在线比较，搭建完环境后，即可运行上百次仿真而无需手工检查结果，可以提高验证效率">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-07-02T14:24:01.490Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://grenze.cn/archives/876155d6.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>04 SV 验证-随机化 | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">80</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">42</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">82</span></a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/876155d6.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          04 SV 验证-随机化
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-07-01 15:35:07" itemprop="dateCreated datePublished" datetime="2021-07-01T15:35:07+02:00">2021-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-02 16:24:01" itemprop="dateModified" datetime="2021-07-02T16:24:01+02:00">2021-07-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SV-%E9%AA%8C%E8%AF%81/" itemprop="url" rel="index">
+                    <span itemprop="name">SV 验证</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SV-%E9%AA%8C%E8%AF%81/SV%E7%B2%BE%E9%80%9A/" itemprop="url" rel="index">
+                    <span itemprop="name">SV精通</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>为什么需要随机？</p>
+<ul>
+<li>芯片体积增大，复杂度日渐提高，原先的定向测试无法满足需求，因此随机测试比例不断提高</li>
+<li>CRT 方法通过随机激励，可以找到意想不到的bug</li>
+<li>CRT 需要激励，参考模型和在线比较，搭建完环境后，即可运行上百次仿真而无需手工检查结果，可以提高验证效率</li>
+</ul>
+<a id="more"></a>
+<p>为什么需要约束？</p>
+<ul>
+<li><p>如果没有约束，产生有效激励的同时也产生了很多无效和非法的激励</p>
+</li>
+<li><p>约束不但可以指定数据的取值范围，还可以指定各个数值的随机权重分布</p>
+</li>
+<li>我们需要的是合法的随机，需要限定激励的合法范围</li>
+</ul>
+<p>需要随机什么？</p>
+<ul>
+<li>器件配置：通过寄存器和系统信号</li>
+<li>环境配置：随机化验证环境，例如合理的时钟和外部反馈信号</li>
+<li>原始输入数据：例如MCDF数据包的长度、带宽，数据间的顺序</li>
+<li>延时：握手信号之间的时序关系，例如valid和ready，req和ack之间的时序关系</li>
+<li>协议异常：如果反馈信号给出异常，那么设计是否可以保持后续数据处理的稳定性？</li>
+</ul>
+<h2 id="随机约束和分布"><a href="#随机约束和分布" class="headerlink" title="随机约束和分布"></a>随机约束和分布</h2><h3 id="声明随机变量"><a href="#声明随机变量" class="headerlink" title="声明随机变量"></a>声明随机变量</h3><p>声明rand变量，在后期通过对象调用<code>randomize()</code> 函数随机化变量， 约束constraint也在类中声明</p>
+<p>SV 只能随机化2值数据类型， 无法随机化出X，Z值和字符串。但是可以用logic类型，不会报错，但是不会生成X，Z值。 </p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> packet;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">rand</span> <span class="keyword">bit</span> [<span class="number">31</span>:<span class="number">0</span>] src;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">randc</span> <span class="keyword">bit</span>[<span class="number">7</span>:<span class="number">0</span>] kind;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// limit the values for src</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">constraint</span> c &#123;src &gt; <span class="number">10</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">                  src &lt; <span class="number">15</span>;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endclass</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">packet p;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    p = <span class="keyword">new</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">assert</span>(p<span class="variable">.randomize</span>()) <span class="keyword">else</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$fatal</span>(<span class="number">0</span>, <span class="string">"randomize failed"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    transmit(p);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">end</span></span></pre></td></tr></table></figure>
+<p><strong>rand 和 randc 区别：</strong></p>
+<ul>
+<li>rand: 每次随机化这个类后，这些变量都会赋一个值，并且概率都是相同的</li>
+<li>randc: 周期随机性，所有可能值都赋过值后，才可能重复</li>
+</ul>
+<h3 id="权重分布"><a href="#权重分布" class="headerlink" title="权重分布"></a>权重分布</h3><p>关键词 <code>dist</code> 可以在约束中用来产生随机数值的权重分布，:= 表示每个值的权重是相同的， ：/表示权重要平分到每一个值， <strong>权重和值可以是常数或变量</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">rand</span> <span class="keyword">int</span> src, dst;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">constraint</span> c_dist &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    src <span class="keyword">dist</span> &#123;<span class="number">0</span> := <span class="number">40</span>, [<span class="number">1</span>:<span class="number">3</span>] := <span class="number">60</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 0:40/220, 1:60/220, 2:60/220, 3:60/220</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    dst <span class="keyword">dist</span> &#123;<span class="number">0</span> :/ <span class="number">40</span>, [<span class="number">1</span>:<span class="number">3</span>] :/ <span class="number">60</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 0:40/100, 1:20/100... 三个数平分60个单位</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h3 id="集合成员和inside运算符"><a href="#集合成员和inside运算符" class="headerlink" title="集合成员和inside运算符"></a>集合成员和inside运算符</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">rand</span> <span class="keyword">int</span> c;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> lo, hi;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">constraint</span> c_range&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    c <span class="keyword">inside</span> &#123;[lo:hi]&#125;; <span class="comment">//相当于 lo&lt;=c,c&lt;=hi</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 选择一个集合之外的值,只需要用取反操作符！</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">constraint</span> c_range&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    !(c <span class="keyword">inside</span> &#123;[lo:hi]&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>使用”$”指定最大值和最小值</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">rand</span> <span class="keyword">bit</span> [<span class="number">6</span>:<span class="number">0</span>] a; <span class="comment">// 0~127</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">constraint</span> c_range&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    a <span class="keyword">inside</span> &#123;[$:<span class="number">4</span>], [<span class="number">20</span>:$]&#125;; <span class="comment">// 0&lt;=a&lt;=4 || 20&lt;=a&lt;=127</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h3 id="条件约束"><a href="#条件约束" class="headerlink" title="条件约束"></a>条件约束</h3><p>可以通过 –&gt; 或 if-else 来让一个约束表达式在特定时刻有效</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> busOp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">constraint</span> c_io&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        (io_space_mode) -&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        addr[<span class="number">31</span>] == <span class="number">1'b1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">constraint</span> c_len_rw &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(op == READ)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            len <span class="keyword">inside</span> &#123;[BYTE:LWRD]&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">else</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            len == LWRD;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr></table></figure>
+<p>约束块都是声明性的代码，是并行的，所有的约束表达式同时有效。</p>
+<h2 id="约束块的控制"><a href="#约束块的控制" class="headerlink" title="约束块的控制"></a>约束块的控制</h2><h3 id="打开关闭约束块"><a href="#打开关闭约束块" class="headerlink" title="打开关闭约束块"></a>打开关闭约束块</h3><ul>
+<li>一个类可以包含多个约束块，可以把不同的约束块用于不同的测试。</li>
+<li>一般情况下，各个约束块之间的约束内容是互相协调不违背的。</li>
+<li>对于其他情况，可以根据不同的需要来选择使能哪些约束块，禁止哪些约束块，可以使用内建的 <code>constraint_mode()</code> 函数打开或关闭约束。</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> packet;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">rand</span> <span class="keyword">bit</span> length;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">constraint</span> c_short &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        length <span class="keyword">inside</span> &#123;[<span class="number">1</span>:<span class="number">32</span>]&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">constraint</span> c_long &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        length <span class="keyword">inside</span> &#123;[<span class="number">1000</span>:<span class="number">1023</span>]&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endclass</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">packet p;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    p = <span class="keyword">new</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    p<span class="variable">.c_short</span><span class="variable">.constraint_mode</span>(<span class="number">0</span>); <span class="comment">// 关闭short constraint</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">assert</span>(p<span class="variable">.randomize</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    transmit(p);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    p<span class="variable">.constraint_mode</span>(<span class="number">0</span>); <span class="comment">// 所有的constraints都关闭</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    p<span class="variable">.c_short</span><span class="variable">.constraint_mode</span>(<span class="number">1</span>); <span class="comment">//只打开short constraint</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">assert</span>(p<span class="variable">.randomize</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    transmit(p);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">end</span></span></pre></td></tr></table></figure>
+<h3 id="内嵌约束"><a href="#内嵌约束" class="headerlink" title="内嵌约束"></a>内嵌约束</h3><p>SV 允许使用 <code>randomize() with</code>来增加额外的约束，这和在类里加约束是等效的，<strong>但同时要注意内部约束和外部约束之间应该是协调的</strong>，如果相违背，随机数值求解会失败。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> transaction;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">rand</span> <span class="keyword">bit</span> [<span class="number">31</span>:<span class="number">0</span>] addr, data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">constraint</span> c1 &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">soft</span> addr <span class="keyword">inside</span> &#123;[<span class="number">0</span>:<span class="number">100</span>], [<span class="number">1000</span>:<span class="number">2000</span>]&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endclass</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">transaction t;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    t = <span class="keyword">new</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// addr is 50-100,1000-1500</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// data &lt; 10</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">assert</span>(t<span class="variable">.randomize</span>() <span class="keyword">with</span> &#123;addr &gt;= <span class="number">50</span>; addr&lt;= <span class="number">1500</span>; data &lt; <span class="number">10</span>;&#125;);</span></pre></td></tr></table></figure>
+<p><strong>QA:</strong></p>
+<p>如果<code>t.randomize() with {addr inside [200:300]; data inside [10:20];}</code> , 那么哪个值是合理的随机数值？</p>
+<p>addr=200, data=10</p>
+<p><code>soft</code> 关键字，软约束： 如果外部也有一个约束，此时soft的约束优先级更低，若没有soft会报错</p>
+<h2 id="随机函数"><a href="#随机函数" class="headerlink" title="随机函数"></a>随机函数</h2><p>SV 提供了两个预定义的void类型的函数 <code>pre_randomize()</code> 和 <code>post_randomize()</code> , 如果在类中定义这两个函数，<code>那么对象在执行了randomize()</code> 之前或之后会分别执行这两个函数。</p>
+<p><strong>随机化个别变量</strong></p>
+<p>可以在调用 <code>randomize()</code> 时，可以在参数列表里加入变量，这样只有这些变量才会被随机化，其他变量会被当做状态变量而不会被随机化。</p>
+<p><strong>注意：</strong>无论变量是不是rand类型，都可以作为 <code>randomize()</code> 的参数而被随机化。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> rising;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">byte</span> low;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">rand</span> <span class="keyword">byte</span> med, hi;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">constraint</span> up&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        low&lt;med; med&lt;hi;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endclass</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 情况1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    rising r;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    r=<span class="keyword">new</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    r<span class="variable">.randomize</span>(); <span class="comment">// 随机化med,hi</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    r<span class="variable">.randomize</span>(med); <span class="comment">// 只随机化med</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    r<span class="variable">.randomize</span>(low); <span class="comment">// 只随机化low</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 情况2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    rising r;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    r=<span class="keyword">new</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    r<span class="variable">.randomize</span>(low);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">end</span></span></pre></td></tr></table></figure>
+<p>对于情况2，med和hi没有参与randomize过程，值为0，randomize(low)后, 约束med&lt;hi不满足报错。因此我们应该先对整个对象随机化，使它满足约束，然后再只随机化其中一个变量。</p>
+<h2 id="数组约束"><a href="#数组约束" class="headerlink" title="数组约束"></a>数组约束</h2><h3 id="数组大小约束"><a href="#数组大小约束" class="headerlink" title="数组大小约束"></a>数组大小约束</h3><p>多数情况下，数组的大小应该给定范围，防止生成过大体积的数组或空数组。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> dyn_size;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">rand</span> <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>] d[];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">constraint</span> d_size &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        d<span class="variable">.size</span> <span class="keyword">inside</span> &#123;[<span class="number">1</span>:<span class="number">10</span>]&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr></table></figure>
+<p><code>size()</code> 函数可以约束动态数组或队列的元素个数</p>
+<p>使用inside约束可以设置数组大小的上下限。<strong>记住</strong>，一定要设置上限，否则会产生成千上万个元素，导致随即求解器要用很长的时间才能求解。</p>
+<h3 id="约束数组中的元素"><a href="#约束数组中的元素" class="headerlink" title="约束数组中的元素"></a>约束数组中的元素</h3><p>SV 可以利用foreach对数组的每一个元素进行约束。针对动态数组，foreach更适合对非固定大小数组中每个元素的约束。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> good_sum;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">rand</span> uint len[];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">constraint</span> c_len &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">foreach</span>(len[i])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            len[i] <span class="keyword">inside</span> &#123;[<span class="number">1</span>:<span class="number">255</span>]&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        len<span class="variable">.sum</span>() &lt; <span class="number">1024</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        len<span class="variable">.size</span>() <span class="keyword">inside</span> &#123;[<span class="number">1</span>:<span class="number">8</span>]&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr></table></figure>
+<h3 id="产生唯一元素的数组"><a href="#产生唯一元素的数组" class="headerlink" title="产生唯一元素的数组"></a>产生唯一元素的数组</h3><p>如果想要产生一个随机数组，它的每一个元素的值都是唯一的。</p>
+<p><strong>方法一：</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> unique_slow;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">rand</span> <span class="keyword">bit</span> [<span class="number">7</span>:<span class="number">0</span>] ua[<span class="number">64</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">constraint</span> c &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">foreach</span>(ua[i])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">foreach</span>(ua[j])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span>(i != j) <span class="comment">// 除了元素自己</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                    ua[i] != ua[j]; <span class="comment">// 和其他元素比较都不同</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr></table></figure>
+<p>会产生超过4000个独立的约束，从而降低仿真速度。</p>
+<p><strong>方法二：</strong></p>
+<p>也可以利用 randc 变量来辅助生成唯一元素的数组。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> randc8;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">randc</span> <span class="keyword">bit</span> [<span class="number">7</span>:<span class="number">0</span>] val; <span class="comment">// val: 0-255,随机1-256次中，元素是唯一的</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endclass</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> little_unique_array;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">bit</span> [<span class="number">7</span>:<span class="number">0</span>] ua [<span class="number">64</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> <span class="keyword">void</span> pre_randomize();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        randc8 rc8;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        rc8 = <span class="keyword">new</span>(); <span class="comment">// 不能放在foreach里</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">foreach</span>(ua[i]) <span class="keyword">begin</span> <span class="comment">// 随机化了64次，小于256，所以元素都是唯一的</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">assert</span>(rc8<span class="variable">.randomize</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            ua[i] = rc8<span class="variable">.val</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endclass</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    little_unique_array lua;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    lua = <span class="keyword">new</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    lua<span class="variable">.randomize</span>(); <span class="comment">// 会先执行pre_randomize</span></span></pre></td></tr></table></figure>
+<h3 id="随机化句柄数组"><a href="#随机化句柄数组" class="headerlink" title="随机化句柄数组"></a>随机化句柄数组</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">parameter</span> MAX_SIZE = <span class="number">10</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> rand_stuff;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">bit</span> [<span class="number">1</span>:<span class="number">0</span>] value = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// rand bit [1:0] value;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endclass</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> rand_array;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">rand</span> rand_stuff array[]; <span class="comment">// 不要忘记使用rand!</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">constraint</span> c &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        array<span class="variable">.size</span> <span class="keyword">inside</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            [<span class="number">1</span>:MAX_SIZE];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> <span class="keyword">new</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        array = <span class="keyword">new</span>[MAX_SIZE];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">foreach</span>(array[i])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            array[i] = <span class="keyword">new</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endclass</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">rand_array ra;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    ra = <span class="keyword">new</span>(); <span class="comment">// 构造数组和所有的对象,ra 里有十个对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">assert</span>(ra<span class="variable">.randomize</span>() <span class="keyword">with</span> &#123;array<span class="variable">.size</span> == <span class="number">2</span>&#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">foreach</span>(ra<span class="variable">.array</span>[i])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">$display</span>(ra<span class="variable">.array</span>[i]<span class="variable">.value</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">end</span></span></pre></td></tr></table></figure>
+<p>随机化句柄指向的对象和数组个数，但是句柄指向的对象value不是一个rand变量，<code>array[0].value=1, array[1].value=1</code>, 若没有function，句柄数组中的每一个句柄元素都是悬空的，所以需要在随机化之前为每一个元素句柄构造对象。</p>
+<p><strong>句柄声明为rand?</strong></p>
+<p>句柄指向的对象里的变量也会被随机化，但前提是句柄没有悬空，并且其变量也声明为rand。</p>
+<h3 id="随机控制"><a href="#随机控制" class="headerlink" title="随机控制"></a>随机控制</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">15</span>; i++) <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">randsequence</span>(stream)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        	stream : cfg_read := <span class="number">1</span> | io_read :=<span class="number">2</span> | mem_read := <span class="number">5</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            cfg_read : &#123;cfg_read_task;&#125; | &#123;cfg_read_task;&#125; cfg_read;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            mem_read : &#123;mem_read_task;&#125; | &#123;mem_read_task;&#125; mem_read;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            io_read : &#123;io_read_task;&#125; | &#123;io_read_task;&#125; io_read;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">endsequence</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">task</span> cfg_read_task;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endtask</span></span></pre></td></tr></table></figure>
+<p>以上代码产生了stream序列，它可以是cfg_read, io_read 或 mem_read, 权重不同，随机选取。</p>
+<p>cfg_read 可以是对cfg_read_task的一次调用，也可以是在改任务调用后尾随一个cfg_read。</p>
+<p>randsequence 的一个优点是它是程序性的代码，在执行过程中可以逐步调试，或增加<code>$display</code> 语句。<code>如果调用对象的randomize()</code> 函数，它要么成功，要么失败，无法知道它执行的过程。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/876155d6.html" title="04 SV 验证-随机化">http://grenze.cn/archives/876155d6.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> 随机化</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/1c290204.html" rel="prev" title="02 SV 验证-接口驱动和采样">
+      <i class="fa fa-chevron-left"></i> 02 SV 验证-接口驱动和采样
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机约束和分布"><span class="nav-number">2.</span> <span class="nav-text">随机约束和分布</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#声明随机变量"><span class="nav-number">2.1.</span> <span class="nav-text">声明随机变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权重分布"><span class="nav-number">2.2.</span> <span class="nav-text">权重分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合成员和inside运算符"><span class="nav-number">2.3.</span> <span class="nav-text">集合成员和inside运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件约束"><span class="nav-number">2.4.</span> <span class="nav-text">条件约束</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#约束块的控制"><span class="nav-number">3.</span> <span class="nav-text">约束块的控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#打开关闭约束块"><span class="nav-number">3.1.</span> <span class="nav-text">打开关闭约束块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内嵌约束"><span class="nav-number">3.2.</span> <span class="nav-text">内嵌约束</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机函数"><span class="nav-number">4.</span> <span class="nav-text">随机函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组约束"><span class="nav-number">5.</span> <span class="nav-text">数组约束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组大小约束"><span class="nav-number">5.1.</span> <span class="nav-text">数组大小约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#约束数组中的元素"><span class="nav-number">5.2.</span> <span class="nav-text">约束数组中的元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#产生唯一元素的数组"><span class="nav-number">5.3.</span> <span class="nav-text">产生唯一元素的数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机化句柄数组"><span class="nav-number">5.4.</span> <span class="nav-text">随机化句柄数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机控制"><span class="nav-number">5.5.</span> <span class="nav-text">随机控制</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/archives/876155d6.html" title="04 SV 验证-随机化" target="_blank">04 SV 验证-随机化</a>
+          </li>
+        
+          <li>
+            <a href="/archives/1c290204.html" title="02 SV 验证-接口驱动和采样" target="_blank">02 SV 验证-接口驱动和采样</a>
+          </li>
+        
+          <li>
+            <a href="/archives/8ca7f075.html" title="MCDF实验-lab1" target="_blank">MCDF实验-lab1</a>
+          </li>
+        
+          <li>
+            <a href="/archives/6578d19d.html" title="c4 Scheduling-Definition des HLS-Schedulingproblems" target="_blank">c4 Scheduling-Definition des HLS-Schedulingproblems</a>
+          </li>
+        
+          <li>
+            <a href="/archives/6944cdce.html" title="c4 Scheduling-Auspraegungen und Trade-offs" target="_blank">c4 Scheduling-Auspraegungen und Trade-offs</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">273k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">4:08</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: 'bcfd541fc96a03f37eac79df392a27a1',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
