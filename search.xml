@@ -83,7 +83,7 @@
 <p>randsequence 的一个优点是它是程序性的代码，在执行过程中可以逐步调试，或增加<code>$display</code> 语句。<code>如果调用对象的randomize()</code> 函数，它要么成功，要么失败，无法知道它执行的过程。</p>
 ]]></content>
       <categories>
-        <category>SV 验证</category>
+        <category>SV验证</category>
         <category>SV精通</category>
       </categories>
       <tags>
