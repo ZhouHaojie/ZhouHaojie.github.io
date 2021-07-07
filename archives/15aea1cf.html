@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mbG372Css0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://grenze.cn').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="实验2主要让我们逐渐从使用硬件盒子验证过渡到软件盒子(class) 来验证设计，理解类的继承和层次包含关系。">
+<meta name="keywords" content="lab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MCDF实验-lab2">
+<meta property="og:url" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;15aea1cf.html">
+<meta property="og:site_name" content="ZhouHaojie的博客">
+<meta property="og:description" content="实验2主要让我们逐渐从使用硬件盒子验证过渡到软件盒子(class) 来验证设计，理解类的继承和层次包含关系。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;15aea1cf&#x2F;image-20210705112131628.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;15aea1cf&#x2F;image-20210705121326153.png">
+<meta property="og:updated_time" content="2021-07-07T13:26:40.832Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;grenze.cn&#x2F;archives&#x2F;15aea1cf&#x2F;image-20210705112131628.png">
+
+<link rel="canonical" href="http://grenze.cn/archives/15aea1cf.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>MCDF实验-lab2 | ZhouHaojie的博客</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=143690141"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '143690141');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ZhouHaojie的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhouHaojie的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">只有你拼劲全力，才会在人前显得毫不费劲</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">80</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">40</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">83</span></a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies/" rel="section"><i class="fa fa-fw fa-film"></i>观影</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-book"></i>阅读</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://grenze.cn/archives/15aea1cf.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhouHaojie">
+      <meta itemprop="description" content="Karlsruher Institut für Technologie,此为博客一枚。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhouHaojie的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MCDF实验-lab2
+        </h1>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-07-07 15:26:01 / 修改时间：15:26:40" itemprop="dateCreated datePublished" datetime="2021-07-07T15:26:01+02:00">2021-07-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SV%E9%AA%8C%E8%AF%81/" itemprop="url" rel="index">
+                    <span itemprop="name">SV验证</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SV%E9%AA%8C%E8%AF%81/Lab/" itemprop="url" rel="index">
+                    <span itemprop="name">Lab</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>17k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>15 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>实验2主要让我们逐渐从使用硬件盒子验证过渡到软件盒子(class) 来验证设计，理解类的继承和层次包含关系。<a id="more"></a></p>
+<h2 id="接口的使用"><a href="#接口的使用" class="headerlink" title="接口的使用"></a>接口的使用</h2><p>修改lab1的代码，使用接口来连接验证组件和DUT，所以验证组件<code>chnl_initiator</code>的端口变得非常“干净”，即<code>chnl_intf intf</code>。在使用接口之前需要<strong>定义接口</strong><code>chnl_intf</code>和内部的接口，同时也要声明一个<strong>时钟块</strong>，它的功能是为了<strong>消除</strong>可能存在的<strong>竞争问题</strong>，确保时钟驱动数据之间有一定的延迟，以便于DUT顺利采样。</p>
+<p>引入接口后的代码，例化的实例包括了只<strong>产生数据</strong>的<code>channel generator</code>，只负责<strong>发送数据</strong>的<code>channel initiator</code>以及作为验证组件和DUT之间的<strong>接口</strong><code>chnl_intf</code></p>
+<p><strong>实验要求：</strong></p>
+<ul>
+<li><code>channel_initiator</code>发送的数据例如<code>valid</code>和<code>data</code>与时钟<code>clk</code>均在同一个变化沿，没有任何延迟。这种0延迟的数据发送<strong>不利于波形的查看</strong>，要在之前的代码基础上使用<code>intf.ck</code>的方式来做数据驱动，并且再观察波形，查看驱动的数据与时钟上升沿的延迟。</li>
+<li>为了更好地控制<strong>相邻数据</strong>之间的<strong>空闲间隔</strong>，引入了一个变量<code>idle_cycles</code>，它表示相邻有效数据之间的间隔。之前的代码会使得有效数据之间保持固定的一个空闲周期，需要使用<code>idle_cycles</code>来灵活控制有效数据之间的空闲周期。</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> chnl_intf(<span class="keyword">input</span> clk, <span class="keyword">input</span> rstn);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>] ch_data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">logic</span>        ch_valid;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">logic</span>        ch_ready;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">logic</span> [ <span class="number">5</span>:<span class="number">0</span>] ch_margin;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">clocking</span> drv_ck @(<span class="keyword">posedge</span> clk);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">default</span> <span class="keyword">input</span> #<span class="number">1</span>ns <span class="keyword">output</span> #<span class="number">1</span>ns;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">output</span> ch_data, ch_valid;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">input</span> ch_ready, ch_margin;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endclocking</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endinterface</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> chnl_initiator(chnl_intf intf);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">string</span> name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">int</span> idle_cycles = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">function</span> <span class="keyword">automatic</span> <span class="keyword">void</span> set_idle_cycles(<span class="keyword">int</span> n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    idle_cycles = n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">function</span> <span class="keyword">automatic</span> <span class="keyword">void</span> set_name(<span class="keyword">string</span> s);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    name = s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">task</span> <span class="keyword">automatic</span> chnl_write(<span class="keyword">input</span> <span class="keyword">logic</span>[<span class="number">31</span>:<span class="number">0</span>] data);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    @(<span class="keyword">posedge</span> intf<span class="variable">.clk</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// USER TODO 1.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Please use the clocking drv_ck of chnl_intf to drive data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    intf<span class="variable">.drv_ck</span><span class="variable">.ch_valid</span> &lt;= <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    intf<span class="variable">.drv_ck</span><span class="variable">.ch_data</span> &lt;= data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">wait</span>(intf<span class="variable">.ch_ready</span> === <span class="number">'b1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"%t channel initiator [%s] sent data %x"</span>, <span class="built_in">$time</span>, name, data);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// USER TODO 1.2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Apply variable idle_cycles and decide how many idle cycles to be</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// inserted between two sequential data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">repeat</span>(idle_cycles) chnl_idle();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endtask</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">task</span> <span class="keyword">automatic</span> chnl_idle();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">    @(<span class="keyword">posedge</span> intf<span class="variable">.clk</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// USER TODO 1.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Please use the clocking drv_ck of chnl_intf to drive data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">    intf<span class="variable">.drv_ck</span><span class="variable">.ch_valid</span> &lt;= <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    intf<span class="variable">.drv_ck</span><span class="variable">.ch_data</span> &lt;= <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endtask</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endmodule</span></span></pre></td></tr></table></figure>
+<h2 id="仿真的结束"><a href="#仿真的结束" class="headerlink" title="仿真的结束"></a>仿真的结束</h2><p>在tb module，利用fork-join语句来实现三个chnl_initiator同时发送数据的要求。同时将不同的test也组装到task中，以此来区分不同的测试内容，这是由于每一个测试任务的测试目的和要求都不相同。</p>
+<p><strong>实验要求：</strong></p>
+<ul>
+<li>参考<code>basic_test()</code>, 实现<code>burst_test()</code>方法，使得每个<code>chnl_initiator</code>的<code>idle_cycles</code>设置为0，同时发送500个数据，最后结束测试。</li>
+<li>实现<code>fifo_full_test()</code>方法，使得无论采取什么数值的<code>idle_cycles</code>，也无论发送多少个数据，只要各个<code>chnl_initiator</code>的不停发送使得对应的channel缓存变为满标志(ready拉低)，那么可以在三个channel都拉低ready时(不必要同时拉低，可以先后拉低即可)，便可以立即结束测试</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// each channel send data with idle_cycles inside [1:3]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// each channel send out 200 data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// then to finish the test</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">task</span> <span class="keyword">automatic</span> basic_test();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// verification component initializationi</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    chnl0_gen<span class="variable">.initialize</span>(<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    chnl1_gen<span class="variable">.initialize</span>(<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    chnl2_gen<span class="variable">.initialize</span>(<span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    chnl0_init<span class="variable">.set_name</span>(<span class="string">"chnl0_init"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    chnl1_init<span class="variable">.set_name</span>(<span class="string">"chnl1_init"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    chnl2_init<span class="variable">.set_name</span>(<span class="string">"chnl2_init"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    chnl0_init<span class="variable">.set_idle_cycles</span>($urandom_range(<span class="number">1</span>, <span class="number">3</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    chnl1_init<span class="variable">.set_idle_cycles</span>($urandom_range(<span class="number">1</span>, <span class="number">3</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    chnl2_init<span class="variable">.set_idle_cycles</span>($urandom_range(<span class="number">1</span>, <span class="number">3</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"basic_test initialized components"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">wait</span> (rstn === <span class="number">1'b1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">repeat</span>(<span class="number">5</span>) @(<span class="keyword">posedge</span> clk);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"basic_test started testing DUT"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Please check the SV book for fork-join basic knowledge</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// and get understood it is for parallel thread running</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">fork</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">repeat</span>(<span class="number">100</span>) chnl0_init<span class="variable">.chnl_write</span>(chnl0_gen<span class="variable">.get_data</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">repeat</span>(<span class="number">100</span>) chnl1_init<span class="variable">.chnl_write</span>(chnl1_gen<span class="variable">.get_data</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">repeat</span>(<span class="number">100</span>) chnl2_init<span class="variable">.chnl_write</span>(chnl2_gen<span class="variable">.get_data</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">join</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// waiting until transfering all of the data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">fork</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(chnl0_init<span class="variable">.intf</span><span class="variable">.ch_margin</span> == <span class="number">'h20</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(chnl1_init<span class="variable">.intf</span><span class="variable">.ch_margin</span> == <span class="number">'h20</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(chnl2_init<span class="variable">.intf</span><span class="variable">.ch_margin</span> == <span class="number">'h20</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">join</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"basic_test finished testing DUT"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endtask</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// USER TODO 2.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// each channel send data with idle_cycles == 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// each channel send out 500 data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// then to finish the test</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">task</span> <span class="keyword">automatic</span> burst_test();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// initiator</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">    chnl0_init<span class="variable">.set_name</span>(<span class="string">"chnl0_init"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">    chnl1_init<span class="variable">.set_name</span>(<span class="string">"chnl1_init"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">    chnl2_init<span class="variable">.set_name</span>(<span class="string">"chnl2_init"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">    chnl0_init<span class="variable">.set_idle_cycles</span>(<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">    chnl1_init<span class="variable">.set_idle_cycles</span>(<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">    chnl2_init<span class="variable">.set_idle_cycles</span>(<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// generator</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">    chnl0_gen<span class="variable">.initialize</span>(<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">    chnl1_gen<span class="variable">.initialize</span>(<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">    chnl2_gen<span class="variable">.initialize</span>(<span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"burst_test initialized components"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">wait</span> (rstn === <span class="number">1'b1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">repeat</span>(<span class="number">5</span>) @(<span class="keyword">posedge</span> clk);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"burst_test started testing DUT"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">fork</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">repeat</span>(<span class="number">500</span>) chnl0_init<span class="variable">.chnl_write</span>(chnl0_gen<span class="variable">.get_data</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">            chnl0_init<span class="variable">.chnl_idle</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">repeat</span>(<span class="number">500</span>) chnl1_init<span class="variable">.chnl_write</span>(chnl1_gen<span class="variable">.get_data</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line">            chnl1_init<span class="variable">.chnl_idle</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">repeat</span>(<span class="number">500</span>) chnl2_init<span class="variable">.chnl_write</span>(chnl2_gen<span class="variable">.get_data</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">            chnl2_init<span class="variable">.chnl_idle</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">join</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">fork</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">wait</span>(chnl0_init<span class="variable">.intf</span><span class="variable">.ch_margin</span> == <span class="number">'h20</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">73</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">wait</span>(chnl1_init<span class="variable">.intf</span><span class="variable">.ch_margin</span> == <span class="number">'h20</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">74</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">wait</span>(chnl2_init<span class="variable">.intf</span><span class="variable">.ch_margin</span> == <span class="number">'h20</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">75</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">join</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">76</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"burst_test finished testung DUT"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">77</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">78</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endtask</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">79</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">80</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// USER TODO 2.2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">81</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// The test should be immediately finished when all of channels</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">82</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// have been reached fifo full state, but not all reaching</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">83</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// fifo full at the same time</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">84</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">task</span> <span class="keyword">automatic</span> fifo_full_test();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">85</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// initiator</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">86</span></pre></td><td class="code"><pre><span class="line">    chnl0_init<span class="variable">.set_name</span>(<span class="string">"chnl0_init"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">87</span></pre></td><td class="code"><pre><span class="line">    chnl1_init<span class="variable">.set_name</span>(<span class="string">"chnl1_init"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">88</span></pre></td><td class="code"><pre><span class="line">    chnl2_init<span class="variable">.set_name</span>(<span class="string">"chnl2_init"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">89</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">90</span></pre></td><td class="code"><pre><span class="line">    chnl0_init<span class="variable">.set_idle_cycles</span>(<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">91</span></pre></td><td class="code"><pre><span class="line">    chnl1_init<span class="variable">.set_idle_cycles</span>(<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">92</span></pre></td><td class="code"><pre><span class="line">    chnl2_init<span class="variable">.set_idle_cycles</span>(<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">93</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// generator</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">94</span></pre></td><td class="code"><pre><span class="line">    chnl0_gen<span class="variable">.initialize</span>(<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">95</span></pre></td><td class="code"><pre><span class="line">    chnl1_gen<span class="variable">.initialize</span>(<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">96</span></pre></td><td class="code"><pre><span class="line">    chnl2_gen<span class="variable">.initialize</span>(<span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">97</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"burst_test initialized components"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">98</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">wait</span> (rstn === <span class="number">1'b1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">99</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">repeat</span>(<span class="number">5</span>) @(<span class="keyword">posedge</span> clk);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">100</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"fifo_full_test started testing DUT"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">101</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// fork join_none,执行内部语句时，父线程继续执行</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">102</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">fork</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">103</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">forever</span> chnl0_init<span class="variable">.chnl_write</span>(chnl0_gen<span class="variable">.get_data</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">104</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">forever</span> chnl1_init<span class="variable">.chnl_write</span>(chnl1_gen<span class="variable">.get_data</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">105</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">forever</span> chnl2_init<span class="variable">.chnl_write</span>(chnl2_gen<span class="variable">.get_data</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">106</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">join_none</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">107</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 分别三个都满足，并非同时</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">108</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">fork</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">109</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(chnl0_init<span class="variable">.intf</span><span class="variable">.ch_margin</span> == <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">110</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(chnl1_init<span class="variable">.intf</span><span class="variable">.ch_margin</span> == <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">111</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(chnl2_init<span class="variable">.intf</span><span class="variable">.ch_margin</span> == <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">112</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">join</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">113</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"fifo_full_test finished testing DUT"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">114</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">115</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"fifo_full_test: set and ensure all agents' initiator are idle state"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">116</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">fork</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">117</span></pre></td><td class="code"><pre><span class="line">        chnl0_init<span class="variable">.chnl_idle</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">118</span></pre></td><td class="code"><pre><span class="line">        chnl1_init<span class="variable">.chnl_idle</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">119</span></pre></td><td class="code"><pre><span class="line">        chnl2_init<span class="variable">.chnl_idle</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">120</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">join</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">121</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">122</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"fifo_full_test waiting DUT transfering all of data"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">123</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">fork</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">124</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(chnl0_init<span class="variable">.intf</span><span class="variable">.ch_margin</span> == <span class="number">'h20</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">125</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(chnl1_init<span class="variable">.intf</span><span class="variable">.ch_margin</span> == <span class="number">'h20</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">126</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(chnl2_init<span class="variable">.intf</span><span class="variable">.ch_margin</span> == <span class="number">'h20</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">127</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">join</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">128</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"fifo_full_test: 3 channel fifos have transferred all data"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">129</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">130</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"fifo_full_test finished testing DUT"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">131</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endtask</span></span></pre></td></tr></table></figure>
+<p><code>fork join_none</code>在执行内部语句时父线程继续执行，<code>fork join</code> 只要内部语句分别都满足，并非同时满足，就可跳出</p>
+<h2 id="类的例化和类的成员"><a href="#类的例化和类的成员" class="headerlink" title="类的例化和类的成员"></a>类的例化和类的成员</h2><p>将之前用来封装验证功能的硬件盒子(module)中的数据和内容移植到软件盒子(class)中来。掌握类的基本例化，类的成员变量访问权限以及类的成员方法如何定义和使用。</p>
+<p><strong>实验要求：</strong></p>
+<ul>
+<li>将module的<code>chnl_initiator</code>和<code>chnl_generator</code>改成class的<code>chnl_initiator</code>和<code>chnl_generator</code>，同时定义一个用来封装发送数据的类<code>chnl_trans</code>。</li>
+<li>由于每一个<code>chnl_initiator</code>都需要使用接口<code>chnl_intf</code>来发送数据，在发送数据之前需要确保<br><code>chnl_initiator</code>中的接口不是悬空的，即需要由外部被传递。通过调用<code>chnl_initiator</code>的方法来完成接口的传递。</li>
+<li>注意class里面声明接口的指针必须要加上<code>virtual</code>关键字。</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> chnl_trans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">int</span> data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">int</span> id;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">int</span> num;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endclass</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> chnl_initiator;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">local</span> <span class="keyword">string</span> name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">local</span> <span class="keyword">int</span> idle_cycles;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">virtual</span> chnl_intf intf;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">"chnl_initiator"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span><span class="variable">.name</span> = name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span><span class="variable">.idle_cycles</span> = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> set_idle_cycles(<span class="keyword">int</span> n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span><span class="variable">.idle_cycles</span> = n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> set_name(<span class="keyword">string</span> s);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span><span class="variable">.name</span> = s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">function</span> <span class="keyword">void</span> set_interface(<span class="keyword">virtual</span> chnl_intf intf);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(intf == <span class="literal">null</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$error</span>(<span class="string">"interface handle is NULL, please check if target interface has been intantiated"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">else</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span><span class="variable">.intf</span> = intf;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">task</span> chnl_write(<span class="keyword">input</span> chnl_trans t);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">      @(<span class="keyword">posedge</span> intf<span class="variable">.clk</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// USER TODO 1.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// Please use the clocking drv_ck of chnl_intf to drive data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">      intf<span class="variable">.drv_ck</span><span class="variable">.ch_valid</span> &lt;= <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">      intf<span class="variable">.drv_ck</span><span class="variable">.ch_data</span> &lt;= t<span class="variable">.data</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">	  @(<span class="keyword">negedge</span> intf<span class="variable">.clk</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">wait</span>(intf<span class="variable">.ch_ready</span> === <span class="number">'b1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%t channel initiator [%s] sent data %x"</span>, <span class="built_in">$time</span>, name, t<span class="variable">.data</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// USER TODO 1.2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// Apply variable idle_cycles and decide how many idle cycles to be</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// inserted between two sequential data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">repeat</span>(<span class="keyword">this</span><span class="variable">.idle_cycles</span>) chnl_idle();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endtask</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">task</span> chnl_idle();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">      @(<span class="keyword">posedge</span> intf<span class="variable">.clk</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// USER TODO 1.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// Please use the clocking drv_ck of chnl_intf to drive data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">      intf<span class="variable">.drv_ck</span><span class="variable">.ch_valid</span> &lt;= <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">      intf<span class="variable">.drv_ck</span><span class="variable">.ch_data</span> &lt;= <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endtask</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endclass</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// USER TODO 3.4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// check if the object use is correct?</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> chnl_generator;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">  chnl_trans trans[$];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">int</span> num;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">int</span> id;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">  chnl_trans t;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">int</span> n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span><span class="variable">.id</span> = n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span><span class="variable">.num</span> = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//t = new();</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">function</span> chnl_trans get_trans();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">    t = <span class="keyword">new</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">    t<span class="variable">.data</span> = <span class="number">'h00C0_0000</span> + (<span class="keyword">this</span><span class="variable">.id</span>&lt;&lt;<span class="number">16</span>) + <span class="keyword">this</span><span class="variable">.num</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line">    t<span class="variable">.id</span> = <span class="keyword">this</span><span class="variable">.id</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line">    t<span class="variable">.num</span> = <span class="keyword">this</span><span class="variable">.num</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">73</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span><span class="variable">.num</span>++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">74</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span><span class="variable">.trans</span><span class="variable">.push_back</span>(t);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">75</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> t;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">76</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">77</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endclass</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">78</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// module tb</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">79</span></pre></td><td class="code"><pre><span class="line">chnl_intf chnl0_if(.*);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">80</span></pre></td><td class="code"><pre><span class="line">  chnl_intf chnl1_if(.*);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">81</span></pre></td><td class="code"><pre><span class="line">  chnl_intf chnl2_if(.*);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">82</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">83</span></pre></td><td class="code"><pre><span class="line">  chnl_initiator chnl0_init;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">84</span></pre></td><td class="code"><pre><span class="line">  chnl_initiator chnl1_init;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">85</span></pre></td><td class="code"><pre><span class="line">  chnl_initiator chnl2_init;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">86</span></pre></td><td class="code"><pre><span class="line">  chnl_generator chnl0_gen;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">87</span></pre></td><td class="code"><pre><span class="line">  chnl_generator chnl1_gen;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">88</span></pre></td><td class="code"><pre><span class="line">  chnl_generator chnl2_gen;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">89</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">90</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">91</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// USER TODO 3.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">92</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// instantiate the components chn0/1/2_init chnl0/1/2_gen</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">93</span></pre></td><td class="code"><pre><span class="line">    chnl0_init = <span class="keyword">new</span>(<span class="string">"chnl0_init"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">94</span></pre></td><td class="code"><pre><span class="line">    chnl1_init = <span class="keyword">new</span>(<span class="string">"chnl1_init"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">95</span></pre></td><td class="code"><pre><span class="line">    chnl2_init = <span class="keyword">new</span>(<span class="string">"chnl2_init"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">96</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">97</span></pre></td><td class="code"><pre><span class="line">    chnl0_gen = <span class="keyword">new</span>(<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">98</span></pre></td><td class="code"><pre><span class="line">    chnl1_gen = <span class="keyword">new</span>(<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">99</span></pre></td><td class="code"><pre><span class="line">    chnl2_gen = <span class="keyword">new</span>(<span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">100</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">101</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">102</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// USER TODO 3.2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">103</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// assign the interface handle to each chnl_initiator objects</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">104</span></pre></td><td class="code"><pre><span class="line">    chnl0_init<span class="variable">.set_interface</span>(chnl0_if); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">105</span></pre></td><td class="code"><pre><span class="line">    chnl1_init<span class="variable">.set_interface</span>(chnl1_if);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">106</span></pre></td><td class="code"><pre><span class="line">    chnl2_init<span class="variable">.set_interface</span>(chnl2_if);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">107</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// USER TODO 3.3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">108</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// START TESTs</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">109</span></pre></td><td class="code"><pre><span class="line">    basic_test();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">110</span></pre></td><td class="code"><pre><span class="line">    burst_test();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">111</span></pre></td><td class="code"><pre><span class="line">    fifo_full_test();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">112</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">113</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"*****************all of tests have been finished********************"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">114</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$finish</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">115</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">end</span></span></pre></td></tr></table></figure>
+<h2 id="包的定义和类的继承"><a href="#包的定义和类的继承" class="headerlink" title="包的定义和类的继承"></a>包的定义和类的继承</h2><p>进一步引入新的类<code>chnl_agent</code>、<code>chnl_root_test</code>、<code>chnl_basic_test</code>、<code>chnl_burst_test</code>、<code>chnl_fifo_full_test</code>，同时将所有的类(都是与channel相关的验证组件类)封装到专门包裹软件类的容器<code>package chnl_pkg</code>中且完成编译。编译后的<code>chnl_pkg</code>会被默认编译到work中，与其它的module是一同并列放置的。</p>
+<ul>
+<li><code>chnl_agent</code>：将它作为一个标准组件单元，包括generator、driver(initiator)和monitor。所以<code>chnl_initiator</code>和<code>chnl_generator</code>应该放在agent中例化</li>
+<li>task实现的测试任务由类来实现：父类<code>chnl_root_test</code>，子类<code>chnl_basic_test</code>、<code>chnl_burst_test</code>、<code>chnl_fifo_full_test</code></li>
+</ul>
+<p><strong>实验要求：</strong></p>
+<ul>
+<li>将各个类封装到 <code>package chnl_pkg</code> 中，然后需要从 <code>chnl_pkg</code> 中引入其中的类，并在module tb4 中声明类的句柄</li>
+<li>实现类<code>chnl_burst_test</code>、<code>chnl_fifo_full_test</code></li>
+<li>例化已经声明过的三个组件</li>
+<li>完成从test一层的接口传递任务，使得其内部各个组件都可以得到需要的接口</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="meta-keyword">timescale</span> 1ns/1ps</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> chnl_intf(<span class="keyword">input</span> clk, <span class="keyword">input</span> rstn);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>] ch_data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">logic</span>        ch_valid;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">logic</span>        ch_ready;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">logic</span> [ <span class="number">5</span>:<span class="number">0</span>] ch_margin;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">clocking</span> drv_ck @(<span class="keyword">posedge</span> clk);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">default</span> <span class="keyword">input</span> #<span class="number">1</span>ns <span class="keyword">output</span> #<span class="number">1</span>ns;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">output</span> ch_data, ch_valid;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">input</span> ch_ready, ch_margin;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endclocking</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endinterface</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> chnl_pkg;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">class</span> chnl_trans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> id;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> num;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endclass</span>: chnl_trans</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">class</span> chnl_initiator;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">local</span> <span class="keyword">string</span> name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">local</span> <span class="keyword">int</span> idle_cycles;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">local</span> <span class="keyword">virtual</span> chnl_intf intf;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">"chnl_initiator"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span><span class="variable">.name</span> = name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span><span class="variable">.idle_cycles</span> = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> <span class="keyword">void</span> set_idle_cycles(<span class="keyword">int</span> n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span><span class="variable">.idle_cycles</span> = n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> <span class="keyword">void</span> set_name(<span class="keyword">string</span> s);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span><span class="variable">.name</span> = s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> <span class="keyword">void</span> set_interface(<span class="keyword">virtual</span> chnl_intf intf);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">if</span>(intf == <span class="literal">null</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">$error</span>(<span class="string">"interface handle is NULL, please check if target interface has been intantiated"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">else</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span><span class="variable">.intf</span> = intf;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">task</span> chnl_write(<span class="keyword">input</span> chnl_trans t);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">      @(<span class="keyword">posedge</span> intf<span class="variable">.clk</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// USER TODO 1.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// Please use the clocking drv_ck of chnl_intf to drive data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">      intf<span class="variable">.drv_ck</span><span class="variable">.ch_valid</span> &lt;= <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">      intf<span class="variable">.drv_ck</span><span class="variable">.ch_data</span> &lt;= t<span class="variable">.data</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">	      @(<span class="keyword">negedge</span> intf<span class="variable">.clk</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">wait</span>(intf<span class="variable">.ch_ready</span> === <span class="number">'b1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%t channel initiator [%s] sent data %x"</span>, <span class="built_in">$time</span>, name, t<span class="variable">.data</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// USER TODO 1.2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// Apply variable idle_cycles and decide how many idle cycles to be</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// inserted between two sequential data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">repeat</span>(<span class="keyword">this</span><span class="variable">.idle_cycles</span>) chnl_idle();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endtask</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">task</span> chnl_idle();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line">      @(<span class="keyword">posedge</span> intf<span class="variable">.clk</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// USER TODO 1.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">      <span class="comment">// Please use the clocking drv_ck of chnl_intf to drive data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">      intf<span class="variable">.drv_ck</span><span class="variable">.ch_valid</span> &lt;= <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">      intf<span class="variable">.drv_ck</span><span class="variable">.ch_data</span> &lt;= <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endtask</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endclass</span>: chnl_initiator</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">class</span> chnl_generator;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line">    chnl_trans trans[$];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">73</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> num;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">74</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> id;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">75</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">int</span> n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">76</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span><span class="variable">.id</span> = n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">77</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span><span class="variable">.num</span> = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">78</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">79</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> chnl_trans get_trans();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">80</span></pre></td><td class="code"><pre><span class="line">      chnl_trans t = <span class="keyword">new</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">81</span></pre></td><td class="code"><pre><span class="line">      t<span class="variable">.data</span> = <span class="number">'h00C0_0000</span> + (<span class="keyword">this</span><span class="variable">.id</span>&lt;&lt;<span class="number">16</span>) + <span class="keyword">this</span><span class="variable">.num</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">82</span></pre></td><td class="code"><pre><span class="line">      t<span class="variable">.id</span> = <span class="keyword">this</span><span class="variable">.id</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">83</span></pre></td><td class="code"><pre><span class="line">      t<span class="variable">.num</span> = <span class="keyword">this</span><span class="variable">.num</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">84</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span><span class="variable">.num</span>++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">85</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span><span class="variable">.trans</span><span class="variable">.push_back</span>(t);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">86</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">return</span> t;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">87</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">88</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endclass</span>: chnl_generator</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">89</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">90</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">class</span> chnl_agent;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">91</span></pre></td><td class="code"><pre><span class="line">    chnl_generator gen;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">92</span></pre></td><td class="code"><pre><span class="line">    chnl_initiator init;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">93</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">local</span> <span class="keyword">int</span> ntrans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">94</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">virtual</span> chnl_intf vif;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">95</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">string</span> name = <span class="string">"chnl_agent"</span>, <span class="keyword">int</span> id = <span class="number">0</span>, <span class="keyword">int</span> ntrans = <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">96</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span><span class="variable">.gen</span> = <span class="keyword">new</span>(id);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">97</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span><span class="variable">.init</span> = <span class="keyword">new</span>(name);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">98</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span><span class="variable">.ntrans</span> = ntrans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">99</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">100</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> <span class="keyword">void</span> set_ntrans(<span class="keyword">int</span> n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">101</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span><span class="variable">.ntrans</span> = n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">102</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">103</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> <span class="keyword">void</span> set_interface(<span class="keyword">virtual</span> chnl_intf vif);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">104</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span><span class="variable">.vif</span> = vif;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">105</span></pre></td><td class="code"><pre><span class="line">      init<span class="variable">.set_interface</span>(vif);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">106</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">107</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">task</span> run();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">108</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">repeat</span>(<span class="keyword">this</span><span class="variable">.ntrans</span>) <span class="keyword">this</span><span class="variable">.init</span><span class="variable">.chnl_write</span>(<span class="keyword">this</span><span class="variable">.gen</span><span class="variable">.get_trans</span>());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">109</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span><span class="variable">.init</span><span class="variable">.chnl_idle</span>(); <span class="comment">// set idle after all data sent out</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">110</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endtask</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">111</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endclass</span>: chnl_agent</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">112</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">113</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">class</span> chnl_root_test;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">114</span></pre></td><td class="code"><pre><span class="line">    chnl_agent agent[<span class="number">3</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">115</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">protected</span> <span class="keyword">string</span> name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">116</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">int</span> ntrans = <span class="number">100</span>, <span class="keyword">string</span> name = <span class="string">"chnl_root_test"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">117</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">foreach</span>(agent[i]) <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">118</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span><span class="variable">.agent</span>[i] = <span class="keyword">new</span>(<span class="built_in">$sformatf</span>(<span class="string">"chnl_agent%0d"</span>,i), i, ntrans);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">119</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">120</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">this</span><span class="variable">.name</span> = name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">121</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s instantiate objects"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">122</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">123</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">task</span> run();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">124</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s started testing DUT"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">125</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">fork</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">126</span></pre></td><td class="code"><pre><span class="line">        agent[<span class="number">0</span>]<span class="variable">.run</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">127</span></pre></td><td class="code"><pre><span class="line">        agent[<span class="number">1</span>]<span class="variable">.run</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">128</span></pre></td><td class="code"><pre><span class="line">        agent[<span class="number">2</span>]<span class="variable">.run</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">129</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">join</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">130</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s waiting DUT transfering all of data"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">131</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">fork</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">132</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(agent[<span class="number">0</span>]<span class="variable">.vif</span><span class="variable">.ch_margin</span> == <span class="number">'h20</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">133</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(agent[<span class="number">1</span>]<span class="variable">.vif</span><span class="variable">.ch_margin</span> == <span class="number">'h20</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">134</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(agent[<span class="number">2</span>]<span class="variable">.vif</span><span class="variable">.ch_margin</span> == <span class="number">'h20</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">135</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">join</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">136</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s: 3 channel fifos have transferred all data"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">137</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s finished testing DUT"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">138</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endtask</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">139</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> <span class="keyword">void</span> set_interface(<span class="keyword">virtual</span> chnl_intf ch0_vif, <span class="keyword">virtual</span> chnl_intf ch1_vif, <span class="keyword">virtual</span> chnl_intf ch2_vif);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">140</span></pre></td><td class="code"><pre><span class="line">      agent[<span class="number">0</span>]<span class="variable">.set_interface</span>(ch0_vif);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">141</span></pre></td><td class="code"><pre><span class="line">      agent[<span class="number">1</span>]<span class="variable">.set_interface</span>(ch1_vif);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">142</span></pre></td><td class="code"><pre><span class="line">      agent[<span class="number">2</span>]<span class="variable">.set_interface</span>(ch2_vif);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">143</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">144</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endclass</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">145</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// each channel send data with idle_cycles inside [1:3]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">146</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// each channel send out 200 data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">147</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// then to finish the test</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">148</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">class</span> chnl_basic_test <span class="keyword">extends</span> chnl_root_test;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">149</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">int</span> ntrans = <span class="number">200</span>, <span class="keyword">string</span> name = <span class="string">"chnl_basic_test"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">150</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">super</span><span class="variable">.new</span>(ntrans, name);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">151</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">foreach</span>(agent[i]) <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">152</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span><span class="variable">.agent</span>[i]<span class="variable">.init</span><span class="variable">.set_idle_cycles</span>($urandom_range(<span class="number">1</span>, <span class="number">3</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">153</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">154</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s configured objects"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">155</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">156</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endclass</span>: chnl_basic_test</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">157</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// USER TODO 4.2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">158</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// Refer to chnl_basic_test, and extend another 2 tests</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">159</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// chnl_burst_test, chnl_fifo_full_test</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">160</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// each channel send data with idle_cycles == 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">161</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// each channel send out 500 data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">162</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// then to finish the test</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">163</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">class</span> chnl_burst_test <span class="keyword">extends</span> chnl_root_test;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">164</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//USER TODO</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">165</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">int</span> ntrans = <span class="number">500</span>, <span class="keyword">string</span> name = <span class="string">"chnl_burst_test"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">166</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">super</span><span class="variable">.new</span>(ntrans, name);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">167</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">foreach</span>(agent[i]) <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">168</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span><span class="variable">.agent</span>[i]<span class="variable">.init</span><span class="variable">.set_idle_cycles</span>(<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">169</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">170</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s configured objects"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">171</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">172</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endclass</span>: chnl_burst_test</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">173</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// USER TODO 4.2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">174</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// The test should be immediately finished when all of channels</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">175</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// have been reached fifo full state, but not all reaching</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">176</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// fifo full at the same time</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">177</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">class</span> chnl_fifo_full_test <span class="keyword">extends</span> chnl_root_test;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">178</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// USER TODO</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">179</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">function</span> <span class="keyword">new</span>(<span class="keyword">int</span> ntrans = <span class="number">1_000_000</span>, <span class="keyword">string</span> name = <span class="string">"chnl_fifo_full_test"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">180</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">super</span><span class="variable">.new</span>(ntrans, name);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">181</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">foreach</span>(agent[i]) <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">182</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span><span class="variable">.agent</span>[i]<span class="variable">.init</span><span class="variable">.set_idle_cycles</span>(<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">183</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">184</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s configured objects"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">185</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endfunction</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">186</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">task</span> run();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">187</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s started testing DUT"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">188</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">fork</span>: fork_all_run</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">189</span></pre></td><td class="code"><pre><span class="line">        agent[<span class="number">0</span>]<span class="variable">.run</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">190</span></pre></td><td class="code"><pre><span class="line">        agent[<span class="number">1</span>]<span class="variable">.run</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">191</span></pre></td><td class="code"><pre><span class="line">        agent[<span class="number">2</span>]<span class="variable">.run</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">192</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">join_none</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">193</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s: 3 agents running now"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">194</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">195</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s: waiting 3 channel fifos to be full"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">196</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">fork</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">197</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(agent[<span class="number">0</span>]<span class="variable">.vif</span><span class="variable">.ch_margin</span> == <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">198</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(agent[<span class="number">1</span>]<span class="variable">.vif</span><span class="variable">.ch_margin</span> == <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">199</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(agent[<span class="number">2</span>]<span class="variable">.vif</span><span class="variable">.ch_margin</span> == <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">200</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">join</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">201</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s: 3 channel fifos have reached full"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">202</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">203</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s: stop 3 agents running"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">204</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">disable</span> fork_all_run;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">205</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s: set and ensure all agents' initiator are idle state"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">206</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">fork</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">207</span></pre></td><td class="code"><pre><span class="line">        agent[<span class="number">0</span>]<span class="variable">.init</span><span class="variable">.chnl_idle</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">208</span></pre></td><td class="code"><pre><span class="line">        agent[<span class="number">1</span>]<span class="variable">.init</span><span class="variable">.chnl_idle</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">209</span></pre></td><td class="code"><pre><span class="line">        agent[<span class="number">2</span>]<span class="variable">.init</span><span class="variable">.chnl_idle</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">210</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">join</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">211</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">212</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s waiting DUT transfering all of data"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">213</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">fork</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">214</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(agent[<span class="number">0</span>]<span class="variable">.vif</span><span class="variable">.ch_margin</span> == <span class="number">'h20</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">215</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(agent[<span class="number">1</span>]<span class="variable">.vif</span><span class="variable">.ch_margin</span> == <span class="number">'h20</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">216</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">wait</span>(agent[<span class="number">2</span>]<span class="variable">.vif</span><span class="variable">.ch_margin</span> == <span class="number">'h20</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">217</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">join</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">218</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s: 3 channel fifos have transferred all data"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">219</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">220</span></pre></td><td class="code"><pre><span class="line">      <span class="built_in">$display</span>(<span class="string">"%s finished testing DUT"</span>, <span class="keyword">this</span><span class="variable">.name</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">221</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">endtask</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">222</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">endclass</span>: chnl_fifo_full_test</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">223</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">224</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endpackage</span>: chnl_pkg</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">225</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">226</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> tb4_ref;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">227</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">logic</span>         clk;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">228</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">logic</span>         rstn;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">229</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>]  mcdt_data;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">230</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">logic</span>         mcdt_val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">231</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">logic</span> [ <span class="number">1</span>:<span class="number">0</span>]  mcdt_id;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">232</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">233</span></pre></td><td class="code"><pre><span class="line">  mcdt dut(</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">234</span></pre></td><td class="code"><pre><span class="line">     <span class="variable">.clk_i</span>       (clk                )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">235</span></pre></td><td class="code"><pre><span class="line">    ,<span class="variable">.rstn_i</span>      (rstn               )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">236</span></pre></td><td class="code"><pre><span class="line">    ,<span class="variable">.ch0_data_i</span>  (chnl0_if<span class="variable">.ch_data</span>   )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">237</span></pre></td><td class="code"><pre><span class="line">    ,<span class="variable">.ch0_valid_i</span> (chnl0_if<span class="variable">.ch_valid</span>  )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">238</span></pre></td><td class="code"><pre><span class="line">    ,<span class="variable">.ch0_ready_o</span> (chnl0_if<span class="variable">.ch_ready</span>  )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">239</span></pre></td><td class="code"><pre><span class="line">    ,<span class="variable">.ch0_margin_o</span>(chnl0_if<span class="variable">.ch_margin</span> )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">240</span></pre></td><td class="code"><pre><span class="line">    ,<span class="variable">.ch1_data_i</span>  (chnl1_if<span class="variable">.ch_data</span>   )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">241</span></pre></td><td class="code"><pre><span class="line">    ,<span class="variable">.ch1_valid_i</span> (chnl1_if<span class="variable">.ch_valid</span>  )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">242</span></pre></td><td class="code"><pre><span class="line">    ,<span class="variable">.ch1_ready_o</span> (chnl1_if<span class="variable">.ch_ready</span>  )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">243</span></pre></td><td class="code"><pre><span class="line">    ,<span class="variable">.ch1_margin_o</span>(chnl1_if<span class="variable">.ch_margin</span> )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">244</span></pre></td><td class="code"><pre><span class="line">    ,<span class="variable">.ch2_data_i</span>  (chnl2_if<span class="variable">.ch_data</span>   )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">245</span></pre></td><td class="code"><pre><span class="line">    ,<span class="variable">.ch2_valid_i</span> (chnl2_if<span class="variable">.ch_valid</span>  )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">246</span></pre></td><td class="code"><pre><span class="line">    ,<span class="variable">.ch2_ready_o</span> (chnl2_if<span class="variable">.ch_ready</span>  )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">247</span></pre></td><td class="code"><pre><span class="line">    ,<span class="variable">.ch2_margin_o</span>(chnl2_if<span class="variable">.ch_margin</span> )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">248</span></pre></td><td class="code"><pre><span class="line">    ,<span class="variable">.mcdt_data_o</span> (mcdt_data          )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">249</span></pre></td><td class="code"><pre><span class="line">    ,<span class="variable">.mcdt_val_o</span>  (mcdt_val           )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">250</span></pre></td><td class="code"><pre><span class="line">    ,<span class="variable">.mcdt_id_o</span>   (mcdt_id            )</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">251</span></pre></td><td class="code"><pre><span class="line">  );</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">252</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// clock generation</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">253</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">254</span></pre></td><td class="code"><pre><span class="line">    clk &lt;= <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">255</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">forever</span> <span class="keyword">begin</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">256</span></pre></td><td class="code"><pre><span class="line">      #<span class="number">5</span> clk &lt;= !clk;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">257</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">258</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">259</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// reset trigger</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">260</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">261</span></pre></td><td class="code"><pre><span class="line">    #<span class="number">10</span> rstn &lt;= <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">262</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">repeat</span>(<span class="number">10</span>) @(<span class="keyword">posedge</span> clk);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">263</span></pre></td><td class="code"><pre><span class="line">    rstn &lt;= <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">264</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">265</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// USER TODO 4.1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">266</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">// import defined class from chnl_pkg</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">267</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">import</span> chnl_pkg::*;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">268</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">269</span></pre></td><td class="code"><pre><span class="line">  chnl_intf chnl0_if(.*);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">270</span></pre></td><td class="code"><pre><span class="line">  chnl_intf chnl1_if(.*);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">271</span></pre></td><td class="code"><pre><span class="line">  chnl_intf chnl2_if(.*);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">272</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">273</span></pre></td><td class="code"><pre><span class="line">  chnl_basic_test basic_test;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">274</span></pre></td><td class="code"><pre><span class="line">  chnl_burst_test burst_test;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">275</span></pre></td><td class="code"><pre><span class="line">  chnl_fifo_full_test fifo_full_test;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">276</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">277</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">278</span></pre></td><td class="code"><pre><span class="line">    basic_test = <span class="keyword">new</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">279</span></pre></td><td class="code"><pre><span class="line">    burst_test = <span class="keyword">new</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">280</span></pre></td><td class="code"><pre><span class="line">    fifo_full_test = <span class="keyword">new</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">281</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// USER TODO 4.4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">282</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// assign the interface handle to each chnl_initiator objects</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">283</span></pre></td><td class="code"><pre><span class="line">    basic_test<span class="variable">.set_interface</span>(chnl0_if, chnl1_if, chnl2_if);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">284</span></pre></td><td class="code"><pre><span class="line">    burst_test<span class="variable">.set_interface</span>(chnl0_if, chnl1_if, chnl2_if);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">285</span></pre></td><td class="code"><pre><span class="line">    fifo_full_test<span class="variable">.set_interface</span>(chnl0_if, chnl1_if, chnl2_if);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">286</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// USER TODO 4.5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">287</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// START TESTs</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">288</span></pre></td><td class="code"><pre><span class="line">    basic_test<span class="variable">.run</span>(); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">289</span></pre></td><td class="code"><pre><span class="line">    burst_test<span class="variable">.run</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">290</span></pre></td><td class="code"><pre><span class="line">    fifo_full_test<span class="variable">.run</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">291</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$display</span>(<span class="string">"*****************all of tests have been finished********************"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">292</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">$finish</span>();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">293</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">end</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">294</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">endmodule</span></span></pre></td></tr></table></figure>
+<h2 id="验证环境结构"><a href="#验证环境结构" class="headerlink" title="验证环境结构"></a>验证环境结构</h2><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p><img src="/archives/15aea1cf/image-20210705112131628.png" style="zoom:50%;"></p>
+<p>软件和硬件通过接口连接，<code>所有的类封装到chnl_pkg</code> 中并编译到work库中。</p>
+<p><img src="/archives/15aea1cf/image-20210705121326153.png" style="zoom: 33%;"></p>
+<ul>
+<li><p>接口传递 interface 的指针如何传递到 initiator?    </p>
+<p>通过<code>chnl_root_test</code> 的<code>set_interface()</code> function, 然后又调用<code>agent</code>的<code>set_interface()</code>将值传入initiator。</p>
+</li>
+<li><p>仿真是怎样运行的？</p>
+<p>通过test的run()让每个agent的run()运行起来，然后再让各个generator和initiator运行起来。</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\archives\8ca7f075.html" rel="bookmark">MCDF实验-lab1</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="ZhouHaojie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="ZhouHaojie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ZhouHaojie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/grenze.cn/archives/15aea1cf.html" title="MCDF实验-lab2">http://grenze.cn/archives/15aea1cf.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/lab/" rel="tag"><i class="fa fa-tag"></i> lab</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/archives/876155d6.html" rel="prev" title="04 SV 验证-随机化">
+      <i class="fa fa-chevron-left"></i> 04 SV 验证-随机化
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#接口的使用"><span class="nav-number">1.</span> <span class="nav-text">接口的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仿真的结束"><span class="nav-number">2.</span> <span class="nav-text">仿真的结束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类的例化和类的成员"><span class="nav-number">3.</span> <span class="nav-text">类的例化和类的成员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#包的定义和类的继承"><span class="nav-number">4.</span> <span class="nav-text">包的定义和类的继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证环境结构"><span class="nav-number">5.</span> <span class="nav-text">验证环境结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构"><span class="nav-number">5.1.</span> <span class="nav-text">结构</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+ <a href="/">
+    <img class="site-author-image" itemprop="image" alt="ZhouHaojie" src="/images/avatar.jpg">
+ </a>
+  <p class="site-author-name" itemprop="name">ZhouHaojie</p>
+  <div class="site-description" itemprop="description">Karlsruher Institut für Technologie,此为博客一枚。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhouHaojie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhouHaojie" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhouhaojie@yahoo.com" title="E-Mail → mailto:zhouhaojie@yahoo.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/archives/15aea1cf.html" title="MCDF实验-lab2" target="_blank">MCDF实验-lab2</a>
+          </li>
+        
+          <li>
+            <a href="/archives/876155d6.html" title="04 SV 验证-随机化" target="_blank">04 SV 验证-随机化</a>
+          </li>
+        
+          <li>
+            <a href="/archives/1c290204.html" title="02 SV 验证-接口驱动和采样" target="_blank">02 SV 验证-接口驱动和采样</a>
+          </li>
+        
+          <li>
+            <a href="/archives/8ca7f075.html" title="MCDF实验-lab1" target="_blank">MCDF实验-lab1</a>
+          </li>
+        
+          <li>
+            <a href="/archives/6578d19d.html" title="c4 Scheduling-Definition des HLS-Schedulingproblems" target="_blank">c4 Scheduling-Definition des HLS-Schedulingproblems</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhouHaojie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">290k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">4:23</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 22249,
+      el: 'wpac-rating',
+      color: 'f79533'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '037aa3a17f11795b7607',
+      clientSecret: 'e44bdaf7d6805a52651f5232062e47b32ef82567',
+      repo: 'Comment',
+      owner: 'ZhouHaojie',
+      admin: ['ZhouHaojie'],
+      id: '4fb63a40fae60bc999a763181193a109',
+        language: '',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true; // 控制开启 / 开启礼花特效 
+  POWERMODE.shake = false; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
